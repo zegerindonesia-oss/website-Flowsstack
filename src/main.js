@@ -20,9 +20,11 @@ import {
   Calendar,
   Utensils,
   CreditCard,
-  Share2
+  Share2,
+  Construction
 } from 'lucide';
 import AOS from 'aos';
+import { translations } from './translations.js';
 
 // Initialize Animations
 AOS.init({
@@ -32,169 +34,181 @@ AOS.init({
   easing: 'ease-out-cubic'
 });
 
-// Data
-const categories = [
-  { name: 'Creative Tools', icon: 'Sparkles', desc: 'Kreasi konten visual & media dengan AI.' },
-  { name: 'Business Operations', icon: 'Briefcase', desc: 'Sistem manajemen operasional harian.' },
-  { name: 'Finance', icon: 'Banknote', desc: 'Pengelolaan keuangan dan pembayaran.' },
-  { name: 'Commerce', icon: 'ShoppingBag', desc: 'Solusi jualan online & offline.' },
-  { name: 'Education', icon: 'GraduationCap', desc: 'Platform edukasi & knowledge base.' }
-];
+// State
+let currentLang = localStorage.getItem('flowstack_lang') || 'en';
 
+// Data
 const products = [
   {
     name: 'FlowPict',
     category: 'Creative Tools',
-    desc: 'Ubah foto biasa menjadi foto profesional hanya dengan 1 klik.',
+    descKey: 'product_flowpict_desc',
     icon: 'Image',
-    link: '/products/flowpict'
+    link: '/products/flowpict',
+    color: 'purple'
   },
   {
     name: 'FlowQueue',
     category: 'Business Operations',
-    desc: 'Sistem antrian digital pintar untuk klinik, restoran, dan pelayanan publik.',
+    descKey: null,
+    desc: 'Smart queue management system for service businesses.',
     icon: 'Users',
-    link: '/products/flowqueue'
+    link: '/products/flowqueue',
+    color: 'pink'
   },
   {
     name: 'FlowBook',
     category: 'Business Operations',
-    desc: 'Platform booking & reservasi online otomatis untuk jasa dan penyewaan.',
+    descKey: null,
+    desc: 'Effortless appointment booking and scheduling.',
     icon: 'Calendar',
-    link: '/products/flowbook'
+    link: '/products/flowbook',
+    color: 'blue'
   },
   {
     name: 'FlowTrain',
     category: 'Education',
-    desc: 'Learning Management System (LMS) modern untuk pelatihan karyawan & kursus online.',
+    descKey: null,
+    desc: 'LMS Platform for corporate training and education.',
     icon: 'GraduationCap',
-    link: '/products/flowtrain'
+    link: '/products/flowtrain',
+    color: 'orange'
   },
   {
     name: 'FlowMenu',
     category: 'Commerce',
-    desc: 'Buku menu digital via QR Code dengan integrasi pemesanan langsung.',
+    descKey: null,
+    desc: 'Digital F&B solution for modern restaurants.',
     icon: 'Utensils',
-    link: '/products/flowmenu'
+    link: '/products/flowmenu',
+    color: 'green'
   },
   {
     name: 'FlowPay',
     category: 'Finance',
-    desc: 'Solusi invoicing dan payment gateway terintegrasi untuk bisnis.',
+    descKey: null,
+    desc: 'Integrated finance manager and payment gateway.',
     icon: 'CreditCard',
-    link: '/products/flowpay'
+    link: '/products/flowpay',
+    color: 'indigo'
   },
   {
     name: 'FlowContent',
     category: 'Creative Tools',
+    descKey: null,
     desc: 'Content planner & scheduler terpusat untuk semua media sosial Anda.',
     icon: 'Share2',
-    link: '/products/flowcontent'
+    link: '/products/flowcontent',
+    color: 'red'
   },
   {
     name: 'FlowStore',
     category: 'Commerce',
-    desc: 'Buat toko online profesional sendiri dalam hitungan menit.',
+    descKey: null,
+    desc: 'Complete E-commerce solution for online selling.',
     icon: 'ShoppingBag',
-    link: '/products/flowstore'
+    link: '/products/flowstore',
+    color: 'teal'
+  },
+  {
+    name: 'More Tools',
+    category: 'Future',
+    descKey: 'product_coming_soon_desc',
+    icon: 'Construction',
+    link: '#',
+    isComingSoon: true,
+    color: 'gray'
   }
 ];
 
-const serviceList = [
-  'Website Company Profile',
-  'Web App Internal System',
-  'Mobile App (Android / iOS)',
-  'Custom Dashboard',
-  'Custom Automation'
-];
+// i18n Logic
+function updateLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('flowstack_lang', lang);
 
-const steps = [
-  { title: 'Pilih Produk atau Solusi', desc: 'Jelajahi katalog produk kami atau konsultasikan kebutuhan custom Anda.' },
-  { title: 'Gunakan atau Coba Produk', desc: 'Mulai dengan versi gratis atau demo untuk merasakan manfaatnya.' },
-  { title: 'Upgrade Sesuai Kebutuhan', desc: 'Scale up layanan seiring pertumbuhan bisnis Anda.' },
-  { title: 'Tumbuh Bersama FlowStack', desc: 'Nikmati ekosistem terintegrasi yang mendukung kesuksesan jangka panjang.' }
-];
+  // Update Text Content
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
 
-// Render Functions
-function renderCategories() {
-  const container = document.getElementById('category-grid');
-  if (!container) return;
+  // Update Toggle Button Label
+  const langLabel = document.getElementById('lang-label');
+  if (langLabel) {
+    langLabel.textContent = lang.toUpperCase();
+  }
 
-  container.innerHTML = categories.map((cat, index) => `
-    <div class="glass-card flex flex-col items-start h-full" data-aos="fade-up" data-aos-delay="${index * 100}">
-      <div class="icon-box">
-        <i data-lucide="${cat.icon}"></i>
-      </div>
-      <h3 class="card-title text-xl font-bold mb-3">${cat.name}</h3>
-      <p class="text-muted text-sm leading-relaxed">${cat.desc}</p>
-    </div>
-  `).join('');
+  // Re-render Products (to update translated descriptions)
+  renderProducts();
 }
 
 function renderProducts() {
-  const container = document.getElementById('featured-products');
+  const container = document.getElementById('products-grid');
   if (!container) return;
 
-  container.innerHTML = products.map((product, index) => `
-    <div class="glass-card hover:border-primary/30 group" data-aos="fade-up" data-aos-delay="${index * 100}">
-      <span class="badge-pill mb-6">${product.category}</span>
-      <div class="flex items-start gap-4 mb-6">
-        <div class="bg-primary/10 p-3 rounded-xl text-primary shrink-0">
-           <i data-lucide="${product.icon}" width="32" height="32"></i>
+  container.innerHTML = products.map((product, index) => {
+    // Determine description text based on lang
+    let description = product.desc;
+    if (product.descKey && translations[currentLang][product.descKey]) {
+      description = translations[currentLang][product.descKey];
+    } else if (product.isComingSoon) {
+      description = translations[currentLang].product_coming_soon_desc;
+    }
+
+    const name = product.isComingSoon
+      ? translations[currentLang].product_coming_soon
+      : product.name;
+
+    if (product.isComingSoon) {
+      return `
+        <div class="glass-card p-6 rounded-2xl border-dashed border-2 border-gray-300 flex flex-col items-center justify-center text-center opacity-70 hover:opacity-100 transition-opacity" data-aos="fade-up" data-aos-delay="${index * 100}">
+            <div class="size-14 rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center mb-5">
+                <i data-lucide="${product.icon}" width="32" height="32"></i>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-gray-400 mb-2">${name}</h3>
+            <p class="text-sm text-gray-400 mb-4">${description}</p>
         </div>
-        <div>
-          <h3 class="font-bold text-2xl mb-1 group-hover:text-primary transition-colors">${product.name}</h3>
-          <p class="text-xs text-muted font-mono">SAAS PRODUCT</p>
+        `;
+    }
+
+    return `
+    <a href="${product.link}"
+        class="group glass-card p-6 rounded-2xl hover:shadow-glass-hover transition-all duration-300 transform hover:-translate-y-2 cursor-pointer bg-white block" data-aos="fade-up" data-aos-delay="${index * 100}">
+        <div
+        class="size-14 rounded-xl bg-${product.color}-100 text-${product.color}-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+        <i data-lucide="${product.icon}" width="32" height="32"></i>
         </div>
-      </div>
-      <p class="text-muted mb-8 text-sm line-clamp-3">${product.desc}</p>
-      
-      <a href="${product.link}" class="w-full btn btn-outline justify-center hover:bg-primary hover:text-white hover:border-primary">
-        Lihat Detail
-      </a>
-    </div>
-  `).join('');
+        <h3 class="font-heading text-xl font-bold text-[#131118] mb-2">${name}</h3>
+        <p class="text-sm text-gray-500 mb-4">${description}</p>
+        <div class="flex items-center text-primary text-sm font-bold">
+        <span>Learn more</span>
+        <span
+            class="material-symbols-outlined text-[16px] ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">arrow_forward</span>
+        </div>
+    </a>
+  `}).join('');
+
+  createIcons({ icons: { Image, Users, Calendar, GraduationCap, Utensils, CreditCard, Share2, ShoppingBag, Construction } });
 }
-
-function renderServices() {
-  const container = document.getElementById('service-list');
-  if (!container) return;
-
-  container.innerHTML = serviceList.map(service => `
-    <li class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/50 transition-colors">
-      <div class="text-secondary bg-pink-100 rounded-full p-1">
-        <i data-lucide="CheckCircle2" width="16" height="16"></i>
-      </div>
-      <span class="font-semibold text-gray-700">${service}</span>
-    </li>
-  `).join('');
-}
-
-function renderSteps() {
-  const container = document.getElementById('how-it-works');
-  if (!container) return;
-
-  container.innerHTML = steps.map((step, index) => `
-    <div class="relative z-10" data-aos="fade-up" data-aos-delay="${index * 100}">
-      <div class="w-16 h-16 mx-auto bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-lg flex items-center justify-center text-primary font-bold text-2xl border border-purple-100 mb-6 relative">
-         ${index + 1}
-         <div class="absolute -z-10 bg-primary blur-xl opacity-20 inset-0"></div>
-      </div>
-      <h3 class="font-bold text-lg mb-2">${step.title}</h3>
-      <p class="text-muted text-sm px-4">${step.desc}</p>
-    </div>
-  `).join('');
-}
-
 
 // Execute
 document.addEventListener('DOMContentLoaded', () => {
-  renderCategories();
-  renderProducts();
-  renderServices();
-  renderSteps();
+  // Initial Render
+  updateLanguage(currentLang);
 
-  // Initialize Icons
+  // Event Listeners
+  const langToggle = document.getElementById('lang-toggle');
+  if (langToggle) {
+    langToggle.addEventListener('click', () => {
+      const newLang = currentLang === 'en' ? 'id' : 'en';
+      updateLanguage(newLang);
+    });
+  }
+
+  // Initialize all icons initially needed
   createIcons({
     icons: {
       TrendingUp,
@@ -216,7 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Calendar,
       Utensils,
       CreditCard,
-      Share2
+      Share2,
+      Construction
     }
   });
 });
