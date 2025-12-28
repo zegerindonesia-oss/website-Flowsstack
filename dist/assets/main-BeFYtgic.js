@@ -139,7 +139,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
             <div class="size-14 rounded-xl ${t.styleClass} flex items-center justify-center mb-5">
                 <i data-lucide="${t.icon}" width="32" height="32"></i>
             </div>
-            <h3 class="font-heading text-xl font-bold text-gray-400 mb-2">${n}</h3>
+            <h3 class="font-heading text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink mb-2">${n}</h3>
             <p class="text-sm text-gray-400 mb-4">${s}</p>
         </div>
         `:`
@@ -149,7 +149,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
         class="size-14 rounded-xl ${t.styleClass} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
         <i data-lucide="${t.icon}" width="32" height="32"></i>
         </div>
-        <h3 class="font-heading text-xl font-bold text-[#131118] mb-2">${n}</h3>
+        <h3 class="font-heading text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink mb-2">${n}</h3>
         <p class="text-sm text-gray-500 mb-4">${s}</p>
         <div class="flex items-center text-primary text-sm font-bold">
         <span>Learn more</span>
