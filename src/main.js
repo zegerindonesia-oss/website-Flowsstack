@@ -35,7 +35,7 @@ AOS.init({
 });
 
 // State
-let currentLang = localStorage.getItem('flowstack_lang') || 'en';
+let currentLang = localStorage.getItem('flowstack_lang') || 'id';
 
 // Data
 const products = [
@@ -45,7 +45,7 @@ const products = [
     descKey: 'product_flowpict_desc',
     icon: 'Image',
     link: '/products/flowpict',
-    color: 'purple'
+    styleClass: 'bg-purple-100 text-purple-600'
   },
   {
     name: 'FlowQueue',
@@ -54,7 +54,7 @@ const products = [
     desc: 'Smart queue management system for service businesses.',
     icon: 'Users',
     link: '/products/flowqueue',
-    color: 'pink'
+    styleClass: 'bg-pink-100 text-pink-600'
   },
   {
     name: 'FlowBook',
@@ -63,7 +63,7 @@ const products = [
     desc: 'Effortless appointment booking and scheduling.',
     icon: 'Calendar',
     link: '/products/flowbook',
-    color: 'blue'
+    styleClass: 'bg-blue-100 text-blue-600'
   },
   {
     name: 'FlowTrain',
@@ -72,7 +72,7 @@ const products = [
     desc: 'LMS Platform for corporate training and education.',
     icon: 'GraduationCap',
     link: '/products/flowtrain',
-    color: 'orange'
+    styleClass: 'bg-orange-100 text-orange-600'
   },
   {
     name: 'FlowMenu',
@@ -81,7 +81,7 @@ const products = [
     desc: 'Digital F&B solution for modern restaurants.',
     icon: 'Utensils',
     link: '/products/flowmenu',
-    color: 'green'
+    styleClass: 'bg-green-100 text-green-600'
   },
   {
     name: 'FlowPay',
@@ -90,7 +90,7 @@ const products = [
     desc: 'Integrated finance manager and payment gateway.',
     icon: 'CreditCard',
     link: '/products/flowpay',
-    color: 'indigo'
+    styleClass: 'bg-indigo-100 text-indigo-600'
   },
   {
     name: 'FlowContent',
@@ -99,7 +99,7 @@ const products = [
     desc: 'Content planner & scheduler terpusat untuk semua media sosial Anda.',
     icon: 'Share2',
     link: '/products/flowcontent',
-    color: 'red'
+    styleClass: 'bg-red-100 text-red-600'
   },
   {
     name: 'FlowStore',
@@ -108,7 +108,7 @@ const products = [
     desc: 'Complete E-commerce solution for online selling.',
     icon: 'ShoppingBag',
     link: '/products/flowstore',
-    color: 'teal'
+    styleClass: 'bg-teal-100 text-teal-600'
   },
   {
     name: 'More Tools',
@@ -117,7 +117,7 @@ const products = [
     icon: 'Construction',
     link: '#',
     isComingSoon: true,
-    color: 'gray'
+    styleClass: 'bg-gray-100 text-gray-400'
   }
 ];
 
@@ -130,7 +130,7 @@ function updateLanguage(lang) {
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (translations[lang][key]) {
+    if (translations[lang] && translations[lang][key]) {
       el.textContent = translations[lang][key];
     }
   });
@@ -165,7 +165,7 @@ function renderProducts() {
     if (product.isComingSoon) {
       return `
         <div class="glass-card p-6 rounded-2xl border-dashed border-2 border-gray-300 flex flex-col items-center justify-center text-center opacity-70 hover:opacity-100 transition-opacity" data-aos="fade-up" data-aos-delay="${index * 100}">
-            <div class="size-14 rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center mb-5">
+            <div class="size-14 rounded-xl ${product.styleClass} flex items-center justify-center mb-5">
                 <i data-lucide="${product.icon}" width="32" height="32"></i>
             </div>
             <h3 class="font-heading text-xl font-bold text-gray-400 mb-2">${name}</h3>
@@ -178,7 +178,7 @@ function renderProducts() {
     <a href="${product.link}"
         class="group glass-card p-6 rounded-2xl hover:shadow-glass-hover transition-all duration-300 transform hover:-translate-y-2 cursor-pointer bg-white block" data-aos="fade-up" data-aos-delay="${index * 100}">
         <div
-        class="size-14 rounded-xl bg-${product.color}-100 text-${product.color}-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+        class="size-14 rounded-xl ${product.styleClass} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
         <i data-lucide="${product.icon}" width="32" height="32"></i>
         </div>
         <h3 class="font-heading text-xl font-bold text-[#131118] mb-2">${name}</h3>
@@ -191,7 +191,14 @@ function renderProducts() {
     </a>
   `}).join('');
 
-  createIcons({ icons: { Image, Users, Calendar, GraduationCap, Utensils, CreditCard, Share2, ShoppingBag, Construction } });
+  createIcons({
+    icons: { Image, Users, Calendar, GraduationCap, Utensils, CreditCard, Share2, ShoppingBag, Construction },
+    nameAttr: 'data-lucide',
+    attrs: {
+      width: "32",
+      height: "32"
+    }
+  });
 }
 
 // Execute
