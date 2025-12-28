@@ -1,113 +1,388 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="light" lang="id">
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlowPict - AI Product Photography | FlowStack</title>
+    <title>FlowPict - AI Product Photography & Design | FlowStack</title>
     <meta name="description" content="Ubah foto produk biasa menjadi visual komersial profesional menggunakan AI." />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <script type="module" crossorigin src="/assets/flowpict-D5IAFsv8.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/aos-QBqVCxaf.js">
-  <link rel="stylesheet" crossorigin href="/assets/aos-Bg96OoZf.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8655f6",
+                        "primary-dark": "#6d44c5",
+                        "secondary-pink": "#EC4899",
+                        "soft-blue": "#E0E7FF",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#151022",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "heading": ["Outfit", "sans-serif"],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+    </style>
 </head>
 
-<body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="/" class="logo">← Kembali ke Flow<span>Stack</span></a>
-            <a href="#pricing" class="btn btn-primary">Try FlowPict Free</a>
-        </div>
-    </nav>
+<body
+    class="bg-background-light dark:bg-background-dark text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
 
-    <section class="hero">
-        <div class="container grid-2 items-center">
-            <div data-aos="fade-right">
-                <span class="product-badge mb-4">AI Tools & Media</span>
-                <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-                    Foto Produk Profesional <span class="text-gradient">Dalam Sekejap</span>
-                </h1>
-                <p class="text-lg text-muted mb-8">
-                    Tidak perlu studio mahal. Cukup upload foto produk sederhana, dan biarkan AI kami mengubahnya
-                    menjadi materi iklan kelas dunia.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#demo" class="btn btn-primary">Lihat Demo</a>
+    <!-- Navbar (Consistent with Main Site) -->
+    <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
+        <nav
+            class="glass-nav rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl shadow-lg transition-all duration-300">
+            <a href="/" class="flex items-center gap-3 text-[#131118] hover:opacity-80 transition-opacity">
+                <div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                </div>
+                <span class="font-heading text-lg font-bold tracking-tight">Back to FlowStack</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="#pricing"
+                    class="bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
+                    Try FlowPict Free
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-10 overflow-hidden">
+        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+                <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                AI Visual Studio
+            </div>
+            <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                Visual Profesional <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Hanya 1
+                    Klik</span>
+            </h1>
+            <p class="text-lg text-gray-500 mb-10 max-w-2xl mx-auto">
+                Solusi lengkap untuk kebutuhan visual bisnis Anda. Dari foto produk, desain banner, hingga materi iklan,
+                semuanya otomatis dengan AI.
+            </p>
+        </div>
+
+        <!-- Marquee Gallery (TryBacon Style) -->
+        <div class="py-10 space-y-8 marquee-container overflow-hidden">
+            <!-- Row 1 -->
+            <div class="flex gap-6 animate-marquee w-max">
+                <!-- Items duplicated for seamless loop -->
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[-2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Product 1"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80" alt="Product 2"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[-1deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" alt="Product 3"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[3deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80" alt="Product 4"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[-2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80" alt="Product 5"
+                        class="w-full h-full object-cover">
+                </div>
+                <!-- Duplicate -->
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[-2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Product 1"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80" alt="Product 2"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl transform rotate-[-1deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" alt="Product 3"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
-            <div data-aos="fade-left"
-                class="bg-gray-900 rounded-xl p-8 min-h-[400px] relative overflow-hidden text-white flex flex-col justify-center items-center">
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-black opacity-50"></div>
-                <div class="relative z-10 text-center">
-                    <p class="mb-4 text-gray-400">Before</p>
-                    <div class="w-24 h-24 bg-gray-500 rounded mx-auto mb-8"></div>
-                    <p class="mb-4 text-purple-400 font-bold">✨ AI Magic ✨</p>
-                    <p class="mb-4 text-gray-400">After</p>
-                    <div class="w-full h-32 bg-purple-500 rounded mx-auto shadow-glow"></div>
+
+            <!-- Row 2 -->
+            <div class="flex gap-6 animate-marquee-reverse w-max">
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[1deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=600&q=80" alt="Banner 1"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[-2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1493612276216-9c783700ebad?w=600&q=80" alt="Banner 2"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&q=80" alt="Banner 3"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[-1deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=600&q=80" alt="Banner 4"
+                        class="w-full h-full object-cover">
+                </div>
+                <!-- Duplicate -->
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[1deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=600&q=80" alt="Banner 1"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[-2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1493612276216-9c783700ebad?w=600&q=80" alt="Banner 2"
+                        class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="w-[320px] aspect-video rounded-2xl overflow-hidden shadow-xl transform rotate-[2deg] hover:rotate-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&q=80" alt="Banner 3"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-surface" id="how-it-works">
-        <div class="container">
-            <h2 class="text-center text-3xl font-bold mb-12">Semudah 1-2-3</h2>
-            <div class="grid-3 text-center">
-                <div class="card bg-white">
-                    <div class="text-4xl mb-4">📸</div>
-                    <h3 class="font-bold mb-2">1. Upload</h3>
-                    <p class="text-muted">Upload foto produk Anda (background apa saja).</p>
+    <!-- Features Grid -->
+    <section class="py-20 bg-gray-50 dark:bg-[#1A1625]" id="features">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-16">
+                All-in-One <span class="text-primary">Creative Suite</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1: AI Product Photography -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up">
+                    <div
+                        class="size-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        📸
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">AI Product Photography</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Ubah foto produk biasa (bahkan dari HP) menjadi foto studio profesional hanya dengan 1 klik.
+                        Tersedia ratusan tema siap pakai.
+                    </p>
                 </div>
-                <div class="card bg-white">
-                    <div class="text-4xl mb-4">🎨</div>
-                    <h3 class="font-bold mb-2">2. Prompt</h3>
-                    <p class="text-muted">Pilih template atau ketik deskripsi background (e.g. "on a wooden table in
-                        bali").</p>
+
+                <!-- Feature 2: FlowMagic -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="size-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        ✨
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">FlowMagic Design</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Desain poster atau konten social media dengan referensi gaya. Cukup upload contoh desain yang
+                        Anda suka, AI akan menirunya untuk brand Anda.
+                    </p>
                 </div>
-                <div class="card bg-white">
-                    <div class="text-4xl mb-4">🚀</div>
-                    <h3 class="font-bold mb-2">3. Generate</h3>
-                    <p class="text-muted">Download hasil resolusi tinggi siap posting.</p>
+
+                <!-- Feature 3: Professional Banners -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="size-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        🥪
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Delivery Banner</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Buat banner menarik untuk GrabFood, GoFood, atau ShopeeFood yang terbukti meningkatkan konversi
+                        penjualan.
+                    </p>
+                </div>
+
+                <!-- Feature 4: Professional Ads -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up">
+                    <div
+                        class="size-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        📢
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Professional Ads</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Template iklan konversi tinggi untuk Facebook Ads & Instagram Ads. Generate variasi iklan visual
+                        dalam hitungan detik.
+                    </p>
+                </div>
+
+                <!-- Feature 5: Affiliate Tools -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="size-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        💰
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Affiliate Booster</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Generator khusus untuk affiliate marketer. Buat storyboard gambar produk lengkap dengan
+                        caption/prompt penjualan yang menarik.
+                    </p>
+                </div>
+
+                <!-- Feature 6: Photo Editing -->
+                <div class="bg-white dark:bg-[#231E31] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-primary/30 transition-all group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="size-14 bg-gray-100 text-gray-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        🎨
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Magic Editor</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Hapus objek, ganti warna, perluas gambar (outpainting), dan edit detail visual lainnya dengan
+                        perintah teks sederhana.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="section-padding" id="pricing">
-        <div class="container">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Harga Simple</h2>
+    <!-- Pricing Section -->
+    <section class="py-20 relative overflow-hidden" id="pricing">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-secondary-pink font-bold tracking-wider uppercase text-sm mb-2 block">Pricing</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Mulai Hemat, Hasil Hebat</h2>
+                <p class="text-gray-500">Pilih paket yang sesuai dengan kebutuhan konten Anda.</p>
             </div>
-            <div class="grid-2 max-w-4xl mx-auto gap-8">
-                <div class="card">
-                    <h3 class="font-bold text-xl">Pay-as-you-go</h3>
-                    <div class="text-3xl font-bold my-4">Rp 50.000 <span class="text-sm font-normal text-muted">/ 50
-                            credits</span></div>
-                    <p class="text-muted mb-6">Bagus untuk kebutuhan insidentil.</p>
-                    <button class="btn btn-outline w-full">Top Up</button>
-                </div>
-                <div class="card border-primary-solid shadow-xl">
-                    <h3 class="font-bold text-xl text-primary-solid">Pro Subscription</h3>
-                    <div class="text-3xl font-bold my-4">Rp 150.000 <span class="text-sm font-normal text-muted">/
-                            bulan</span></div>
-                    <p class="text-muted mb-6">Untuk agency & UMKM aktif.</p>
-                    <ul class="mb-6 space-y-2">
-                        <li>✅ 500 Credits / bulan</li>
-                        <li>✅ Remove Watermark</li>
-                        <li>✅ Priority Generation</li>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+                <!-- Starter -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
+                    <h3 class="font-bold text-xl mb-4">Starter</h3>
+                    <div class="text-4xl font-bold mb-2">Rp 49rb<span
+                            class="text-sm text-gray-400 font-normal">/topup</span></div>
+                    <p class="text-gray-500 text-sm mb-8">Untuk coba-coba atau kebutuhan insidentil.</p>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 50 Credits</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Akses Basic Templates
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Standard Resolution
+                        </li>
                     </ul>
-                    <button class="btn btn-primary w-full">Subscribe</button>
+                    <button
+                        class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary/5 transition-colors">Top
+                        Up Sekarang</button>
+                </div>
+
+                <!-- Pro (Best Value) -->
+                <div
+                    class="bg-[#151022] text-white p-10 rounded-3xl shadow-2xl border-4 border-primary relative transform md:-translate-y-4">
+                    <div
+                        class="absolute top-0 right-0 bg-secondary-pink text-white text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-lg">
+                        POPULAR</div>
+                    <h3 class="font-bold text-xl mb-4">Pro Creator</h3>
+                    <div class="text-4xl font-bold mb-2">Rp 149rb<span
+                            class="text-sm text-gray-400 font-normal">/bulan</span></div>
+                    <p class="text-indigo-200 text-sm mb-8">Untuk UMKM & Content Creator aktif.</p>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 500 Credits / bulan
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Akses Semua Fitur AI
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> FlowMagic & Banner Gen
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Remove Watermark</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 4K Ultra HD Export
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary-pink font-bold hover:opacity-90 shadow-glow transition-opacity">Start
+                        Free Trial</button>
+                </div>
+
+                <!-- Agency -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
+                    <h3 class="font-bold text-xl mb-4">Agency</h3>
+                    <div class="text-4xl font-bold mb-2">Rp 499rb<span
+                            class="text-sm text-gray-400 font-normal">/bulan</span></div>
+                    <p class="text-gray-500 text-sm mb-8">Untuk Tim & Penggunaan Skala Besar.</p>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 2500 Credits / bulan
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 5 User Seats</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> API Access</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Priority Support</li>
+                    </ul>
+                    <button
+                        class="w-full py-3 rounded-xl border-2 border-gray-200 text-gray-700 font-bold hover:border-gray-400 transition-colors">Contact
+                        Sales</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 border-t border-light text-center">
-        <p class="text-muted text-sm">FlowPict is part of <a href="/" class="text-primary-solid font-bold">FlowStack
-                Ecosystem</a></p>
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-background-dark py-12 px-6 border-t border-gray-100">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400 text-sm">© 2025 FlowStack. Part of Zeger Indonesia Ecosystem.</p>
+        </div>
     </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+        });
+    </script>
 </body>
 
 </html>
