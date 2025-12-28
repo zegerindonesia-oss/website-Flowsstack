@@ -38,6 +38,14 @@ AOS.init({
 let currentLang = localStorage.getItem('flowstack_lang') || 'id';
 
 // Data
+const categories = [
+  { name: 'Creative Tools', icon: 'Sparkles', desc: 'Kreasi konten visual & media dengan AI.' },
+  { name: 'Business Operations', icon: 'Briefcase', desc: 'Sistem manajemen operasional harian.' },
+  { name: 'Finance', icon: 'Banknote', desc: 'Pengelolaan keuangan dan pembayaran.' },
+  { name: 'Commerce', icon: 'ShoppingBag', desc: 'Solusi jualan online & offline.' },
+  { name: 'Education', icon: 'GraduationCap', desc: 'Platform edukasi & knowledge base.' }
+];
+
 const products = [
   {
     name: 'FlowPict',
@@ -121,6 +129,21 @@ const products = [
   }
 ];
 
+const serviceList = [
+  'Website Company Profile',
+  'Web App Internal System',
+  'Mobile App (Android / iOS)',
+  'Custom Dashboard',
+  'Custom Automation'
+];
+
+const steps = [
+  { title: 'Pilih Produk atau Solusi', desc: 'Jelajahi katalog produk kami atau konsultasikan kebutuhan custom Anda.' },
+  { title: 'Gunakan atau Coba Produk', desc: 'Mulai dengan versi gratis atau demo untuk merasakan manfaatnya.' },
+  { title: 'Upgrade Sesuai Kebutuhan', desc: 'Scale up layanan seiring pertumbuhan bisnis Anda.' },
+  { title: 'Tumbuh Bersama FlowStack', desc: 'Nikmati ekosistem terintegrasi yang mendukung kesuksesan jangka panjang.' }
+];
+
 // i18n Logic
 function updateLanguage(lang) {
   currentLang = lang;
@@ -143,6 +166,22 @@ function updateLanguage(lang) {
 
   // Re-render Products (to update translated descriptions)
   renderProducts();
+}
+
+// Render Functions
+function renderCategories() {
+  const container = document.getElementById('category-grid');
+  if (!container) return;
+
+  container.innerHTML = categories.map((cat, index) => `
+    <div class="glass-card flex flex-col items-start h-full" data-aos="fade-up" data-aos-delay="${index * 100}">
+      <div class="icon-box">
+        <i data-lucide="${cat.icon}"></i>
+      </div>
+      <h3 class="card-title text-xl font-bold mb-3">${cat.name}</h3>
+      <p class="text-muted text-sm leading-relaxed">${cat.desc}</p>
+    </div>
+  `).join('');
 }
 
 function renderProducts() {
@@ -201,10 +240,44 @@ function renderProducts() {
   });
 }
 
+function renderServices() {
+  const container = document.getElementById('service-list');
+  if (!container) return;
+
+  container.innerHTML = serviceList.map(service => `
+    <li class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/50 transition-colors">
+      <div class="text-secondary bg-pink-100 rounded-full p-1">
+        <i data-lucide="CheckCircle2" width="16" height="16"></i>
+      </div>
+      <span class="font-semibold text-gray-700">${service}</span>
+    </li>
+  `).join('');
+}
+
+function renderSteps() {
+  const container = document.getElementById('how-it-works');
+  if (!container) return;
+
+  container.innerHTML = steps.map((step, index) => `
+    <div class="relative z-10" data-aos="fade-up" data-aos-delay="${index * 100}">
+      <div class="w-16 h-16 mx-auto bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-lg flex items-center justify-center text-primary font-bold text-2xl border border-purple-100 mb-6 relative">
+         ${index + 1}
+         <div class="absolute -z-10 bg-primary blur-xl opacity-20 inset-0"></div>
+      </div>
+      <h3 class="font-bold text-lg mb-2">${step.title}</h3>
+      <p class="text-muted text-sm px-4">${step.desc}</p>
+    </div>
+  `).join('');
+}
+
+
 // Execute
 document.addEventListener('DOMContentLoaded', () => {
-  // Initial Render
-  updateLanguage(currentLang);
+  renderCategories();
+  renderProducts();  // This handles initial createIcons inside it for products
+  renderServices();
+  renderSteps();
+  updateLanguage(currentLang); // Defines initial language and re-renders products
 
   // Event Listeners
   const langToggle = document.getElementById('lang-toggle');
@@ -215,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize all icons initially needed
+  // Initialize all icons (for non-product sections like categories, services)
   createIcons({
     icons: {
       TrendingUp,
