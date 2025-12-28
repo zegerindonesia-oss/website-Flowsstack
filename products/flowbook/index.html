@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowBook - Appointment Booking Platform | FlowStack</title>
+    <meta name="description"
+        content="Platform reservasi online otomatis untuk jasa, kelas, dan penyewaan. Terima booking 24/7 tanpa admin." />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script type="module" src="/src/style.css"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/" class="logo">← Kembali ke Flow<span>Stack</span></a>
+            <a href="#pricing" class="btn btn-primary">Mulai Booking</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container grid-2 items-center">
+            <div data-aos="fade-right">
+                <span class="product-badge mb-4">Business Operations</span>
+                <h1 class="text-4xl lg:text-5xl font-bold mb-6">
+                    Terima Jadwal <span class="text-gradient">Otomatis 24/7</span>
+                </h1>
+                <p class="text-lg text-muted mb-8">
+                    Stop balas chat "masih kosong kak?". Biarkan klien memilih slot waktu mereka sendiri, bayar DP, dan
+                    terima reminder otomatis.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#demo" class="btn btn-primary">Buat Halaman Booking</a>
+                </div>
+            </div>
+            <div data-aos="fade-left"
+                class="bg-purple-50 rounded-xl p-8 min-h-[400px] flex items-center justify-center border border-primary/20 relative">
+                <!-- Calendar Visual -->
+                <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold">Pilih Jadwal</h4>
+                        <span class="text-primary text-sm font-bold">Desember 2025</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 text-center text-sm">
+                        <div class="p-2 bg-gray-100 rounded text-gray-400">09:00</div>
+                        <div
+                            class="p-2 bg-primary/20 text-primary rounded font-bold cursor-pointer border border-primary">
+                            10:00</div>
+                        <div class="p-2 bg-gray-100 rounded text-gray-400 line-through">11:00</div>
+                        <div class="p-2 bg-gray-100 rounded text-gray-400">13:00</div>
+                    </div>
+                    <button class="btn btn-primary w-full mt-6 py-2 text-sm">Konfirmasi Booking</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-surface" id="features">
+        <div class="container">
+            <h2 class="text-center text-3xl font-bold mb-12">Fitur Lengkap</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3 class="card-title">Calendar Sync</h3>
+                    <p class="card-desc">Sync dengan Google Calendar. Anti bentrok jadwal pribadi dan bisnis.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔔</div>
+                    <h3 class="card-title">Auto Reminders</h3>
+                    <p class="card-desc">Kurangi "No-Show" dengan reminder otomatis via WhatsApp & Email H-1.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h3 class="card-title">Deposite Payments</h3>
+                    <p class="card-desc">Wajibkan DP saat booking untuk mengamankan slot waktu berharga Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="pricing">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Pricing</h2>
+            </div>
+            <div class="grid-3 max-w-5xl mx-auto">
+                <div class="card">
+                    <h3 class="font-bold text-xl">Personal</h3>
+                    <div class="text-3xl font-bold my-4">Free</div>
+                    <p class="text-muted mb-6">1 Halaman Booking.</p>
+                    <ul class="mb-6 space-y-2 text-sm">
+                        <li>✅ Manual Approval</li>
+                        <li>✅ Email Reminder</li>
+                    </ul>
+                    <button class="btn btn-outline w-full">Daftar</button>
+                </div>
+                <div class="card border-primary-solid shadow-xl">
+                    <h3 class="font-bold text-xl text-primary-solid">Pro</h3>
+                    <div class="text-3xl font-bold my-4">Rp 59rb<span class="text-sm text-muted">/bln</span></div>
+                    <p class="text-muted mb-6">Unlimited Bookings.</p>
+                    <ul class="mb-6 space-y-2 text-sm">
+                        <li>✅ WA Reminder</li>
+                        <li>✅ Payment Gateway</li>
+                        <li>✅ Custom Domain</li>
+                    </ul>
+                    <button class="btn btn-primary w-full">Upgrade</button>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl">Business</h3>
+                    <div class="text-3xl font-bold my-4">Rp 199rb<span class="text-sm text-muted">/bln</span></div>
+                    <p class="text-muted mb-6">Untuk Tim/Klinik.</p>
+                    <ul class="mb-6 space-y-2 text-sm">
+                        <li>✅ Multi-Staff Support</li>
+                        <li>✅ Advanced Reporting</li>
+                    </ul>
+                    <button class="btn btn-outline w-full">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-light text-center">
+        <p class="text-muted text-sm">FlowBook is part of <a href="/" class="text-primary-solid font-bold">FlowStack
+                Ecosystem</a></p>
+    </footer>
+    <script type="module">import AOS from 'aos'; AOS.init();</script>
+</body>
+
+</html>
