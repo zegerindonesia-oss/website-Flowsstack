@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowAssist - Asisten WhatsApp AI 24 Jam | FlowStack</title>
+    <meta name="description"
+        content="FlowAssist adalah AI Customer Service berbasis WhatsApp yang membantu bisnis melayani pelanggan 24 jam nonstop." />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8655f6",
+                        "primary-dark": "#6d44c5",
+                        "secondary-pink": "#EC4899",
+                        "soft-blue": "#E0E7FF",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#151022",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "heading": ["Outfit", "sans-serif"],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-bubble {
+            position: relative;
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .chat-bubble.incoming {
+            background-color: #ffffff;
+            border-top-left-radius: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            color: #111b21;
+        }
+
+        .chat-bubble.outgoing {
+            background-color: #d9fdd3;
+            border-top-right-radius: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            color: #111b21;
+            margin-left: auto;
+        }
+
+        .marvel-device {
+            display: inline-block;
+            position: relative;
+            box-sizing: content-box !important;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
+        <nav
+            class="glass-nav rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl shadow-lg transition-all duration-300">
+            <a href="/" class="flex items-center gap-3 text-[#131118] hover:opacity-80 transition-opacity">
+                <div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+                </div>
+                <span class="font-heading text-lg font-bold tracking-tight">Back to FlowStack</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="#pricing"
+                    class="bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
+                    Mulai Sekarang
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+                    <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                    Produk Resmi dari FlowStack
+                </div>
+
+                <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                    Balas Semua Chat Pelanggan, <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">24 Jam,
+                        Tanpa CS</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-4 font-heading max-w-3xl mx-auto">
+                    FlowAssist adalah AI WhatsApp Assistant dari FlowStack yang otomatis menjawab pertanyaan pelanggan,
+                    mencatat order, dan membantu bisnismu tetap closing — bahkan saat kamu tidur.
+                </p>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-8">
+                    <a href="#pricing"
+                        class="bg-primary hover:bg-primary-dark text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
+                        Mulai Sekarang
+                    </a>
+                    <a href="#demo"
+                        class="bg-white hover:bg-gray-50 text-gray-800 text-lg font-bold px-10 py-4 rounded-full transition-all shadow-md border border-gray-200 flex items-center gap-2">
+                        <span class="material-symbols-outlined">play_circle</span>
+                        Lihat Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Visual: iPhone Mockup with Chat -->
+            <div class="relative max-w-sm mx-auto mt-12 mb-20 md:max-w-4xl flex justify-center">
+                <!-- Background Circle -->
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-primary/20 to-secondary-pink/20 rounded-full blur-3xl -z-10 animate-pulse">
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-10 items-center">
+                    <!-- Phone UI -->
+                    <div class="bg-gray-900 border-[14px] border-gray-900 rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl overflow-hidden relative bg-[#e5ddd5]"
+                        data-aos="fade-up">
+                        <!-- WhatsApp Header -->
+                        <div class="bg-[#008069] p-4 flex items-center gap-3 text-white">
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-sm">smart_toy</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Toko Berkah Jaya</p>
+                                <p class="text-[10px] opacity-80">Online | FlowAssist AI</p>
+                            </div>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div
+                            class="p-4 space-y-4 h-full overflow-y-auto pb-20 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat">
+                            <!-- Customer -->
+                            <div class="chat-bubble incoming" data-aos="fade-right" data-aos-delay="500">
+                                Halo kak, sepatu model A masih ada?
+                                <div class="text-[10px] text-gray-400 text-right mt-1">19:30</div>
+                            </div>
+
+                            <!-- FlowAssist -->
+                            <div class="chat-bubble outgoing" data-aos="fade-left" data-aos-delay="1500">
+                                Halo Kak! 👋 Model A masih ready stock ya. Ada warna Hitam & Putih. Kakak mau ukuran
+                                berapa? 😊
+                                <div
+                                    class="text-[10px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
+                                    19:30 <span
+                                        class="material-symbols-outlined text-[10px] text-blue-500">done_all</span>
+                                </div>
+                            </div>
+
+                            <!-- Customer -->
+                            <div class="chat-bubble incoming" data-aos="fade-right" data-aos-delay="2500">
+                                Ukuran 42 hitam ada? Harganya berapa?
+                                <div class="text-[10px] text-gray-400 text-right mt-1">19:31</div>
+                            </div>
+
+                            <!-- FlowAssist -->
+                            <div class="chat-bubble outgoing" data-aos="fade-left" data-aos-delay="3500">
+                                Ada Kak, ukuran 42 Hitam siap kirim! 🔥<br><br>Harganya Rp 299.000 (Lagi diskon dari Rp
+                                450.000).<br><br>Mau checkout sekarang biar dikirim besok pagi? 😉
+                                <div
+                                    class="text-[10px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
+                                    19:31 <span
+                                        class="material-symbols-outlined text-[10px] text-blue-500">done_all</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Feature Cards on Desktop -->
+                    <div class="hidden md:flex flex-col gap-6">
+                        <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-green-500 flex items-center gap-3 w-64 animate-float"
+                            style="animation-delay: 0s;">
+                            <div class="bg-green-100 p-2 rounded-lg text-green-600">
+                                <span class="material-symbols-outlined">bolt</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Fast Response</p>
+                                <p class="text-xs text-gray-500">Balas dalam < 3 detik</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-primary flex items-center gap-3 w-64 animate-float"
+                            style="animation-delay: 2s;">
+                            <div class="bg-purple-100 p-2 rounded-lg text-primary">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Aktif 24 Jam</p>
+                                <p class="text-xs text-gray-500">Gak pernah tidur</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-500 flex items-center gap-3 w-64 animate-float"
+                            style="animation-delay: 4s;">
+                            <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Auto Closing</p>
+                                <p class="text-xs text-gray-500">Fokus jualan & omset</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. PROBLEM SECTION -->
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4">Masalah Umum <span
+                        class="text-red-500">Pemilik Usaha</span></h2>
+                <p class="text-gray-600 text-lg">Sering mengalami hal-hal ini di bisnismu?</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                    data-aos="fade-up">
+                    <div class="bg-red-50 w-12 h-12 rounded-xl flex items-center justify-center text-red-500 mb-4">
+                        <span class="material-symbols-outlined">chat_error</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Chat Menumpuk</h3>
+                    <p class="text-gray-500 text-sm">Ratusan chat masuk tapi admin kewalahan membalas satu per satu.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-red-50 w-12 h-12 rounded-xl flex items-center justify-center text-red-500 mb-4">
+                        <span class="material-symbols-outlined">payments</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">CS Mahal</h3>
+                    <p class="text-gray-500 text-sm">Harus gaji CS 2-4 Juta/bulan, belum training dan drama karyawan.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-red-50 w-12 h-12 rounded-xl flex items-center justify-center text-red-500 mb-4">
+                        <span class="material-symbols-outlined">bedtime</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Order Hilang Malam Hari</h3>
+                    <p class="text-gray-500 text-sm">Customer chat malam tapi dibalas besok pagi, mereka sudah beli di
+                        kompetitor.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-red-50 w-12 h-12 rounded-xl flex items-center justify-center text-red-500 mb-4">
+                        <span class="material-symbols-outlined">settings_alert</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Pusing Teknis</h3>
+                    <p class="text-gray-500 text-sm">Mau pakai bot tapi ribet setting webhook, API, dan server sendiri.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SOLUTION SECTION -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider mb-6">
+                        <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                        Solusi Terbaik
+                    </div>
+                    <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
+                        FlowAssist Menjadi Solusi <br>
+                        <span class="text-primary">Otomatisasi Bisnismu</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        FlowAssist bekerja sebagai asisten digital WhatsApp yang aktif 24 jam nonstop. Ramah, natural,
+                        dan fokus untuk meningkatkan penjualan, bukan hanya menjawab chat.
+                    </p>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Auto Reply 24 Jam</h4>
+                                <p class="text-sm text-gray-500">Menjawab pertanyaan kapanpun customer chat.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Follow-up Otomatis</h4>
+                                <p class="text-sm text-gray-500">Mengingatkan customer yang belum checkout.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Gaya Bahasa Natural</h4>
+                                <p class="text-sm text-gray-500">Bisa disetting bahasa formal, santai, atau gaul.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative" data-aos="fade-left">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-50 rounded-3xl transform rotate-3">
+                    </div>
+                    <div class="relative bg-white border border-gray-100 rounded-3xl p-8 shadow-xl">
+                        <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-4">
+                            <div
+                                class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">smart_toy</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">FlowAssist AI</h3>
+                                <p class="text-sm text-green-500 flex items-center gap-1"><span
+                                        class="w-2 h-2 bg-green-500 rounded-full"></span> Online</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <p class="font-bold text-xs text-gray-400 mb-1">PERTANYAAN UMUM</p>
+                                <p class="text-sm font-medium">"Min, tokonya buka jam berapa?"</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <span class="material-symbols-outlined text-gray-300">arrow_downward</span>
+                            </div>
+                            <div class="bg-primary/5 p-4 rounded-xl border border-primary/20">
+                                <p class="font-bold text-xs text-primary mb-1">AI REPLY</p>
+                                <p class="text-sm font-medium">"Halo Kak! Toko kami buka Senin - Sabtu jam 09.00 - 17.00
+                                    WIB. Tapi Kakak bisa order di website 24 jam ya! Mau liat katalog?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. HOW IT WORKS -->
+    <section class="py-24 bg-background-dark text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4">Cara Kerja FlowAssist</h2>
+                <p class="text-gray-400">Mudah, tanpa coding, tanpa ribet.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative group" data-aos="fade-up">
+                    <div
+                        class="size-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl font-bold mb-6 border border-white/10 group-hover:bg-primary transition-colors">
+                        1</div>
+                    <h3 class="font-bold text-xl mb-3">Login FlowStack</h3>
+                    <p class="text-gray-400 text-sm">Masuk ke dashboard FlowStack dan pilih menu FlowAssist.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="size-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl font-bold mb-6 border border-white/10 group-hover:bg-primary transition-colors">
+                        2</div>
+                    <h3 class="font-bold text-xl mb-3">Connect WhatsApp</h3>
+                    <p class="text-gray-400 text-sm">Scan QR Code WhatsApp bisnis kamu untuk menghubungkan.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="size-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl font-bold mb-6 border border-white/10 group-hover:bg-primary transition-colors">
+                        3</div>
+                    <h3 class="font-bold text-xl mb-3">Atur Jawaban</h3>
+                    <p class="text-gray-400 text-sm">Upload data produk dan FAQ dasar toko kamu.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="size-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl font-bold mb-6 border border-white/10 group-hover:bg-primary transition-colors">
+                        4</div>
+                    <h3 class="font-bold text-xl mb-3">AI Siap Kerja</h3>
+                    <p class="text-gray-400 text-sm">Selesai! FlowAssist langsung melayani pelanggan yang chat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. BENEFITS -->
+    <section class="py-24 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-6">Kenapa Bisnis Memilih FlowAssist?</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/50 transition-all group">
+                    <div
+                        class="size-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">savings</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Hemat Biaya CS</h3>
+                    <p class="text-gray-500">Lebih murah daripada gaji satu orang CS per bulan. Efisiensi tinggi.</p>
+                </div>
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/50 transition-all group">
+                    <div
+                        class="size-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">mark_chat_read</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Tidak Ada Chat Terlewat</h3>
+                    <p class="text-gray-500">Semua chat dibalas secepat kilat. Customer tidak akan lari ke kompetitor.
+                    </p>
+                </div>
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/50 transition-all group">
+                    <div
+                        class="size-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">hub</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Ekosistem FlowStack</h3>
+                    <p class="text-gray-500">Terintegrasi dengan produk FlowStack lainnya seperti FlowStore & FlowBook.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PRICING -->
+    <section id="pricing" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4">Harga Hemat, <span
+                        class="text-primary">Value Besar</span></h2>
+                <p class="text-gray-600">Jauh lebih murah dari gaji CS bulanan.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+
+                <!-- Plan 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">Bulanan</h3>
+                    <p class="text-sm text-gray-500 mb-6">Coba dulu, cocok baru lanjut.</p>
+                    <div class="text-4xl font-extrabold mb-1">Rp399.000</div>
+                    <div class="text-xs text-gray-400 mb-8">/ bulan</div>
+
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> 1 WhatsApp Bisnis
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> AI Aktif 24 Jam
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Support Dasar</li>
+                    </ul>
+
+                    <a href="https://wa.me/628123456789"
+                        class="block w-full py-3 rounded-xl border border-primary text-primary font-bold text-center hover:bg-primary hover:text-white transition-colors">Pilih
+                        Paket</a>
+                </div>
+
+                <!-- Plan 2 BEST -->
+                <div
+                    class="bg-background-dark text-white p-10 rounded-3xl shadow-2xl border-2 border-primary relative transform md:-translate-y-4">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary-pink text-white text-xs font-bold px-4 py-1 rounded-full">
+                        BEST VALUE</div>
+                    <h3 class="font-bold text-2xl mb-2">3 Bulan</h3>
+                    <p class="text-sm text-gray-300 mb-6">Lebih hemat untuk jangka menengah.</p>
+                    <div class="text-5xl font-extrabold mb-1">Rp1.050.000</div>
+                    <div class="text-xs text-gray-400 mb-8">/ 3 bulan (Hemat Rp147rb)</div>
+
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-secondary-pink text-lg">check</span> Semua Fitur
+                            Bulanan</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-secondary-pink text-lg">check</span> Priority
+                            Support</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-secondary-pink text-lg">check</span> Akses Update
+                            Baru</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-secondary-pink text-lg">check</span> Setup
+                            Assistance</li>
+                    </ul>
+
+                    <a href="https://wa.me/628123456789"
+                        class="block w-full py-4 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary-dark transition-colors shadow-lg hover:shadow-glow">Berlangganan
+                        Sekarang</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">6 Bulan</h3>
+                    <p class="text-sm text-gray-500 mb-6">Paling hemat untuk bisnis serius.</p>
+                    <div class="text-4xl font-extrabold mb-1">Rp1.950.000</div>
+                    <div class="text-xs text-gray-400 mb-8">/ 6 bulan (Hemat Rp444rb)</div>
+
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> 1 WhatsApp Bisnis
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> AI Aktif 24 Jam
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Priority Support
+                        </li>
+                    </ul>
+
+                    <a href="https://wa.me/628123456789"
+                        class="block w-full py-3 rounded-xl border border-primary text-primary font-bold text-center hover:bg-primary hover:text-white transition-colors">Pilih
+                        Paket</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TRUST & CTA -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+
+            <div class="mb-12">
+                <h2 class="font-heading text-2xl font-bold mb-4 text-gray-400">Dibangun oleh FlowStack untuk UMKM
+                    Indonesia</h2>
+                <div class="flex justify-center gap-8 opacity-50 grayscale">
+                    <!-- Placeholders for logos if needed, sticking to text for now as per req -->
+                    <span class="text-xl font-bold text-gray-300">FlowStack Ecosystem</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-br from-background-dark to-gray-900 rounded-[3rem] p-12 md:p-20 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px]"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-pink/20 rounded-full blur-[80px]"></div>
+
+                <h2 class="font-heading text-4xl md:text-6xl font-extrabold mb-8 relative z-10">
+                    Biarkan AI yang Melayani. <br>
+                    Kamu Fokus Kembangkan Bisnis.
+                </h2>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
+                    <a href="#pricing"
+                        class="bg-primary hover:bg-primary-dark text-white text-xl font-bold px-12 py-5 rounded-full shadow-lg hover:shadow-glow transition-all">
+                        Gunakan FlowAssist Sekarang
+                    </a>
+                </div>
+                <p class="mt-6 text-gray-400 text-sm">Powered by FlowStack</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12 px-6">
+        <div class="container mx-auto max-w-6xl flex flex-col items-center">
+            <div class="flex items-center gap-3 text-[#131118] mb-8">
+                <div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-[24px]">layers</span>
+                </div>
+                <span
+                    class="font-heading text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">FlowStack</span>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 text-center md:text-left w-full max-w-4xl mb-12">
+                <div>
+                    <h4 class="font-bold mb-4">Produk</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="/products/flowpict" class="hover:text-primary">FlowPict</a></li>
+                        <li><a href="/products/flowassist" class="hover:text-primary">FlowAssist</a></li>
+                        <li><a href="#" class="hover:text-primary">FlowTrade</a></li>
+                        <li><a href="#" class="hover:text-primary">FlowHR</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Jasa</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-primary">Website Development</a></li>
+                        <li><a href="#" class="hover:text-primary">Web & Mobile App</a></li>
+                        <li><a href="#" class="hover:text-primary">Custom Automation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Panduan</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-primary">Dokumentasi</a></li>
+                        <li><a href="#" class="hover:text-primary">Blog</a></li>
+                        <li><a href="#" class="hover:text-primary">Komunitas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-primary">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm">© 2025 FlowStack. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
+</body>
+
+</html>

@@ -21,7 +21,8 @@ import {
   Utensils,
   CreditCard,
   Share2,
-  Construction
+  Construction,
+  MessageCircle
 } from 'lucide';
 import AOS from 'aos';
 import { translations } from './translations.js';
@@ -64,6 +65,16 @@ const products = [
     link: '/products/flowqueue',
     styleClass: 'bg-pink-100 text-pink-600'
   },
+  {
+    name: 'FlowAssist',
+    category: 'Business Operations',
+    descKey: null,
+    desc: 'Asisten WhatsApp AI 24 Jam untuk otomatisasi CS.',
+    icon: 'MessageCircle',
+    link: '/products/flowassist',
+    styleClass: 'bg-green-100 text-green-600'
+  },
+
   {
     name: 'FlowBook',
     category: 'Business Operations',
@@ -311,7 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Utensils,
       CreditCard,
       Share2,
-      Construction
+      Construction,
+      MessageCircle
     }
   });
 });
