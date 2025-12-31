@@ -163,8 +163,7 @@
     </style>
 </head>
 
-<body
-    class="bg-background-light text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
+<body class="text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
 
     <!-- Animated Aurora Background -->
     <div class="animated-mesh-gradient"></div>
@@ -190,156 +189,137 @@
 
     <!-- 1. HERO SECTION -->
     <section class="relative pt-32 pb-20 overflow-hidden">
-        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
 
-            <!-- CS Professional Image (Floating/Top) -->
-            <div class="flex justify-center mb-8" data-aos="fade-down">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full transform translate-y-4"></div>
-                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=300&h=300&fit=crop&crop=faces&q=80"
-                        alt="Professional CS Agent"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-2xl relative z-10 animate-float">
-                    <div class="absolute bottom-2 right-0 bg-white px-3 py-1 rounded-full shadow-lg border border-gray-100 flex items-center gap-1 z-20 animate-bounce"
-                        style="animation-duration: 3s;">
-                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span class="text-xs font-bold text-gray-700">Online</span>
+                <!-- Left Column: Content -->
+                <div class="text-left z-20" data-aos="fade-right">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm border border-white/50 text-primary text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                        Produk Resmi dari FlowStack
+                    </div>
+
+                    <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-gray-900">
+                        Balas Semua Chat Pelanggan, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">24
+                            Jam,
+                            Tanpa CS</span>
+                    </h1>
+
+                    <p class="text-xl text-gray-700 mb-8 font-heading leading-relaxed max-w-lg">
+                        FlowAssist adalah AI WhatsApp Assistant dari FlowStack yang otomatis menjawab pertanyaan,
+                        mencatat order, dan closing penjualan — aktif selamanya, tanpa gaji bulanan.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 mt-8">
+                        <a href="#pricing"
+                            class="bg-primary hover:bg-primary-dark text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2 w-full sm:w-auto justify-center">
+                            Mulai Sekarang
+                        </a>
+                        <a href="#demo"
+                            class="bg-white/80 backdrop-blur-md hover:bg-white text-gray-800 text-lg font-bold px-10 py-4 rounded-full transition-all shadow-md border border-white/50 flex items-center gap-2 w-full sm:w-auto justify-center">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            Lihat Demo
+                        </a>
+                    </div>
+
+                    <!-- Trust Indicator -->
+                    <div class="mt-8 flex items-center gap-4 text-sm text-gray-500 font-medium">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white"
+                                src="https://i.pravatar.cc/100?img=1" alt="User">
+                            <img class="w-8 h-8 rounded-full border-2 border-white"
+                                src="https://i.pravatar.cc/100?img=2" alt="User">
+                            <div
+                                class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px]">
+                                +2k</div>
+                        </div>
+                        <p>Sudah digunakan 2,000+ UMKM</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="text-center max-w-4xl mx-auto mb-16">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm border border-white/50 text-primary text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                    <span class="material-symbols-outlined text-[16px]">smart_toy</span>
-                    Produk Resmi dari FlowStack
-                </div>
+                <!-- Right Column: Visual Composition -->
+                <div class="relative h-[600px] flex items-center justify-center md:justify-end" data-aos="fade-left">
 
-                <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-gray-900">
-                    Balas Semua Chat Pelanggan, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">24 Jam,
-                        Tanpa CS</span>
-                </h1>
+                    <!-- Background Blob -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary-pink/30 rounded-full blur-[80px] -z-10 animate-pulse">
+                    </div>
 
-                <p class="text-xl md:text-2xl font-bold text-gray-700 mb-4 font-heading max-w-3xl mx-auto">
-                    FlowAssist adalah AI WhatsApp Assistant dari FlowStack yang otomatis menjawab pertanyaan pelanggan,
-                    mencatat order, dan membantu bisnismu tetap closing — bahkan saat kamu tidur.
-                </p>
+                    <!-- Large CS Image (Asian Professional) -->
+                    <div class="absolute bottom-0 right-0 md:right-[-50px] w-[80%] md:w-[90%] z-10">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+                            alt="Professional Asian CS"
+                            class="w-full h-auto object-contain drop-shadow-2xl hero-cs-image mask-image-gradient">
+                    </div>
 
-                <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-8">
-                    <a href="#pricing"
-                        class="bg-primary hover:bg-primary-dark text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
-                        Mulai Sekarang
-                    </a>
-                    <a href="#demo"
-                        class="bg-white/80 backdrop-blur-md hover:bg-white text-gray-800 text-lg font-bold px-10 py-4 rounded-full transition-all shadow-md border border-white/50 flex items-center gap-2">
-                        <span class="material-symbols-outlined">play_circle</span>
-                        Lihat Demo
-                    </a>
-                </div>
-            </div>
-
-            <!-- Hero Visual: Real iPhone Mockup with Chat -->
-            <div class="relative max-w-sm mx-auto mt-12 mb-20 md:max-w-4xl flex justify-center">
-                <!-- Background Light Effect -->
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-white/40 to-primary/20 rounded-full blur-[100px] -z-10">
-                </div>
-
-                <div class="flex flex-col md:flex-row gap-10 items-center">
-
-                    <!-- Real iPhone Mockup -->
-                    <div class="iphone-mockup" data-aos="fade-up">
-                        <div class="iphone-frame"></div> <!-- The Frame Image -->
-                        <div class="iphone-screen"> <!-- The Content Inside -->
+                    <!-- Hand Held iPhone Mockup (Floating in front) -->
+                    <div class="iphone-hand-mockup absolute left-0 md:left-10 bottom-10 animate-float"
+                        style="animation-duration: 6s;">
+                        <div class="iphone-hand-frame"></div> <!-- Hand Image Frame -->
+                        <div class="iphone-hand-screen"> <!-- The Content Inside -->
 
                             <!-- WhatsApp Header -->
-                            <div class="bg-[#008069] p-4 flex items-center gap-3 text-white pt-12">
+                            <div class="bg-[#008069] p-4 flex items-center gap-3 text-white pt-8">
                                 <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-sm">smart_toy</span>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="font-bold text-sm">Toko Berkah Jaya</p>
-                                    <p class="text-[10px] opacity-80">Online | FlowAssist AI</p>
-                                </div>
-                                <div class="flex items-center gap-4 text-white">
-                                    <span class="material-symbols-outlined text-lg">videocam</span>
-                                    <span class="material-symbols-outlined text-lg">call</span>
+                                    <p class="font-bold text-sm">Toko Berkah</p>
+                                    <p class="text-[10px] opacity-80">Online</p>
                                 </div>
                             </div>
 
                             <!-- Chat Area -->
-                            <div
-                                class="p-4 space-y-4 h-full overflow-y-auto pb-40 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat">
+                            <div class="p-3 space-y-3 h-full overflow-y-auto pb-20 bg-[#efe7dd]">
                                 <!-- Customer -->
-                                <div class="chat-bubble incoming" data-aos="fade-right" data-aos-delay="500">
-                                    Halo kak, sepatu model A masih ada?
-                                    <div class="text-[10px] text-gray-400 text-right mt-1">19:30</div>
+                                <div class="chat-bubble incoming text-xs">
+                                    Ready kak?
+                                    <div class="text-[8px] text-gray-400 text-right mt-1">19:30</div>
                                 </div>
 
                                 <!-- FlowAssist -->
-                                <div class="chat-bubble outgoing" data-aos="fade-left" data-aos-delay="1500">
-                                    Halo Kak! 👋 Model A masih ready stock ya. Ada warna Hitam & Putih. Kakak mau ukuran
-                                    berapa? 😊
+                                <div class="chat-bubble outgoing text-xs">
+                                    Ready Kak! Mau warna apa? 😊
                                     <div
-                                        class="text-[10px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
+                                        class="text-[8px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
                                         19:30 <span
-                                            class="material-symbols-outlined text-[10px] text-blue-500">done_all</span>
+                                            class="material-symbols-outlined text-[8px] text-blue-500">done_all</span>
                                     </div>
                                 </div>
 
                                 <!-- Customer -->
-                                <div class="chat-bubble incoming" data-aos="fade-right" data-aos-delay="2500">
-                                    Ukuran 42 hitam ada? Harganya berapa?
-                                    <div class="text-[10px] text-gray-400 text-right mt-1">19:31</div>
+                                <div class="chat-bubble incoming text-xs">
+                                    Hitam size L ada?
+                                    <div class="text-[8px] text-gray-400 text-right mt-1">19:31</div>
                                 </div>
 
                                 <!-- FlowAssist -->
-                                <div class="chat-bubble outgoing" data-aos="fade-left" data-aos-delay="3500">
-                                    Ada Kak, ukuran 42 Hitam siap kirim! 🔥<br><br>Harganya Rp 299.000 (Lagi diskon dari
-                                    Rp 450.000).<br><br>Mau checkout sekarang biar dikirim besok pagi? 😉
+                                <div class="chat-bubble outgoing text-xs">
+                                    Ada dong! Siap kirim hari ini. Mau checkout? 🔥
                                     <div
-                                        class="text-[10px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
+                                        class="text-[8px] text-gray-500 text-right mt-1 flex items-center justify-end gap-1">
                                         19:31 <span
-                                            class="material-symbols-outlined text-[10px] text-blue-500">done_all</span>
+                                            class="material-symbols-outlined text-[8px] text-blue-500">done_all</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Floating Badge on Phone -->
+                        <div class="absolute -right-4 top-20 bg-white p-3 rounded-xl shadow-lg border border-green-100 flex items-center gap-3 z-40 animate-bounce"
+                            style="animation-duration: 3s;">
+                            <div class="bg-green-100 p-2 rounded-lg text-green-600">
+                                <span class="material-symbols-outlined text-xl">bolt</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-xs">Fast Reply</p>
+                                <p class="text-[10px] text-gray-500">&lt; 1 Detik</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Floating Feature Cards on Desktop -->
-                    <div class="hidden md:flex flex-col gap-6">
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border-l-4 border-green-500 flex items-center gap-3 w-64 animate-float"
-                            style="animation-delay: 0s;">
-                            <div class="bg-green-100 p-2 rounded-lg text-green-600">
-                                <span class="material-symbols-outlined">bolt</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm">Fast Response</p>
-                                <p class="text-xs text-gray-500">Balas dalam &lt; 3 detik</p>
-                            </div>
-                        </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border-l-4 border-primary flex items-center gap-3 w-64 animate-float"
-                            style="animation-delay: 2s;">
-                            <div class="bg-purple-100 p-2 rounded-lg text-primary">
-                                <span class="material-symbols-outlined">schedule</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm">Aktif 24 Jam</p>
-                                <p class="text-xs text-gray-500">Gak pernah tidur</p>
-                            </div>
-                        </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border-l-4 border-blue-500 flex items-center gap-3 w-64 animate-float"
-                            style="animation-delay: 4s;">
-                            <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm">Auto Closing</p>
-                                <p class="text-xs text-gray-500">Fokus jualan & omset</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
