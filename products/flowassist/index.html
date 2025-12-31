@@ -57,36 +57,43 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* Animated Mesh Gradient */
+        /* Animated Mesh Gradient - FlowStack Aurora */
         .animated-mesh-gradient {
             background-color: #ffffff;
             background-image:
-                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
-            background-image:
-                radial-gradient(at 40% 20%, hsla(260, 100%, 90%, 1) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, hsla(189, 100%, 90%, 1) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, hsla(340, 100%, 94%, 1) 0px, transparent 50%),
-                radial-gradient(at 80% 50%, hsla(270, 100%, 96%, 1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(240, 100%, 96%, 1) 0px, transparent 50%),
-                radial-gradient(at 80% 100%, hsla(240, 100%, 96%, 1) 0px, transparent 50%),
-                radial-gradient(at 0% 0%, hsla(340, 100%, 96%, 1) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(271, 91%, 65%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(330, 81%, 60%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(271, 91%, 65%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(330, 81%, 60%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(280, 100%, 90%, 0.5) 0px, transparent 50%);
             background-size: 200% 200%;
-            animation: gradient 20s ease infinite;
+            animation: gradient 15s ease infinite;
+            filter: blur(60px);
+
+            /* Positioning to sit behind everything but cover full screen */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
+                transform: scale(1);
             }
 
             50% {
                 background-position: 100% 50%;
+                transform: scale(1.1);
             }
 
             100% {
                 background-position: 0% 50%;
+                transform: scale(1);
             }
         }
 
@@ -115,11 +122,11 @@
             margin-left: auto;
         }
 
-        /* Realistic iPhone Mockup Wrapper */
+        /* Realistic iPhone 15 Pro Mockup */
         .iphone-mockup {
             position: relative;
-            width: 320px;
-            height: 650px;
+            width: 330px;
+            height: 680px;
             margin: 0 auto;
             z-index: 10;
         }
@@ -132,21 +139,24 @@
             height: 100%;
             z-index: 20;
             pointer-events: none;
-            background-image: url('https://assets.codepen.io/927786/iphone-14-mockup.png');
-            /* Reliable CDN for iPhone 14 Frame */
-            background-size: contain;
+            /* High-quality iPhone 15 Pro Blue Frame */
+            background-image: url('https://raw.githubusercontent.com/zegerindonesia-oss/assets/refs/heads/main/iphone15pro-blue-frame.png');
+            /* Fallback to generic if needed, but intended for 15 Pro look */
+            background-image: url('https://framerusercontent.com/images/22tL7sYcO8W6GgIeKq4dZL4.png');
+            /* Reliable Framer Asset 15 Pro Blue */
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: center;
         }
 
         .iphone-screen {
             position: absolute;
-            top: 18px;
-            left: 22px;
-            width: 276px;
-            height: 614px;
+            top: 15px;
+            left: 21px;
+            width: 288px;
+            height: 648px;
             background-color: #e5ddd5;
-            border-radius: 40px;
+            border-radius: 46px;
             overflow: hidden;
             z-index: 15;
         }
@@ -154,7 +164,10 @@
 </head>
 
 <body
-    class="bg-background-light text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden animated-mesh-gradient">
+    class="bg-background-light text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
+
+    <!-- Animated Aurora Background -->
+    <div class="animated-mesh-gradient"></div>
 
     <!-- Navbar -->
     <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
@@ -183,7 +196,7 @@
             <div class="flex justify-center mb-8" data-aos="fade-down">
                 <div class="relative">
                     <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full transform translate-y-4"></div>
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=faces&q=80"
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=300&h=300&fit=crop&crop=faces&q=80"
                         alt="Professional CS Agent"
                         class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-2xl relative z-10 animate-float">
                     <div class="absolute bottom-2 right-0 bg-white px-3 py-1 rounded-full shadow-lg border border-gray-100 flex items-center gap-1 z-20 animate-bounce"
