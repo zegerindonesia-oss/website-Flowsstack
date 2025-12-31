@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to check if user is accessing their own document
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Helper function to check if the user has admin role
+    // Using a safe get() to avoid errors if doc doesn't exist
+    function isAdmin() {
+      let userDoc = get(/databases/$(database)/documents/users/$(request.auth.uid));
+      return userDoc != null && userDoc.data.role == 'admin';
+    }
+
+    // Validation: Check if the role is not being changed
+    function isRoleUnchanged() {
+       return request.resource.data.role == resource.data.role;
+    }
+
+    // Validation: Check if the new role is 'user'
+    function isRoleUser() {
+      return request.resource.data.role == 'user';
+    }
+
+    // Rules for 'users' collection
+    match /users/{userId} {
+      // READ: User can read own doc OR Admin can read any doc
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+
+      // CREATE: User can create own doc IF they set role to 'user'
+      allow create: if isAuthenticated() && isOwner(userId) && isRoleUser();
+
+      // UPDATE: User can update own doc IF they DO NOT change the role
+      // OR Admin can update/overwrite anything
+      allow update: if isAuthenticated() && (
+        (isOwner(userId) && isRoleUnchanged()) || 
+        isAdmin()
+      );
+    }
+
+    // Default rule: deny all other access
+    match /{document=**} {
+      allow read, write: if false; 
+    }
+  }
+}

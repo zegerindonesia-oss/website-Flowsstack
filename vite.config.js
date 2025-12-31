@@ -17,6 +17,7 @@ export default defineConfig({
                 flowcontent: resolve(__dirname, 'products/flowcontent/index.html'),
                 flowstore: resolve(__dirname, 'products/flowstore/index.html'),
                 flowassist: resolve(__dirname, 'products/flowassist/index.html'),
+                login: resolve(__dirname, 'login.html'),
             },
         },
     },

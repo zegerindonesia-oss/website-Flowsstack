@@ -35,6 +35,19 @@ AOS.init({
   easing: 'ease-out-cubic'
 });
 
+// Firebase Integration
+import { app } from './firebase/config';
+import { loginWithGoogle, logout, subscribeToAuthChanges } from './firebase/auth';
+import { addData, getData } from './firebase/db';
+
+console.log("Firebase App Initialized:", app);
+
+// Expose for manual testing in console
+window.testLogin = loginWithGoogle;
+window.testLogout = logout;
+window.testFirestoreAdd = () => addData('test_collection', { timestamp: new Date(), message: 'Hello Firebase!' });
+window.testFirestoreGet = () => getData('test_collection');
+
 // State
 let currentLang = localStorage.getItem('flowstack_lang') || 'id';
 
@@ -324,6 +337,27 @@ document.addEventListener('DOMContentLoaded', () => {
       Share2,
       Construction,
       MessageCircle
+    }
+  });
+
+  // Auth State Listener
+  subscribeToAuthChanges((user) => {
+    const authBtn = document.getElementById('nav-auth-btn');
+    if (authBtn) {
+      if (user) {
+        authBtn.textContent = 'Logout';
+        authBtn.href = '#';
+        authBtn.onclick = async (e) => {
+          e.preventDefault();
+          await logout();
+          window.location.reload();
+        };
+        // You could also show a profile image here if you modify the HTML structure
+      } else {
+        authBtn.textContent = 'Login';
+        authBtn.href = '/login.html';
+        authBtn.onclick = null;
+      }
     }
   });
 });
