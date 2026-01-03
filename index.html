@@ -142,7 +142,74 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center gap-8">
         <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Home</a>
-        <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Products</a>
+        
+        <!-- Products Dropdown -->
+        <div class="relative group">
+          <button class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors flex items-center gap-1 py-4">
+            Products
+            <span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+          </button>
+          
+          <!-- Dropdown Menu -->
+          <div class="absolute top-full left-1/2 -translate-x-1/2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pt-2">
+            <div class="glass-card p-2 rounded-xl border border-gray-100 shadow-xl bg-white/95 backdrop-blur-md flex flex-col gap-1 max-h-[80vh] overflow-y-auto">
+              <!-- FlowPict (Active) -->
+              <a href="/products/flowpict" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between group/item">
+                <span class="font-bold">FlowPict</span>
+                <span class="material-symbols-outlined text-[16px] text-primary opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
+              </a>
+              
+              <!-- FlowAssist (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowAssist
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+              <!-- FlowQueue (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowQueue
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+              <!-- FlowBook (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowBook
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+              
+              <!-- FlowContent (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowContent
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+               <!-- FlowTrain (Soon) -->
+               <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowTrain
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+              <!-- FlowMenu (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowMenu
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+              <!-- FlowPay (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowPay
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+
+              <!-- FlowStore (Soon) -->
+              <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-primary/5 text-sm text-gray-700 hover:text-primary font-medium transition-colors flex items-center justify-between">
+                FlowStore
+                <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 uppercase">Soon</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Services</a>
         <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Pricing</a>
       </div>

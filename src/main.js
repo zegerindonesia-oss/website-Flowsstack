@@ -67,7 +67,8 @@ const products = [
     descKey: 'product_flowpict_desc',
     icon: 'Image',
     link: '/products/flowpict',
-    styleClass: 'bg-purple-100 text-purple-600'
+    styleClass: 'bg-purple-100 text-purple-600',
+    isSoon: false
   },
   {
     name: 'FlowQueue',
@@ -76,7 +77,8 @@ const products = [
     desc: 'Smart queue management system for service businesses.',
     icon: 'Users',
     link: '/products/flowqueue',
-    styleClass: 'bg-pink-100 text-pink-600'
+    styleClass: 'bg-pink-100 text-pink-600',
+    isSoon: true
   },
   {
     name: 'FlowAssist',
@@ -85,7 +87,8 @@ const products = [
     desc: 'Asisten WhatsApp AI 24 Jam untuk otomatisasi CS.',
     icon: 'MessageCircle',
     link: '/products/flowassist',
-    styleClass: 'bg-green-100 text-green-600'
+    styleClass: 'bg-green-100 text-green-600',
+    isSoon: true
   },
 
   {
@@ -95,7 +98,8 @@ const products = [
     desc: 'Effortless appointment booking and scheduling.',
     icon: 'Calendar',
     link: '/products/flowbook',
-    styleClass: 'bg-blue-100 text-blue-600'
+    styleClass: 'bg-blue-100 text-blue-600',
+    isSoon: true
   },
   {
     name: 'FlowTrain',
@@ -104,7 +108,8 @@ const products = [
     desc: 'LMS Platform for corporate training and education.',
     icon: 'GraduationCap',
     link: '/products/flowtrain',
-    styleClass: 'bg-orange-100 text-orange-600'
+    styleClass: 'bg-orange-100 text-orange-600',
+    isSoon: true
   },
   {
     name: 'FlowMenu',
@@ -113,7 +118,8 @@ const products = [
     desc: 'Digital F&B solution for modern restaurants.',
     icon: 'Utensils',
     link: '/products/flowmenu',
-    styleClass: 'bg-green-100 text-green-600'
+    styleClass: 'bg-green-100 text-green-600',
+    isSoon: true
   },
   {
     name: 'FlowPay',
@@ -122,7 +128,8 @@ const products = [
     desc: 'Integrated finance manager and payment gateway.',
     icon: 'CreditCard',
     link: '/products/flowpay',
-    styleClass: 'bg-indigo-100 text-indigo-600'
+    styleClass: 'bg-indigo-100 text-indigo-600',
+    isSoon: true
   },
   {
     name: 'FlowContent',
@@ -131,7 +138,8 @@ const products = [
     desc: 'Content planner & scheduler terpusat untuk semua media sosial Anda.',
     icon: 'Share2',
     link: '/products/flowcontent',
-    styleClass: 'bg-red-100 text-red-600'
+    styleClass: 'bg-red-100 text-red-600',
+    isSoon: true
   },
   {
     name: 'FlowStore',
@@ -140,7 +148,8 @@ const products = [
     desc: 'Complete E-commerce solution for online selling.',
     icon: 'ShoppingBag',
     link: '/products/flowstore',
-    styleClass: 'bg-teal-100 text-teal-600'
+    styleClass: 'bg-teal-100 text-teal-600',
+    isSoon: true
   },
   {
     name: 'More Tools',
@@ -149,7 +158,8 @@ const products = [
     icon: 'Construction',
     link: '#',
     isComingSoon: true,
-    styleClass: 'bg-gray-100 text-gray-400'
+    styleClass: 'bg-gray-100 text-gray-400',
+    isSoon: false
   }
 ];
 
@@ -225,6 +235,11 @@ function renderProducts() {
       ? translations[currentLang].product_coming_soon
       : product.name;
 
+    // Badge logic
+    const soonBadge = product.isSoon
+      ? `<span class="ml-2 inline-block px-2 py-0.5 text-[10px] font-bold tracking-wide text-gray-500 bg-gray-100 border border-gray-200 rounded-full uppercase">SOON</span>`
+      : '';
+
     if (product.isComingSoon) {
       return `
         <div class="glass-card p-6 rounded-2xl border-dashed border-2 border-gray-300 flex flex-col items-center justify-center text-center opacity-70 hover:opacity-100 transition-opacity" data-aos="fade-up" data-aos-delay="${index * 100}">
@@ -244,7 +259,10 @@ function renderProducts() {
         class="size-14 rounded-xl ${product.styleClass} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
         <i data-lucide="${product.icon}" width="32" height="32"></i>
         </div>
-        <h3 class="font-heading text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink mb-2">${name}</h3>
+        <div class="flex items-center mb-2">
+            <h3 class="font-heading text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">${name}</h3>
+            ${soonBadge}
+        </div>
         <p class="text-sm text-gray-500 mb-4">${description}</p>
         <div class="flex items-center text-primary text-sm font-bold">
         <span>Learn more</span>
