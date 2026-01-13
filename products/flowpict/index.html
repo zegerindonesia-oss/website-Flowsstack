@@ -302,6 +302,137 @@
     </section>
 
     <!-- ==================================================
+         SECTION 1.5 — LIHAT LEBIH DEKAT (APPLE STYLE BANNER)
+    ================================================== -->
+    <section class="py-20 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <h2 class="font-heading text-5xl md:text-6xl font-extrabold mb-12 tracking-tight">
+                Lihat lebih dekat.
+            </h2>
+
+            <!-- Video Banner Card -->
+            <div onclick="openVideoModal()"
+                class="group relative w-full aspect-[21/9] md:aspect-[2.4/1] bg-[#f5f5f7] rounded-[40px] overflow-hidden cursor-pointer transition-all hover:scale-[1.01]">
+                <!-- Background Image Placeholder -->
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&q=80&auto=format&fit=crop"
+                    class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700">
+
+                <!-- Text Overlay -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                    <p class="font-heading text-2xl md:text-4xl font-bold text-gray-900 mb-6 drop-shadow-sm">
+                        Tur Terpandu<br>
+                        FlowPict, FlowMagic, dan AI Studio
+                    </p>
+                    <button
+                        class="bg-gray-900/90 hover:bg-black text-white px-8 py-3.5 rounded-full font-bold text-sm backdrop-blur-md flex items-center gap-2 transition-all group-hover:scale-105">
+                        <span class="material-symbols-outlined text-lg">play_circle</span>
+                        Tonton video
+                    </button>
+                </div>
+            </div>
+
+            <!-- DEEP DIVE CARDS (KENALI LEBIH DALAM) -->
+            <div class="mt-24">
+                <h2 class="font-heading text-5xl md:text-6xl font-extrabold mb-12 tracking-tight">
+                    Kenali FlowPict lebih dalam.
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Card 1: Personal -->
+                    <div onclick="openFeatureModal('personal')"
+                        class="group relative aspect-[3/4] bg-black rounded-[40px] overflow-hidden cursor-pointer shadow-xl transition-all hover:scale-[1.02]">
+                        <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-60 transition-opacity duration-500">
+
+                        <div class="absolute top-10 left-10 right-10">
+                            <h3 class="text-white text-xl font-bold mb-2">FlowPict for Personal</h3>
+                            <p class="text-white/80 font-heading text-3xl md:text-4xl font-bold leading-tight">
+                                Menawan dan tangguh untuk brand milikmu.
+                            </p>
+                        </div>
+
+                        <div
+                            class="absolute bottom-10 right-10 bg-white/20 backdrop-blur-md p-3 rounded-full text-white group-hover:bg-white group-hover:text-black transition-all">
+                            <span class="material-symbols-outlined text-2xl">add</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Business -->
+                    <div onclick="openFeatureModal('business')"
+                        class="group relative aspect-[3/4] bg-black rounded-[40px] overflow-hidden cursor-pointer shadow-xl transition-all hover:scale-[1.02]">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80"
+                            class="w-full h-full object-cover opacity-70 group-hover:opacity-60 transition-opacity duration-500">
+
+                        <div class="absolute top-10 left-10 right-10">
+                            <h3 class="text-white text-xl font-bold mb-2">FlowPict for Business</h3>
+                            <p class="text-white/80 font-heading text-3xl md:text-4xl font-bold leading-tight">
+                                Skalabilitas penuh<br>untuk agensi & klien.
+                            </p>
+                        </div>
+
+                        <div
+                            class="absolute bottom-10 right-10 bg-white/20 backdrop-blur-md p-3 rounded-full text-white group-hover:bg-white group-hover:text-black transition-all">
+                            <span class="material-symbols-outlined text-2xl">add</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO MODAL (Placeholder Logic) -->
+    <div id="video-modal"
+        class="fixed inset-0 z-[100] transition-opacity duration-300 opacity-0 pointer-events-none flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl transform transition-transform scale-95"
+            id="video-modal-content">
+            <button onclick="closeVideoModal()"
+                class="absolute top-4 right-4 z-50 bg-black/50 text-white p-2 rounded-full hover:bg-black/80">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="w-full h-full flex items-center justify-center text-white">
+                <p class="text-xl font-bold text-center">
+                    <span class="material-symbols-outlined text-6xl mb-4 text-gray-500">play_circle_off</span><br>
+                    Video akan ditampilkan di sini (Google Drive Embed)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURE DETAIL MODAL (Scrollable) -->
+    <div id="feature-modal"
+        class="fixed inset-0 z-[100] transition-opacity duration-300 opacity-0 pointer-events-none flex items-end md:items-center justify-center md:p-8 bg-black/30 backdrop-blur-md">
+        <div class="bg-white w-full max-w-4xl h-[90vh] md:h-[85vh] md:rounded-[40px] rounded-t-[40px] shadow-2xl overflow-hidden flex flex-col transform transition-transform translate-y-20 md:translate-y-0 md:scale-95"
+            id="feature-modal-content">
+
+            <!-- Modal Header (Sticky) -->
+            <div
+                class="flex items-center justify-between px-8 py-6 border-b border-gray-100 bg-white z-10 sticky top-0">
+                <h3 id="modal-title" class="text-2xl font-heading font-extrabold text-gray-900">FlowPict Feature</h3>
+                <button onclick="closeFeatureModal()"
+                    class="bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-gray-600">close</span>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="overflow-y-auto p-8 space-y-8 no-scrollbar" id="modal-body">
+                <!-- Content will be injected via JS -->
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-3xl p-12 text-center border border-gray-100">
+                        <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">image</span>
+                        <p class="text-gray-500">Gambar Penjelasan Fitur Panjang akan muncul di sini.<br>(User akan
+                            upload gambar scrollable)</p>
+                    </div>
+                    <div class="p-8 bg-purple-50 rounded-3xl">
+                        <h4 class="font-bold text-xl mb-2 text-primary">Keunggulan Utama</h4>
+                        <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================
          SECTION 2 — SOCIAL PROOF (MOVING MARQUEE)
     ================================================== -->
     <section class="py-24 bg-gray-50 border-y border-gray-100 overflow-hidden">
@@ -525,13 +656,16 @@
                         <ul class="space-y-2 text-sm">
                             <li class="flex items-center gap-2"><span
                                     class="material-symbols-outlined text-yellow-400 text-lg">star</span>
-                                <strong>FlowPict Personal</strong> (Rp149k)</li>
+                                <strong>FlowPict Personal</strong> (Rp149k)
+                            </li>
                             <li class="flex items-center gap-2"><span
                                     class="material-symbols-outlined text-yellow-400 text-lg">star</span>
-                                <strong>FlowPict Business</strong> (Rp149k)</li>
+                                <strong>FlowPict Business</strong> (Rp149k)
+                            </li>
                             <li class="flex items-center gap-2"><span
                                     class="material-symbols-outlined text-yellow-400 text-lg">star</span>
-                                <strong>Commercial License</strong></li>
+                                <strong>Commercial License</strong>
+                            </li>
                         </ul>
                     </div>
 
@@ -776,7 +910,97 @@
             }, delay);
         }
 
-        setTimeout(loopToast, 3000);
+        // 3. MODAL LOGIC
+
+        // Video Modal
+        const videoModal = document.getElementById('video-modal');
+        const videoModalContent = document.getElementById('video-modal-content');
+
+        function openVideoModal() {
+            videoModal.classList.remove('opacity-0', 'pointer-events-none');
+            videoModalContent.classList.remove('scale-95');
+            videoModalContent.classList.add('scale-100');
+        }
+
+        function closeVideoModal() {
+            videoModal.classList.add('opacity-0', 'pointer-events-none');
+            videoModalContent.classList.add('scale-95');
+            videoModalContent.classList.remove('scale-100');
+        }
+
+        // Feature Modal (Detail Deep Dive)
+        const featureModal = document.getElementById('feature-modal');
+        const featureModalContent = document.getElementById('feature-modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+
+        function openFeatureModal(type) {
+            featureModal.classList.remove('opacity-0', 'pointer-events-none');
+            featureModalContent.classList.remove('translate-y-20', 'md:scale-95');
+            featureModalContent.classList.add('translate-y-0', 'md:scale-100');
+
+            // Dynamic Content Population (Placeholder logic)
+            if (type === 'personal') {
+                modalTitle.innerText = "FlowPict for Personal";
+                // In real implementation, you would inject the image scroller here
+                modalBody.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-3xl p-4 md:p-12 text-center border dashed border-gray-200">
+                             <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">image</span>
+                             <p class="font-bold text-gray-400">Placeholder: Gambar Penjelasan Fitur PERSONAL</p>
+                             <p class="text-xs text-gray-400 mt-2">Upload gambar portrait panjang di sini.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="p-6 bg-pink-50 rounded-2xl">
+                                <h4 class="font-bold text-lg mb-2 text-pink-600">Personal Branding</h4>
+                                <p class="text-sm text-gray-600">Cocok untuk influencer, creator, dan small business owner.</p>
+                            </div>
+                             <div class="p-6 bg-purple-50 rounded-2xl">
+                                <h4 class="font-bold text-lg mb-2 text-purple-600">Unlimited Creativity</h4>
+                                <p class="text-sm text-gray-600">Akses penuh ke semua fitur creative tanpa batas.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'business') {
+                modalTitle.innerText = "FlowPict for Business";
+                modalBody.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-3xl p-4 md:p-12 text-center border dashed border-gray-200">
+                             <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">domain</span>
+                             <p class="font-bold text-gray-400">Placeholder: Gambar Penjelasan Fitur BUSINESS</p>
+                             <p class="text-xs text-gray-400 mt-2">Upload gambar portrait panjang di sini.</p>
+                        </div>
+                         <div class="grid md:grid-cols-2 gap-4">
+                            <div class="p-6 bg-blue-50 rounded-2xl">
+                                <h4 class="font-bold text-lg mb-2 text-blue-600">Commercial License</h4>
+                                <p class="text-sm text-gray-600">Legalitas penuh untuk mengerjakan project klien berbayar.</p>
+                            </div>
+                             <div class="p-6 bg-indigo-50 rounded-2xl">
+                                <h4 class="font-bold text-lg mb-2 text-indigo-600">Priority Support</h4>
+                                <p class="text-sm text-gray-600">Jalur khusus bantuan teknis untuk kelancaran bisnis Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function closeFeatureModal() {
+            featureModal.classList.add('opacity-0', 'pointer-events-none');
+            featureModalContent.classList.add('translate-y-20', 'md:scale-95');
+            featureModalContent.classList.remove('translate-y-0', 'md:scale-100');
+        }
+
+        // Close modal on click outside
+        window.onclick = function (event) {
+            if (event.target == videoModal) {
+                closeVideoModal();
+            }
+            if (event.target == featureModal) {
+                closeFeatureModal();
+            }
+        }
     </script>
 </body>
 
