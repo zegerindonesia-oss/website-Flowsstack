@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlowPict - AI Product Photography & Design | FlowStack</title>
-    <meta name="description" content="Ubah foto produk biasa menjadi visual komersial profesional menggunakan AI." />
+    <title>FlowPict - Ubah Foto Biasa Jadi Profesional | FlowStack</title>
+    <meta name="description"
+        content="Ubah foto produk biasa menjadi visual komersial profesional menggunakan AI dalam 1 klik." />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -32,8 +33,9 @@
                         "heading": ["Outfit", "sans-serif"],
                     },
                     animation: {
-                        'marquee': 'marquee 25s linear infinite',
-                        'marquee-reverse': 'marquee-reverse 25s linear infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 40s linear infinite',
+                        'blob': 'blob 7s infinite',
                     },
                     keyframes: {
                         marquee: {
@@ -43,6 +45,12 @@
                         'marquee-reverse': {
                             '0%': { transform: 'translateX(-100%)' },
                             '100%': { transform: 'translateX(0%)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         }
                     }
                 },
@@ -55,15 +63,31 @@
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .marquee-container {
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+
+        .sales-toast {
+            animation: slideInLeft 0.5s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -71,7 +95,7 @@
 <body
     class="bg-background-light dark:bg-background-dark text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
 
-    <!-- Navbar (Consistent with Main Site) -->
+    <!-- Navbar -->
     <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
         <nav
             class="glass-nav rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl shadow-lg transition-all duration-300">
@@ -90,805 +114,526 @@
         </nav>
     </div>
 
-    <!-- Section 1 : PROBLEM SETUP -->
-    <section class="relative pt-32 pb-20 overflow-hidden">
-        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+    <!-- ==================================================
+         SECTION 1 — HOOK + VISUAL PROOF (ABOVE THE FOLD)
+    ================================================== -->
+    <section class="relative pt-36 pb-20 overflow-hidden">
+        <!-- Background Effects -->
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-pink/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+
+        <div class="container mx-auto px-6 text-center max-w-5xl relative z-10">
+            <!-- Badge -->
             <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-8 hover:bg-primary/10 transition-colors cursor-default">
                 <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
-                FlowPict AI Visual Studio
+                AI Visual Designer #1 di Indonesia
             </div>
 
-            <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-                Kenapa Desain Jualan <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Masih
-                    Kelihatan Amatiran?</span>
+            <!-- Headline -->
+            <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1]">
+                Ubah Foto Biasa Menjadi <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Visual
+                    Profesional</span>
+                Hanya dengan 1 Klik
             </h1>
 
-            <p class="text-xl md:text-2xl font-bold text-gray-800 mb-4 font-heading">
-                Buat Desain Profesional Tanpa Designer & Tanpa Ribet
+            <!-- Subheadline -->
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto font-medium">
+                Foto dan desain siap jualan — <span class="text-gray-900 font-bold">tanpa fotografer</span>, <span
+                    class="text-gray-900 font-bold">tanpa designer</span>, <span class="text-gray-900 font-bold">tanpa
+                    ribet</span>.
             </p>
 
-            <p class="text-lg text-gray-500 mb-10 max-w-2xl mx-auto">
-                FlowPict membuktikan bahwa foto biasa bisa berubah menjadi visual jualan profesional hanya dengan 1
-                klik.
-            </p>
-
+            <!-- CTA -->
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
                 <a href="#pricing"
-                    class="bg-primary hover:bg-primary-dark text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
-                    Lihat Harga & Beli Sekarang
+                    class="bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-xl hover:shadow-primary/50 flex items-center gap-2 transform hover:-translate-y-1">
+                    Beli FlowPict Sekarang
+                    <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
             </div>
 
-            <!-- Hero Media -->
-            <div
-                class="relative max-w-5xl mx-auto mt-12 mb-20 bg-gray-100 rounded-3xl overflow-hidden aspect-video shadow-2xl border border-gray-200 group">
+            <!-- Visual Showcase (Marquee) -->
+            <div class="mb-20">
+                <p class="text-center text-sm font-bold text-gray-500 uppercase tracking-widest mb-8">Input Biasa →
+                    Output Profesional</p>
+
                 <div
-                    class="absolute inset-0 flex items-center justify-center bg-black/40 text-white z-10 opacity-100 group-hover:opacity-0 transition-opacity">
-                    <div class="text-center">
-                        <span class="material-symbols-outlined text-6xl mb-4">play_circle</span>
-                        <p class="font-bold text-xl uppercase tracking-widest">Video Demo – Placeholder</p>
-                        <p class="text-sm">Showing: Foto biasa → klik → hasil profesional</p>
-                    </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&q=80"
-                    alt="Hero Video Placeholder" class="w-full h-full object-cover">
-            </div>
-
-            <!-- Before vs After Hero Slider -->
-            <div class="grid md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto mb-20">
-                <div class="space-y-4">
-                    <div class="relative rounded-2xl overflow-hidden border-2 border-red-200">
-                        <span
-                            class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Before</span>
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=40&blur=10"
-                            alt="Before" class="w-full aspect-square object-cover">
-                    </div>
-                    <p class="text-sm text-gray-500 font-medium italic">"Foto produk biasa dari HP dengan pencahayaan
-                        seadanya."</p>
-                </div>
-                <div class="space-y-4">
-                    <div class="relative rounded-2xl overflow-hidden border-2 border-primary">
-                        <span
-                            class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase">After</span>
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="After"
-                            class="w-full aspect-square object-cover shadow-2xl">
-                    </div>
-                    <p class="text-sm text-primary font-bold italic">"Hasil FlowPict: Pencahayaan studio & background
-                        profesional otomatis."</p>
-                </div>
-            </div>
-
-            <!-- Agitate -->
-            <div class="bg-red-50 border border-red-100 p-8 rounded-3xl max-w-3xl mx-auto" data-aos="fade-up">
-                <p class="text-red-700 text-lg md:text-xl font-medium">
-                    "Tanpa visual yang profesional, produk sulit dipercaya, iklan tidak diklik, dan penjualan
-                    terhambat."
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 2 : PRESENT BENEFIT -->
-    <section class="py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
-                    Yang Akan Kamu Dapatkan <br>
-                    <span class="text-primary">dari FlowPict</span>
-                </h2>
-            </div>
-
-            <div class="grid md:grid-cols-5 gap-6">
-                <!-- Benefit 1 -->
-                <div class="p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all text-center group"
-                    data-aos="fade-up">
-                    <div
-                        class="size-14 mx-auto bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                        📸
-                    </div>
-                    <p class="font-bold text-gray-800 text-sm">Bukti nyata desain sebelum & sesudah</p>
-                </div>
-                <!-- Benefit 2 -->
-                <div class="p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all text-center group"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div
-                        class="size-14 mx-auto bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                        ✨
-                    </div>
-                    <p class="font-bold text-gray-800 text-sm">Hasil visual profesional tanpa skill desain</p>
-                </div>
-                <!-- Benefit 3 -->
-                <div class="p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all text-center group"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        class="size-14 mx-auto bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                        🚀
-                    </div>
-                    <p class="font-bold text-gray-800 text-sm">Konten promosi siap pakai</p>
-                </div>
-                <!-- Benefit 4 -->
-                <div class="p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all text-center group"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div
-                        class="size-14 mx-auto bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                        💰
-                    </div>
-                    <p class="font-bold text-gray-800 text-sm">Hemat biaya & waktu</p>
-                </div>
-                <!-- Benefit 5 -->
-                <div class="p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-all text-center group"
-                    data-aos="fade-up" data-aos-delay="400">
-                    <div
-                        class="size-14 mx-auto bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                        ♾️
-                    </div>
-                    <p class="font-bold text-gray-800 text-sm">Sekali bayar, pakai selamanya</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3 : PRODUCT BRIDGING -->
-    <section class="py-24 bg-background-dark text-white overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
-                    Buktinya Ada. <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Bukan
-                        Sekadar Janji.</span>
-                </h2>
-
-                <p class="text-xl text-indigo-200 mb-12">
-                    FlowPict adalah <strong>AI Visual Designer</strong> yang mengubah foto & ide sederhana menjadi
-                    desain jualan profesional, sehingga calon pembeli langsung percaya dengan produk kamu.
-                </p>
-            </div>
-
-            <!-- Visual Flow Mockup -->
-            <div
-                class="relative max-w-5xl mx-auto py-12 px-8 bg-white/5 rounded-[40px] border border-white/10 backdrop-blur-xl">
-                <div class="grid md:grid-cols-3 gap-8 items-center relative">
-                    <!-- Step 1 -->
-                    <div class="text-center space-y-6 group" data-aos="fade-right">
+                    class="marquee-container relative w-full overflow-hidden bg-gray-50 py-10 rounded-[3rem] border border-gray-100 shadow-inner">
+                    <div class="flex animate-marquee gap-8 w-max px-4">
+                        <!-- Item 1: Before After Photo -->
                         <div
-                            class="size-20 mx-auto bg-white/10 rounded-3xl flex items-center justify-center text-3xl border border-white/20 group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-[40px]">upload_file</span>
+                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group relative">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-bold">Before: Foto HP</span>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-xl mb-2">Upload Foto</h3>
-                            <p class="text-indigo-200 text-sm">Ambil foto produk apa adanya lewat HP kamu.</p>
-                        </div>
-                    </div>
-
-                    <!-- Arrow 1 (Desktop) -->
-                    <div class="hidden md:flex absolute left-[28%] top-[30%] text-white/20">
-                        <span class="material-symbols-outlined text-[60px]">trending_flat</span>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="text-center space-y-6 group" data-aos="fade-up" data-aos-delay="100">
                         <div
-                            class="size-24 mx-auto bg-gradient-to-tr from-primary to-secondary-pink rounded-[32px] flex items-center justify-center text-4xl shadow-glow animate-pulse">
-                            <span class="material-symbols-outlined text-[48px]">auto_fix_high</span>
+                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-primary relative group">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                AFTER: FlowPict AI</div>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-xl mb-2">Pilih Style</h3>
-                            <p class="text-indigo-200 text-sm">Pilih ratusan gaya profesional yang tersedia.</p>
-                        </div>
-                    </div>
 
-                    <!-- Arrow 2 (Desktop) -->
-                    <div class="hidden md:flex absolute right-[28%] top-[30%] text-white/20">
-                        <span class="material-symbols-outlined text-[60px]">trending_flat</span>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="text-center space-y-6 group" data-aos="fade-left" data-aos-delay="200">
+                        <!-- Item 2: Final Design -->
                         <div
-                            class="size-20 mx-auto bg-white/10 rounded-3xl flex items-center justify-center text-3xl border border-white/20 group-hover:bg-secondary-pink transition-colors">
-                            <span class="material-symbols-outlined text-[40px]">checkmark_seal</span>
+                            class="flex-shrink-0 w-[300px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                            <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&q=80"
+                                class="w-full h-full object-cover">
                         </div>
-                        <div>
-                            <h3 class="font-bold text-xl mb-2">Hasil Jadi</h3>
-                            <p class="text-indigo-200 text-sm">Visual berkelas siap dipakai jualan.</p>
+
+                        <!-- Item 3: Before After Video Placeholder -->
+                        <div
+                            class="flex-shrink-0 w-[400px] h-[300px] bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex items-center justify-center relative">
+                            <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=800&q=80"
+                                class="w-full h-full object-cover opacity-50">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-4xl mb-2">play_circle</span>
+                                <span class="font-bold">Video Ads Generated</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Another Design -->
+                        <div
+                            class="flex-shrink-0 w-[300px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80"
+                                class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Duplicate for Loop -->
+                        <div
+                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group relative">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-bold">Before: Angle Buruk</span>
+                            </div>
+                        </div>
+                        <div
+                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-primary relative group">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                AFTER: Professional</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- CTA -->
-                <div class="mt-16 text-center">
-                    <a href="#pricing"
-                        class="inline-flex items-center gap-2 bg-white text-background-dark hover:bg-indigo-50 px-10 py-4 rounded-full font-bold text-lg transition-all">
-                        Beli FlowPict Sekarang
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                    </a>
+            <!-- Hope / Dream List -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span
+                        class="material-symbols-outlined text-red-500 bg-red-50 p-1.5 rounded-lg">no_photography</span>
+                    <span class="font-semibold text-sm">Tidak perlu kamera mahal</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span class="material-symbols-outlined text-red-500 bg-red-50 p-1.5 rounded-lg">person_off</span>
+                    <span class="font-semibold text-sm">Tidak perlu fotografer</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span class="material-symbols-outlined text-green-500 bg-green-50 p-1.5 rounded-lg">palette</span>
+                    <span class="font-semibold text-sm">Tidak perlu designer</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span
+                        class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">storefront</span>
+                    <span class="font-semibold text-sm">Cocok untuk Personal & Bisnis</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">auto_fix</span>
+                    <span class="font-semibold text-sm">30+ Fitur AI Visual</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">savings</span>
+                    <span class="font-semibold text-sm">Hemat jutaan rupiah</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4 : FEATURE + VISUAL PROOF (CORE SECTION) -->
-    <section class="py-24 bg-gray-50" id="features">
+    <!-- ==================================================
+         SECTION 2 — SOCIAL PROOF + PROBLEM CALL BACK
+    ================================================== -->
+    <section class="py-24 bg-gray-50 border-y border-gray-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-center mb-20">
-                Fitur Unggulan & <span class="text-primary">Bukti Nyata</span>
-            </h2>
-
-            <div class="space-y-32">
-                <!-- Feature 1: AI Product Photography -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="space-y-6">
-                        <div
-                            class="size-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-3xl">
-                            📸</div>
-                        <h3 class="font-heading text-3xl font-bold">1. AI Product Photography</h3>
-                        <p class="text-gray-600 text-lg">Ubah foto produk biasa (bahkan dari HP) menjadi foto studio
-                            profesional hanya dengan 1 klik. Tersedia ratusan tema siap pakai.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Pencahayaan Studio Automatis
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Ratusan Background Keren
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=40&blur=5"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 2: FlowMagic Design -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="order-2 md:order-1 space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=40&blur=5"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2 space-y-6">
-                        <div
-                            class="size-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center text-3xl">
-                            ✨</div>
-                        <h3 class="font-heading text-3xl font-bold">2. FlowMagic Design</h3>
-                        <p class="text-gray-600 text-lg">Desain poster atau konten social media dengan referensi gaya.
-                            Cukup upload contoh desain yang Anda suka, AI akan menirunya.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Style Transfer AI
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Auto Layouting
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Feature 3: Delivery Banner -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="space-y-6">
-                        <div
-                            class="size-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-3xl">
-                            🥪</div>
-                        <h3 class="font-heading text-3xl font-bold">3. Delivery Banner</h3>
-                        <p class="text-gray-600 text-lg">Buat banner menarik untuk GrabFood, GoFood, atau ShopeeFood
-                            yang terbukti meningkatkan konversi penjualan.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                High-Conversion Templates
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Auto Food Enhancement
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-[16/9]">
-                                    <span
-                                        class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=40&blur=5"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-[16/9]">
-                                    <span
-                                        class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 4: Magic Editor -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="order-2 md:order-1 space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=40&blur=2"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-square">
-                                    <span
-                                        class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
-                                        class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2 space-y-6">
-                        <div
-                            class="size-14 bg-gray-100 text-gray-600 rounded-2xl flex items-center justify-center text-3xl">
-                            🎨</div>
-                        <h3 class="font-heading text-3xl font-bold">4. Magic Editor</h3>
-                        <p class="text-gray-600 text-lg">Hapus objek, ganti warna, perluas gambar, dan edit detail
-                            visual lainnya dengan perintah teks sederhana.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                AI Inpainting & Outpainting
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Smart Background Remover
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Feature 5: Professional Ads -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="space-y-6">
-                        <div
-                            class="size-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl">
-                            📢</div>
-                        <h3 class="font-heading text-3xl font-bold">5. Professional Ads</h3>
-                        <p class="text-gray-600 text-lg">Tingkatkan konversi iklan dengan visual yang dirancang khusus
-                            untuk performa tinggi.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Conversion-Optimized Design
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Multiple Variations in Seconds
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-square">
-                                <span
-                                    class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=40&blur=5"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-square">
-                                <span
-                                    class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
-                                    class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 6: Meta Ads Creative -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="order-2 md:order-1 space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-[9/16]">
-                                <span
-                                    class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=40&blur=5"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-[9/16]">
-                                <span
-                                    class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
-                                    class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2 space-y-6">
-                        <div
-                            class="size-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-3xl">
-                            📱</div>
-                        <h3 class="font-heading text-3xl font-bold">6. Meta Ads Creative</h3>
-                        <p class="text-gray-600 text-lg">Format khusus untuk Facebook & Instagram Ads. Generate berbagai
-                            variasi konten dalam hitungan detik.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                FB/IG Format Automation
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Multi-Ad Variation Testing
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Feature 7: Affiliate Intelligence -->
-                <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
-                    <div class="space-y-6">
-                        <div
-                            class="size-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl">
-                            💰</div>
-                        <h3 class="font-heading text-3xl font-bold">7. Affiliate Intelligence</h3>
-                        <p class="text-gray-600 text-lg">Buat storyboard produk & caption promosi yang memikat untuk
-                            para affiliate marketer.</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                Storyboard Generation
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700 font-medium">
-                                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                                High-Engagement Captions
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="relative rounded-xl overflow-hidden border border-gray-200 aspect-square">
-                                <span
-                                    class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Before</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=40&blur=5"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="relative rounded-xl overflow-hidden border-2 border-primary aspect-square">
-                                <span
-                                    class="absolute top-2 left-2 bg-primary text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">After</span>
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
-                                    class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-200 rounded-2xl aspect-video flex flex-col items-center justify-center border-2 border-dashed border-gray-300 group">
-                            <span
-                                class="material-symbols-outlined text-4xl text-gray-400 group-hover:scale-110 transition-transform">play_circle</span>
-                            <p class="text-gray-500 font-bold text-xs mt-2 uppercase">Video Demo – Placeholder</p>
-                            <p class="text-[10px] text-gray-400">"Hasil asli dari FlowPict"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <!-- SECTION 5 : SOCIAL PROOF (VISUAL TRUST) -->
-    <section class="py-24 bg-white overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
-                    Ini Bukan Mockup. <br>
-                    <span class="text-primary">Ini Hasil Asli.</span>
-                </h2>
-                <p class="text-lg text-gray-500">Semua visual ini dibuat menggunakan FlowPict.</p>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="columns-2 md:columns-4 gap-4 space-y-4 mb-16" data-aos="fade-up">
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1493612276216-9c783700ebad?w=600&q=80" class="w-full">
-                </div>
-                <div
-                    class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform">
-                    <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&q=80" class="w-full">
-                </div>
-            </div>
-
-            <!-- Video Montage Placeholder -->
-            <div class="relative max-w-4xl mx-auto rounded-3xl overflow-hidden aspect-video bg-gray-900 shadow-2xl group"
-                data-aos="zoom-in">
-                <div
-                    class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 bg-black/40 group-hover:bg-black/20 transition-all">
-                    <span class="material-symbols-outlined text-6xl mb-4 text-primary animate-pulse">play_circle</span>
-                    <h3 class="font-bold text-2xl uppercase tracking-widest">Video Montage – Placeholder</h3>
-                    <p class="text-indigo-200">Kumpulan hasil karya user FlowPict</p>
-                </div>
-                <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=1200&q=80"
-                    class="w-full h-full object-cover opacity-60">
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6 : OFFER STACK -->
-    <section class="py-24 bg-gray-50" id="pricing">
-        <div class="container mx-auto px-6">
+            <!-- Testimonials -->
             <div class="text-center mb-16">
-                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">Pilih Paket <span
-                        class="text-primary">Lifetime</span> FlowPict</h2>
-                <div
-                    class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold animate-bounce mt-4">
-                    <span class="material-symbols-outlined text-sm">timer</span>
-                    PROMO TERBATAS: SEKALI BAYAR UNTUK SELAMANYA!
+                <h2 class="font-heading text-3xl font-bold mb-4">UMKM, Brand, dan Creator sudah terbantu</h2>
+                <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <!-- Testi 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso" class="w-full">
+                            </div>
+                            <div class="text-left">
+                                <p class="font-bold text-sm">Budi Santoso</p>
+                                <p class="text-xs text-gray-500">Owner Brand Sepatu</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">"Dulu bayar fotografer 5 juta sekali sesi. Sekarang pakai
+                            FlowPict cuma butuh HP, hasilnya sama bagusnya!"</p>
+                        <div
+                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
+                            <span class="text-xs text-gray-400">Bukti Foto (Placeholder)</span>
+                        </div>
+                    </div>
+                    <!-- Testi 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Sari+W" class="w-full">
+                            </div>
+                            <div class="text-left">
+                                <p class="font-bold text-sm">Sari W.</p>
+                                <p class="text-xs text-gray-500">Affiliate Marketer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">"Bikin konten video ads buat Shopee Video jadi gampang
+                            banget. Sales langsung naik 300%."</p>
+                        <div
+                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
+                            <span class="text-xs text-gray-400">Bukti Video (Placeholder)</span>
+                        </div>
+                    </div>
+                    <!-- Testi 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Digital+Agency" class="w-full">
+                            </div>
+                            <div class="text-left">
+                                <p class="font-bold text-sm">Dimas A.</p>
+                                <p class="text-xs text-gray-500">Freelance Designer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">"Fitur Magic Edit-nya gila sih. Hapus object, ganti
+                            background, semua dalam hitungan detik. Klien happy!"</p>
+                        <div
+                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
+                            <span class="text-xs text-gray-400">Bukti Desain (Placeholder)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
-                <!-- FlowPict Lite -->
-                <div
-                    class="bg-white p-10 rounded-[40px] shadow-xl border border-gray-100 flex flex-col transition-all hover:scale-[1.02]">
-                    <div class="mb-8">
-                        <h3 class="font-bold text-2xl mb-2">FlowPict Lite</h3>
-                        <p class="text-gray-500 text-sm">Ideal untuk pemula & UMKM kecil.</p>
+            <!-- Problem vs Solution -->
+            <div class="bg-white rounded-[40px] p-8 md:p-12 shadow-xl border border-gray-100 max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Problem -->
+                    <div class="space-y-6">
+                        <h3 class="font-heading text-2xl font-bold text-red-500 flex items-center gap-2">
+                            <span class="material-symbols-outlined">cancel</span> Cara Lama (Ribet & Mahal)
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 bg-red-50 p-4 rounded-xl">
+                                <span
+                                    class="material-symbols-outlined text-red-500 mt-0.5">sentiment_dissatisfied</span>
+                                <span class="text-gray-700 text-sm">Beli kamera mahal, tapi hasil foto tetap gelap dan
+                                    tidak menarik.</span>
+                            </li>
+                            <li class="flex items-start gap-3 bg-red-50 p-4 rounded-xl">
+                                <span class="material-symbols-outlined text-red-500 mt-0.5">payments</span>
+                                <span class="text-gray-700 text-sm">Bayar fotografer jutaan rupiah untuk satu sesi
+                                    foto.</span>
+                            </li>
+                            <li class="flex items-start gap-3 bg-red-50 p-4 rounded-xl">
+                                <span class="material-symbols-outlined text-red-500 mt-0.5">schedule</span>
+                                <span class="text-gray-700 text-sm">Menunggu design berhari-hari, revisi lama.</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <div class="mb-8">
-                        <div class="text-5xl font-extrabold text-background-dark">Rp149.000</div>
-                        <div class="text-primary font-bold text-sm mt-1">SEKALI BAYAR / LIFETIME</div>
+                    <!-- Solution -->
+                    <div class="space-y-6">
+                        <h3 class="font-heading text-2xl font-bold text-primary flex items-center gap-2">
+                            <span class="material-symbols-outlined">check_circle</span> Cara FlowPict (Cepat & Hemat)
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3 bg-primary/5 p-4 rounded-xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary mt-0.5">photo_camera</span>
+                                <span class="text-gray-700 text-sm">FlowPict menggantikan studio foto. Modal HP sudah
+                                    cukup.</span>
+                            </li>
+                            <li class="flex items-start gap-3 bg-primary/5 p-4 rounded-xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary mt-0.5">smart_toy</span>
+                                <span class="text-gray-700 text-sm">FlowPict menggantikan fotografer & editor. AI
+                                    bekerja otomatis.</span>
+                            </li>
+                            <li class="flex items-start gap-3 bg-primary/5 p-4 rounded-xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary mt-0.5">bolt</span>
+                                <span class="text-gray-700 text-sm">Semua visual (Foto, Video, Design) jadi dalam
+                                    hitungan detik.</span>
+                            </li>
+                        </ul>
                     </div>
-
-                    <ul class="space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <span class="material-symbols-outlined text-green-500">check_circle</span>
-                            AI Product Photography
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <span class="material-symbols-outlined text-green-500">check_circle</span>
-                            FlowMagic Design
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <span class="material-symbols-outlined text-green-500">check_circle</span>
-                            Delivery Banner
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <span class="material-symbols-outlined text-green-500">check_circle</span>
-                            Magic Editor
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <span class="material-symbols-outlined text-green-500">check_circle</span>
-                            Unlimited Generate
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 font-bold">
-                            <span class="material-symbols-outlined text-primary">infinity</span>
-                            Lifetime Access
-                        </li>
-                    </ul>
-
-                    <a href="https://wa.me/628123456789?text=Halo%20FlowStack,%20saya%20tertarik%20Beli%20FlowPict%20Lite"
-                        target="_blank"
-                        class="w-full py-4 rounded-2xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all text-center">
-                        Beli FlowPict Lite
-                    </a>
                 </div>
 
-                <!-- FlowPict Pro -->
-                <div
-                    class="bg-background-dark text-white p-10 rounded-[40px] shadow-2xl border-4 border-primary relative flex flex-col transform md:-translate-y-4 transition-all hover:scale-[1.02]">
-                    <div
-                        class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary-pink text-white text-xs font-bold px-6 py-2 rounded-full shadow-lg uppercase tracking-widest leading-none">
-                        BEST VALUE
-                    </div>
-
-                    <div class="mb-8">
-                        <h3 class="font-bold text-2xl mb-2">FlowPict Pro</h3>
-                        <p class="text-indigo-200 text-sm">Untuk Profesional & Agensi Kreatif.</p>
-                    </div>
-
-                    <div class="mb-8">
-                        <div class="text-5xl font-extrabold">Rp199.000</div>
-                        <div class="text-secondary-pink font-bold text-sm mt-1">SEKALI BAYAR / LIFETIME</div>
-                    </div>
-
-                    <ul class="space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3 text-indigo-100">
-                            <span class="material-symbols-outlined text-green-400">check_circle</span>
-                            Semua fitur FlowPict Lite
-                        </li>
-                        <li class="flex items-center gap-3 text-indigo-100">
-                            <span class="material-symbols-outlined text-green-400">check_circle</span>
-                            Professional Ads
-                        </li>
-                        <li class="flex items-center gap-3 text-indigo-100">
-                            <span class="material-symbols-outlined text-green-400">check_circle</span>
-                            Meta Ads Creative
-                        </li>
-                        <li class="flex items-center gap-3 text-indigo-100">
-                            <span class="material-symbols-outlined text-green-400">check_circle</span>
-                            Affiliate Intelligence
-                        </li>
-                        <li class="flex items-center gap-3 text-indigo-100">
-                            <span class="material-symbols-outlined text-green-400">check_circle</span>
-                            Unlimited Generate
-                        </li>
-                        <li class="flex items-center gap-3 text-indigo-100 font-bold">
-                            <span class="material-symbols-outlined text-secondary-pink">infinity</span>
-                            Lifetime Access
-                        </li>
-                    </ul>
-
-                    <a href="https://wa.me/628123456789?text=Halo%20FlowStack,%20saya%20tertarik%20Upgrade%20ke%20FlowPict%20Pro"
-                        target="_blank"
-                        class="w-full py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-pink font-bold hover:opacity-90 shadow-glow transition-all text-center">
-                        Upgrade ke FlowPict Pro
-                    </a>
-
-                    <p class="text-center text-[10px] text-indigo-300 mt-4 uppercase font-bold tracking-widest">Sekali
-                        bayar. Pakai selamanya.</p>
+                <div class="mt-12 text-center p-6 bg-yellow-50 rounded-2xl border border-yellow-200">
+                    <p class="font-bold text-gray-800 mb-2">🎁 BONUS SPESIAL</p>
+                    <p class="text-gray-600 text-sm">Dapatkan akses ke **Grup Support/Community** & Update Fitur Berkala
+                        untuk setiap pembelian.</p>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- SECTION 7 : HANDLING OBJECTION -->
-    <section class="py-24 bg-white">
-        <div class="container mx-auto px-6 text-center max-w-3xl">
-            <h2 class="font-heading text-3xl md:text-4xl font-extrabold mb-8">
-                Bayangkan jika calon pembeli melihat visual produkmu…
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="p-6 rounded-2xl bg-gray-50 border border-red-100 italic text-gray-400">
-                    "Foto biasa yang bikin produkmu terlihat murah..."
-                </div>
-                <div class="p-6 rounded-2xl bg-primary/5 border border-primary/20 italic text-primary font-bold">
-                    "Atau visual profesional yang membangun rasa percaya?"
+    <!-- ==================================================
+         SECTION 3 — VALUE STACK + PRICING (CLOSING AREA)
+    ================================================== -->
+    <section class="py-24 bg-background-dark text-white" id="pricing">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
+                    Apa yang Kamu Dapatkan dari <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">FlowPict</span>
+                </h2>
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm font-semibold">AI Foto Produk</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm font-semibold">AI Video Ads</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm font-semibold">Magic Design</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm font-semibold">Delivery Food Banner</span>
+                    <span class="px-4 py-2 bg-white/10 rounded-full text-sm font-semibold">Unlimited Generate</span>
+                    <span
+                        class="px-4 py-2 bg-primary/20 text-primary border border-primary rounded-full text-sm font-semibold">Lifetime
+                        Access</span>
                 </div>
             </div>
 
-            <p class="text-xl text-gray-700 mb-12 leading-relaxed">
-                FlowPict sudah membuktikannya lewat hasil nyata. <br>
-                <strong>Sekarang giliran bisnismu.</strong>
-            </p>
+            <!-- PRICING CARDS -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-end">
 
-            <a href="#pricing"
-                class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-xl font-bold px-12 py-5 rounded-full transition-all shadow-glow">
-                Beli FlowPict Sekarang
-                <span class="material-symbols-outlined">shopping_cart</span>
-            </a>
+                <!-- Option 1: Personal -->
+                <div class="bg-white text-gray-900 p-8 rounded-3xl relative">
+                    <h3 class="font-bold text-xl mb-2 text-gray-500">FlowPict Personal</h3>
+                    <div class="mb-6">
+                        <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
+                        <div class="text-4xl font-extrabold">Rp149.000</div>
+                        <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Untuk Penggunaan
+                            Pribadi</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> All AI Features
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Unlimited Generate
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20beli%20FlowPict%20Personal"
+                        class="block w-full py-3 border-2 border-gray-200 rounded-xl font-bold text-center hover:border-primary hover:text-primary transition-colors">
+                        Pilih Personal
+                    </a>
+                </div>
+
+                <!-- Option 3: BUNDLING (HIGHLIGHT) -->
+                <div
+                    class="bg-gradient-to-b from-primary to-[#502ead] text-white p-8 rounded-3xl relative overflow-hidden transform md:-translate-y-4 shadow-2xl border-4 border-white/20">
+                    <div
+                        class="absolute top-0 right-0 bg-yellow-400 text-black text-xs font-bold px-4 py-1 rounded-bl-xl">
+                        BEST VALUE</div>
+
+                    <h3 class="font-bold text-2xl mb-2">BUNDLING PAKET</h3>
+                    <p class="text-white/80 text-sm mb-4">Personal License + Business License</p>
+
+                    <div class="mb-6">
+                        <span class="text-sm text-white/50 line-through">Rp3.000.000</span>
+                        <div class="text-5xl font-extrabold">Rp199.000</div>
+                        <span
+                            class="text-xs font-bold text-yellow-400 bg-yellow-400/20 px-2 py-0.5 rounded border border-yellow-400/50">HEMAT
+                            93% • LIFETIME</span>
+                    </div>
+
+                    <div class="bg-white/10 rounded-xl p-4 mb-8 backdrop-blur-sm border border-white/10">
+                        <p class="text-sm font-semibold mb-2">Apa yang kamu dapatkan:</p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-yellow-400 text-lg">star</span>
+                                <strong>FlowPict Personal</strong> (Rp149k)</li>
+                            <li class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-yellow-400 text-lg">star</span>
+                                <strong>FlowPict Business</strong> (Rp149k)</li>
+                            <li class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-yellow-400 text-lg">star</span>
+                                <strong>Commercial License</strong></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20ambil%20PROMO%20BUNDLING%20FlowPict"
+                        class="block w-full py-4 bg-yellow-400 text-black rounded-xl font-extrabold text-center hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-yellow-400/50">
+                        AMBIL PAKET BUNDLING
+                    </a>
+                </div>
+
+                <!-- Option 2: Business -->
+                <div class="bg-white text-gray-900 p-8 rounded-3xl relative">
+                    <h3 class="font-bold text-xl mb-2 text-gray-500">FlowPict Business</h3>
+                    <div class="mb-6">
+                        <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
+                        <div class="text-4xl font-extrabold">Rp149.000</div>
+                        <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Untuk Komersial /
+                            Klien</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Commercial License
+                        </li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-lg">check</span> Priority Support
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20beli%20FlowPict%20Business"
+                        class="block w-full py-3 border-2 border-gray-200 rounded-xl font-bold text-center hover:border-primary hover:text-primary transition-colors">
+                        Pilih Business
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scarcity / Timer -->
+            <div class="mt-12 text-center text-white/60 text-sm">
+                <p>⚠️ Harga lifetime ini sangat terbatas & tidak akan selalu tersedia. Ambil sekarang sebelum harga
+                    naik.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         SECTION 4 — HANDLING OBJECTION + FAQ + TRUST
+    ================================================== -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="font-heading text-3xl font-bold text-center mb-12">Yang Sering Ditanyakan (FAQ)</h2>
+
+            <div class="space-y-4">
+                <details
+                    class="group bg-gray-50 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
+                    <summary class="flex items-center justify-between font-bold text-lg list-none">
+                        Kenapa harus FlowPict?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 leading-relaxed">
+                        Karena FlowPict memberikan hasil visual nyata (bukan cuma filter). Anda bisa menghemat jutaan
+                        rupiah per bulan karena tidak perlu bayar fotografer dan designer lagi. Cukup sekali bayar,
+                        pakai selamanya.
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-gray-50 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
+                    <summary class="flex items-center justify-between font-bold text-lg list-none">
+                        Apakah sulit digunakan untuk pemula?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 leading-relaxed">
+                        Sangat mudah. FlowPict didesain untuk orang awam. Cukup upload foto, pilih style, dan klik
+                        generate. Semudah main Instagram.
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-gray-50 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
+                    <summary class="flex items-center justify-between font-bold text-lg list-none">
+                        Apakah ini sekali bayar (Lifetime)?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 leading-relaxed">
+                        YA, BENAR. Untuk masa promo ini, Anda hanya perlu membayar sekali untuk akses selamanya. Tidak
+                        ada biaya langganan bulanan.
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-gray-50 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
+                    <summary class="flex items-center justify-between font-bold text-lg list-none">
+                        Bedanya Personal dengan Business?
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 leading-relaxed">
+                        Versi Personal ditujukan untuk penggunaan pribadi toko online Anda sendiri. Versi Business
+                        memberikan lisensi komersial (Commercial License) sehingga Anda bisa membuka jasa desain/jasa
+                        foto untuk klien menggunakan FlowPict.
+                    </div>
+                </details>
+            </div>
+
+            <!-- Final CTA -->
+            <div class="mt-20 text-center bg-primary/5 rounded-[40px] p-10 border border-primary/20">
+                <h3 class="font-heading text-2xl md:text-3xl font-extrabold mb-4">
+                    "Kalau visual bisnismu terlihat profesional,<br> kepercayaan dan penjualan akan mengikuti."
+                </h3>
+                <a href="#pricing"
+                    class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-xl font-bold px-12 py-5 rounded-full transition-all shadow-glow mt-6 animate-blob">
+                    Beli FlowPict Sekarang
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-50 dark:bg-background-dark py-16 px-6 border-t border-gray-100">
-        <div class="container mx-auto text-center space-y-8">
+    <footer class="bg-gray-50 dark:bg-background-dark py-12 px-6 border-t border-gray-100">
+        <div class="container mx-auto text-center space-y-6">
             <div class="flex items-center justify-center gap-3">
                 <div
-                    class="size-10 rounded-xl bg-gradient-to-tr from-primary to-secondary-pink flex items-center justify-center text-white">
+                    class="size-8 rounded-lg bg-gradient-to-tr from-primary to-secondary-pink flex items-center justify-center text-white text-sm">
                     📸
                 </div>
                 <span
-                    class="font-heading text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">FlowPict</span>
+                    class="font-heading text-xl font-bold tracking-tight text-gray-900 dark:text-white">FlowPict</span>
             </div>
-
-            <p class="text-gray-500 max-w-md mx-auto">
-                FlowPict is a product by <strong>Flowstack</strong>. <br>
-                Empowering businesses with AI-driven visual excellence.
-            </p>
-
-            <div class="flex justify-center gap-8 text-sm font-medium text-gray-400">
-                <a href="/" class="hover:text-primary transition-colors">FlowStack Home</a>
-                <a href="#features" class="hover:text-primary transition-colors">Features</a>
-                <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
-            </div>
-
-            <div class="pt-8 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-gray-500 text-sm">FlowPict is a product by <strong>Flowstack</strong>.</p>
+            <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
                 <p class="text-gray-400 text-xs">© 2025 FlowStack. Part of Zeger Indonesia Ecosystem.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Sales Notification Toast -->
+    <div id="sales-toast"
+        class="fixed bottom-6 left-6 z-50 transform transition-all duration-500 translate-y-32 opacity-0">
+        <div class="bg-white rounded-xl shadow-2xl p-4 flex items-center gap-4 border border-gray-100 max-w-sm">
+            <div class="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xs"
+                id="toast-avatar">
+                AD
+            </div>
+            <div>
+                <p class="text-xs text-gray-500 mb-0.5">Baru saja membeli</p>
+                <p class="font-bold text-sm text-gray-800"><span id="toast-name">Andre dari Jakarta</span></p>
+                <p class="text-[10px] text-primary font-bold mt-0.5">FlowPict Bundling</p>
+            </div>
+            <button onclick="closeToast()" class="absolute top-2 right-2 text-gray-300 hover:text-gray-500">
+                <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
@@ -896,6 +641,33 @@
             once: true,
             duration: 800,
         });
+
+        // Sales Notification Script
+        const names = ["Andre dari Jakarta", "Siska dari Surabaya", "Budi dari Bandung", "Putri dari Medan", "Reza dari Jogja"];
+        const products = ["FlowPict Bundling", "FlowPict Personal", "FlowPict Business"];
+        const toast = document.getElementById('sales-toast');
+        const toastName = document.getElementById('toast-name');
+
+        function showToast() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            toastName.innerText = randomName;
+
+            toast.classList.remove('translate-y-32', 'opacity-0');
+
+            setTimeout(() => {
+                closeToast();
+            }, 4000);
+        }
+
+        function closeToast() {
+            toast.classList.add('translate-y-32', 'opacity-0');
+        }
+
+        // Start loop
+        setTimeout(() => {
+            showToast();
+            setInterval(showToast, 12000);
+        }, 3000);
     </script>
 </body>
 
