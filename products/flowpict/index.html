@@ -74,6 +74,16 @@
             -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
 
+        /* Hide scrollbar for smooth feel if needed, though marquee usually handles it */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         .sales-toast {
             animation: slideInLeft 0.5s ease-out forwards;
         }
@@ -126,7 +136,7 @@
             class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-pink/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
         </div>
 
-        <div class="container mx-auto px-6 text-center max-w-5xl relative z-10">
+        <div class="container mx-auto px-6 text-center max-w-7xl relative z-10">
             <!-- Badge -->
             <div
                 class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-8 hover:bg-primary/10 transition-colors cursor-default">
@@ -150,7 +160,7 @@
             </p>
 
             <!-- CTA -->
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-20">
                 <a href="#pricing"
                     class="bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-xl hover:shadow-primary/50 flex items-center gap-2 transform hover:-translate-y-1">
                     Beli FlowPict Sekarang
@@ -158,75 +168,96 @@
                 </a>
             </div>
 
-            <!-- Visual Showcase (Marquee) -->
+            <!-- Visual Showcase (Marquee) — Updated to Flashcard Style -->
             <div class="mb-20">
-                <p class="text-center text-sm font-bold text-gray-500 uppercase tracking-widest mb-8">Input Biasa →
+                <p class="text-center text-sm font-bold text-gray-500 uppercase tracking-widest mb-10">Input Biasa →
                     Output Profesional</p>
 
-                <div
-                    class="marquee-container relative w-full overflow-hidden bg-gray-50 py-10 rounded-[3rem] border border-gray-100 shadow-inner">
+                <div class="marquee-container relative w-full overflow-hidden bg-transparent py-4">
                     <div class="flex animate-marquee gap-8 w-max px-4">
-                        <!-- Item 1: Before After Photo -->
+                        <!-- Card 1: Before/After -->
                         <div
-                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group relative">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span class="text-white font-bold">Before: Foto HP</span>
+                            class="flex-shrink-0 w-[400px] h-[550px] bg-white rounded-[40px] shadow-2xl overflow-hidden border border-gray-100 group relative transform hover:scale-[1.02] transition-transform duration-300">
+                            <!-- Before -->
+                            <div class="h-1/2 w-full relative">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80"
+                                    class="w-full h-full object-cover">
+                                <div
+                                    class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold uppercase">
+                                    Before: Foto HP</div>
                             </div>
-                        </div>
-                        <div
-                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-primary relative group">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                                AFTER: FlowPict AI</div>
-                        </div>
-
-                        <!-- Item 2: Final Design -->
-                        <div
-                            class="flex-shrink-0 w-[300px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-                            <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&q=80"
-                                class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Item 3: Before After Video Placeholder -->
-                        <div
-                            class="flex-shrink-0 w-[400px] h-[300px] bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex items-center justify-center relative">
-                            <img src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=800&q=80"
-                                class="w-full h-full object-cover opacity-50">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
-                                <span class="material-symbols-outlined text-4xl mb-2">play_circle</span>
-                                <span class="font-bold">Video Ads Generated</span>
+                            <!-- After -->
+                            <div class="h-1/2 w-full relative border-t border-white/20">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&fit=crop"
+                                    class="w-full h-full object-cover filter brightness-110 contrast-125">
+                                <div
+                                    class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                                    After: FlowPict AI</div>
+                                <div class="absolute bottom-6 left-6 right-6">
+                                    <h3 class="text-white font-bold text-xl drop-shadow-md">AI Product Photography</h3>
+                                    <p class="text-white/90 text-sm drop-shadow-md">Studio lighting otomatis.</p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Item 4: Another Design -->
+                        <!-- Card 2: Design Result -->
                         <div
-                            class="flex-shrink-0 w-[300px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80"
+                            class="flex-shrink-0 w-[400px] h-[550px] bg-white rounded-[40px] shadow-2xl overflow-hidden border border-gray-100 group relative transform hover:scale-[1.02] transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=800&q=80"
                                 class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Duplicate for Loop -->
-                        <div
-                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group relative">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span class="text-white font-bold">Before: Angle Buruk</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                            </div>
+                            <div class="absolute bottom-8 left-8 right-8 text-white">
+                                <div
+                                    class="bg-white/20 backdrop-blur-md w-fit px-3 py-1 rounded-full text-xs font-bold mb-3 uppercase border border-white/30">
+                                    Magic Design</div>
+                                <h3 class="font-bold text-3xl mb-1 font-heading">Poster Iklan</h3>
+                                <p class="text-white/80">Desain profesional instant.</p>
                             </div>
                         </div>
+
+                        <!-- Card 3: Video -->
                         <div
-                            class="flex-shrink-0 w-[400px] h-[300px] bg-white rounded-2xl shadow-lg overflow-hidden border border-primary relative group">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80&auto=format&fit=crop"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                                AFTER: Professional</div>
+                            class="flex-shrink-0 w-[400px] h-[550px] bg-gray-900 rounded-[40px] shadow-2xl overflow-hidden border border-gray-800 group relative transform hover:scale-[1.02] transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=800&q=80"
+                                class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="size-20 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-4xl ml-1">play_arrow</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-8 left-8 right-8 text-white">
+                                <div class="bg-red-500 w-fit px-3 py-1 rounded-full text-xs font-bold mb-3 uppercase">
+                                    Video Ads</div>
+                                <h3 class="font-bold text-3xl mb-1 font-heading">Motion Graphic</h3>
+                                <p class="text-white/80">Video promosi otomatis.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Another Before After -->
+                        <div
+                            class="flex-shrink-0 w-[400px] h-[550px] bg-white rounded-[40px] shadow-2xl overflow-hidden border border-gray-100 group relative transform hover:scale-[1.02] transition-transform duration-300">
+                            <!-- Before -->
+                            <div class="h-1/2 w-full relative">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80"
+                                    class="w-full h-full object-cover">
+                                <div
+                                    class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold uppercase">
+                                    Before: Gelap & Kusam</div>
+                            </div>
+                            <!-- After -->
+                            <div class="h-1/2 w-full relative border-t border-white/20">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80&fit=crop"
+                                    class="w-full h-full object-cover filter brightness-110 contrast-125 saturate-150">
+                                <div
+                                    class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                                    After: Jernih & Menjual</div>
+                                <div class="absolute bottom-6 left-6 right-6">
+                                    <h3 class="text-white font-bold text-xl drop-shadow-md">Smart Enhancement</h3>
+                                    <p class="text-white/90 text-sm drop-shadow-md">Detail produk lebih tajam.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -271,72 +302,81 @@
     </section>
 
     <!-- ==================================================
-         SECTION 2 — SOCIAL PROOF + PROBLEM CALL BACK
+         SECTION 2 — SOCIAL PROOF (MOVING MARQUEE)
     ================================================== -->
-    <section class="py-24 bg-gray-50 border-y border-gray-100">
-        <div class="container mx-auto px-6">
-            <!-- Testimonials -->
-            <div class="text-center mb-16">
-                <h2 class="font-heading text-3xl font-bold mb-4">UMKM, Brand, dan Creator sudah terbantu</h2>
-                <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <!-- Testi 1 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
-                                <img src="https://ui-avatars.com/api/?name=Budi+Santoso" class="w-full">
-                            </div>
-                            <div class="text-left">
-                                <p class="font-bold text-sm">Budi Santoso</p>
-                                <p class="text-xs text-gray-500">Owner Brand Sepatu</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">"Dulu bayar fotografer 5 juta sekali sesi. Sekarang pakai
-                            FlowPict cuma butuh HP, hasilnya sama bagusnya!"</p>
-                        <div
-                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
-                            <span class="text-xs text-gray-400">Bukti Foto (Placeholder)</span>
+    <section class="py-24 bg-gray-50 border-y border-gray-100 overflow-hidden">
+        <div class="container mx-auto px-6 mb-12 text-center">
+            <h2 class="font-heading text-3xl font-bold mb-4">Kata Mereka yang Sudah Pakai FlowPict</h2>
+        </div>
+
+        <div class="marquee-container relative w-full overflow-hidden">
+            <div class="flex animate-marquee gap-6 w-max px-4">
+                <!-- Testimonial Items -->
+                <div class="w-[350px] bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=random"
+                            class="size-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-sm">Budi Santoso</p>
+                            <p class="text-xs text-gray-500">Owner Brand Sepatu</p>
                         </div>
                     </div>
-                    <!-- Testi 2 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
-                                <img src="https://ui-avatars.com/api/?name=Sari+W" class="w-full">
-                            </div>
-                            <div class="text-left">
-                                <p class="font-bold text-sm">Sari W.</p>
-                                <p class="text-xs text-gray-500">Affiliate Marketer</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">"Bikin konten video ads buat Shopee Video jadi gampang
-                            banget. Sales langsung naik 300%."</p>
-                        <div
-                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
-                            <span class="text-xs text-gray-400">Bukti Video (Placeholder)</span>
+                    <p class="text-gray-600 text-sm">"Hemat 5 juta per bulan buat foto studio. Hasilnya gila sih."</p>
+                </div>
+
+                <div class="w-[350px] bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Sari+W&background=random"
+                            class="size-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-sm">Sari W.</p>
+                            <p class="text-xs text-gray-500">Affiliate Shopee</p>
                         </div>
                     </div>
-                    <!-- Testi 3 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
-                                <img src="https://ui-avatars.com/api/?name=Digital+Agency" class="w-full">
-                            </div>
-                            <div class="text-left">
-                                <p class="font-bold text-sm">Dimas A.</p>
-                                <p class="text-xs text-gray-500">Freelance Designer</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">"Fitur Magic Edit-nya gila sih. Hapus object, ganti
-                            background, semua dalam hitungan detik. Klien happy!"</p>
-                        <div
-                            class="rounded-lg overflow-hidden h-32 w-full bg-gray-100 flex items-center justify-center">
-                            <span class="text-xs text-gray-400">Bukti Desain (Placeholder)</span>
+                    <p class="text-gray-600 text-sm">"Konten video ads jadi gampang bgt. Sales naik 300%!"</p>
+                </div>
+
+                <div class="w-[350px] bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Dimas+Ar&background=random"
+                            class="size-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-sm">Dimas A.</p>
+                            <p class="text-xs text-gray-500">Freelance Designer</p>
                         </div>
                     </div>
+                    <p class="text-gray-600 text-sm">"Bantu banget buat ngerjain project klien yg deadline mepet."</p>
+                </div>
+
+                <div class="w-[350px] bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Rina+Shop&background=random"
+                            class="size-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-sm">Rina Shop</p>
+                            <p class="text-xs text-gray-500">Olshop Fashion</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm">"Gak perlu sewa model lagi, fiturnya lengkap banget."</p>
+                </div>
+
+                <div class="w-[350px] bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://ui-avatars.com/api/?name=Toko+Berkah&background=random"
+                            class="size-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-sm">Pak Ahmad</p>
+                            <p class="text-xs text-gray-500">UMKM Kuliner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm">"Foto makanan jadi menggugah selera, orderan GoFood makin rame."
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- Problem vs Solution -->
+        <!-- Problem Call Back (Static) -->
+        <div class="container mx-auto px-6 mt-20">
             <div class="bg-white rounded-[40px] p-8 md:p-12 shadow-xl border border-gray-100 max-w-5xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-12">
                     <!-- Problem -->
@@ -426,11 +466,19 @@
                 <!-- Option 1: Personal -->
                 <div class="bg-white text-gray-900 p-8 rounded-3xl relative">
                     <h3 class="font-bold text-xl mb-2 text-gray-500">FlowPict Personal</h3>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
                         <div class="text-4xl font-extrabold">Rp149.000</div>
                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
                     </div>
+
+                    <!-- Countdown per card could be repetitive, let's put it on top or inside button? No, user asked "below price" -->
+                    <div
+                        class="mb-6 flex items-center gap-2 text-red-500 font-bold text-sm bg-red-50 p-2 rounded-lg justify-center">
+                        <span class="material-symbols-outlined text-sm">schedule</span>
+                        <span class="countdown-timer">00:00:00</span>
+                    </div>
+
                     <ul class="space-y-3 mb-8 text-sm text-gray-600">
                         <li class="flex items-center gap-2"><span
                                 class="material-symbols-outlined text-green-500 text-lg">check</span> Untuk Penggunaan
@@ -458,12 +506,18 @@
                     <h3 class="font-bold text-2xl mb-2">BUNDLING PAKET</h3>
                     <p class="text-white/80 text-sm mb-4">Personal License + Business License</p>
 
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <span class="text-sm text-white/50 line-through">Rp3.000.000</span>
                         <div class="text-5xl font-extrabold">Rp199.000</div>
                         <span
                             class="text-xs font-bold text-yellow-400 bg-yellow-400/20 px-2 py-0.5 rounded border border-yellow-400/50">HEMAT
                             93% • LIFETIME</span>
+                    </div>
+
+                    <div
+                        class="mb-6 flex items-center gap-2 text-yellow-300 font-bold text-sm bg-white/10 p-2 rounded-lg justify-center border border-yellow-300/30">
+                        <span class="material-symbols-outlined text-sm animate-pulse">timer</span>
+                        Promo Berakhir dlm: <span class="countdown-timer">00:00:00</span>
                     </div>
 
                     <div class="bg-white/10 rounded-xl p-4 mb-8 backdrop-blur-sm border border-white/10">
@@ -490,11 +544,18 @@
                 <!-- Option 2: Business -->
                 <div class="bg-white text-gray-900 p-8 rounded-3xl relative">
                     <h3 class="font-bold text-xl mb-2 text-gray-500">FlowPict Business</h3>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
                         <div class="text-4xl font-extrabold">Rp149.000</div>
                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
                     </div>
+
+                    <div
+                        class="mb-6 flex items-center gap-2 text-red-500 font-bold text-sm bg-red-50 p-2 rounded-lg justify-center">
+                        <span class="material-symbols-outlined text-sm">schedule</span>
+                        <span class="countdown-timer">00:00:00</span>
+                    </div>
+
                     <ul class="space-y-3 mb-8 text-sm text-gray-600">
                         <li class="flex items-center gap-2"><span
                                 class="material-symbols-outlined text-green-500 text-lg">check</span> Untuk Komersial /
@@ -572,14 +633,15 @@
                 <details
                     class="group bg-gray-50 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
                     <summary class="flex items-center justify-between font-bold text-lg list-none">
-                        Bedanya Personal dengan Business?
+                        Apa bedanya versi Personal & Business?
                         <span
                             class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
                     </summary>
                     <div class="mt-4 text-gray-600 leading-relaxed">
-                        Versi Personal ditujukan untuk penggunaan pribadi toko online Anda sendiri. Versi Business
-                        memberikan lisensi komersial (Commercial License) sehingga Anda bisa membuka jasa desain/jasa
-                        foto untuk klien menggunakan FlowPict.
+                        <strong>Versi Personal</strong> ditujukan untuk penggunaan pribadi atau kebutuhan usaha Anda
+                        sendiri. <br><br>
+                        <strong>Versi Business</strong> ditujukan jika Anda ingin menggunakan FlowPict untuk mengerjakan
+                        project Client atau membuka jasa visual/desain (Commercial Use).
                     </div>
                 </details>
             </div>
@@ -642,15 +704,57 @@
             duration: 800,
         });
 
-        // Sales Notification Script
-        const names = ["Andre dari Jakarta", "Siska dari Surabaya", "Budi dari Bandung", "Putri dari Medan", "Reza dari Jogja"];
+        // 1. COUNTDOWN TIMER
+        // Set countdown to 1 hour from now, looping
+        function startCountdown() {
+            let duration = 3600; // 1 hour in seconds
+            const timers = document.querySelectorAll('.countdown-timer');
+
+            setInterval(() => {
+                let hours = Math.floor(duration / 3600);
+                let minutes = Math.floor((duration % 3600) / 60);
+                let seconds = duration % 60;
+
+                let timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                timers.forEach(timer => timer.textContent = timeString);
+
+                if (--duration < 0) {
+                    duration = 3600; // Reset
+                }
+            }, 1000);
+        }
+        startCountdown();
+
+
+        // 2. SALES NOTIFICATION (50+ NAMES)
+        const names = [
+            "Andre dari Jakarta", "Budi dari Bandung", "Siska dari Surabaya", "Putri dari Medan",
+            "Reza dari Jogja", "Dewi dari Bali", "Rizky dari Malang", "Santi dari Semarang",
+            "Eko dari Solo", "Dian dari Bekasi", "Fajar dari Makassar", "Indah dari Bogor",
+            "Gilang dari Tangerang", "Hendra dari Palembang", "Lestari dari Lampung",
+            "Bayu dari Depok", "Citra dari Pekanbaru", "Dedi dari Batam", "Rina dari Padang",
+            "Adi dari Balikpapan", "Maya dari Samarinda", "Ferry dari Pontianak",
+            "Nurul dari Banjarmasin", "Yudi from Manado", "Kartika dari Denpasar",
+            "Bambang dari Serang", "Wulan dari Cirebon", "Hadi from Cimahi", "Kiki dari Sukabumi",
+            "Lia dari Tasikmalaya", "Joko dari Purwokerto", "Ratna dari Tegal", "Agus dari Kediri",
+            "Nia dari Madiun", "Rudi dari Jember", "Sari dari Probolinggo", "Iwan dari Banyuwangi",
+            "Nina dari Mataram", "Vina dari Kupang", "Doni dari Ambon", "Putra dari Jayapura",
+            "Tari dari Sorong", "Yanti dari Bengkulu", "Eka dari Jambi", "Gunawan dari Pangkalpinang",
+            "Rini dari Tanjung Pinang", "Hery dari Palangkaraya", "Lisa dari Palu", "Yoga dari Kendari"
+        ];
+
         const products = ["FlowPict Bundling", "FlowPict Personal", "FlowPict Business"];
         const toast = document.getElementById('sales-toast');
         const toastName = document.getElementById('toast-name');
+        const toastAvatar = document.getElementById('toast-avatar');
 
         function showToast() {
             const randomName = names[Math.floor(Math.random() * names.length)];
+            const initials = randomName.substring(0, 2).toUpperCase();
+
             toastName.innerText = randomName;
+            toastAvatar.innerText = initials;
 
             toast.classList.remove('translate-y-32', 'opacity-0');
 
@@ -663,11 +767,16 @@
             toast.classList.add('translate-y-32', 'opacity-0');
         }
 
-        // Start loop
-        setTimeout(() => {
-            showToast();
-            setInterval(showToast, 12000);
-        }, 3000);
+        // Start loop with random interval
+        function loopToast() {
+            const delay = Math.floor(Math.random() * (15000 - 8000 + 1) + 8000); // 8-15 seconds
+            setTimeout(() => {
+                showToast();
+                loopToast();
+            }, delay);
+        }
+
+        setTimeout(loopToast, 3000);
     </script>
 </body>
 
