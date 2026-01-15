@@ -319,70 +319,72 @@
                     <div
                         class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-transparent py-4 group hover-pause">
                         <!-- Pause on Hover class handled by CSS -->
-                        <!-- SET 1: NEW PHOTOS -->
-                        <div class="flex gap-8 group-hover:[animation-play-state:paused]">
-                            <!-- Photo 1 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
-                                <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Lifestyle Model</p>
+                        <div class="flex animate-marquee gap-8 w-max px-4">
+                            <!-- SET 1: NEW PHOTOS -->
+                            <div class="flex gap-8 group-hover:[animation-play-state:paused]">
+                                <!-- Photo 1 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
+                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Lifestyle Model</p>
+                                    </div>
+                                </div>
+                                <!-- Photo 2 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
+                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Dark Luxury</p>
+                                    </div>
+                                </div>
+                                <!-- Photo 3 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
+                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Group Product</p>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Photo 2 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
-                                <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Dark Luxury</p>
-                                </div>
-                            </div>
-                            <!-- Photo 3 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
-                                <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Group Product</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- SET 2: DUPLICATE FOR INFINITE LOOP -->
-                        <div class="flex gap-8 group-hover:[animation-play-state:paused]">
-                            <!-- Photo 1 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
-                                <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Lifestyle Model</p>
+                            <!-- SET 2: DUPLICATE FOR INFINITE LOOP -->
+                            <div class="flex gap-8 group-hover:[animation-play-state:paused]">
+                                <!-- Photo 1 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
+                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Lifestyle Model</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Photo 2 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
-                                <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Dark Luxury</p>
+                                <!-- Photo 2 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
+                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Dark Luxury</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Photo 3 -->
-                            <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
-                                <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                    class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
-                                <div
-                                    class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                    <p class="text-white font-bold">Group Product</p>
+                                <!-- Photo 3 -->
+                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
+                                    onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
+                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
+                                    <div
+                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                        <p class="text-white font-bold">Group Product</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
