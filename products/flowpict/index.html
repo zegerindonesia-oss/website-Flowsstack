@@ -121,6 +121,69 @@
         .-rotate-y-12 {
             transform: rotateY(-12deg) scale(0.9);
         }
+
+        /* Carousel Classes */
+        .carousel-card {
+            position: absolute;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            top: 50%;
+            transform: translateY(-50%);
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .pos-center {
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 20;
+            opacity: 1;
+            width: 320px;
+            height: 600px;
+            border-radius: 42px;
+            /* Fits inside phone's 50px-8px */
+        }
+
+        @media (min-width: 768px) {
+            .pos-center {
+                width: 350px;
+                height: 650px;
+            }
+        }
+
+        .pos-left {
+            left: 50%;
+            /* Start from center axis */
+            transform: translate(-160%, -50%) scale(0.8) rotateY(12deg);
+            /* Push Left */
+            z-index: 10;
+            opacity: 0.6;
+            width: 280px;
+            height: 500px;
+            border-radius: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-left {
+                transform: translate(-180%, -50%) scale(0.85) rotateY(12deg);
+            }
+        }
+
+        .pos-right {
+            left: 50%;
+            transform: translate(60%, -50%) scale(0.8) rotateY(-12deg);
+            /* Push Right */
+            z-index: 10;
+            opacity: 0.6;
+            width: 280px;
+            height: 500px;
+            border-radius: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-right {
+                transform: translate(80%, -50%) scale(0.85) rotateY(-12deg);
+            }
+        }
     </style>
 </head>
 
@@ -518,10 +581,10 @@
                 <div class="text-center mb-12">
                     <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
                         Lihat <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Perbedaannya</span>
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Hasilnya</span>
                     </h2>
                     <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-4">
-                        Foto biasa vs visual profesional. Persepsi pelanggan berubah dalam hitungan detik.
+                        Foto biasa menjadi visual profesional. Persepsi pelanggan anda berubah dalam hitungan detik.
                     </p>
                 </div>
 
@@ -534,65 +597,51 @@
                         </span>
                     </div>
 
-                    <!-- 3D CAROUSEL CONTAINER -->
+                    <!-- 3D CAROUSEL CONTAINER (Flashcard Style) -->
                     <div
-                        class="relative w-full max-w-6xl mx-auto h-[500px] md:h-[600px] flex items-center justify-center perspective-1000 overflow-visible py-12">
+                        class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000">
 
-                        <!-- Left Card (Previous) -->
+                        <!-- STATIC PHONE FRAME OVERLAY -->
                         <div
-                            class="absolute left-4 md:left-20 top-1/2 -translate-y-1/2 w-[280px] h-[450px] bg-white rounded-3xl shadow-xl transform scale-90 -rotate-y-12 opacity-80 z-10 transition-all duration-500 hidden md:block">
-                            <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                class="w-full h-full object-cover rounded-3xl opacity-50" alt="Previous">
-                        </div>
-
-                        <!-- Center Card (Active - Phone Frame) -->
-                        <div
-                            class="relative w-[320px] md:w-[350px] h-[600px] md:h-[650px] bg-black rounded-[50px] border-[8px] border-gray-900 shadow-2xl z-20 flex flex-col overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[350px] h-[600px] md:h-[650px] pointer-events-none z-30">
+                            <!-- Border/Chassis -->
+                            <div class="absolute inset-0 border-[8px] border-gray-900 rounded-[50px] shadow-2xl"></div>
                             <!-- Dynamic Island -->
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30">
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-40">
                             </div>
-
-                            <!-- Screen Content (Auto-Slider) -->
-                            <div class="flex-1 bg-white overflow-hidden relative group" id="phone-slider-photo">
-                                <!-- Slides -->
-                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100"
-                                    data-slide="0">
-                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
-                                        class="w-full h-full object-cover" alt="Slide 1">
-                                </div>
-                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
-                                    data-slide="1">
-                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                        class="w-full h-full object-cover" alt="Slide 2">
-                                </div>
-                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
-                                    data-slide="2">
-                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                        class="w-full h-full object-cover" alt="Slide 3">
-                                </div>
-
-                                <!-- Text Overlay (Always Visible) -->
-                                <div
-                                    class="absolute top-12 left-0 right-0 text-center text-white p-4 z-10 pointer-events-none">
-                                    <h3 class="font-bold text-xl drop-shadow-md">Professional Studio</h3>
-                                    <p class="text-xs opacity-90 drop-shadow-md">Generated with FlowPict AI</p>
-                                </div>
-
-                                <!-- Bottom CTA inside Phone -->
-                                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-20 pointer-events-auto">
-                                    <button
-                                        class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors">
-                                        Lihat Hasilnya
-                                    </button>
-                                </div>
+                            <!-- Text Overlay -->
+                            <div class="absolute top-12 left-0 right-0 text-center text-white p-4 z-40 drop-shadow-md">
+                                <h3 class="font-bold text-xl">Professional Studio</h3>
+                                <p class="text-xs opacity-90">Generated with FlowPict AI</p>
+                            </div>
+                            <!-- Button (Static) -->
+                            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-40 pointer-events-auto">
+                                <button
+                                    class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors pointer-events-auto">
+                                    Lihat Hasilnya
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Right Card (Next) -->
-                        <div
-                            class="absolute right-4 md:right-20 top-1/2 -translate-y-1/2 w-[280px] h-[450px] bg-white rounded-3xl shadow-xl transform scale-90 rotate-y-12 opacity-80 z-10 transition-all duration-500 hidden md:block">
-                            <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                class="w-full h-full object-cover rounded-3xl opacity-50" alt="Next">
+                        <!-- MOVING CARDS CONTAINER -->
+                        <div id="photo-carousel-track" class="absolute inset-0 w-full h-full">
+                            <!-- Card 1 -->
+                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="0">
+                                <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="carousel-card pos-right bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="1">
+                                <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="carousel-card pos-left bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="2">
+                                <img src="/assets/showcase/zeger-group-cups-new.jpg" class="w-full h-full object-cover">
+                            </div>
                         </div>
 
                     </div>
@@ -611,75 +660,52 @@
                 </span>
             </div>
 
-            <!-- 3D CAROUSEL VIDEO -->
+            <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
             <div
-                class="relative w-full max-w-6xl mx-auto h-[550px] md:h-[650px] flex items-center justify-center perspective-1000 overflow-visible py-12">
+                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000">
 
-                <!-- Left Video (Side) -->
+                <!-- STATIC PHONE FRAME OVERLAY -->
                 <div
-                    class="absolute left-4 md:left-20 top-1/2 -translate-y-1/2 w-[280px] h-[500px] bg-black rounded-3xl shadow-xl transform -rotate-y-12 opacity-80 z-10 transition-all duration-500 hidden md:block border-4 border-gray-800">
-                    <iframe class="w-full h-full object-cover rounded-2xl pointer-events-auto opacity-60"
-                        src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview" allow="autoplay"
-                        loading="lazy"></iframe>
-                    <div class="absolute bottom-4 left-0 right-0 text-center">
-                        <span class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Promosi
-                            Aren</span>
-                    </div>
-                </div>
-
-                <!-- Center Video (Active - Phone Frame) -->
-                <!-- Center Video (Active - Phone Frame) -->
-                <div
-                    class="relative w-[320px] md:w-[350px] h-[600px] md:h-[650px] bg-black rounded-[50px] border-[8px] border-gray-900 shadow-2xl z-20 flex flex-col overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[350px] h-[600px] md:h-[650px] pointer-events-none z-30">
+                    <!-- Border/Chassis -->
+                    <div class="absolute inset-0 border-[8px] border-gray-900 rounded-[50px] shadow-2xl"></div>
                     <!-- Dynamic Island -->
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30"></div>
-
-                    <!-- Screen Content (Auto-Slider) -->
-                    <div class="flex-1 bg-black overflow-hidden relative group" id="phone-slider-video">
-                        <!-- Slides (Iframes) -->
-                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10"
-                            data-slide="0">
-                            <iframe class="w-full h-full object-cover pointer-events-auto"
-                                src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
-                                allow="autoplay" loading="lazy"></iframe>
-                        </div>
-                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0"
-                            data-slide="1">
-                            <iframe class="w-full h-full object-cover pointer-events-auto"
-                                src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
-                                allow="autoplay" loading="lazy"></iframe>
-                        </div>
-                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0"
-                            data-slide="2">
-                            <iframe class="w-full h-full object-cover pointer-events-auto"
-                                src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
-                                allow="autoplay" loading="lazy"></iframe>
-                        </div>
-
-                        <!-- Text Overlay -->
-                        <div class="absolute top-12 left-0 right-0 text-center text-white p-4 pointer-events-none z-20">
-                            <h3 class="font-bold text-xl drop-shadow-md">Cinematic Commercial</h3>
-                        </div>
-
-                        <!-- Bottom CTA inside Phone -->
-                        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 pointer-events-auto z-20">
-                            <button
-                                class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors">
-                                Lihat Hasilnya
-                            </button>
-                        </div>
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-40"></div>
+                    <!-- Text Overlay -->
+                    <div class="absolute top-12 left-0 right-0 text-center text-white p-4 z-40 drop-shadow-md">
+                        <h3 class="font-bold text-xl">Cinematic Commercial</h3>
+                    </div>
+                    <!-- Button (Static) -->
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-40 pointer-events-auto">
+                        <button
+                            class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors pointer-events-auto">
+                            Lihat Hasilnya
+                        </button>
                     </div>
                 </div>
 
-                <!-- Right Video (Side) -->
-                <div
-                    class="absolute right-4 md:right-20 top-1/2 -translate-y-1/2 w-[280px] h-[500px] bg-black rounded-3xl shadow-xl transform rotate-y-12 opacity-80 z-10 transition-all duration-500 hidden md:block border-4 border-gray-800">
-                    <iframe class="w-full h-full object-cover rounded-2xl pointer-events-auto opacity-60"
-                        src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview" allow="autoplay"
-                        loading="lazy"></iframe>
-                    <div class="absolute bottom-4 left-0 right-0 text-center">
-                        <span class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Product
-                            Reel</span>
+                <!-- MOVING CARDS CONTAINER -->
+                <div id="video-carousel-track" class="absolute inset-0 w-full h-full">
+                    <!-- Card 1 (Center) -->
+                    <div class="carousel-card pos-center bg-black rounded-[40px] overflow-hidden shadow-xl"
+                        data-index="0">
+                        <iframe class="w-full h-full object-cover pointer-events-auto"
+                            src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
+                            allow="autoplay" loading="lazy"></iframe>
+                    </div>
+                    <!-- Card 2 (Right) -->
+                    <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl"
+                        data-index="1">
+                        <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+                            src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
+                            allow="autoplay" loading="lazy"></iframe>
+                    </div>
+                    <!-- Card 3 (Left) -->
+                    <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl"
+                        data-index="2">
+                        <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+                            src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
+                            allow="autoplay" loading="lazy"></iframe>
                     </div>
                 </div>
 
@@ -1925,33 +1951,67 @@
             }
         }
 
-        // 4. PHONE SLIDERS (Simple Auto-Fade)
-        function initPhoneSlider(sliderId) {
-            const container = document.getElementById(sliderId);
-            if (!container) return;
+        // 4. FLASHCARD CAROUSEL (Moving Cards)
+        function initFlashcardCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
 
-            const slides = container.querySelectorAll('[data-slide]');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
+            const cards = Array.from(track.children);
+            // Positions cycle: Center -> Left -> Right -> Center
+            // Classes: pos-center, pos-left, pos-right
+
+            // Current assignment:
+            // 0: Center
+            // 1: Right
+            // 2: Left
+            // This setup allows:
+            // Right (1) -> moves to Center
+            // Center (0) -> moves to Left
+            // Left (2) -> moves to Right
+
+            let state = [
+                'pos-center', // Card 0
+                'pos-right',  // Card 1
+                'pos-left'    // Card 2
+            ];
 
             setInterval(() => {
-                // Fade out current
-                slides[currentSlide].classList.remove('opacity-100', 'z-10');
-                slides[currentSlide].classList.add('opacity-0', 'z-0');
+                // Rotation logic:
+                // New Center should be the one from Right (pos-right -> pos-center)
+                // New Left should be the one from Center (pos-center -> pos-left)
+                // New Right should be the one from Left (pos-left -> pos-right)
 
-                // Update index
-                currentSlide = (currentSlide + 1) % totalSlides;
+                // Let's shift the array? 
+                // We want to change the class assigned to each INDEX.
+                // Current: 0=C, 1=R, 2=L
+                // Next: 0=L, 1=C, 2=R 
+                // Next: 0=R, 1=L, 2=C
 
-                // Fade in next
-                slides[currentSlide].classList.remove('opacity-0', 'z-0');
-                slides[currentSlide].classList.add('opacity-100', 'z-10');
-            }, 3000); // 3 seconds per slide
+                // Logic:
+                // ‘pos-center’ becomes ‘pos-left’
+                // ‘pos-left’ becomes ‘pos-right’
+                // ‘pos-right’ becomes ‘pos-center’
+
+                state = state.map(cls => {
+                    if (cls === 'pos-center') return 'pos-left';
+                    if (cls === 'pos-left') return 'pos-right';
+                    if (cls === 'pos-right') return 'pos-center';
+                    return cls;
+                });
+
+                // Apply
+                cards.forEach((card, index) => {
+                    // Safe class updates: Move positions without nuking utility classes
+                    card.classList.remove('pos-center', 'pos-left', 'pos-right');
+                    card.classList.add(state[index]);
+                });
+
+            }, 3000);
         }
 
-        // Init Sliders
         window.addEventListener('DOMContentLoaded', () => {
-            initPhoneSlider('phone-slider-photo');
-            initPhoneSlider('phone-slider-video');
+            initFlashcardCarousel('photo-carousel-track');
+            initFlashcardCarousel('video-carousel-track');
         });
     </script>
 </body>
