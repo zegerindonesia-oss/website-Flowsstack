@@ -109,6 +109,33 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
+    <!-- Auth Check Script -->
+    <script type="module">
+        import { subscribeToAuthChanges } from '/src/firebase/auth.js';
+
+        const updateLink = (id, text, href, classNameAdd = '') => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.innerText = text;
+                el.href = href;
+                if (classNameAdd) el.classList.add(...classNameAdd.split(' '));
+            }
+        }
+
+        subscribeToAuthChanges((user) => {
+            console.log("Auth State Changed:", user ? "Logged In" : "Logged Out");
+            if (user) {
+                // User Logged In -> Show "Open App"
+                const appUrl = '/products/flowpict/app.html';
+                const openText = 'Open App';
+
+                updateLink('nav-btn-action', openText, appUrl);
+                updateLink('btn-personal', openText, appUrl);
+                updateLink('btn-bundling', openText, appUrl);
+                updateLink('btn-business', openText, appUrl);
+            }
+        });
+    </script>
 
     <!-- DEBUG BANNER - TEMPORARY -->
     <div class="bg-red-600 text-white text-center py-2 font-bold z-[9999] relative">
@@ -126,7 +153,7 @@
                 <span class="font-heading text-lg font-bold tracking-tight">Back to FlowStack</span>
             </a>
             <div class="flex items-center gap-4">
-                <a href="#pricing"
+                <a href="#pricing" id="nav-btn-action"
                     class="bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-glow flex items-center gap-2">
                     Lihat Harga
                 </a>
@@ -1140,6 +1167,7 @@
                         </li>
                     </ul>
                     <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20beli%20FlowPict%20Personal"
+                        id="btn-personal"
                         class="block w-full py-3 border-2 border-gray-200 rounded-xl font-bold text-center hover:border-primary hover:text-primary transition-colors">
                         Pilih Personal
                     </a>
@@ -1184,6 +1212,7 @@
                     </div>
 
                     <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20ambil%20PROMO%20BUNDLING%20FlowPict"
+                        id="btn-bundling"
                         class="block w-full py-4 bg-yellow-400 text-black rounded-xl font-extrabold text-center hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-yellow-400/50">
                         AMBIL PAKET BUNDLING
                     </a>
@@ -1217,13 +1246,29 @@
                         </li>
                     </ul>
                     <a href="https://wa.me/628123456789?text=Halo%20saya%20mau%20beli%20FlowPict%20Business"
+                        id="btn-business"
                         class="block w-full py-3 border-2 border-gray-200 rounded-xl font-bold text-center hover:border-primary hover:text-primary transition-colors">
                         Pilih Business
                     </a>
                 </div>
             </div>
 
-            <!-- Scarcity / Timer -->
+            <!-- Guarantee Badge -->
+            <div class="mt-16 text-center max-w-2xl mx-auto">
+                <div
+                    class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100 flex items-center gap-6 shadow-sm">
+                    <div
+                        class="size-20 bg-white rounded-full flex items-center justify-center shadow-md flex-shrink-0 text-green-500">
+                        <span class="material-symbols-outlined text-4xl">verified_user</span>
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-gray-900 text-lg mb-1">Garansi 100% Uang Kembali</h4>
+                        <p class="text-gray-600 text-sm">Jika tools tidak berfungsi sebagaimana mestinya, kami
+                            kembalikan uang anda 100% tanpa potongan. Kami menjamin kepuasan anda.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="mt-12 text-center text-gray-500 text-sm">
                 <p>⚠️ Harga lifetime ini sangat terbatas & tidak akan selalu tersedia. Ambil sekarang sebelum harga
                     naik.</p>
@@ -1364,13 +1409,13 @@
                         class="group bg-gray-50 border border-gray-100 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
                         <summary
                             class="flex items-center justify-between font-bold text-lg list-none select-none text-gray-900">
-                            Apakah saya perlu laptop spek tinggi?
+                            Apakah saya perlu Laptop Spek tinggi ?
                             <span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180 text-gray-400 group-open:text-primary">keyboard_arrow_down</span>
                         </summary>
                         <div class="mt-4 text-gray-600 leading-relaxed">
-                            Tidak. FlowPict berjalan 100% di cloud server kami yang cepat. Anda bisa akses dari HP,
-                            Tablet, atau Laptop "kentang" sekalipun. Semua proses berat ditangani oleh AI kami.
+                            Tidak. FlowPict bisa akses dari HP, Tablet, atau Laptop "kentang" sekalipun. Semua proses
+                            berat ditangani oleh AI kami.
                         </div>
                     </details>
 
@@ -1426,13 +1471,14 @@
                         class="group bg-gray-50 border border-gray-100 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
                         <summary
                             class="flex items-center justify-between font-bold text-lg list-none select-none text-gray-900">
-                            Apakah ini sekali bayar (Lifetime)?
+                            Apakah aksesnya lifetime/Sekali Bayar?
                             <span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180 text-gray-400 group-open:text-primary">keyboard_arrow_down</span>
                         </summary>
                         <div class="mt-4 text-gray-600 leading-relaxed">
-                            YA, BENAR. Khusus periode Promo Launching ini, Anda hanya perlu membayar sekali untuk akses
-                            selamanya. Tidak ada biaya langganan bulanan yang membebani cashflow Anda.
+                            Ya hanya sekali bayar anda dapat menggunakan tools ini lifetime, terkait akses tools kami
+                            menggunakan layanan dari google, selama google membuka layananya maka tools kami dapat
+                            digunakan
                         </div>
                     </details>
                 </div>
@@ -1548,6 +1594,10 @@
         </div>
     </footer>
 
+    <!-- SOUND for Notification -->
+    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
+        preload="auto"></audio>
+
     <!-- Sales Notification Toast -->
     <div id="sales-toast"
         class="fixed bottom-6 left-6 z-50 transform transition-all duration-500 translate-y-32 opacity-0">
@@ -1625,6 +1675,13 @@
 
             toastName.innerText = randomName;
             toastAvatar.innerText = initials;
+
+            // Play Sound
+            const audio = document.getElementById('notif-sound');
+            if (audio) {
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log('Audio play blocked:', e));
+            }
 
             toast.classList.remove('translate-y-32', 'opacity-0');
 
