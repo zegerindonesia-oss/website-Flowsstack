@@ -648,43 +648,36 @@
                                 <p class="text-xs opacity-90">Generated with FlowPict AI</p>
                             </div>
                             <!-- Button (Static) -->
-                            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-40 pointer-events-auto">
-                                <button
-                                    class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors pointer-events-auto">
-                                    Lihat Hasilnya
-                                </button>
-                            </div>
                         </div>
 
                         <!-- MOVING CARDS CONTAINER -->
-                        <div id="photo-carousel-track"
-                            class="absolute inset-0 w-full h-full pointer-events-auto hover:pause-animation">
+                        <div id="photo-carousel-track" class="absolute inset-0 w-full h-full">
                             <!-- Card 1 (Center) -->
-                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl cursor-pointer transition-transform hover:scale-105"
-                                data-index="0"
-                                onclick="openImageModal(this.querySelector('img').src); pauseCarousel('photo-carousel-track')">
+                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="0">
                                 <img src="assets/showcase/zeger-coffee-dark-girl.jpg"
                                     class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 2 (Right) -->
-                            <div class="carousel-card pos-right bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                            <!-- Card 2 (Right-1) -->
+                            <div class="carousel-card pos-right-1 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="1">
                                 <img src="assets/showcase/zeger-coffee-hijab.jpg" class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 3 (Left) -->
-                            <div class="carousel-card pos-left bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                            <!-- Card 3 (Right-2) -->
+                            <div class="carousel-card pos-right-2 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="2">
                                 <img src="assets/showcase/zeger-coffee-korean.jpg" class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 4 (Hidden 1) -->
-                            <div class="carousel-card pos-hidden bg-gray-100 rounded-[40px] overflow-hidden shadow-xl opacity-0"
+                            <!-- Card 4 (Left-2) -->
+                            <div class="carousel-card pos-left-2 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="3">
-                                <img src="assets/showcase/zeger-coffee-splash.png" class="w-full h-full object-cover">
+                                <img src="assets/showcase/zeger-coffee-splash-new.jpg"
+                                    class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 5 (Hidden 2) -->
-                            <div class="carousel-card pos-hidden bg-gray-100 rounded-[40px] overflow-hidden shadow-xl opacity-0"
+                            <!-- Card 5 (Left-1) -->
+                            <div class="carousel-card pos-left-1 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="4">
-                                <img src="assets/showcase/zeger-coffee-matcha.jpg" class="w-full h-full object-cover">
+                                <img src="assets/showcase/zeger-coffee-bottle.jpg" class="w-full h-full object-cover">
                             </div>
                         </div>
 
@@ -728,33 +721,25 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- MOVING CARDS CONTAINER -->
-                <div id="video-carousel-track" class="absolute inset-0 w-full h-full">
-                    <!-- Card 1 (Center) -->
-                    <div class="carousel-card pos-center bg-black rounded-[40px] overflow-hidden shadow-xl"
-                        data-index="0">
-                        <iframe class="w-full h-full object-cover pointer-events-auto"
-                            src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
-                            allow="autoplay" loading="lazy"></iframe>
-                    </div>
-                    <!-- Card 2 (Right) -->
-                    <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl"
-                        data-index="1">
-                        <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
-                            src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
-                            allow="autoplay" loading="lazy"></iframe>
-                    </div>
-                    <!-- Card 3 (Left) -->
-                    <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl"
-                        data-index="2">
-                        <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
-                            src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
-                            allow="autoplay" loading="lazy"></iframe>
-                    </div>
-                </div>
-
+                <iframe class="w-full h-full object-cover pointer-events-auto"
+                    src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview" allow="autoplay"
+                    loading="lazy"></iframe>
             </div>
+            <!-- Card 2 (Right) -->
+            <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl" data-index="1">
+                <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+                    src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview" allow="autoplay"
+                    loading="lazy"></iframe>
+            </div>
+            <!-- Card 3 (Left) -->
+            <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl" data-index="2">
+                <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+                    src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview" allow="autoplay"
+                    loading="lazy"></iframe>
+            </div>
+        </div>
+
+        </div>
         </div>
 
         <!-- 3. FEATURE LISTS (TICKERS) -->
@@ -937,20 +922,111 @@
                             <p class="text-white/80 font-heading text-3xl md:text-4xl font-bold leading-tight mb-4">
                                 Untuk kebutuhan<br>personal & individu.
                             </p>
-                            <!-- Mini Pill List Preview -->
-                            <div
-                                class="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Content
-                                    Creator</span>
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Online
-                                    Seller</span>
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Personal
-                                    Brand</span>
-                            </div>
-                        </div>
+                            <!-- Marquee Content (Running Feature) -->
+<div
+    class="w-full overflow-hidden mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 mask-linear-fade">
+    <div class="flex animate-marquee gap-3 w-max">
+        <!-- Items -->
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">architecture</span> Architecture
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real Sketch
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">face</span> Caricature
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span> Clean Up
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style Studio
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">devices</span> Mockup Gen
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span> Carousel Maker
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo Mixer
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span> Uncrop Image
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">magic_button</span> Smart Edit
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span> Face Switch
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span> BG Remover
+        </div>
+
+        <!-- DUPLICATES -->
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">architecture</span> Architecture
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real Sketch
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">face</span> Caricature
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span> Clean Up
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style Studio
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">devices</span> Mockup Gen
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span> Carousel Maker
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo Mixer
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span> Uncrop Image
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">magic_button</span> Smart Edit
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span> Face Switch
+        </div>
+        <div
+            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+            <span class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span> BG Remover
+        </div>
+    </div>
+</div>                        </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
                             <p class="text-white text-sm mb-4 font-medium">Cocok untuk kamu yang ingin visual rapi
@@ -1091,97 +1167,13 @@
                             <div class="flex animate-marquee gap-6 w-max px-4" style="animation-duration: 40s;">
                                 <!-- Creative Art -->
                                 <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
-                                    Architecture
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">face</span> Caricature
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">cleaning_services</span> Clean
-                                    Up
-                                </div>
-                                <!-- Product Shot -->
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">devices</span> Mockup Gen
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">view_carousel</span> Carousel
-                                    Maker
-                                </div>
-                                <!-- Editor -->
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">tune</span> Photo Mixer
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">crop_free</span> Uncrop Image
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">magic_button</span> Smart Edit
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">face_retouching_natural</span>
-                                    Face Switch
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
-                                    Remover
-                                </div>
-                                <!-- DUPLICATES -->
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
-                                    Architecture
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
-                                </div>
-                                <div
-                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
+                                    class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold text-sm inline-block shadow-lg group-hover:bg-yellow-300 transition-colors">
+                                    Ambil Bundling FlowPict
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Bundling Info (Optional visual cue) -->
-                <div class="max-w-5xl mx-auto mt-8 relative z-20">
-                    <div class="w-full bg-gradient-to-r from-primary to-secondary-pink rounded-[32px] p-8 text-white text-center shadow-lg relative overflow-hidden group hover:scale-[1.01] transition-transform cursor-pointer"
-                        onclick="window.location.hash='#pricing'">
-                        <div
-                            class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">🔹 Bundling (Best Value)</h3>
-                        <p class="text-lg opacity-90 mb-4">Akses semua fitur Personal + Business. Solusi paling lengkap
-                            untuk bisnis Anda.</p>
-                        <span
-                            class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold text-sm inline-block shadow-lg group-hover:bg-yellow-300 transition-colors">
-                            Ambil Bundling FlowPict
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- VIDEO MODAL (Placeholder Logic) -->

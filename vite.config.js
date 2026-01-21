@@ -8,6 +8,7 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 flowtrade: resolve(__dirname, 'products/flowtrade/index.html'),
                 flowpict: resolve(__dirname, 'products/flowpict/index.html'),
+                flowpictApp: resolve(__dirname, 'products/flowpict/app.html'),
                 flowhr: resolve(__dirname, 'products/flowhr/index.html'),
                 flowqueue: resolve(__dirname, 'products/flowqueue/index.html'),
                 flowbook: resolve(__dirname, 'products/flowbook/index.html'),
