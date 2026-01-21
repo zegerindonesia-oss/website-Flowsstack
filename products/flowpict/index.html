@@ -1608,7 +1608,7 @@
     </footer>
 
     <!-- SOUND for Notification -->
-    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/937/937-preview.mp3"
+    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"
         preload="auto"></audio>
 
     <!-- Sales Notification Toast -->
@@ -1692,8 +1692,17 @@
             // Play Sound
             const audio = document.getElementById('notif-sound');
             if (audio) {
-                audio.volume = 0.5;
-                audio.play().catch(e => console.log('Audio play blocked:', e));
+                audio.volume = 1.0; // Max volume
+                // Attempt to play - browsers might block if no interaction yet
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Play started
+                    })
+                        .catch(error => {
+                            console.log('Audio playback prevented by browser policy until user interaction.');
+                        });
+                }
             }
 
             toast.classList.remove('translate-y-32', 'opacity-0');
