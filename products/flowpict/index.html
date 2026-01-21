@@ -184,6 +184,14 @@
                 transform: translate(80%, -50%) scale(0.85) rotateY(-12deg);
             }
         }
+
+        .pos-hidden {
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            z-index: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -593,7 +601,7 @@
                     <div class="flex items-center gap-4 mb-10 px-4 justify-center">
                         <span
                             class="text-lg font-bold text-white bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
-                            Foto Biasa Menjadi Foto Profesional
+                            Foto Profesional
                         </span>
                     </div>
 
@@ -624,23 +632,34 @@
                         </div>
 
                         <!-- MOVING CARDS CONTAINER -->
-                        <div id="photo-carousel-track" class="absolute inset-0 w-full h-full">
-                            <!-- Card 1 -->
-                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
-                                data-index="0">
-                                <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                        <div id="photo-carousel-track"
+                            class="absolute inset-0 w-full h-full pointer-events-auto hover:pause-animation">
+                            <!-- Card 1 (Center) -->
+                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl cursor-pointer transition-transform hover:scale-105"
+                                data-index="0"
+                                onclick="openImageModal(this.querySelector('img').src); pauseCarousel('photo-carousel-track')">
+                                <img src="assets/showcase/zeger-coffee-dark-girl.jpg"
                                     class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 2 -->
+                            <!-- Card 2 (Right) -->
                             <div class="carousel-card pos-right bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="1">
-                                <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                    class="w-full h-full object-cover">
+                                <img src="assets/showcase/zeger-coffee-hijab.jpg" class="w-full h-full object-cover">
                             </div>
-                            <!-- Card 3 -->
+                            <!-- Card 3 (Left) -->
                             <div class="carousel-card pos-left bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
                                 data-index="2">
-                                <img src="/assets/showcase/zeger-group-cups-new.jpg" class="w-full h-full object-cover">
+                                <img src="assets/showcase/zeger-coffee-korean.jpg" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 4 (Hidden 1) -->
+                            <div class="carousel-card pos-hidden bg-gray-100 rounded-[40px] overflow-hidden shadow-xl opacity-0"
+                                data-index="3">
+                                <img src="assets/showcase/zeger-coffee-splash.png" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 5 (Hidden 2) -->
+                            <div class="carousel-card pos-hidden bg-gray-100 rounded-[40px] overflow-hidden shadow-xl opacity-0"
+                                data-index="4">
+                                <img src="assets/showcase/zeger-coffee-matcha.jpg" class="w-full h-full object-cover">
                             </div>
                         </div>
 
@@ -656,13 +675,14 @@
             <div class="flex items-center gap-4 mb-10 px-4 justify-center">
                 <span
                     class="text-lg font-bold text-white bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
-                    Video Biasa Menjadi Video Profesional
+                    Video Profesional
                 </span>
             </div>
 
             <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
-            <div
-                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000">
+            <div class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000 group"
+                onmouseenter="pauseCarousel('video-carousel-track')"
+                onmouseleave="resumeCarousel('video-carousel-track')">
 
                 <!-- STATIC PHONE FRAME OVERLAY -->
                 <div
@@ -1952,61 +1972,81 @@
         }
 
         // 4. FLASHCARD CAROUSEL (Moving Cards)
+
+        const carouselIntervals = {};
+
         function initFlashcardCarousel(trackId) {
             const track = document.getElementById(trackId);
             if (!track) return;
 
             const cards = Array.from(track.children);
-            // Positions cycle: Center -> Left -> Right -> Center
-            // Classes: pos-center, pos-left, pos-right
+            const count = cards.length;
 
-            // Current assignment:
-            // 0: Center
-            // 1: Right
-            // 2: Left
-            // This setup allows:
-            // Right (1) -> moves to Center
-            // Center (0) -> moves to Left
-            // Left (2) -> moves to Right
+            // Define offsets based on count
+            // Cycle 3: ['pos-center', 'pos-left', 'pos-right']
+            // Cycle 5: ['pos-center', 'pos-left', 'pos-hidden', 'pos-hidden', 'pos-right']
 
-            let state = [
-                'pos-center', // Card 0
-                'pos-right',  // Card 1
-                'pos-left'    // Card 2
-            ];
+            let offsets;
+            if (count === 5) {
+                // Initial State in HTML:
+                // Card 0: pos-center (Index 0 in cycle)
+                // Card 1: pos-right (Index 4 in cycle)
+                // Card 2: pos-left (Index 1 in cycle)
+                // Card 3: pos-hidden (Index 2 in cycle)
+                // Card 4: pos-hidden (Index 3 in cycle)
 
-            setInterval(() => {
-                // Rotation logic:
-                // New Center should be the one from Right (pos-right -> pos-center)
-                // New Left should be the one from Center (pos-center -> pos-left)
-                // New Right should be the one from Left (pos-left -> pos-right)
+                // We want to map card index to cycle index.
+                offsets = [0, 4, 1, 2, 3];
+            } else {
+                // 3 items
+                // Card 0: pos-center (0)
+                // Card 1: pos-right (2)
+                // Card 2: pos-left (1)
+                offsets = [0, 2, 1];
+            }
 
-                // Let's shift the array? 
-                // We want to change the class assigned to each INDEX.
-                // Current: 0=C, 1=R, 2=L
-                // Next: 0=L, 1=C, 2=R 
-                // Next: 0=R, 1=L, 2=C
+            track.dataset.offsets = JSON.stringify(offsets);
 
-                // Logic:
-                // ‘pos-center’ becomes ‘pos-left’
-                // ‘pos-left’ becomes ‘pos-right’
-                // ‘pos-right’ becomes ‘pos-center’
+            // Start Interval
+            resumeCarousel(trackId);
+        }
 
-                state = state.map(cls => {
-                    if (cls === 'pos-center') return 'pos-left';
-                    if (cls === 'pos-left') return 'pos-right';
-                    if (cls === 'pos-right') return 'pos-center';
-                    return cls;
-                });
+        function rotateCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track || !track.dataset.offsets) return;
 
-                // Apply
-                cards.forEach((card, index) => {
-                    // Safe class updates: Move positions without nuking utility classes
-                    card.classList.remove('pos-center', 'pos-left', 'pos-right');
-                    card.classList.add(state[index]);
-                });
+            const cards = Array.from(track.children);
+            const count = cards.length;
+            let offsets = JSON.parse(track.dataset.offsets);
 
-            }, 3000);
+            const cycle3 = ['pos-center', 'pos-left', 'pos-right'];
+            const cycle5 = ['pos-center', 'pos-left', 'pos-hidden', 'pos-hidden', 'pos-right'];
+            const cycle = (count === 5) ? cycle5 : cycle3;
+
+            // Increment offsets (rotate forward)
+            offsets = offsets.map(o => (o + 1) % count);
+
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Apply classes
+            cards.forEach((card, index) => {
+                const stateClass = cycle[offsets[index]];
+                // Clean all possible classes
+                card.classList.remove('pos-center', 'pos-left', 'pos-right', 'pos-hidden');
+                card.classList.add(stateClass);
+            });
+        }
+
+        function pauseCarousel(trackId) {
+            if (carouselIntervals[trackId]) {
+                clearInterval(carouselIntervals[trackId]);
+                carouselIntervals[trackId] = null;
+            }
+        }
+
+        function resumeCarousel(trackId) {
+            if (carouselIntervals[trackId]) return; // already running
+            carouselIntervals[trackId] = setInterval(() => rotateCarousel(trackId), 3000);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
