@@ -207,20 +207,20 @@
 
             <!-- Subheadline -->
             <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-4xl mx-auto font-medium leading-relaxed">
-                Tanpa studio, tanpa fotografer mahal. Cukup upload, dan AI kami akan menyulap produk Anda menjadi materi
-                iklan berkelas dunia dalam hitungan detik.
+                Tanpa studio, tanpa fotografer mahal. Cukup upload, dan Flowpict akan membuat produk kamu menjadi visual
+                profesional dalam hitungan detik.
             </p>
 
             <!-- CTA -->
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-20">
                 <a href="#how-it-works"
                     class="bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-xl hover:shadow-primary/50 flex items-center gap-2 transform hover:-translate-y-1">
-                    👉 Coba FlowPict Sekarang
+                    Coba FlowPict Sekarang
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
                 <a href="#showcase"
                     class="bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 text-lg font-bold px-10 py-4 rounded-full transition-all shadow-md flex items-center gap-2 transform hover:-translate-y-1">
-                    👉 Lihat Contoh Hasilnya
+                    Lihat Contoh Hasilnya
                 </a>
             </div>
 
@@ -504,7 +504,6 @@
                         <div
                             class="mt-10 p-6 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 text-center">
                             <div class="flex items-center justify-center gap-2 text-xl font-bold">
-                                <span>👉</span>
                                 <span>Visual profesional, langsung jadi dalam 1 klik.</span>
                             </div>
                         </div>
@@ -553,28 +552,34 @@
                             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30">
                             </div>
 
-                            <!-- Screen Content -->
-                            <div class="flex-1 bg-white overflow-hidden relative group">
-                                <img src="/assets/showcase/zeger-bottle-dark-new.jpg" class="w-full h-full object-cover"
-                                    alt="Main Showcase">
-
-                                <!-- Play Button Overlay -->
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div
-                                        class="size-16 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer hover:bg-white/50 transition-colors shadow-lg border border-white/50">
-                                        <span
-                                            class="material-symbols-outlined text-4xl text-white fill-current">play_arrow</span>
-                                    </div>
+                            <!-- Screen Content (Auto-Slider) -->
+                            <div class="flex-1 bg-white overflow-hidden relative group" id="phone-slider-photo">
+                                <!-- Slides -->
+                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100"
+                                    data-slide="0">
+                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                                        class="w-full h-full object-cover" alt="Slide 1">
+                                </div>
+                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
+                                    data-slide="1">
+                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                                        class="w-full h-full object-cover" alt="Slide 2">
+                                </div>
+                                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
+                                    data-slide="2">
+                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
+                                        class="w-full h-full object-cover" alt="Slide 3">
                                 </div>
 
-                                <!-- Text Overlay -->
-                                <div class="absolute top-12 left-0 right-0 text-center text-white p-4">
+                                <!-- Text Overlay (Always Visible) -->
+                                <div
+                                    class="absolute top-12 left-0 right-0 text-center text-white p-4 z-10 pointer-events-none">
                                     <h3 class="font-bold text-xl drop-shadow-md">Professional Studio</h3>
                                     <p class="text-xs opacity-90 drop-shadow-md">Generated with FlowPict AI</p>
                                 </div>
 
                                 <!-- Bottom CTA inside Phone -->
-                                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5">
+                                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-20 pointer-events-auto">
                                     <button
                                         class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors">
                                         Lihat Hasilnya
@@ -623,24 +628,41 @@
                 </div>
 
                 <!-- Center Video (Active - Phone Frame) -->
+                <!-- Center Video (Active - Phone Frame) -->
                 <div
                     class="relative w-[320px] md:w-[350px] h-[600px] md:h-[650px] bg-black rounded-[50px] border-[8px] border-gray-900 shadow-2xl z-20 flex flex-col overflow-hidden transform hover:scale-105 transition-transform duration-500">
                     <!-- Dynamic Island -->
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30"></div>
 
-                    <!-- Screen Content -->
-                    <div class="flex-1 bg-black overflow-hidden relative group">
-                        <iframe class="w-full h-full object-cover pointer-events-auto"
-                            src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
-                            allow="autoplay" loading="lazy"></iframe>
+                    <!-- Screen Content (Auto-Slider) -->
+                    <div class="flex-1 bg-black overflow-hidden relative group" id="phone-slider-video">
+                        <!-- Slides (Iframes) -->
+                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10"
+                            data-slide="0">
+                            <iframe class="w-full h-full object-cover pointer-events-auto"
+                                src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
+                                allow="autoplay" loading="lazy"></iframe>
+                        </div>
+                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0"
+                            data-slide="1">
+                            <iframe class="w-full h-full object-cover pointer-events-auto"
+                                src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
+                                allow="autoplay" loading="lazy"></iframe>
+                        </div>
+                        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0"
+                            data-slide="2">
+                            <iframe class="w-full h-full object-cover pointer-events-auto"
+                                src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
+                                allow="autoplay" loading="lazy"></iframe>
+                        </div>
 
                         <!-- Text Overlay -->
-                        <div class="absolute top-12 left-0 right-0 text-center text-white p-4 pointer-events-none">
+                        <div class="absolute top-12 left-0 right-0 text-center text-white p-4 pointer-events-none z-20">
                             <h3 class="font-bold text-xl drop-shadow-md">Cinematic Commercial</h3>
                         </div>
 
                         <!-- Bottom CTA inside Phone -->
-                        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 pointer-events-auto">
+                        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 pointer-events-auto z-20">
                             <button
                                 class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors">
                                 Lihat Hasilnya
@@ -997,7 +1019,7 @@
                         </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
-                            <p class="text-white text-sm mb-4 font-medium">👉 Cocok untuk kamu yang ingin visual rapi
+                            <p class="text-white text-sm mb-4 font-medium">Cocok untuk kamu yang ingin visual rapi
                                 tanpa ribet desain.</p>
                             <div
                                 class="w-full bg-white text-black font-bold py-4 rounded-full text-center hover:bg-gray-100 transition-colors">
@@ -1032,7 +1054,7 @@
                         </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
-                            <p class="text-white text-sm mb-4 font-medium">👉 Dibuat untuk visual yang bantu jualan,
+                            <p class="text-white text-sm mb-4 font-medium">Dibuat untuk visual yang bantu jualan,
                                 bukan sekadar bagus.</p>
                             <div
                                 class="w-full bg-white text-black font-bold py-4 rounded-full text-center hover:bg-gray-100 transition-colors">
@@ -1052,7 +1074,7 @@
                             untuk bisnis Anda.</p>
                         <span
                             class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold text-sm inline-block shadow-lg group-hover:bg-yellow-300 transition-colors">
-                            Ambil Bundling FlowPict 👉
+                            Ambil Bundling FlowPict
                         </span>
                     </div>
                 </div>
@@ -1902,6 +1924,35 @@
                 closeImageModal();
             }
         }
+
+        // 4. PHONE SLIDERS (Simple Auto-Fade)
+        function initPhoneSlider(sliderId) {
+            const container = document.getElementById(sliderId);
+            if (!container) return;
+
+            const slides = container.querySelectorAll('[data-slide]');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            setInterval(() => {
+                // Fade out current
+                slides[currentSlide].classList.remove('opacity-100', 'z-10');
+                slides[currentSlide].classList.add('opacity-0', 'z-0');
+
+                // Update index
+                currentSlide = (currentSlide + 1) % totalSlides;
+
+                // Fade in next
+                slides[currentSlide].classList.remove('opacity-0', 'z-0');
+                slides[currentSlide].classList.add('opacity-100', 'z-10');
+            }, 3000); // 3 seconds per slide
+        }
+
+        // Init Sliders
+        window.addEventListener('DOMContentLoaded', () => {
+            initPhoneSlider('phone-slider-photo');
+            initPhoneSlider('phone-slider-video');
+        });
     </script>
 </body>
 
