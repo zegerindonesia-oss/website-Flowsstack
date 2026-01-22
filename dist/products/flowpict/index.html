@@ -104,6 +104,119 @@
                 opacity: 1;
             }
         }
+
+        /* 3D CAROUSEL UTILS */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .rotate-y-12 {
+            transform: rotateY(12deg) scale(0.9);
+        }
+
+        .-rotate-y-12 {
+            transform: rotateY(-12deg) scale(0.9);
+        }
+
+        /* Carousel Classes */
+        .carousel-card {
+            position: absolute;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            top: 50%;
+            transform: translateY(-50%);
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .pos-center {
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 20;
+            opacity: 1;
+            width: 320px;
+            height: 600px;
+            border-radius: 42px;
+            /* Fits inside phone's 50px-8px */
+        }
+
+        @media (min-width: 768px) {
+            .pos-center {
+                width: 350px;
+                height: 650px;
+            }
+        }
+
+        /* Updated 5-Item Carousel Positions (Mepet/Tighter) */
+
+        /* LEFT SIDE */
+        .pos-left-1 {
+            left: 50%;
+            transform: translate(-100%, -50%) scale(0.9) rotateY(15deg);
+            z-index: 10;
+            opacity: 0.8;
+            width: 280px;
+            height: 520px;
+            border-radius: 35px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-left-1 {
+                transform: translate(-100%, -50%) scale(0.9) rotateY(15deg);
+            }
+        }
+
+        .pos-left-2 {
+            left: 50%;
+            transform: translate(-150%, -50%) scale(0.8) rotateY(25deg);
+            z-index: 5;
+            opacity: 0.6;
+            width: 260px;
+            height: 480px;
+            border-radius: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-left-2 {
+                transform: translate(-150%, -50%) scale(0.8) rotateY(25deg);
+            }
+        }
+
+        /* RIGHT SIDE */
+        .pos-right-1 {
+            left: 50%;
+            transform: translate(0%, -50%) scale(0.9) rotateY(-15deg);
+            z-index: 10;
+            opacity: 0.8;
+            width: 280px;
+            height: 520px;
+            border-radius: 35px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-right-1 {
+                transform: translate(0%, -50%) scale(0.9) rotateY(-15deg);
+            }
+        }
+
+        .pos-right-2 {
+            left: 50%;
+            transform: translate(50%, -50%) scale(0.8) rotateY(-25deg);
+            z-index: 5;
+            opacity: 0.6;
+            width: 260px;
+            height: 480px;
+            border-radius: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .pos-right-2 {
+                transform: translate(50%, -50%) scale(0.8) rotateY(-25deg);
+            }
+        }
     </style>
   <script type="module" crossorigin src="/assets/flowpict-CA0rK_4B.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
@@ -160,35 +273,77 @@
 
             <!-- Headline -->
             <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1]">
-                Jangan Biarkan <span class="text-red-500">Foto Buruk</span><br>
-                Membunuh Omset Bisnismu
+                Ubah Foto Biasa Menjadi<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Visual
+                    Profesional</span> dengan 1 Klik
             </h1>
 
             <!-- Subheadline -->
             <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-4xl mx-auto font-medium leading-relaxed">
-                Padahal produk kamu bagus.<br>
-                Tapi visual yang biasa bikin calon pembeli <span class="text-red-500 font-bold">tidak klik</span>, <span
-                    class="text-red-500 font-bold">tidak percaya</span>, dan akhirnya <span
-                    class="text-red-500 font-bold">batal beli</span>.
-                <br><br>
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink font-extrabold text-3xl md:text-4xl">FlowPict</span>
-                membantu mengubah foto biasa menjadi <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink font-extrabold text-3xl md:text-4xl whitespace-nowrap">Visual
-                    Profesional</span> siap jualan cukup 1 klik, tanpa skill desain.
+                Tanpa studio, tanpa fotografer mahal. Cukup upload, dan Flowpict akan membuat produk kamu menjadi visual
+                profesional dalam hitungan detik.
             </p>
 
             <!-- CTA -->
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-20">
                 <a href="#how-it-works"
                     class="bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-xl hover:shadow-primary/50 flex items-center gap-2 transform hover:-translate-y-1">
-                    👉 Coba FlowPict Sekarang
+                    Coba FlowPict Sekarang
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
                 <a href="#showcase"
                     class="bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 text-lg font-bold px-10 py-4 rounded-full transition-all shadow-md flex items-center gap-2 transform hover:-translate-y-1">
-                    👉 Lihat Contoh Hasilnya
+                    Lihat Contoh Hasilnya
                 </a>
+            </div>
+
+            <!-- BENTO GRID -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto h-[500px] md:h-[600px]">
+                <!-- Large Left Item (Orange style in Ref) -->
+                <div
+                    class="col-span-1 md:col-span-1 row-span-2 bg-orange-100 rounded-3xl overflow-hidden relative group hover:-translate-y-1 transition-transform duration-300">
+                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        alt="Fashion Model">
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl">
+                        <p class="font-bold text-gray-900 text-sm">Lifestyle Gen</p>
+                    </div>
+                </div>
+
+                <!-- Tall Middle Item (Green style in Ref) -->
+                <div
+                    class="col-span-1 md:col-span-1 row-span-2 bg-green-100 rounded-3xl overflow-hidden relative group hover:-translate-y-1 transition-transform duration-300 mt-8 md:mt-12">
+                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        alt="Product Shot">
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl">
+                        <p class="font-bold text-gray-900 text-sm">Product Studio</p>
+                    </div>
+                </div>
+
+                <!-- Center High Item (Yellow style in Ref - Focus) -->
+                <div
+                    class="col-span-1 md:col-span-1 row-span-2 bg-yellow-100 rounded-3xl overflow-hidden relative group hover:-translate-y-1 transition-transform duration-300 -mt-8 md:-mt-12 shadow-2xl z-10 border-4 border-white">
+                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        alt="Creative Scene">
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl">
+                        <span
+                            class="absolute -top-3 -right-3 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">HOT</span>
+                        <p class="font-bold text-gray-900 text-sm">Creative Scene</p>
+                    </div>
+                </div>
+
+                <!-- Right Item (Blue style in Ref) -->
+                <div
+                    class="col-span-1 md:col-span-1 row-span-2 bg-blue-100 rounded-3xl overflow-hidden relative group hover:-translate-y-1 transition-transform duration-300">
+                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100"
+                        alt="Street Style">
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-xl">
+                        <p class="font-bold text-gray-900 text-sm">Street Style</p>
+                    </div>
+                </div>
             </div>
 
             <!-- ==================================================
@@ -422,7 +577,6 @@
                         <div
                             class="mt-10 p-6 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 text-center">
                             <div class="flex items-center justify-center gap-2 text-xl font-bold">
-                                <span>👉</span>
                                 <span>Visual profesional, langsung jadi dalam 1 klik.</span>
                             </div>
                         </div>
@@ -437,355 +591,143 @@
                 <div class="text-center mb-12">
                     <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6">
                         Lihat <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Perbedaannya</span>
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Hasilnya</span>
                     </h2>
                     <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-4">
-                        Foto biasa vs visual profesional. Persepsi pelanggan berubah dalam hitungan detik.
+                        Foto biasa menjadi visual profesional. Persepsi pelanggan anda berubah dalam hitungan detik.
                     </p>
                 </div>
 
-                <!-- 1. FOTO PROFESIONAL -->
+                <!-- 1. FOTO PROFESIONAL 3D STYLE -->
                 <div>
-                    <div class="flex items-center gap-4 mb-6 px-4">
-                        <div class="h-px bg-gray-200 flex-1"></div>
+                    <div class="flex items-center gap-4 mb-10 px-4 justify-center">
                         <span
-                            class="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest bg-gray-50 px-4 py-1 rounded-full border border-gray-200">
+                            class="text-lg font-bold text-white bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
                             Foto Profesional
                         </span>
-                        <div class="h-px bg-gray-200 flex-1"></div>
                     </div>
 
+                    <!-- 3D CAROUSEL CONTAINER (Flashcard Style) -->
                     <div
-                        class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-transparent py-4 group hover-pause">
-                        <!-- Pause on Hover class handled by CSS -->
-                        <div class="flex animate-marquee gap-8 w-max px-4">
-                            <!-- SET 1: NEW PHOTOS -->
-                            <div class="flex gap-8 group-hover:[animation-play-state:paused]">
-                                <!-- Photo 1 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
-                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Lifestyle Model</p>
-                                    </div>
-                                </div>
-                                <!-- Photo 2 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
-                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Dark Luxury</p>
-                                    </div>
-                                </div>
-                                <!-- Photo 3 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
-                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Group Product</p>
-                                    </div>
-                                </div>
-                            </div>
+                        class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000">
 
-                            <!-- SET 2: DUPLICATE FOR INFINITE LOOP -->
-                            <div class="flex gap-8 group-hover:[animation-play-state:paused]">
-                                <!-- Photo 1 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-model-drink-new.jpg')">
-                                    <img src="/assets/showcase/zeger-model-drink-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Lifestyle Model">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Lifestyle Model</p>
-                                    </div>
-                                </div>
-                                <!-- Photo 2 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-bottle-dark-new.jpg')">
-                                    <img src="/assets/showcase/zeger-bottle-dark-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Dark Luxury">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Dark Luxury</p>
-                                    </div>
-                                </div>
-                                <!-- Photo 3 -->
-                                <div class="w-[300px] h-[400px] rounded-2xl overflow-hidden relative shadow-lg cursor-pointer transition-transform hover:scale-105"
-                                    onclick="openImageModal('/assets/showcase/zeger-group-cups-new.jpg')">
-                                    <img src="/assets/showcase/zeger-group-cups-new.jpg"
-                                        class="absolute inset-0 w-full h-full object-cover" alt="Group Product">
-                                    <div
-                                        class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                                        <p class="text-white font-bold">Group Product</p>
-                                    </div>
-                                </div>
+                        <!-- STATIC PHONE FRAME OVERLAY -->
+                        <div
+                            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[350px] h-[600px] md:h-[650px] pointer-events-none z-30">
+                            <!-- Border/Chassis -->
+                            <div class="absolute inset-0 border-[8px] border-gray-900 rounded-[50px] shadow-2xl"></div>
+                            <!-- Dynamic Island -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-40">
+                            </div>
+                            <!-- Text Overlay -->
+                            <div class="absolute top-12 left-0 right-0 text-center text-white p-4 z-40 drop-shadow-md">
+                                <h3 class="font-bold text-xl">Professional Studio</h3>
+                                <p class="text-xs opacity-90">Generated with FlowPict AI</p>
+                            </div>
+                            <!-- Button (Static) -->
+                        </div>
+
+                        <!-- MOVING CARDS CONTAINER -->
+                        <div id="photo-carousel-track" class="absolute inset-0 w-full h-full">
+                            <!-- Card 1 (Center) -->
+                            <div class="carousel-card pos-center bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="0">
+                                <img src="/assets/zeger-coffee-dark-girl-wmHQxPhu.jpg"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 2 (Right-1) -->
+                            <div class="carousel-card pos-right-1 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="1">
+                                <img src="/assets/zeger-coffee-hijab-CciMuiq4.jpg" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 3 (Right-2) -->
+                            <div class="carousel-card pos-right-2 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="2">
+                                <img src="/assets/zeger-coffee-korean-CEApnEUj.jpg" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 4 (Left-2) -->
+                            <div class="carousel-card pos-left-2 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="3">
+                                <img src="/assets/zeger-coffee-splash-new-CLzN2JTu.jpg"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <!-- Card 5 (Left-1) -->
+                            <div class="carousel-card pos-left-1 bg-gray-100 rounded-[40px] overflow-hidden shadow-xl"
+                                data-index="4">
+                                <img src="/assets/zeger-coffee-bottle-by-_RqBA.jpg" class="w-full h-full object-cover">
                             </div>
                         </div>
+
                     </div>
                 </div>
+
+
+            </div>
+        </div>
+
+        <!-- 2. VIDEO PROFESIONAL -->
+        <div>
+            <div class="flex items-center gap-4 mb-10 px-4 justify-center">
+                <span
+                    class="text-lg font-bold text-white bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
+                    Video Profesional
+                </span>
             </div>
 
-            <!-- 2. VIDEO PROFESIONAL -->
-            <div>
-                <div class="flex items-center gap-4 mb-6 px-4">
-                    <div class="h-px bg-gray-200 flex-1"></div>
-                    <span
-                        class="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink uppercase tracking-widest bg-gray-50 px-4 py-1 rounded-full border border-gray-200">
-                        Video Profesional
-                    </span>
-                    <div class="h-px bg-gray-200 flex-1"></div>
-                </div>
+            <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
+            <div
+                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000 group">
 
+                <!-- STATIC PHONE FRAME OVERLAY -->
                 <div
-                    class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-transparent py-4 group hover-pause">
-                    <!-- Reverse animation direction for variety -->
-                    <div class="flex animate-marquee gap-6 w-max px-4" style="animation-direction: reverse;">
-                        <!-- SET 1: VIDEOS -->
-                        <div class="flex gap-6 group-hover:[animation-play-state:paused] pointer-events-auto">
-                            <!-- Video 1: Aren (New) -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Promosi
-                                        Aren</span>
-                                </div>
-                            </div>
-                            <!-- Video 2: Matcha -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Cinematic
-                                        Ads</span>
-                                </div>
-                            </div>
-                            <!-- Video 3: Event -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Product
-                                        Reel</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SET 2: DUPLICATE VIDEOS -->
-                        <div class="flex gap-6 group-hover:[animation-play-state:paused] pointer-events-auto">
-                            <!-- Video 1: Aren (New) -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Promosi
-                                        Aren</span>
-                                </div>
-                            </div>
-                            <!-- Video 2: Matcha -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Cinematic
-                                        Ads</span>
-                                </div>
-                            </div>
-                            <!-- Video 3: Event -->
-                            <div class="w-[320px] h-[568px] rounded-2xl overflow-hidden relative shadow-lg bg-black">
-                                <iframe class="w-full h-full object-cover pointer-events-auto"
-                                    src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
-                                    allow="autoplay" loading="lazy"></iframe>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Product
-                                        Reel</span>
-                                </div>
-                            </div>
-                        </div>
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[350px] h-[600px] md:h-[650px] pointer-events-none z-30">
+                    <!-- Border/Chassis -->
+                    <div class="absolute inset-0 border-[8px] border-gray-900 rounded-[50px] shadow-2xl"></div>
+                    <!-- Dynamic Island -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-40"></div>
+                    <!-- Text Overlay -->
+                    <div class="absolute top-12 left-0 right-0 text-center text-white p-4 z-40 drop-shadow-md">
+                        <h3 class="font-bold text-xl">Cinematic Commercial</h3>
+                    </div>
+                    <!-- Button (Static) -->
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-40 pointer-events-auto">
+                        <button
+                            class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors pointer-events-auto">
+                            Lihat Hasilnya
+                        </button>
                     </div>
                 </div>
+                <iframe class="w-full h-full object-cover pointer-events-auto"
+                    src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview" allow="autoplay"
+                    loading="lazy"></iframe>
             </div>
-
-            <!-- 3. FEATURE LISTS (TICKERS) -->
-            <div>
-                <!-- FlowPict Business Ticker -->
-                <div class="mb-8">
-                    <div class="flex items-center gap-4 mb-4 px-4">
-                        <div class="size-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <span class="material-symbols-outlined">business_center</span>
-                        </div>
-                        <h3 class="font-heading font-bold text-xl">FlowPict Business</h3>
-                    </div>
-                    <div
-                        class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-blue-50/50 py-3 border-y border-blue-100">
-                        <div class="flex animate-marquee gap-6 w-max px-4">
-                            <!-- Items -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">photo_camera</span> AI
-                                Photography
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">campaign</span> Delivery
-                                Banner
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">auto_fix_high</span> Magic
-                                Design
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">videocam</span> Professional
-                                Ads <span class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">bolt</span> Affiliate
-                                Intelligence <span
-                                    class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">ads_click</span> Meta Ads
-                                Content <span
-                                    class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">tag</span> Caption & Hashtag
-                                Otomatis
-                            </div>
-
-                            <!-- DUPLICATES -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">photo_camera</span> AI
-                                Photography
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">campaign</span> Delivery
-                                Banner
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">auto_fix_high</span> Magic
-                                Design
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-blue-500">videocam</span> Professional
-                                Ads <span class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FlowPict Personal Ticker -->
-                <div>
-                    <div class="flex items-center gap-4 mb-4 px-4">
-                        <div class="size-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center">
-                            <span class="material-symbols-outlined">person</span>
-                        </div>
-                        <h3 class="font-heading font-bold text-xl">FlowPict Personal</h3>
-                    </div>
-                    <div
-                        class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-pink-50/50 py-3 border-y border-pink-100">
-                        <div class="flex animate-marquee gap-6 w-max px-4" style="animation-duration: 40s;">
-                            <!-- Creative Art -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">architecture</span>
-                                Architecture
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">face</span> Caricature
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">cleaning_services</span> Clean
-                                Up
-                            </div>
-                            <!-- Product Shot -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">devices</span> Mockup Gen
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">view_carousel</span> Carousel
-                                Maker
-                            </div>
-                            <!-- Editor -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">tune</span> Photo Mixer
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">crop_free</span> Uncrop Image
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">magic_button</span> Smart Edit
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">face_retouching_natural</span>
-                                Face Switch
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
-                                Remover
-                            </div>
-
-                            <!-- DUPLICATES -->
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">architecture</span>
-                                Architecture
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
-                            </div>
-                            <div
-                                class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Card 2 (Right) -->
+            <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                data-index="1" onclick="rotateCarouselBy('video-carousel-track', -1)">
+                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
+                    src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview" allow="autoplay"
+                    loading="lazy"></iframe>
             </div>
+            <!-- Card 3 (Left) -->
+            <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                data-index="2" onclick="rotateCarouselBy('video-carousel-track', 1)">
+                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
+                    src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview" allow="autoplay"
+                    loading="lazy"></iframe>
+            </div>
+        </div>
+
+        </div>
+        </div>
+
+
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
 
         <!-- ==================================================
@@ -941,23 +883,151 @@
                             <p class="text-white/80 font-heading text-3xl md:text-4xl font-bold leading-tight mb-4">
                                 Untuk kebutuhan<br>personal & individu.
                             </p>
-                            <!-- Mini Pill List Preview -->
+                            <!-- Marquee Content (Running Feature) -->
                             <div
-                                class="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Content
-                                    Creator</span>
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Online
-                                    Seller</span>
-                                <span
-                                    class="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">Personal
-                                    Brand</span>
+                                class="w-full overflow-hidden mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 mask-linear-fade">
+                                <div class="flex animate-marquee gap-3 w-max">
+                                    <!-- Items -->
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">architecture</span>
+                                        Architecture
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real
+                                        Sketch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">face</span>
+                                        Caricature
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span>
+                                        Clean Up
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style
+                                        Studio
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">devices</span>
+                                        Mockup Gen
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span>
+                                        Carousel Maker
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo
+                                        Mixer
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span>
+                                        Uncrop Image
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">magic_button</span>
+                                        Smart Edit
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span>
+                                        Face Switch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span>
+                                        BG Remover
+                                    </div>
+
+                                    <!-- DUPLICATES -->
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">architecture</span>
+                                        Architecture
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real
+                                        Sketch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">face</span>
+                                        Caricature
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span>
+                                        Clean Up
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style
+                                        Studio
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">devices</span>
+                                        Mockup Gen
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span>
+                                        Carousel Maker
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo
+                                        Mixer
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span>
+                                        Uncrop Image
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">magic_button</span>
+                                        Smart Edit
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span>
+                                        Face Switch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span>
+                                        BG Remover
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
-                            <p class="text-white text-sm mb-4 font-medium">👉 Cocok untuk kamu yang ingin visual rapi
+                            <p class="text-white text-sm mb-4 font-medium">Cocok untuk kamu yang ingin visual rapi
                                 tanpa ribet desain.</p>
                             <div
                                 class="w-full bg-white text-black font-bold py-4 rounded-full text-center hover:bg-gray-100 transition-colors">
@@ -992,7 +1062,7 @@
                         </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
-                            <p class="text-white text-sm mb-4 font-medium">👉 Dibuat untuk visual yang bantu jualan,
+                            <p class="text-white text-sm mb-4 font-medium">Dibuat untuk visual yang bantu jualan,
                                 bukan sekadar bagus.</p>
                             <div
                                 class="w-full bg-white text-black font-bold py-4 rounded-full text-center hover:bg-gray-100 transition-colors">
@@ -1001,23 +1071,139 @@
                         </div>
                     </div>
 
-                    <!-- Bundling Info (Optional visual cue) -->
-                    <div class="md:col-span-2 bg-gradient-to-r from-primary to-secondary-pink rounded-[32px] p-8 text-white text-center shadow-lg relative overflow-hidden group hover:scale-[1.01] transition-transform cursor-pointer"
-                        onclick="window.location.hash='#pricing'">
-                        <div
-                            class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">🔹 Bundling (Best Value)</h3>
-                        <p class="text-lg opacity-90 mb-4">Akses semua fitur Personal + Business. Solusi paling lengkap
-                            untuk bisnis Anda.</p>
-                        <span
-                            class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold text-sm inline-block shadow-lg group-hover:bg-yellow-300 transition-colors">
-                            Ambil Bundling FlowPict 👉
-                        </span>
-                    </div>
+                    <!-- End of Grid (Cards) -->
                 </div>
-            </div>
-        </div>
+
+                <!-- 3. FEATURE LISTS (TICKERS - MOVED) -->
+                <div class="my-12">
+                    <!-- FlowPict Business Ticker -->
+                    <div class="mb-8">
+                        <div class="flex items-center gap-4 mb-4 px-4">
+                            <div class="size-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                                <span class="material-symbols-outlined">business_center</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl">FlowPict Business</h3>
+                        </div>
+                        <div
+                            class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-blue-50/50 py-3 border-y border-blue-100">
+                            <div class="flex animate-marquee gap-6 w-max px-4">
+                                <!-- Items -->
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">photo_camera</span> AI
+                                    Photography
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">campaign</span> Delivery
+                                    Banner
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">auto_fix_high</span> Magic
+                                    Design
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">videocam</span> Professional
+                                    Ads <span
+                                        class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">bolt</span> Affiliate
+                                    Intelligence <span
+                                        class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">ads_click</span> Meta Ads
+                                    Content <span
+                                        class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">tag</span> Caption & Hashtag
+                                    Otomatis
+                                </div>
+                                <!-- DUPLICATES -->
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">photo_camera</span> AI
+                                    Photography
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">campaign</span> Delivery
+                                    Banner
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">auto_fix_high</span> Magic
+                                    Design
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-blue-100 shadow-sm text-sm font-bold text-blue-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-blue-500">videocam</span> Professional
+                                    Ads <span
+                                        class="text-[10px] bg-red-100 text-red-600 px-1.5 rounded ml-1">SOON</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FlowPict Personal Ticker -->
+                    <div>
+                        <div class="flex items-center gap-4 mb-4 px-4">
+                            <div class="size-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center">
+                                <span class="material-symbols-outlined">person</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl">FlowPict Personal</h3>
+                        </div>
+                        <div
+                            class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-pink-50/50 py-3 border-y border-pink-100">
+                            <div class="flex animate-marquee gap-6 w-max px-4">
+                                <!-- FlowPict Personal Items -->
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
+                                    Remover
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
+                                    Architecture
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
+                                </div>
+                                <!-- Duplicates for Loop -->
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
+                                    Remover
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
+                                    Architecture
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </section>
 
     <!-- VIDEO MODAL (Placeholder Logic) -->
@@ -1104,8 +1290,6 @@
                     Paket untuk kreator, marketer, dan agensi dari segala skala.
                 </p>
                 <div class="flex flex-wrap justify-center gap-4 mt-8">
-                    <span class="px-6 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">Unlimited
-                        Generate</span>
                     <span
                         class="px-6 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-semibold">Lifetime
                         Access</span>
@@ -1121,7 +1305,7 @@
                     <p class="text-xs text-gray-400 mb-3">Paket untuk penggunaan pribadi</p>
                     <div class="mb-4">
                         <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
-                        <div class="text-4xl font-extrabold">Rp149.000</div>
+                        <div class="text-4xl font-extrabold">Rp99.000</div>
                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
                     </div>
 
@@ -1162,10 +1346,10 @@
 
                     <div class="mb-4">
                         <span class="text-sm text-white/50 line-through">Rp3.000.000</span>
-                        <div class="text-5xl font-extrabold">Rp199.000</div>
+                        <div class="text-5xl font-extrabold">Rp149.000</div>
                         <span
                             class="text-xs font-bold text-yellow-400 bg-yellow-400/20 px-2 py-0.5 rounded border border-yellow-400/50">HEMAT
-                            93% • LIFETIME</span>
+                            95% • LIFETIME</span>
                     </div>
 
                     <div
@@ -1179,11 +1363,11 @@
                         <ul class="space-y-2 text-sm">
                             <li class="flex items-center gap-2"><span
                                     class="material-symbols-outlined text-yellow-400 text-lg">star</span>
-                                <strong>FlowPict Personal</strong> (Rp149k)
+                                <strong>FlowPict Personal</strong> (Rp99k)
                             </li>
                             <li class="flex items-center gap-2"><span
                                     class="material-symbols-outlined text-yellow-400 text-lg">star</span>
-                                <strong>FlowPict Business</strong> (Rp149k)
+                                <strong>FlowPict Business</strong> (Rp99k)
                             </li>
                         </ul>
                     </div>
@@ -1201,7 +1385,7 @@
                     <p class="text-xs text-gray-400 mb-3">Paket untuk kreator, marketer, dan agensi</p>
                     <div class="mb-4">
                         <span class="text-sm text-red-400 line-through">Rp1.500.000</span>
-                        <div class="text-4xl font-extrabold">Rp149.000</div>
+                        <div class="text-4xl font-extrabold">Rp99.000</div>
                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded">LIFETIME</span>
                     </div>
 
@@ -1230,7 +1414,22 @@
                 </div>
             </div>
 
-            <!-- Scarcity / Timer -->
+            <!-- Guarantee Badge -->
+            <div class="mt-16 text-center max-w-2xl mx-auto">
+                <div
+                    class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100 flex items-center gap-6 shadow-sm">
+                    <div
+                        class="size-20 bg-white rounded-full flex items-center justify-center shadow-md flex-shrink-0 text-green-500">
+                        <span class="material-symbols-outlined text-4xl">verified_user</span>
+                    </div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-gray-900 text-lg mb-1">Garansi 100% Uang Kembali</h4>
+                        <p class="text-gray-600 text-sm">Jika tools tidak berfungsi sebagaimana mestinya, kami
+                            kembalikan uang anda 100% tanpa potongan. Kami menjamin kepuasan anda.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="mt-12 text-center text-gray-500 text-sm">
                 <p>⚠️ Harga lifetime ini sangat terbatas & tidak akan selalu tersedia. Ambil sekarang sebelum harga
                     naik.</p>
@@ -1371,13 +1570,28 @@
                         class="group bg-gray-50 border border-gray-100 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
                         <summary
                             class="flex items-center justify-between font-bold text-lg list-none select-none text-gray-900">
-                            Apakah saya perlu laptop spek tinggi?
+                            Apakah saya perlu Laptop Spek tinggi ?
                             <span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180 text-gray-400 group-open:text-primary">keyboard_arrow_down</span>
                         </summary>
                         <div class="mt-4 text-gray-600 leading-relaxed">
-                            Tidak. FlowPict berjalan 100% di cloud server kami yang cepat. Anda bisa akses dari HP,
-                            Tablet, atau Laptop "kentang" sekalipun. Semua proses berat ditangani oleh AI kami.
+                            Tidak. FlowPict bisa akses dari HP, Tablet, atau Laptop "kentang" sekalipun. Semua proses
+                            berat ditangani oleh AI kami.
+                        </div>
+                    </details>
+
+                    <!-- Q New: Unlimited Generate -->
+                    <details
+                        class="group bg-gray-50 border border-gray-100 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
+                        <summary
+                            class="flex items-center justify-between font-bold text-lg list-none select-none text-gray-900">
+                            Apakah tools ini bisa unlimited generate?
+                            <span
+                                class="material-symbols-outlined transition-transform group-open:rotate-180 text-gray-400 group-open:text-primary">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="mt-4 text-gray-600 leading-relaxed">
+                            Kami menggunakan layanan Google, jadi tergantung dari pihak google, tetapi untuk saat ini
+                            layanan google masih memberikan unlimited generate
                         </div>
                     </details>
 
@@ -1433,13 +1647,14 @@
                         class="group bg-gray-50 border border-gray-100 rounded-2xl p-6 cursor-pointer open:bg-white open:shadow-lg transition-all">
                         <summary
                             class="flex items-center justify-between font-bold text-lg list-none select-none text-gray-900">
-                            Apakah ini sekali bayar (Lifetime)?
+                            Apakah aksesnya lifetime/Sekali Bayar?
                             <span
                                 class="material-symbols-outlined transition-transform group-open:rotate-180 text-gray-400 group-open:text-primary">keyboard_arrow_down</span>
                         </summary>
                         <div class="mt-4 text-gray-600 leading-relaxed">
-                            YA, BENAR. Khusus periode Promo Launching ini, Anda hanya perlu membayar sekali untuk akses
-                            selamanya. Tidak ada biaya langganan bulanan yang membebani cashflow Anda.
+                            Ya hanya sekali bayar anda dapat menggunakan tools ini lifetime, terkait akses tools kami
+                            menggunakan layanan dari google, selama google membuka layananya maka tools kami dapat
+                            digunakan
                         </div>
                     </details>
                 </div>
@@ -1555,6 +1770,10 @@
         </div>
     </footer>
 
+    <!-- SOUND for Notification -->
+    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"
+        preload="auto"></audio>
+
     <!-- Sales Notification Toast -->
     <div id="sales-toast"
         class="fixed bottom-6 left-6 z-50 transform transition-all duration-500 translate-y-32 opacity-0">
@@ -1633,6 +1852,22 @@
             toastName.innerText = randomName;
             toastAvatar.innerText = initials;
 
+            // Play Sound
+            const audio = document.getElementById('notif-sound');
+            if (audio) {
+                audio.volume = 1.0; // Max volume
+                // Attempt to play - browsers might block if no interaction yet
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Play started
+                    })
+                        .catch(error => {
+                            console.log('Audio playback prevented by browser policy until user interaction.');
+                        });
+                }
+            }
+
             toast.classList.remove('translate-y-32', 'opacity-0');
 
             setTimeout(() => {
@@ -1652,6 +1887,8 @@
                 loopToast();
             }, delay);
         }
+        // Start the loop
+        setTimeout(loopToast, 2000);
 
         // 3. MODAL LOGIC
 
@@ -1788,29 +2025,170 @@
 
         function openImageModal(src) {
             modalImageSrc.src = src;
-            imageModal.classList.remove('opacity-0', 'pointer-events-none');
-            imageModalContent.classList.remove('scale-95');
-            imageModalContent.classList.add('scale-100');
+            resumeCarousel(trackId);
         }
 
-        function closeImageModal() {
-            imageModal.classList.add('opacity-0', 'pointer-events-none');
-            imageModalContent.classList.add('scale-95');
-            imageModalContent.classList.remove('scale-100');
+        // 4. FLASHCARD CAROUSEL (Moving Cards)
+        const carouselIntervals = {};
+
+        function initFlashcardCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+
+            const cards = Array.from(track.children);
+            const count = cards.length;
+
+            let offsets;
+            if (count === 5) {
+                // Cycle 5: ['pos-center', 'pos-left-1', 'pos-left-2', 'pos-right-2', 'pos-right-1']
+                // Initial: [C, R1, R2, L2, L1]
+                offsets = [0, 4, 3, 2, 1];
+            } else {
+                // 3 items: ['pos-center', 'pos-left-1', 'pos-right-1'] 
+                // Initial: [C, R1, L1] -> mapped to cycle indices 0, 2, 1
+                offsets = [0, 2, 1];
+            }
+
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Start Interval
+            resumeCarousel(trackId);
         }
 
-        // Close modal on click outside
-        window.onclick = function (event) {
-            if (event.target == videoModal) {
-                closeVideoModal();
-            }
-            if (event.target == featureModal) {
-                closeFeatureModal();
-            }
-            if (event.target == imageModal) {
-                closeImageModal();
+        function rotateCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track || !track.dataset.offsets) return;
+
+            const cards = Array.from(track.children);
+            const count = cards.length;
+            let offsets = JSON.parse(track.dataset.offsets);
+
+            // Updated Cycles
+            const cycle3 = ['pos-center', 'pos-left-1', 'pos-right-1'];
+            const cycle5 = ['pos-center', 'pos-left-1', 'pos-left-2', 'pos-right-2', 'pos-right-1'];
+
+            const cycle = (count === 5) ? cycle5 : cycle3;
+
+            // Increment offsets (rotate forward)
+            offsets = offsets.map(o => (o + 1) % count);
+
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Apply classes
+            cards.forEach((card, index) => {
+                const stateClass = cycle[offsets[index]];
+                // Clean all possible classes
+                card.classList.remove('pos-center', 'pos-left-1', 'pos-left-2', 'pos-right-1', 'pos-right-2', 'pos-left', 'pos-right', 'pos-hidden');
+                card.classList.add(stateClass);
+            });
+        }
+
+        function pauseCarousel(trackId) {
+            if (carouselIntervals[trackId]) {
+                clearInterval(carouselIntervals[trackId]);
+                carouselIntervals[trackId] = null;
             }
         }
+
+        function resumeCarousel(trackId) {
+            if (carouselIntervals[trackId]) return; // already running
+            carouselIntervals[trackId] = setInterval(() => rotateCarousel(trackId), 3000);
+        }
+
+        // 5. MANUAL VIDEO CAROUSEL
+        function initManualCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+
+            // 3 items: ['pos-center', 'pos-left-1', 'pos-right-1'] 
+            // Initial: [C, R1, L1] -> mapped to cycle indices 0, 2, 1
+            const offsets = [0, 2, 1];
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Do NOT start interval
+        }
+
+        function rotateCarouselBy(trackId, direction) {
+            const track = document.getElementById(trackId);
+            if (!track || !track.dataset.offsets) return;
+
+            const cards = Array.from(track.children);
+            const count = cards.length;
+            let offsets = JSON.parse(track.dataset.offsets);
+
+            // Updated Cycles (Only need 3 item cycle for video currently)
+            const cycle3 = ['pos-center', 'pos-left-1', 'pos-right-1'];
+
+            // direction 1 = forward (like auto), -1 = backward
+            // For click on Left logic:
+            // If we click Left card that is currently pos-left, we want it to become pos-center.
+            // pos-left is index 1 in cycle3. pos-center is index 0.
+            // So to go from 1 -> 0, we need to DECREMENT offset?
+            // Wait, let's trace:
+            // offsets = [0, 2, 1] means:
+            // Card 0: cycle[0] = Center
+            // Card 1: cycle[2] = Right
+            // Card 2: cycle[1] = Left
+
+            // If we rotate forward (dir=1):
+            // offsets becomes [1, 0, 2]
+            // Card 0: cycle[1] = Left
+            // Card 1: cycle[0] = Center (Right became Center)
+            // Card 2: cycle[2] = Right (Left became Right)
+            // So forward rotation moves Right->Center.
+
+            // If we want Left->Center:
+            // offsets need to go [0, 2, 1] -> [2, 1, 0] ?
+            // Card 0: cycle[2] = Right (Center became Right)
+            // Card 1: cycle[1] = Left (Right became Left)
+            // Card 2: cycle[0] = Center (Left became Center)
+            // This is "backward" rotation.
+
+            // So:
+            // Click Right Card -> Rotate Forward (bring Right to Center) -> direction = 1
+            // Click Left Card -> Rotate Backward (bring Left to Center) -> direction = -1
+
+            offsets = offsets.map(o => {
+                let newO = o + direction;
+                if (newO >= count) newO = 0;
+                if (newO < 0) newO = count - 1;
+                return newO;
+            });
+
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Apply classes
+            cards.forEach((card, index) => {
+                const stateClass = cycle3[offsets[index]];
+                // Clean all possible classes
+                card.classList.remove('pos-center', 'pos-left-1', 'pos-left-2', 'pos-right-1', 'pos-right-2', 'pos-left', 'pos-right', 'pos-hidden');
+                card.classList.add(stateClass);
+
+                // Handle Iframe Interaction
+                // Only enable pointer events on the CENTER card
+                const iframe = card.querySelector('iframe');
+                const overlay = card.querySelector('div.absolute.inset-0.z-10');
+
+                if (stateClass === 'pos-center') {
+                    if (iframe) {
+                        iframe.classList.remove('pointer-events-none', 'opacity-70');
+                        iframe.classList.add('pointer-events-auto', 'opacity-100');
+                    }
+                    if (overlay) overlay.style.display = 'none'; // Allow click through to iframe
+                } else {
+                    if (iframe) {
+                        iframe.classList.add('pointer-events-none', 'opacity-70');
+                        iframe.classList.remove('pointer-events-auto', 'opacity-100');
+                    }
+                    if (overlay) overlay.style.display = 'block'; // Capture click for rotation
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initFlashcardCarousel('photo-carousel-track');
+            initManualCarousel('video-carousel-track');
+        });
     </script>
 </body>
 

@@ -698,8 +698,9 @@
             </div>
 
             <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
-            <div
-                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000 group">
+            <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
+            <div id="video-carousel-container"
+                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-hidden py-12 perspective-1000 group">
 
                 <!-- STATIC PHONE FRAME OVERLAY -->
                 <div
@@ -712,33 +713,38 @@
                     <div class="absolute top-12 left-0 right-0 text-center text-white p-4 z-40 drop-shadow-md">
                         <h3 class="font-bold text-xl">Cinematic Commercial</h3>
                     </div>
-                    <!-- Button (Static) -->
-                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-4/5 z-40 pointer-events-auto">
-                        <button
-                            class="w-full bg-white text-black font-bold py-3 rounded-full text-sm shadow-lg hover:bg-gray-100 transition-colors pointer-events-auto">
-                            Lihat Hasilnya
-                        </button>
+                </div>
+
+                <!-- CAROUSEL TRACK -->
+                <div id="video-carousel-track"
+                    class="w-full h-full flex items-center justify-center transform-style-3d">
+                    <!-- Card 1 (Center) -->
+                    <div class="carousel-card pos-center bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                        data-index="0" onclick="rotateCarouselBy('video-carousel-track', 0)">
+                        <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                        <iframe class="w-full h-full object-cover pointer-events-auto rounded-[40px]"
+                            src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview"
+                            allow="autoplay" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Card 2 (Right) -->
+                    <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                        data-index="1" onclick="rotateCarouselBy('video-carousel-track', -1)">
+                        <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                        <iframe class="w-full h-full object-cover pointer-events-none opacity-70 rounded-[40px]"
+                            src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview"
+                            allow="autoplay" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Card 3 (Left) -->
+                    <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                        data-index="2" onclick="rotateCarouselBy('video-carousel-track', 1)">
+                        <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                        <iframe class="w-full h-full object-cover pointer-events-none opacity-70 rounded-[40px]"
+                            src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview"
+                            allow="autoplay" loading="lazy"></iframe>
                     </div>
                 </div>
-                <iframe class="w-full h-full object-cover pointer-events-auto"
-                    src="https://drive.google.com/file/d/1dukHQgekGy6sZmGJda8aFOo2oZ992FcP/preview" allow="autoplay"
-                    loading="lazy"></iframe>
-            </div>
-            <!-- Card 2 (Right) -->
-            <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
-                data-index="1" onclick="rotateCarouselBy('video-carousel-track', -1)">
-                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
-                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
-                    src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview" allow="autoplay"
-                    loading="lazy"></iframe>
-            </div>
-            <!-- Card 3 (Left) -->
-            <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
-                data-index="2" onclick="rotateCarouselBy('video-carousel-track', 1)">
-                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
-                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
-                    src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview" allow="autoplay"
-                    loading="lazy"></iframe>
             </div>
         </div>
 
