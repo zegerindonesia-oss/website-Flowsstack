@@ -698,9 +698,8 @@
             </div>
 
             <!-- 3D CAROUSEL VIDEO (Flashcard Style) -->
-            <div class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000 group"
-                onmouseenter="pauseCarousel('video-carousel-track')"
-                onmouseleave="resumeCarousel('video-carousel-track')">
+            <div
+                class="relative w-full max-w-6xl mx-auto h-[700px] flex items-center justify-center overflow-visible py-12 perspective-1000 group">
 
                 <!-- STATIC PHONE FRAME OVERLAY -->
                 <div
@@ -726,14 +725,18 @@
                     loading="lazy"></iframe>
             </div>
             <!-- Card 2 (Right) -->
-            <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl" data-index="1">
-                <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+            <div class="carousel-card pos-right bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                data-index="1" onclick="rotateCarouselBy('video-carousel-track', -1)">
+                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
                     src="https://drive.google.com/file/d/1px-ambbbkDtTgCjhtGSHO05wLztCth8n/preview" allow="autoplay"
                     loading="lazy"></iframe>
             </div>
             <!-- Card 3 (Left) -->
-            <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl" data-index="2">
-                <iframe class="w-full h-full object-cover pointer-events-auto opacity-70"
+            <div class="carousel-card pos-left bg-black rounded-[40px] overflow-hidden shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                data-index="2" onclick="rotateCarouselBy('video-carousel-track', 1)">
+                <div class="absolute inset-0 z-10"></div> <!-- Prevent iframe interaction -->
+                <iframe class="w-full h-full object-cover pointer-events-none opacity-70"
                     src="https://drive.google.com/file/d/1ML3M072aXbDwdNn7ts6AkON_t8_ErGIh/preview" allow="autoplay"
                     loading="lazy"></iframe>
             </div>
@@ -742,26 +745,7 @@
         </div>
         </div>
 
-        <!-- 3. FEATURE LISTS (TICKERS) -->
-        <div
-            class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-            <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
-            Remover
-        </div>
 
-        <!-- DUPLICATES -->
-        <div
-            class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-            <span class="material-symbols-outlined text-pink-500">architecture</span>
-            Architecture
-        </div>
-        <div
-            class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-            <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
-        </div>
-        <div
-            class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
-            <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
         </div>
         </div>
         </div>
@@ -923,110 +907,147 @@
                                 Untuk kebutuhan<br>personal & individu.
                             </p>
                             <!-- Marquee Content (Running Feature) -->
-<div
-    class="w-full overflow-hidden mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 mask-linear-fade">
-    <div class="flex animate-marquee gap-3 w-max">
-        <!-- Items -->
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">architecture</span> Architecture
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real Sketch
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">face</span> Caricature
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span> Clean Up
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style Studio
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">devices</span> Mockup Gen
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span> Carousel Maker
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo Mixer
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span> Uncrop Image
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">magic_button</span> Smart Edit
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span> Face Switch
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span> BG Remover
-        </div>
+                            <div
+                                class="w-full overflow-hidden mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 mask-linear-fade">
+                                <div class="flex animate-marquee gap-3 w-max">
+                                    <!-- Items -->
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">architecture</span>
+                                        Architecture
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real
+                                        Sketch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">face</span>
+                                        Caricature
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span>
+                                        Clean Up
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style
+                                        Studio
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">devices</span>
+                                        Mockup Gen
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span>
+                                        Carousel Maker
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo
+                                        Mixer
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span>
+                                        Uncrop Image
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">magic_button</span>
+                                        Smart Edit
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span>
+                                        Face Switch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span>
+                                        BG Remover
+                                    </div>
 
-        <!-- DUPLICATES -->
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">architecture</span> Architecture
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real Sketch
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">face</span> Caricature
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span> Clean Up
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style Studio
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">devices</span> Mockup Gen
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span> Carousel Maker
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo Mixer
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span> Uncrop Image
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">magic_button</span> Smart Edit
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span> Face Switch
-        </div>
-        <div
-            class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
-            <span class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span> BG Remover
-        </div>
-    </div>
-</div>                        </div>
+                                    <!-- DUPLICATES -->
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">architecture</span>
+                                        Architecture
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">draw</span> Real
+                                        Sketch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">face</span>
+                                        Caricature
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">cleaning_services</span>
+                                        Clean Up
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">style</span> Style
+                                        Studio
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">devices</span>
+                                        Mockup Gen
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">view_carousel</span>
+                                        Carousel Maker
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">tune</span> Photo
+                                        Mixer
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span class="material-symbols-outlined text-pink-500 text-sm">crop_free</span>
+                                        Uncrop Image
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">magic_button</span>
+                                        Smart Edit
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">face_retouching_natural</span>
+                                        Face Switch
+                                    </div>
+                                    <div
+                                        class="px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-pink-900 flex items-center gap-1.5 shadow-lg">
+                                        <span
+                                            class="material-symbols-outlined text-pink-500 text-sm">auto_fix_normal</span>
+                                        BG Remover
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="absolute bottom-10 left-10 right-10">
                             <p class="text-white text-sm mb-4 font-medium">Cocok untuk kamu yang ingin visual rapi
@@ -1164,12 +1185,44 @@
                         </div>
                         <div
                             class="marquee-container relative w-full overflow-x-auto no-scrollbar bg-pink-50/50 py-3 border-y border-pink-100">
-                            <div class="flex animate-marquee gap-6 w-max px-4" style="animation-duration: 40s;">
-                                <!-- Creative Art -->
+                            <div class="flex animate-marquee gap-6 w-max px-4">
+                                <!-- FlowPict Personal Items -->
                                 <div
-                                    class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold text-sm inline-block shadow-lg group-hover:bg-yellow-300 transition-colors">
-                                    Ambil Bundling FlowPict
-                                    </span>
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
+                                    Remover
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
+                                    Architecture
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
+                                </div>
+                                <!-- Duplicates for Loop -->
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">auto_fix_normal</span> BG
+                                    Remover
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">architecture</span>
+                                    Architecture
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">draw</span> Real Sketch
+                                </div>
+                                <div
+                                    class="px-5 py-2 bg-white rounded-full border border-pink-100 shadow-sm text-sm font-bold text-pink-900 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-pink-500">style</span> Style Studio
                                 </div>
                             </div>
                         </div>
@@ -2065,9 +2118,99 @@
             carouselIntervals[trackId] = setInterval(() => rotateCarousel(trackId), 3000);
         }
 
+        // 5. MANUAL VIDEO CAROUSEL
+        function initManualCarousel(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+
+            // 3 items: ['pos-center', 'pos-left-1', 'pos-right-1'] 
+            // Initial: [C, R1, L1] -> mapped to cycle indices 0, 2, 1
+            const offsets = [0, 2, 1];
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Do NOT start interval
+        }
+
+        function rotateCarouselBy(trackId, direction) {
+            const track = document.getElementById(trackId);
+            if (!track || !track.dataset.offsets) return;
+
+            const cards = Array.from(track.children);
+            const count = cards.length;
+            let offsets = JSON.parse(track.dataset.offsets);
+
+            // Updated Cycles (Only need 3 item cycle for video currently)
+            const cycle3 = ['pos-center', 'pos-left-1', 'pos-right-1'];
+
+            // direction 1 = forward (like auto), -1 = backward
+            // For click on Left logic:
+            // If we click Left card that is currently pos-left, we want it to become pos-center.
+            // pos-left is index 1 in cycle3. pos-center is index 0.
+            // So to go from 1 -> 0, we need to DECREMENT offset?
+            // Wait, let's trace:
+            // offsets = [0, 2, 1] means:
+            // Card 0: cycle[0] = Center
+            // Card 1: cycle[2] = Right
+            // Card 2: cycle[1] = Left
+
+            // If we rotate forward (dir=1):
+            // offsets becomes [1, 0, 2]
+            // Card 0: cycle[1] = Left
+            // Card 1: cycle[0] = Center (Right became Center)
+            // Card 2: cycle[2] = Right (Left became Right)
+            // So forward rotation moves Right->Center.
+
+            // If we want Left->Center:
+            // offsets need to go [0, 2, 1] -> [2, 1, 0] ?
+            // Card 0: cycle[2] = Right (Center became Right)
+            // Card 1: cycle[1] = Left (Right became Left)
+            // Card 2: cycle[0] = Center (Left became Center)
+            // This is "backward" rotation.
+
+            // So:
+            // Click Right Card -> Rotate Forward (bring Right to Center) -> direction = 1
+            // Click Left Card -> Rotate Backward (bring Left to Center) -> direction = -1
+
+            offsets = offsets.map(o => {
+                let newO = o + direction;
+                if (newO >= count) newO = 0;
+                if (newO < 0) newO = count - 1;
+                return newO;
+            });
+
+            track.dataset.offsets = JSON.stringify(offsets);
+
+            // Apply classes
+            cards.forEach((card, index) => {
+                const stateClass = cycle3[offsets[index]];
+                // Clean all possible classes
+                card.classList.remove('pos-center', 'pos-left-1', 'pos-left-2', 'pos-right-1', 'pos-right-2', 'pos-left', 'pos-right', 'pos-hidden');
+                card.classList.add(stateClass);
+
+                // Handle Iframe Interaction
+                // Only enable pointer events on the CENTER card
+                const iframe = card.querySelector('iframe');
+                const overlay = card.querySelector('div.absolute.inset-0.z-10');
+
+                if (stateClass === 'pos-center') {
+                    if (iframe) {
+                        iframe.classList.remove('pointer-events-none', 'opacity-70');
+                        iframe.classList.add('pointer-events-auto', 'opacity-100');
+                    }
+                    if (overlay) overlay.style.display = 'none'; // Allow click through to iframe
+                } else {
+                    if (iframe) {
+                        iframe.classList.add('pointer-events-none', 'opacity-70');
+                        iframe.classList.remove('pointer-events-auto', 'opacity-100');
+                    }
+                    if (overlay) overlay.style.display = 'block'; // Capture click for rotation
+                }
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             initFlashcardCarousel('photo-carousel-track');
-            initFlashcardCarousel('video-carousel-track');
+            initManualCarousel('video-carousel-track');
         });
     </script>
 </body>
