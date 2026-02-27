@@ -941,68 +941,156 @@
         <div class="container mx-auto px-6 max-w-7xl">
 
 
-            <!-- DEEP DIVE CARD: FLOWPICT PREMIUM -->
+            <!-- DEEP DIVE CARD: FLOWPICT PREMIUM (NEW LAYOUT) -->
             <div class="mt-8">
                 <h2 class="font-heading text-5xl md:text-6xl font-extrabold mb-12 tracking-tight text-center">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Lebih Mengenal FlowPict Premium</span>
                 </h2>
 
-                <div class="max-w-4xl mx-auto">
-                    <!-- Card 1: Premium -->
-                    <div class="group relative bg-black rounded-[40px] overflow-hidden shadow-2xl transition-all hover:scale-[1.01] border border-gray-800 flex flex-col md:flex-row">
-                        <div class="w-full md:w-1/2 h-64 md:h-auto relative">
-                           <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80"
-                                class="w-full h-full object-cover opacity-60 group-hover:opacity-50 transition-opacity duration-500">
-                           <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none"></div>
+                <div class="max-w-6xl mx-auto mt-16 pb-20">
+                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-start justify-center">
+                        
+                        <!-- LEFT: IPHONE MOCKUP VIDEO -->
+                        <div class="w-full lg:w-[350px] flex justify-center lg:sticky lg:top-32 shrink-0">
+                            <!-- Phone Frame -->
+                            <div class="relative w-[320px] h-[650px] transform md:scale-100 group">
+                                <!-- Hardware frame -->
+                                <div class="absolute inset-0 border-[8px] border-gray-900 rounded-[50px] shadow-2xl pointer-events-none z-20"></div>
+                                <!-- Dynamic Island -->
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-30 pointer-events-none"></div>
+                                
+                                <!-- Video Container -->
+                                <div class="absolute inset-0 rounded-[42px] overflow-hidden z-10 bg-black">
+                                    <iframe class="w-full h-full object-cover"
+                                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder_update_me" 
+                                            title="FlowPict Demo Video"
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="w-full md:w-1/2 p-10 md:p-12 relative flex flex-col justify-center">
-                            <h3 class="text-white text-xl font-bold mb-3 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-yellow-400">workspace_premium</span> 
-                                FlowPict Premium
-                            </h3>
-                            <p class="text-white font-heading text-3xl md:text-4xl font-bold leading-tight mb-6 relative z-10">
-                                Akses Penuh ke Semua<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Fitur Generative AI</span>.
-                            </p>
-
-                            <!-- Feature Tags -->
-                            <div class="flex flex-wrap gap-2 mb-8 relative z-10">
-                                <span class="bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-bold">UMKM</span>
-                                <span class="bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-bold">Agency & Marketer</span>
-                                <span class="bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-bold">Personal & Kreator</span>
+                        <!-- RIGHT: FEATURES LIST -->
+                        <div class="w-full lg:w-2/3 bg-gradient-to-br from-[#bc4ad6] to-[#e446a6] rounded-[40px] p-8 md:p-12 shadow-2xl text-white">
+                            <!-- Header Button Style -->
+                            <div class="mb-12 text-center lg:text-left">
+                                <h3 class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white font-extrabold text-xl md:text-2xl px-10 py-3 rounded-full shadow-lg shadow-black/20 uppercase tracking-widest border border-white/20">
+                                    FOTO PROFESIONAL
+                                </h3>
                             </div>
 
-                            <p class="text-white/80 text-sm mb-6 font-medium leading-relaxed relative z-10">Dari AI Photography, Magic Design, hingga Video Generation, semua 40+ fitur ada dalam genggaman Anda untuk kebutuhan komersial maupun personal.</p>
-                            
-                            <a href="#pricing" class="w-full md:w-auto inline-block bg-white text-black font-extrabold py-4 px-8 rounded-full text-center hover:bg-gray-100 transition-colors shadow-lg shadow-white/10 relative z-10 text-lg">
-                                Ambil Lisensi Premium
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                            <!-- Group 1: DESIGN & ART -->
+                            <div class="mb-12">
+                                <h4 class="font-bold text-lg mb-6 text-white uppercase tracking-widest border-b border-white/30 pb-2">DESIGN &amp; ART</h4>
+                                <ul class="space-y-6">
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">🏡</span> Home Design
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">✏️</span> Sketch to Real
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">🎨</span> Art &amp; Cartoon
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">✨</span> Magic Fix
+                                        <span class="bg-white/30 text-white text-xs px-3 py-1 rounded-full ml-auto font-bold tracking-wide">New</span>
+                                    </li>
+                                </ul>
+                            </div>
 
-                <!-- VIDEO DEMO PLACEHOLDER -->
-                <div class="mt-24 max-w-5xl mx-auto pb-8">
-                    <div class="text-center mb-10">
-                        <h3 class="font-heading text-4xl md:text-5xl font-bold mb-4">Lihat Cara Kerjanya</h3>
-                        <p class="text-gray-500 text-lg">Tonton demo singkat bagaimana FlowPict menyulap foto biasa menjadi visual profesional dalam hitungan detik.</p>
-                    </div>
-                    
-                    <div class="relative w-full aspect-video bg-gray-900 rounded-[32px] overflow-hidden shadow-2xl group border-[8px] border-gray-100">
-                        <!-- ============================================== -->
-                        <!-- REPLACE THE SRC BELOW WITH YOUR OWN VIDEO LINK -->
-                        <!-- ============================================== -->
-                        <iframe class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder_update_me" 
-                                title="FlowPict Demo Video"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                        </iframe>
+                            <!-- Group 2: PREMIUM TOOLS -->
+                            <div class="mb-12">
+                                <h4 class="font-bold text-lg mb-6 text-white uppercase tracking-widest border-b border-white/30 pb-2">PREMIUM TOOLS</h4>
+                                <ul class="space-y-6">
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">📝</span> Text to Image
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🖋️</span> Logo Creator
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🦁</span> Mascot Maker
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🖼️</span> Photo Grid
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">📐</span> Size Helper
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <!-- Highlighted Object Eraser -->
+                                    <li class="flex items-center gap-4 text-xl font-medium relative bg-white/10 p-4 rounded-3xl border border-white/20 shadow-md transform -mx-4 px-8">
+                                        <span class="text-3xl">🧼</span> Object Eraser
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🎓</span> Graduation
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🎬</span> Thumbnails
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">©️</span> Watermark
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">⏳</span> Time Machine
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium relative">
+                                        <span class="text-3xl">🤳</span> POV Selfie
+                                        <span class="bg-yellow-400 text-black font-bold text-xs px-3 py-1 rounded-full ml-auto">Premium</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Group 3: LIFESTYLE -->
+                            <div class="mb-4">
+                                <h4 class="font-bold text-lg mb-6 text-white uppercase tracking-widest border-b border-white/30 pb-2">LIFESTYLE</h4>
+                                <ul class="space-y-6">
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">💒</span> Pre-Wedding
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">💘</span> Love Portrait
+                                        <span class="bg-red-500 text-white font-bold text-xs px-3 py-1 rounded-full ml-auto shadow-md">Hot</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">👕</span> Fitting Room
+                                        <span class="bg-white/30 text-white text-xs px-3 py-1 rounded-full ml-auto font-bold tracking-wide">New</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">💄</span> Face Retouch
+                                        <span class="bg-white/30 text-white text-xs px-3 py-1 rounded-full ml-auto font-bold tracking-wide">New</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium cursor-pointer hover:bg-white/5 p-2 rounded-xl transition-colors -mx-2 px-2">
+                                        <span class="text-3xl">💃</span> Model Studio
+                                        <span class="material-symbols-outlined ml-auto text-white/70">keyboard_arrow_down</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium cursor-pointer hover:bg-white/5 p-2 rounded-xl transition-colors -mx-2 px-2">
+                                        <span class="text-3xl">📷</span> Pro Photographer
+                                        <span class="material-symbols-outlined ml-auto text-white/70">keyboard_arrow_down</span>
+                                    </li>
+                                    <li class="flex items-center gap-4 text-xl font-medium">
+                                        <span class="text-3xl">💈</span> Barbershop
+                                        <span class="bg-white/30 text-white text-xs px-3 py-1 rounded-full ml-auto font-bold tracking-wide">New</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
 
     <!-- VIDEO MODAL (Placeholder Logic) -->
     <div id="video-modal"
