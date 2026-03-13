@@ -84,7 +84,7 @@ form.addEventListener('submit', async (e) => {
             await loginWithEmail(email, password);
         }
         // Redirect
-        window.location.href = '/';
+        window.location.href = '/dashboard.html';
     } catch (error) {
         console.error(error);
         let msg = "Authentication failed. Please check your credentials.";
@@ -108,7 +108,7 @@ googleBtn.addEventListener('click', async () => {
         googleBtn.disabled = true;
 
         await loginWithGoogle();
-        window.location.href = '/';
+        window.location.href = '/dashboard.html';
     } catch (error) {
         console.error("Google Login User Cancelled or Failed", error);
         googleBtn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5"> Google';

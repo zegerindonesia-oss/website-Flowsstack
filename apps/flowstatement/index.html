@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FlowStatement - FlowStack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="flex items-center justify-center min-h-screen bg-white">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { protectApp } from '/src/platform/access-control.js';
+
+        // Protect this app (flowstatement)
+        protectApp('flowstatement');
+
+        import { subscribeToAuthChanges } from '/src/firebase/auth.js';
+        import { checkProductOwnership } from '/src/platform/access-control.js';
+
+        subscribeToAuthChanges(async (user) => {
+            if (user) {
+                const isOwned = await checkProductOwnership(user.uid, 'flowstatement');
+                if (isOwned) {
+                    // Load the actual tool (assuming there's an app.html for flowstatement too, or index.html)
+                    // Let's check flowstatement directory later, for now placeholder
+                    document.getElementById('content').innerHTML = `
+                    <iframe src="/products/flowstatement/index.html" title="FlowStatement App"></iframe>
+                `;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

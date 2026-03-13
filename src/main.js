@@ -363,13 +363,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const authBtn = document.getElementById('nav-auth-btn');
     if (authBtn) {
       if (user) {
-        authBtn.textContent = 'Logout';
-        authBtn.href = '#';
-        authBtn.onclick = async (e) => {
-          e.preventDefault();
-          await logout();
-          window.location.reload();
-        };
+        authBtn.textContent = 'Dashboard';
+        authBtn.href = '/dashboard.html';
+        authBtn.onclick = null;
         // You could also show a profile image here if you modify the HTML structure
       } else {
         authBtn.textContent = 'Login';
