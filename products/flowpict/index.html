@@ -233,6 +233,15 @@
             text-decoration: none !important;
             box-shadow: none;
             /* Let Tailwind shadow win */
+            background-image: none !important;
+            /* Remove Mayar rainbow gradient */
+            position: relative;
+        }
+
+        .mayar-button::before,
+        .mayar-button::after {
+            content: none !important;
+            display: none !important;
         }
 
         #btn-premium.mayar-button {
