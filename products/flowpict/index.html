@@ -17,6 +17,7 @@
         rel="stylesheet" />
     <script>
         tailwind.config = {
+            important: true,
             darkMode: "class",
             theme: {
                 extend: {
@@ -220,8 +221,6 @@
 
         /* Fix Mayar Button conflict */
         .mayar-button {
-            background-color: transparent !important;
-            background-image: none !important;
             border: none !important;
             padding: 0 !important;
             margin: 0 !important;
@@ -231,21 +230,12 @@
             width: auto !important;
             height: auto !important;
             font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            color: inherit !important;
             text-decoration: none !important;
-            box-shadow: none !important;
-            border-radius: 0 !important;
-        }
-
-        #nav-btn-action.mayar-button,
-        .hero-cta-button.mayar-button {
-            border-radius: 9999px !important;
+            box-shadow: none;
+            /* Let Tailwind shadow win */
         }
 
         #btn-premium.mayar-button {
-            border-radius: 0.75rem !important;
             display: block !important;
         }
     </style>
@@ -337,7 +327,7 @@
 
             <!-- CTA -->
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-20">
-                <a href="https://flowsstack.myr.id/pl/flowpict-premium?iframe=true" target="_blank"
+                <a href="https://flowsstack.myr.id/pl/flowpict-premium?iframe=true" target="_blank" id="hero-btn-action"
                     data-padding-bottom="30%" data-scrolling="true"
                     class="mayar-button hero-cta-button iframe-lightbox-link bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-lg font-bold px-10 py-4 rounded-full transition-all shadow-xl hover:shadow-primary/50 flex items-center gap-2 transform hover:-translate-y-1">
                     Beli Sekarang
