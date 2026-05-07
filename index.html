@@ -241,129 +241,194 @@
     });
   </script>
   
-  <!-- Hero Section -->
-  <section class="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden">
+  <!-- Hero Slideshow Section -->
+  <style>
+    .hero-slide { display: none; animation: heroFadeIn 0.7s ease; }
+    .hero-slide.active { display: flex; }
+    @keyframes heroFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-dot { width: 8px; height: 8px; border-radius: 9999px; background: #d1d5db; transition: all 0.3s; cursor: pointer; }
+    .slide-dot.active { background: #8655f6; width: 24px; }
+    .hero-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); border-radius: 9999px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
+    .hero-nav-btn:hover { background: white; box-shadow: 0 6px 20px rgba(134,85,246,0.2); }
+  </style>
+
+  <section class="relative min-h-[90vh] overflow-hidden" id="hero-section">
     <!-- Aurora Background Blobs -->
     <div class="aurora-blob blob-1"></div>
     <div class="aurora-blob blob-2"></div>
     <div class="aurora-blob blob-3"></div>
-    <!-- Decorative Pattern Dots -->
-    <div class="absolute top-40 left-10 opacity-20"
-      style="background-image: radial-gradient(#8655f6 1px, transparent 1px); background-size: 20px 20px; width: 200px; height: 200px;">
-    </div>
-    <div class="absolute bottom-20 right-10 opacity-20"
-      style="background-image: radial-gradient(#EC4899 1px, transparent 1px); background-size: 20px 20px; width: 150px; height: 150px;">
-    </div>
-    <div class="layout-content-container max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <!-- Left Content -->
-        <div class="flex flex-col gap-6 text-center lg:text-left">
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/60 w-fit mx-auto lg:mx-0 shadow-sm backdrop-blur-sm">
-            <span class="flex h-2 w-2 rounded-full bg-secondary-pink animate-pulse"></span>
-            <span class="text-xs font-bold text-primary tracking-wide uppercase" data-i18n="hero_badge">New Version 2.0
-              Live</span>
-          </div>
-          <h1
-            class="font-heading text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-[#131118]">
-            <span data-i18n="hero_title_prefix">Kembangkan bisnismu dengan</span> <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink"
-              data-i18n="hero_title_highlight">Ekosistem Digital</span>
-          </h1>
-          <p class="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0" data-i18n="hero_subtitle">
-            #Empowering Your Business. FlowStack is the all-in-one SaaS hub designed to streamline operations, automate
-            workflows, and replace expensive manual work.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-2">
-            <button
-              class="flex items-center justify-center gap-2 h-12 px-8 bg-primary hover:bg-primary-dark text-white text-base font-bold rounded-full shadow-lg hover:shadow-glow transition-all transform hover:-translate-y-0.5">
-              <span data-i18n="hero_cta_primary">Get Started Free</span>
-              <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
-            </button>
-            <button
-              class="flex items-center justify-center gap-2 h-12 px-8 bg-white hover:bg-gray-50 text-[#131118] text-base font-bold rounded-full shadow-md hover:shadow-lg transition-all border border-gray-100">
-              <span class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
-              <span data-i18n="hero_cta_secondary">View Demo</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-center lg:justify-start gap-6 pt-4 text-gray-500 text-sm font-medium">
-            <div class="flex items-center gap-1">
-              <span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span>
-              <span data-i18n="hero_feature_1">No credit card required</span>
-            </div>
-            <div class="flex items-center gap-1">
-              <span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span>
-              <span data-i18n="hero_feature_2">14-day free trial</span>
-            </div>
-          </div>
-        </div>
-        <!-- Right Visual -->
-        <div class="relative w-full aspect-square md:aspect-[4/3] lg:h-[600px] flex items-center justify-center">
-          <!-- Main Organic Shape Image -->
-          <div class="relative w-full h-full max-w-[500px] mx-auto">
-            <div
-              class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary-pink/20 rounded-[3rem] rotate-3 transform transition-transform hover:rotate-6 duration-700">
-            </div>
-            <div
-              class="absolute inset-0 bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-700">
-              <img alt="Dashboard Preview" class="w-full h-full object-cover"
-                data-alt="Data dashboard analytics screen with colorful charts"
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" />
-            </div>
-            <!-- Floating Glass Cards -->
-            <div
-              class="absolute -top-6 -right-4 md:-right-12 bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-glass border border-white/50 animate-[bounce_4s_infinite]">
-              <div class="flex items-center gap-3">
-                <div class="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                  <span class="material-symbols-outlined">trending_up</span>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-500 font-semibold">Revenue</p>
-                  <p class="text-sm font-bold text-[#131118]">+24.5%</p>
-                </div>
+    <!-- Decorative Dots -->
+    <div class="absolute top-40 left-10 opacity-20" style="background-image: radial-gradient(#8655f6 1px, transparent 1px); background-size: 20px 20px; width: 200px; height: 200px;"></div>
+    <div class="absolute bottom-20 right-10 opacity-20" style="background-image: radial-gradient(#EC4899 1px, transparent 1px); background-size: 20px 20px; width: 150px; height: 150px;"></div>
+
+    <!-- SLIDESHOW WRAPPER -->
+    <div id="hero-slides" class="relative w-full">
+
+      <!-- SLIDE 1: FlowStack -->
+      <div class="hero-slide active flex-col justify-center pt-32 pb-24 min-h-[90vh]">
+        <div class="layout-content-container max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
+          <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div class="flex flex-col gap-6 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/60 w-fit mx-auto lg:mx-0 shadow-sm backdrop-blur-sm">
+                <span class="flex h-2 w-2 rounded-full bg-secondary-pink animate-pulse"></span>
+                <span class="text-xs font-bold text-primary tracking-wide uppercase">Ekosistem Digital #1</span>
+              </div>
+              <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-[#131118]">
+                Kembangkan bisnis dengan <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Ekosistem Digital</span>
+              </h1>
+              <p class="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                #Empowering Your Business. FlowStack adalah hub SaaS all-in-one untuk merapikan operasional, otomasi workflow, dan menggantikan pekerjaan manual yang mahal.
+              </p>
+              <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-2">
+                <button class="flex items-center justify-center gap-2 h-12 px-8 bg-primary hover:bg-primary-dark text-white text-base font-bold rounded-full shadow-lg hover:shadow-glow transition-all transform hover:-translate-y-0.5">
+                  <span>Coba Gratis</span>
+                  <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                </button>
+                <button class="flex items-center justify-center gap-2 h-12 px-8 bg-white hover:bg-gray-50 text-[#131118] text-base font-bold rounded-full shadow-md hover:shadow-lg transition-all border border-gray-100">
+                  <span class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
+                  <span>Lihat Demo</span>
+                </button>
+              </div>
+              <div class="flex items-center justify-center lg:justify-start gap-6 pt-2 text-gray-500 text-sm font-medium">
+                <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span> Tanpa kartu kredit</div>
+                <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span> 14 hari masa percobaan</div>
               </div>
             </div>
-            <div
-              class="absolute -bottom-8 -left-4 md:-left-8 bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-glass border border-white/50 animate-[bounce_5s_infinite]">
-              <div class="flex items-center gap-3">
-                <div class="flex -space-x-2">
-                  <div class="size-8 rounded-full border-2 border-white bg-gray-200 bg-cover" data-alt="User avatar">
-                  </div>
-                  <div class="size-8 rounded-full border-2 border-white bg-gray-300 bg-cover" data-alt="User avatar">
-                  </div>
-                  <div class="size-8 rounded-full border-2 border-white bg-gray-400 bg-cover" data-alt="User avatar">
+            <div class="relative w-full aspect-square md:aspect-[4/3] lg:h-[600px] flex items-center justify-center">
+              <div class="relative w-full h-full max-w-[500px] mx-auto">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary-pink/20 rounded-[3rem] rotate-3 transform transition-transform hover:rotate-6 duration-700"></div>
+                <div class="absolute inset-0 bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white transform -rotate-2 hover:rotate-0 transition-transform duration-700">
+                  <img alt="Dashboard Preview" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" />
+                </div>
+                <div class="absolute -top-6 -right-4 md:-right-12 bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-glass border border-white/50 animate-[bounce_4s_infinite]">
+                  <div class="flex items-center gap-3">
+                    <div class="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600"><span class="material-symbols-outlined">trending_up</span></div>
+                    <div><p class="text-xs text-gray-500 font-semibold">Revenue</p><p class="text-sm font-bold text-[#131118]">+24.5%</p></div>
                   </div>
                 </div>
-                <div class="text-xs font-bold text-primary">+12k Users</div>
+                <div class="absolute -bottom-8 -left-4 md:-left-8 bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-glass border border-white/50 animate-[bounce_5s_infinite]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex -space-x-2">
+                      <div class="size-8 rounded-full border-2 border-white bg-gray-200"></div>
+                      <div class="size-8 rounded-full border-2 border-white bg-gray-300"></div>
+                      <div class="size-8 rounded-full border-2 border-white bg-gray-400"></div>
+                    </div>
+                    <div class="text-xs font-bold text-primary">+12k Users</div>
+                  </div>
+                </div>
+                <div class="absolute top-1/2 -right-16 hidden lg:block animate-pulse text-secondary-pink/80"><span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">favorite</span></div>
+                <div class="absolute top-10 -left-12 hidden lg:block animate-pulse text-primary/80" style="animation-delay:1s;"><span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">bolt</span></div>
               </div>
-            </div>
-            <!-- 3D Floating Icon Decoration -->
-            <div class="absolute top-1/2 -right-16 hidden lg:block animate-pulse text-secondary-pink/80">
-              <span class="material-symbols-outlined text-6xl"
-                style="font-variation-settings: 'FILL' 1;">favorite</span>
-            </div>
-            <div class="absolute top-10 -left-12 hidden lg:block animate-pulse text-primary/80"
-              style="animation-delay: 1s;">
-              <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- SLIDE 2: FlowPict -->
+      <div class="hero-slide flex-col justify-center pt-32 pb-24 min-h-[90vh]">
+        <div class="layout-content-container max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
+          <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div class="flex flex-col gap-6 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit mx-auto lg:mx-0 shadow-sm">
+                <span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="text-xs font-bold text-primary tracking-wide uppercase">✨ AI Visual Designer #1 di Indonesia</span>
+              </div>
+              <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-[#131118]">
+                Ubah Foto Biasa Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">Visual Profesional</span> dengan 1 Klik
+              </h1>
+              <p class="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Tanpa studio, tanpa fotografer mahal. Cukup upload, dan FlowPict akan membuat foto produk kamu menjadi visual profesional dalam hitungan detik.
+              </p>
+              <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-2">
+                <a href="/products/flowpict" class="flex items-center justify-center gap-2 h-12 px-8 bg-gradient-to-r from-primary to-primary-dark hover:brightness-110 text-white text-base font-bold rounded-full shadow-lg transition-all transform hover:-translate-y-0.5">
+                  <span>Beli Sekarang</span>
+                  <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </a>
+                <a href="/products/flowpict#showcase" class="flex items-center justify-center gap-2 h-12 px-8 bg-white hover:bg-gray-50 text-[#131118] text-base font-bold rounded-full shadow-md hover:shadow-lg transition-all border border-gray-100">
+                  Lihat Contoh Hasilnya
+                </a>
+              </div>
+              <div class="flex items-center justify-center lg:justify-start gap-6 pt-2 text-gray-500 text-sm font-medium">
+                <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span> Lebih dari 30 fitur AI</div>
+                <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span> Tanpa watermark</div>
+              </div>
+            </div>
+            <div class="relative w-full lg:h-[580px] flex items-center justify-center">
+              <div class="grid grid-cols-2 gap-4 max-w-[480px] mx-auto h-[480px]">
+                <div class="rounded-3xl overflow-hidden shadow-xl row-span-2 group relative">
+                  <img src="/assets/showcase/zeger-coffee-dark-girl.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="FlowPict Result 1" onerror="this.src='https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&q=80'">
+                  <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-xl"><p class="font-bold text-gray-900 text-xs">Lifestyle Gen</p></div>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-xl group relative">
+                  <img src="/assets/showcase/zeger-coffee-hijab.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="FlowPict Result 2" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80'">
+                  <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-xl"><p class="font-bold text-gray-900 text-xs">Product Studio</p></div>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-primary/30 group relative">
+                  <img src="/assets/showcase/zeger-group-cups-new.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="FlowPict Result 3" onerror="this.src='https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80'">
+                  <div class="absolute top-2 right-2 bg-yellow-400 text-black text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</div>
+                  <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-xl"><p class="font-bold text-gray-900 text-xs">Creative Scene</p></div>
+                </div>
+              </div>
+              <!-- Floating badge -->
+              <div class="absolute -top-4 -right-4 md:right-0 bg-white/90 backdrop-blur-xl p-3 rounded-2xl shadow-xl border border-white/50">
+                <div class="flex items-center gap-2">
+                  <div class="size-8 rounded-full bg-purple-100 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">auto_awesome</span></div>
+                  <div><p class="text-[10px] text-gray-500 font-semibold">Hanya</p><p class="text-sm font-extrabold text-primary">Rp99.000</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end #hero-slides -->
+
+    <!-- PREV / NEXT BUTTONS -->
+    <button id="hero-prev" class="hero-nav-btn left-4 md:left-8" onclick="heroMove(-1)" aria-label="Previous slide">
+      <span class="material-symbols-outlined text-gray-700">chevron_left</span>
+    </button>
+    <button id="hero-next" class="hero-nav-btn right-4 md:right-8" onclick="heroMove(1)" aria-label="Next slide">
+      <span class="material-symbols-outlined text-gray-700">chevron_right</span>
+    </button>
+
+    <!-- DOT INDICATORS -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+      <div class="slide-dot active" onclick="heroGoTo(0)" id="dot-0"></div>
+      <div class="slide-dot" onclick="heroGoTo(1)" id="dot-1"></div>
     </div>
+
     <!-- Wave Divider Bottom -->
     <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-      <svg
-        class="relative block w-[calc(140%+1.3px)] h-[60px] text-background-light dark:text-background-dark fill-current"
-        data-name="Layer 1" preserveaspectratio="none" viewbox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-        <path class="fill-[#f8f7fa] opacity-50"
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
-        </path>
-        <path class="fill-white transform translate-y-4"
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
-        </path>
+      <svg class="relative block w-[calc(140%+1.3px)] h-[60px] text-background-light dark:text-background-dark fill-current" data-name="Layer 1" preserveaspectratio="none" viewbox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+        <path class="fill-[#f8f7fa] opacity-50" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+        <path class="fill-white transform translate-y-4" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
       </svg>
     </div>
   </section>
+
+  <script>
+    (function() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.slide-dot');
+      let current = 0;
+      let timer;
+
+      function showSlide(n) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      window.heroMove = function(dir) { clearInterval(timer); showSlide(current + dir); startAuto(); };
+      window.heroGoTo = function(n) { clearInterval(timer); showSlide(n); startAuto(); };
+
+      function startAuto() { timer = setInterval(() => showSlide(current + 1), 5000); }
+      startAuto();
+    })();
+  </script>
+
   <!-- Make with FlowStack Showcase -->
   <section class="py-16 overflow-hidden bg-background-light dark:bg-background-dark">
     <div class="text-center mb-10">
