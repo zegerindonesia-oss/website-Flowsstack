@@ -244,15 +244,16 @@
   <!-- Hero Slideshow Section -->
   <style>
     .hero-slide { display: none; animation: heroFadeIn 0.7s ease; }
-    .hero-slide.active { display: flex; }
+    .hero-slide.active { display: flex; flex-direction: column; justify-content: center; min-height: 90vh; padding-top: 8rem; padding-bottom: 6rem; }
     @keyframes heroFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .slide-dot { width: 8px; height: 8px; border-radius: 9999px; background: #d1d5db; transition: all 0.3s; cursor: pointer; }
     .slide-dot.active { background: #8655f6; width: 24px; }
-    .hero-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); border-radius: 9999px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
+    .hero-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); border-radius: 9999px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
     .hero-nav-btn:hover { background: white; box-shadow: 0 6px 20px rgba(134,85,246,0.2); }
+    #hero-slides { position: relative; width: 100%; min-height: 90vh; }
   </style>
 
-  <section class="relative min-h-[90vh] overflow-hidden" id="hero-section">
+  <section class="relative min-h-[90vh]" id="hero-section" style="overflow: clip;">
     <!-- Aurora Background Blobs -->
     <div class="aurora-blob blob-1"></div>
     <div class="aurora-blob blob-2"></div>
