@@ -129,24 +129,24 @@
   class="bg-background-light dark:bg-background-dark text-[#131118] font-display selection:bg-primary selection:text-white overflow-x-hidden">
   <!-- Navbar Container -->
   <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
-    <nav class="glass-nav rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl shadow-glass transition-all duration-300 relative">
+    <nav class="glass-nav rounded-full px-8 py-4 flex items-center justify-between w-full max-w-6xl shadow-glass transition-all duration-300 relative">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-3 text-[#131118]">
-        <div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined text-[24px]">layers</span>
+        <div class="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-[28px]">layers</span>
         </div>
-        <span class="font-heading text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">FlowStack</span>
+        <span class="font-heading text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-pink">FlowStack</span>
       </a>
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center gap-8">
-        <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Home</a>
+        <a class="text-base font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Home</a>
         
         <!-- Products Dropdown -->
         <div class="relative group">
-          <button class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors flex items-center gap-1 py-4">
+          <button class="text-base font-semibold text-gray-600 hover:text-primary transition-colors flex items-center gap-1 py-4">
             Product
-            <span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+            <span class="material-symbols-outlined text-[22px]">keyboard_arrow_down</span>
           </button>
           
           <!-- Dropdown Menu -->
@@ -166,29 +166,29 @@
           </div>
         </div>
 
-        <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Service</a>
-        <a class="text-sm font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Pricing</a>
+        <a class="text-base font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Service</a>
+        <a class="text-base font-semibold text-gray-600 hover:text-primary transition-colors" href="#">Pricing</a>
       </div>
 
       <!-- Right Actions (Desktop) & Mobile Toggle -->
       <div class="flex items-center gap-3 md:gap-4">
-        <button id="lang-toggle" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-bold text-gray-700">
-          <span class="material-symbols-outlined text-[18px]">language</span>
+        <button id="lang-toggle" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-base font-bold text-gray-700">
+          <span class="material-symbols-outlined text-[20px]">language</span>
           <span id="lang-label">ID</span>
         </button>
 
         <!-- Desktop Only Buttons -->
-        <a id="nav-auth-btn" href="/login.html" class="text-sm font-bold px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition-all hidden md:block">
+        <a id="nav-auth-btn" href="/login.html" class="text-base font-bold px-5 py-2.5 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition-all hidden md:block">
           Login
         </a>
-        <button class="bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-glow hidden md:flex items-center gap-2 group">
+        <button class="bg-primary hover:bg-primary-dark text-white text-base font-bold px-7 py-3 rounded-full transition-all shadow-lg hover:shadow-glow hidden md:flex items-center gap-2 group">
           <span>Get Started</span>
-          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </button>
 
         <!-- Mobile Menu Toggle Button -->
         <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 text-gray-700 hover:text-primary bg-gray-100 rounded-full transition-colors">
-          <span id="mobile-menu-icon" class="material-symbols-outlined text-[24px]">menu</span>
+          <span id="mobile-menu-icon" class="material-symbols-outlined text-[26px]">menu</span>
         </button>
       </div>
 
@@ -243,14 +243,15 @@
   
   <!-- Hero Slideshow Section -->
   <style>
-    .hero-slide { display: none; animation: heroFadeIn 0.7s ease; }
-    .hero-slide.active { display: flex; flex-direction: column; justify-content: center; min-height: 90vh; padding-top: 8rem; padding-bottom: 6rem; }
+    .hero-slide { display: none !important; }
+    .hero-slide.active { display: flex !important; flex-direction: column; justify-content: center; min-height: 90vh; padding-top: 8rem; padding-bottom: 6rem; }
     @keyframes heroFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-slide.active { animation: heroFadeIn 0.7s ease; }
     .slide-dot { width: 8px; height: 8px; border-radius: 9999px; background: #d1d5db; transition: all 0.3s; cursor: pointer; }
     .slide-dot.active { background: #8655f6; width: 24px; }
-    .hero-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.6); border-radius: 9999px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
-    .hero-nav-btn:hover { background: white; box-shadow: 0 6px 20px rgba(134,85,246,0.2); }
-    #hero-slides { position: relative; width: 100%; min-height: 90vh; }
+    .hero-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); border: 1.5px solid rgba(255,255,255,0.7); border-radius: 9999px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.1); transition: all 0.2s; }
+    .hero-nav-btn:hover { background: white; box-shadow: 0 6px 24px rgba(134,85,246,0.25); }
+    #hero-slides { position: relative; width: 100%; }
   </style>
 
   <section class="relative min-h-[90vh]" id="hero-section" style="overflow: clip;">
@@ -266,7 +267,7 @@
     <div id="hero-slides" class="relative w-full">
 
       <!-- SLIDE 1: FlowStack -->
-      <div class="hero-slide active flex-col justify-center pt-32 pb-24 min-h-[90vh]">
+      <div class="hero-slide active">
         <div class="layout-content-container max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="flex flex-col gap-6 text-center lg:text-left">
@@ -326,7 +327,7 @@
       </div>
 
       <!-- SLIDE 2: FlowPict -->
-      <div class="hero-slide flex-col justify-center pt-32 pb-24 min-h-[90vh]">
+      <div class="hero-slide">
         <div class="layout-content-container max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="flex flex-col gap-6 text-center lg:text-left">
