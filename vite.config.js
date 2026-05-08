@@ -17,7 +17,7 @@ export default defineConfig({
                 flowpay: resolve(__dirname, 'products/flowpay/index.html'),
                 flowcontent: resolve(__dirname, 'products/flowcontent/index.html'),
                 flowstore: resolve(__dirname, 'products/flowstore/index.html'),
-                flowassist: resolve(__dirname, 'products/flowassist/index.html'),
+                haloflow: resolve(__dirname, 'products/haloflow/index.html'),
                 login: resolve(__dirname, 'login.html'),
             },
         },
