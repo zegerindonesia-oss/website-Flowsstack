@@ -18,6 +18,8 @@ export default defineConfig({
                 flowcontent: resolve(__dirname, 'products/flowcontent/index.html'),
                 flowstore: resolve(__dirname, 'products/flowstore/index.html'),
                 haloflow: resolve(__dirname, 'products/haloflow/index.html'),
+                haloflowLogin: resolve(__dirname, 'products/haloflow/login.html'),
+                haloflowDashboard: resolve(__dirname, 'products/haloflow/dashboard.html'),
                 login: resolve(__dirname, 'login.html'),
             },
         },
