@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HaloFlow AI Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            purple: '#7C3AED',
+                            pink: '#EC4899',
+                            dark: '#0F172A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8FAFC; }
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden;
+        }
+        .bg-mesh::before, .bg-mesh::after {
+            content: '';
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 10s infinite alternate;
+        }
+        .bg-mesh::before { background: #7C3AED; top: -200px; left: -200px; }
+        .bg-mesh::after { background: #EC4899; bottom: -200px; right: -200px; animation-delay: -5s; }
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #7C3AED, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-mesh"></div>
+
+    <div class="w-full max-w-[1000px] flex rounded-[40px] overflow-hidden glass-card relative z-10">
+        <!-- Left Side: Login Form -->
+        <div class="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center bg-white/50">
+            <div class="mb-10 flex items-center gap-2">
+                <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-200/50 text-slate-500 hover:text-brand-purple transition-all mr-2" title="Kembali">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-pink flex items-center justify-center shadow-lg shadow-brand-purple/30">
+                    <span class="material-symbols-outlined text-white">smart_toy</span>
+                </div>
+                <span class="font-heading font-bold text-2xl tracking-tight">Halo<span class="text-brand-purple">Flow</span></span>
+            </div>
+
+            <div class="mb-8">
+                <h1 class="font-heading text-3xl font-bold mb-2 text-slate-900">Welcome Back 👋</h1>
+                <p class="text-slate-500">Log in to manage your AI assistant and view analytics.</p>
+            </div>
+
+            <form action="dashboard.html" method="GET" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-slate-400 text-xl">mail</span>
+                        </div>
+                        <input type="email" placeholder="admin@perusahaan.com" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-sm font-medium text-slate-700">Password</label>
+                        <a href="#" class="text-sm text-brand-purple hover:text-brand-pink font-medium transition-colors">Forgot Password?</a>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-slate-400 text-xl">lock</span>
+                        </div>
+                        <input type="password" placeholder="••••••••" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-pink text-white font-semibold py-3.5 rounded-2xl shadow-lg shadow-brand-purple/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                        Log In to Dashboard
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-8 text-center text-sm text-slate-500">
+                Don't have an account? <a href="#" class="font-semibold text-brand-purple hover:text-brand-pink transition-colors">Start 14-Days Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Visual/Testimonial -->
+        <div class="hidden lg:flex w-1/2 bg-slate-900 p-12 flex-col justify-between relative overflow-hidden text-white">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-brand-purple/40 to-slate-900"></div>
+            
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-sm font-medium mb-6">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> v2.0 Update Live
+                </div>
+                <h2 class="font-heading text-4xl font-bold leading-tight mb-4">
+                    Automate Your Sales.<br>Grow While You Sleep.
+                </h2>
+                <p class="text-slate-300 text-lg max-w-md">
+                    HaloFlow AI agents are now 40% faster and capable of closing complex B2B deals natively within WhatsApp.
+                </p>
+            </div>
+
+            <div class="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl">
+                <div class="flex gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                    <span class="material-symbols-outlined fill-current">star</span>
+                </div>
+                <p class="text-white/90 italic mb-4">
+                    "Semenjak pakai HaloFlow, CS tim kami bisa fokus ke complaint handling yang rumit, sisanya 80% chat tanya harga & promo dihandle AI sampai closing."
+                </p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-pink flex items-center justify-center font-bold">AS</div>
+                    <div>
+                        <div class="font-semibold text-sm">Ahmad S.</div>
+                        <div class="text-xs text-white/60">Owner, Kopi Senja Nusantara</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
