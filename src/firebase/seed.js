@@ -21,21 +21,27 @@ const products = [
         link: '/apps/flowstatement',
         price: 490000,
         status: 'active'
+    },
+    {
+        id: 'haloflow',
+        name: 'HaloFlow',
+        slug: 'haloflow',
+        description: 'Automasi Customer Service & Sales 24/7 menggunakan AI.',
+        icon: 'SmartToy',
+        link: '/products/haloflow/dashboard.html',
+        price: 390000,
+        status: 'active'
     }
 ];
 
 export const seedProducts = async () => {
     try {
         const querySnapshot = await getDocs(collection(db, "products"));
-        if (querySnapshot.empty) {
-            console.log("Seeding products...");
-            for (const product of products) {
-                await setDoc(doc(db, "products", product.id), product);
-            }
-            console.log("Products seeded successfully.");
-        } else {
-            console.log("Products already exist, skipping seed.");
+        console.log("Seeding products...");
+        for (const product of products) {
+            await setDoc(doc(db, "products", product.id), product, { merge: true });
         }
+        console.log("Products seeded successfully.");
     } catch (error) {
         console.error("Error seeding products:", error);
     }

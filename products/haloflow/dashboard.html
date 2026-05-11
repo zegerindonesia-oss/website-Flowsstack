@@ -74,7 +74,7 @@
         </div>
 
         <div class="p-4 border-t border-slate-200">
-            <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors w-full">
+            <a href="#" id="logout-btn" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors w-full cursor-pointer">
                 <span class="material-symbols-outlined">logout</span>
                 <span>Keluar</span>
             </a>
@@ -99,8 +99,8 @@
                     <span class="material-symbols-outlined">notifications</span>
                     <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
-                <div class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-md">
-                    KS
+                <div id="user-initials" class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-md">
+                    U
                 </div>
             </div>
         </header>
@@ -269,6 +269,33 @@
                     x: { grid: { display: false }, border: { display: false } }
                 },
                 interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    </script>
+    <script type="module">
+        import { subscribeToAuthChanges, logout } from '/src/firebase/auth';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            subscribeToAuthChanges((user) => {
+                if (!user) {
+                    window.location.href = '/login.html';
+                } else {
+                    const userNameEl = document.getElementById('user-initials');
+                    if(userNameEl && user.email) {
+                        userNameEl.textContent = user.email.substring(0, 2).toUpperCase();
+                    }
+                }
+            });
+
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    if (confirm('Keluar dari sistem?')) {
+                        await logout();
+                        window.location.href = '/login.html';
+                    }
+                });
             }
         });
     </script>
