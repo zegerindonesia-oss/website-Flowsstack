@@ -86,14 +86,14 @@
                 <p class="text-slate-500">Log in to manage your AI assistant and view analytics.</p>
             </div>
 
-            <form action="dashboard.html" method="GET" class="space-y-5">
+            <form id="auth-form" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <span class="material-symbols-outlined text-slate-400 text-xl">mail</span>
                         </div>
-                        <input type="email" placeholder="admin@perusahaan.com" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
+                        <input type="email" id="input-email" placeholder="admin@perusahaan.com" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
                     </div>
                 </div>
 
@@ -106,12 +106,15 @@
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <span class="material-symbols-outlined text-slate-400 text-xl">lock</span>
                         </div>
-                        <input type="password" placeholder="••••••••" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
+                        <input type="password" id="input-password" placeholder="••••••••" required class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all bg-white/80" />
                     </div>
                 </div>
 
+                <!-- Error Message -->
+                <div id="auth-error" class="hidden text-sm text-red-600 bg-red-50 p-3 rounded-xl border border-red-100 text-center font-medium"></div>
+
                 <div class="pt-2">
-                    <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-pink text-white font-semibold py-3.5 rounded-2xl shadow-lg shadow-brand-purple/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                    <button type="submit" id="btn-submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-pink text-white font-semibold py-3.5 rounded-2xl shadow-lg shadow-brand-purple/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
                         Log In to Dashboard
                     </button>
                 </div>
@@ -160,5 +163,43 @@
             </div>
         </div>
     </div>
+    
+    <!-- Firebase Script -->
+    <script type="module">
+        import { loginWithEmail } from '/src/firebase/auth';
+
+        const form = document.getElementById('auth-form');
+        const btnSubmit = document.getElementById('btn-submit');
+        const errorDiv = document.getElementById('auth-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.classList.add('hidden');
+            
+            const email = document.getElementById('input-email').value;
+            const password = document.getElementById('input-password').value;
+            
+            const originalBtnText = btnSubmit.innerHTML;
+            btnSubmit.innerHTML = '<span class="animate-spin material-symbols-outlined text-sm inline-block align-middle mr-1">refresh</span> Processing...';
+            btnSubmit.disabled = true;
+
+            try {
+                await loginWithEmail(email, password);
+                // Redirect on success
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error(error);
+                let msg = "Login gagal. Pastikan email dan password benar.";
+                if (error.code === 'auth/user-not-found') msg = "Pengguna tidak ditemukan.";
+                if (error.code === 'auth/wrong-password') msg = "Password salah.";
+                
+                errorDiv.textContent = msg;
+                errorDiv.classList.remove('hidden');
+                
+                btnSubmit.innerHTML = originalBtnText;
+                btnSubmit.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
