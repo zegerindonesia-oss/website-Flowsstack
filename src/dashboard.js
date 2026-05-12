@@ -12,9 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Update UI
-        document.getElementById('user-name').textContent = user.displayName || 'User';
-        document.getElementById('user-email').textContent = user.email;
-        document.getElementById('welcome-name').textContent = (user.displayName || 'User').split(' ')[0];
+        const userNameEl = document.getElementById('user-name');
+        const userEmailEl = document.getElementById('user-email');
+        const welcomeNameEl = document.getElementById('welcome-name');
+
+        if (userNameEl) userNameEl.textContent = user.displayName || 'User';
+        if (userEmailEl) userEmailEl.textContent = user.email;
+        if (welcomeNameEl) welcomeNameEl.textContent = (user.displayName || 'User').split(' ')[0];
 
         // Seed products if needed
         await seedProducts();
@@ -40,6 +44,8 @@ async function loadUserProducts(uid) {
     const activeAppsCount = document.getElementById('active-apps-count');
     const totalSpend = document.getElementById('total-spend');
 
+    if (!appsGrid) return;
+
     try {
         // Get all products first
         const productsSnap = await getDocs(collection(db, "products"));
@@ -53,7 +59,7 @@ async function loadUserProducts(uid) {
             const ownedProductIds = [];
             ownedSnap.forEach(doc => ownedProductIds.push(doc.data().product_id));
 
-            activeAppsCount.textContent = ownedProductIds.length;
+            if (activeAppsCount) activeAppsCount.textContent = ownedProductIds.length;
 
             // Render Apps Grid
             appsGrid.innerHTML = allProducts.map(product => {

@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA_I3CGa7RlNpMs0f43QeDadFdwbG5dglE",
-    authDomain: "flowassist-7ac56.firebaseapp.com",
-    projectId: "flowassist-7ac56",
-    storageBucket: "flowassist-7ac56.firebasestorage.app",
-    messagingSenderId: "321012336628",
-    appId: "1:321012336628:web:3f7cc7b4e229d06ed2dba1",
-    measurementId: "G-STWCG7VLGC"
+    apiKey: "AIzaSyAIrv9U7JK9Kf2bsiZ-UizlUD-D8qfWtlw",
+    authDomain: "flowstack-46f06.firebaseapp.com",
+    projectId: "flowstack-46f06",
+    storageBucket: "flowstack-46f06.firebasestorage.app",
+    messagingSenderId: "935550968714",
+    appId: "1:935550968714:web:68aa056748abbe2b9c5e73",
+    measurementId: "G-7ZZF307WXB"
 };
 
 // Initialize Firebase

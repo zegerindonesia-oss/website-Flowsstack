@@ -22,6 +22,7 @@ export default defineConfig({
                 haloflowDashboard: resolve(__dirname, 'products/haloflow/dashboard.html'),
                 login: resolve(__dirname, 'login.html'),
                 dashboard: resolve(__dirname, 'dashboard.html'),
+                apps: resolve(__dirname, 'apps.html'),
                 account: resolve(__dirname, 'account.html'),
                 billing: resolve(__dirname, 'billing.html'),
                 register: resolve(__dirname, 'register.html'),

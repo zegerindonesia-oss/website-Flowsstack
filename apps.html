@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Apps - FlowStack</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-heading { font-family: 'Outfit', sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.8); }
+        .sidebar-link.active { background: rgba(134, 85, 246, 0.1); color: #8655f6; }
+    </style>
+</head>
+
+<body class="bg-[#f8f7fa] text-[#131118] overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-6">
+        <a href="/" class="flex items-center gap-3">
+            <div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[24px]">layers</span>
+            </div>
+            <span class="font-heading text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">FlowStack</span>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end mr-2">
+                <span id="user-name" class="text-sm font-bold">User Name</span>
+                <span id="user-email" class="text-xs text-gray-500">user@example.com</span>
+            </div>
+            <button id="logout-btn" class="size-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-gray-100 bg-white hidden md:block">
+            <div class="p-4 space-y-2">
+                <a href="/dashboard.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="/apps.html" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all">
+                    <span class="material-symbols-outlined">apps</span>
+                    My Apps
+                </a>
+                <a href="/billing.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all">
+                    <span class="material-symbols-outlined">payments</span>
+                    Billing
+                </a>
+                <a href="/account.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all">
+                    <span class="material-symbols-outlined">person</span>
+                    Account
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10">
+            <header class="mb-10">
+                <h1 class="font-heading text-3xl font-bold text-gray-900 mb-2">My Applications</h1>
+                <p class="text-gray-500">Access and manage all your purchased FlowStack products.</p>
+            </header>
+
+            <div id="apps-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Apps will be injected here -->
+                <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+                <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+                <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/dashboard.js"></script>
+</body>
+
+</html>
