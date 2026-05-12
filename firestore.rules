@@ -32,33 +32,37 @@ service cloud.firestore {
     // Rules for 'users' collection
     match /users/{userId} {
       allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
-      allow create: if isAuthenticated() && isOwner(userId);
-      allow update: if isAuthenticated() && isOwner(userId);
+      allow create: if isAuthenticated() && isOwner(userId) && request.resource.data.role == 'user';
+      allow update: if isAuthenticated() && (isAdmin() || (isOwner(userId) && request.resource.data.role == resource.data.role));
     }
 
     // Rules for 'products' collection
     match /products/{productId} {
       allow read: if true;
-      allow write: if isAuthenticated() && isAdmin();
+      allow write: if isAdmin();
     }
 
     // Rules for 'user_products' collection
     match /user_products/{docId} {
       allow read: if isAuthenticated() && resource.data.user_id == request.auth.uid;
-      allow write: if isAuthenticated();
+      allow write: if isAdmin();
     }
 
     // Rules for HaloFlow collections
-    match /haloflow_settings/{docId} {
-      allow read, write: if isAuthenticated() && docId == request.auth.uid;
-    }
-    
-    match /haloflow_knowledge/{docId} {
-      allow read, write: if isAuthenticated() && resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid;
+    match /haloflow_chats/{chatId} {
+      allow read: if isAuthenticated() && resource.data.user_id == request.auth.uid;
+      allow create: if true; // Allowed for n8n/webhook
+      allow update: if isAuthenticated() && (resource.data.user_id == request.auth.uid || isAdmin());
     }
 
-    match /haloflow_inbox/{docId} {
-      allow read, write: if isAuthenticated() && resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid;
+    match /haloflow_messages/{msgId} {
+      allow read: if isAuthenticated(); 
+      allow write: if true; // Allowed for n8n/webhook
+    }
+
+    match /haloflow_settings/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow write: if isAuthenticated() && isOwner(userId);
     }
 
     // Default rule: deny all other access

@@ -1,8 +1,11 @@
 import { subscribeToAuthChanges, logout } from '../../src/firebase/auth';
 import { db } from '../../src/firebase/config';
-import { collection, query, where, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, getDoc, setDoc, onSnapshot, orderBy, limit, addDoc, serverTimestamp } from 'firebase/firestore';
 
 let currentUser = null;
+let activeChatId = null;
+let chatUnsubscribe = null;
+let msgUnsubscribe = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Authentication & Access Control
@@ -44,6 +47,8 @@ function initAuth() {
             // If passed, set global user and init data
             currentUser = user;
             initSettings();
+            initInbox();
+            initMessageInput();
         } catch (error) {
             console.error("Access check failed:", error);
         }
@@ -244,5 +249,172 @@ async function initSettings() {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
         }
+    });
+}
+
+// --- LIVE INBOX LOGIC ---
+
+function initInbox() {
+    if (!currentUser) return;
+
+    const chatListContainer = document.getElementById('chat-list-container');
+    if (!chatListContainer) return;
+
+    const q = query(
+        collection(db, 'haloflow_chats'),
+        where('user_id', '==', currentUser.uid),
+        orderBy('updatedAt', 'desc')
+    );
+
+    if (chatUnsubscribe) chatUnsubscribe();
+
+    chatUnsubscribe = onSnapshot(q, (snapshot) => {
+        const chats = [];
+        snapshot.forEach(doc => chats.push({ id: doc.id, ...doc.data() }));
+        renderChatList(chats);
+    });
+}
+
+function renderChatList(chats) {
+    const container = document.getElementById('chat-list-container');
+    if (!container) return;
+
+    if (chats.length === 0) {
+        container.innerHTML = '<div class="p-6 text-center text-slate-400 text-sm">Belum ada percakapan.</div>';
+        return;
+    }
+
+    container.innerHTML = chats.map(chat => {
+        const isActive = activeChatId === chat.id;
+        const time = chat.updatedAt?.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || '';
+        
+        // Determine status tag color
+        let tagClass = 'tag-green'; // Default: AI balas otomatis
+        if (chat.status === 'NEEDS_HELP') tagClass = 'tag-red';
+        if (chat.status === 'MANUAL') tagClass = 'bg-slate-100 text-slate-600 border-slate-200';
+
+        const statusLabel = chat.status === 'NEEDS_HELP' ? 'AI butuh bantuan' : 
+                           chat.status === 'MANUAL' ? 'AI dimatikan' : 'AI balas otomatis';
+
+        return `
+            <div class="p-4 border-b border-slate-50 cursor-pointer hover:bg-slate-50 transition-all ${isActive ? 'bg-purple-50/50 border-l-4 border-l-brand-purple' : ''}" 
+                 onclick="selectChat('${chat.id}', '${chat.customerName || chat.customerNumber}', '${chat.customerNumber}')">
+                <div class="flex justify-between items-start mb-1">
+                    <span class="font-bold text-slate-900">${chat.customerName || chat.customerNumber}</span>
+                    <span class="text-[10px] text-slate-400">${time}</span>
+                </div>
+                <div class="text-xs text-slate-500 truncate mb-2">${chat.lastMessage || '...'}</div>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-medium border ${tagClass}">${statusLabel}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+window.selectChat = function(chatId, name, number) {
+    activeChatId = chatId;
+    
+    // Update active state in UI
+    initInbox(); // Re-render list to show active highlight
+
+    // Update Header
+    document.getElementById('active-chat-name').textContent = name;
+    document.getElementById('active-chat-number').textContent = number;
+    
+    // Show messages
+    loadMessages(chatId);
+};
+
+function loadMessages(chatId) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    container.innerHTML = '<div class="flex items-center justify-center h-full"><span class="material-symbols-outlined animate-spin text-slate-300">autorenew</span></div>';
+
+    const q = query(
+        collection(db, 'haloflow_messages'),
+        where('chat_id', '==', chatId),
+        orderBy('createdAt', 'asc')
+    );
+
+    if (msgUnsubscribe) msgUnsubscribe();
+
+    msgUnsubscribe = onSnapshot(q, (snapshot) => {
+        const messages = [];
+        snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+        renderMessages(messages);
+    });
+}
+
+function renderMessages(messages) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    if (messages.length === 0) {
+        container.innerHTML = '<div class="flex items-center justify-center h-full text-slate-400 text-sm">Mulai percakapan...</div>';
+        return;
+    }
+
+    container.innerHTML = messages.map(msg => {
+        const isBot = msg.role === 'assistant' || msg.role === 'bot';
+        const isSystem = msg.role === 'system';
+        
+        if (isSystem) {
+            return `<div class="flex justify-center my-4"><span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] rounded-full font-medium border border-slate-200 uppercase tracking-wider">${msg.content}</span></div>`;
+        }
+
+        return `
+            <div class="flex ${isBot ? 'justify-start' : 'justify-end'} mb-4">
+                <div class="max-w-[80%] ${isBot ? 'chat-ai' : 'chat-user'} p-3 shadow-sm">
+                    <div class="text-sm">${msg.content}</div>
+                    <div class="text-[10px] ${isBot ? 'text-purple-100' : 'text-slate-400'} mt-1 text-right">${msg.createdAt?.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || ''}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Scroll to bottom
+    container.scrollTop = container.scrollHeight;
+}
+
+function initMessageInput() {
+    const input = document.getElementById('message-input');
+    const sendBtn = document.getElementById('send-button');
+
+    if (!input || !sendBtn) return;
+
+    const handleSend = async () => {
+        const content = input.value.trim();
+        if (!content || !activeChatId) return;
+
+        input.value = '';
+        
+        try {
+            // Add message to Firestore
+            await addDoc(collection(db, 'haloflow_messages'), {
+                chat_id: activeChatId,
+                content: content,
+                role: 'assistant', // Manual takeover is assistant role
+                type: 'text',
+                createdAt: serverTimestamp()
+            });
+
+            // Update chat's last message and status to MANUAL if it was NEEDS_HELP
+            await setDoc(doc(db, 'haloflow_chats', activeChatId), {
+                lastMessage: content,
+                updatedAt: serverTimestamp(),
+                status: 'MANUAL' 
+            }, { merge: true });
+
+        } catch (error) {
+            console.error("Gagal mengirim pesan:", error);
+            alert("Gagal mengirim pesan.");
+        }
+    };
+
+    sendBtn.addEventListener('click', handleSend);
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleSend();
     });
 }

@@ -139,61 +139,10 @@
                             <input type="text" placeholder="Cari chat, nama, atau nomor..." class="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-full outline-none focus:border-brand-purple text-xs">
                         </div>
                     </div>
-                    <div class="flex-1 overflow-y-auto">
-                        <!-- Chat Item 1 (AI butuh bantuan) -->
-                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer bg-green-50/50 border-l-4 border-l-green-500">
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">Z</div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex justify-between items-start mb-0.5">
-                                        <div class="font-bold text-sm text-slate-900 truncate">Zuhal</div>
-                                        <div class="text-[10px] text-slate-400">11:21</div>
-                                    </div>
-                                    <div class="flex gap-1 mb-1.5">
-                                        <span class="tag-red text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">smart_toy</span> AI butuh bantuan</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 truncate">halo</p>
-                                    <div class="flex gap-1 mt-1.5">
-                                        <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">person</span> Gilangprodtest</span>
-                                        <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.5 rounded-md">Customer <span class="font-bold">Medium</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Chat Item 2 (AI dimatikan) -->
-                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer">
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">W</div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex justify-between items-start mb-0.5">
-                                        <div class="font-bold text-sm text-slate-900 truncate">Wes</div>
-                                        <div class="text-[10px] text-slate-400">Kemarin 12:23</div>
-                                    </div>
-                                    <div class="flex gap-1 mb-1.5">
-                                        <span class="bg-slate-100 text-slate-500 text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">block</span> AI dimatikan</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 truncate font-semibold">Halo</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Chat Item 3 (AI balas otomatis) -->
-                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer">
-                            <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">6</div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex justify-between items-start mb-0.5">
-                                        <div class="font-bold text-sm text-slate-900 truncate">6285123316286</div>
-                                        <div class="text-[10px] text-slate-400">03/10 09:57</div>
-                                    </div>
-                                    <div class="flex gap-1 mb-1.5">
-                                        <span class="tag-green text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">smart_toy</span> AI balas otomatis</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 truncate">tes</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="chat-list-container" class="flex-1 overflow-y-auto">
+                        <!-- Chats will be injected here via onSnapshot in app.js -->
+                        <div class="p-12 text-center text-slate-400 text-sm italic">Memuat percakapan...</div>
+                    </div>
                     </div>
                 </div>
 
@@ -201,10 +150,10 @@
                 <div class="flex-1 bg-[#FAFAFA] flex flex-col h-full relative">
                     <div class="h-16 px-6 border-b border-slate-200 flex items-center justify-between bg-white z-10 shadow-sm">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm">Z</div>
+                            <div id="active-chat-avatar" class="w-10 h-10 rounded-full bg-purple-100 text-brand-purple flex items-center justify-center font-bold text-sm">H</div>
                             <div>
-                                <h3 class="font-bold text-slate-900 text-sm">Zuhal</h3>
-                                <p class="text-[11px] text-slate-500">628561697983</p>
+                                <h3 id="active-chat-name" class="font-bold text-slate-900 text-sm">Pilih Chat</h3>
+                                <p id="active-chat-number" class="text-[11px] text-slate-500">Silakan pilih chat untuk memulai</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
@@ -217,38 +166,9 @@
                         </div>
                     </div>
                     
-                    <div class="flex-1 p-6 overflow-y-auto space-y-4">
-                        <div class="text-center my-4"><span class="bg-white border border-slate-200 text-slate-500 text-[10px] px-3 py-1 rounded-full font-medium">Hari ini</span></div>
-                        
-                        <div class="flex justify-end">
-                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm">hai</div>
-                        </div>
-                        <div class="flex justify-end">
-                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm mt-1">hai</div>
-                        </div>
-                        
-                        <div class="flex items-center justify-center my-4">
-                            <div class="h-px bg-slate-200 flex-1"></div>
-                            <span class="bg-white border border-slate-200 text-slate-500 text-[10px] px-3 py-1 rounded-full font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">smart_toy</span> AI meminta bantuan menjawab <span class="material-symbols-outlined text-[14px]">expand_more</span></span>
-                            <div class="h-px bg-slate-200 flex-1"></div>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm">halo</div>
-                        </div>
-                        
-                        <div class="flex justify-start">
-                            <div class="bg-green-50 text-green-800 border border-green-200 px-4 py-2.5 rounded-xl max-w-[70%] text-sm shadow-sm relative">
-                                <div class="absolute -left-2 -top-2 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white"><span class="material-symbols-outlined text-white text-[10px]">person</span></div>
-                                hi
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-start">
-                            <div class="flex gap-2 items-end max-w-[80%]">
-                                <div class="chat-ai px-4 py-3 text-sm shadow-md">Selamat datang di HaloFlow AI 👋 Apakah ada yang bisa kami bantu hari ini?</div>
-                            </div>
-                        </div>
+                    <div id="chat-messages-container" class="flex-1 p-6 overflow-y-auto space-y-4 bg-white/50">
+                        <div class="flex items-center justify-center h-full text-slate-400 text-sm italic">Pilih percakapan dari daftar di kiri untuk melihat pesan</div>
+                    </div>
                     </div>
                     
                     <div class="p-4 bg-white border-t border-slate-200">
@@ -261,9 +181,9 @@
                                 <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">add</span></button>
                                 <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">attach_file</span></button>
                                 <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">mood</span></button>
-                                <input type="text" placeholder="Balas manual di sini..." class="flex-1 bg-transparent border-none outline-none text-sm px-2">
+                                <input type="text" id="message-input" placeholder="Balas manual di sini..." class="flex-1 bg-transparent border-none outline-none text-sm px-2">
                             </div>
-                            <button class="bg-gradient-to-r from-brand-purple to-brand-pink text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-all"><span class="material-symbols-outlined">send</span></button>
+                            <button id="send-button" class="bg-gradient-to-r from-brand-purple to-brand-pink text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-all"><span class="material-symbols-outlined">send</span></button>
                         </div>
                     </div>
                 </div>
