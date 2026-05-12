@@ -5,77 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - HaloFlow AI</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
-                    colors: { brand: { purple: '#7C3AED', pink: '#EC4899', dark: '#0F172A', light: '#F8FAFC' } }
+                    colors: { brand: { purple: '#9333EA', pink: '#DB2777', dark: '#0F172A', light: '#F8FAFC' } },
+                    animation: { 'fade-in': 'fadeIn 0.3s ease-out' },
+                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(5px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #F1F5F9; }
-        .glass-header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        .sidebar-item.active { background-color: #F3E8FF; color: #7C3AED; font-weight: 600; }
-        .sidebar-item.active .material-symbols-outlined { color: #7C3AED; }
-        .chat-ai { background: linear-gradient(135deg, #7C3AED, #8B5CF6); color: white; border-radius: 16px 16px 16px 4px; }
-        .chat-user { background: #F1F5F9; color: #1E293B; border-radius: 16px 16px 4px 16px; }
+        body { background-color: #FAFAFA; /* Clean white background */ }
+        .sidebar-item.active { background: linear-gradient(to right, #F3E8FF, transparent); border-left: 3px solid #9333EA; color: #9333EA; font-weight: 600; }
+        .sidebar-item.active .material-symbols-outlined { color: #9333EA; }
+        .chat-ai { background: linear-gradient(135deg, #9333EA, #DB2777); color: white; border-radius: 16px 16px 16px 4px; }
+        .chat-user { background: #FFFFFF; border: 1px solid #E2E8F0; color: #1E293B; border-radius: 16px 16px 4px 16px; }
+        .tag-red { background: #FEF2F2; color: #EF4444; border: 1px solid #FCA5A5; }
+        .tag-green { background: #F0FDF4; color: #22C55E; border: 1px solid #86EFAC; }
+        .gradient-text { background: linear-gradient(to right, #9333EA, #DB2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
     </style>
 </head>
 <body class="font-sans text-slate-800 h-screen overflow-hidden flex">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex h-full">
-        <div class="h-16 flex items-center px-6 border-b border-slate-200">
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex h-full shadow-sm z-20">
+        <div class="h-16 flex items-center px-6 border-b border-slate-100">
             <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-pink flex items-center justify-center shadow-md mr-2">
                 <span class="material-symbols-outlined text-white text-[18px]">smart_toy</span>
             </div>
-            <span class="font-heading font-bold text-xl tracking-tight">Halo<span class="text-brand-purple">Flow</span></span>
+            <span class="font-heading font-bold text-xl tracking-tight">Halo<span class="gradient-text">Flow</span></span>
         </div>
 
-        <div class="p-4 flex-1 overflow-y-auto space-y-1">
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-4 px-2">Menu Utama</div>
-            <a href="#" class="sidebar-item active flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span>Overview</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">chat</span>
-                <span>Live Inbox <span class="bg-brand-pink text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full ml-auto">3</span></span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">campaign</span>
-                <span>Broadcasts</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">contacts</span>
-                <span>Contacts</span>
+        <div class="p-3 flex-1 overflow-y-auto space-y-1">
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-2 px-3">Inbox</div>
+            <a href="#" data-target="panel-inbox" class="sidebar-item active flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">chat</span>
+                <span class="menu-text text-sm">Semua chat</span>
+                <span class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full ml-auto">13</span>
             </a>
 
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-8 px-2">AI Configuration</div>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">model_training</span>
-                <span>Knowledge Base</span>
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Agen AI</div>
+            <a href="#" data-target="panel-training" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">school</span>
+                <span class="menu-text text-sm">Training & Simulator</span>
             </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">settings_suggest</span>
-                <span>Agent Personality</span>
+            <a href="#" data-target="panel-personality" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">psychology</span>
+                <span class="menu-text text-sm">Knowledge Base</span>
             </a>
-            <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
-                <span class="material-symbols-outlined">cable</span>
-                <span>Integrations (n8n)</span>
+
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Operations</div>
+            <a href="#" data-target="panel-agents" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">group</span>
+                <span class="menu-text text-sm">Human Agents</span>
+            </a>
+            <a href="#" data-target="panel-integrations" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">cable</span>
+                <span class="menu-text text-sm">Pengaturan WAHA</span>
+            </a>
+            
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Ecosystem</div>
+            <a href="/dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                <span class="text-sm">Kembali ke FlowStack</span>
             </a>
         </div>
 
-        <div class="p-4 border-t border-slate-200">
-            <a href="#" id="logout-btn" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors w-full cursor-pointer">
-                <span class="material-symbols-outlined">logout</span>
+        <div class="p-4 border-t border-slate-100">
+            <div class="flex items-center gap-3 mb-4 px-2">
+                <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden"><img src="https://ui-avatars.com/api/?name=U&background=9333EA&color=fff" alt="User" id="sidebar-avatar"></div>
+                <div>
+                    <div class="text-sm font-bold text-slate-800" id="sidebar-email">User</div>
+                    <div class="text-[10px] text-slate-500">owner</div>
+                </div>
+            </div>
+            <a href="#" id="logout-btn" class="flex items-center gap-3 px-3 py-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors w-full cursor-pointer text-sm">
+                <span class="material-symbols-outlined text-[18px]">logout</span>
                 <span>Keluar</span>
             </a>
         </div>
@@ -83,221 +99,446 @@
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-        <!-- Header -->
-        <header class="h-16 glass-header flex items-center justify-between px-6 z-10">
-            <div class="flex items-center gap-4">
-                <button class="md:hidden text-slate-500"><span class="material-symbols-outlined">menu</span></button>
-                <h1 class="font-semibold text-lg">Dashboard Overview</h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="hidden sm:flex items-center gap-2 bg-green-50 text-green-600 px-3 py-1.5 rounded-full text-sm font-medium border border-green-100">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    WA Connected
-                </div>
-                <div class="w-px h-6 bg-slate-200 hidden sm:block"></div>
-                <button class="relative text-slate-500 hover:text-brand-purple">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-                <div id="user-initials" class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-md">
-                    U
-                </div>
-            </div>
-        </header>
-
+        
         <!-- Dashboard Body -->
-        <div class="flex-1 overflow-y-auto p-6 scroll-smooth">
-            <div class="max-w-7xl mx-auto space-y-6">
+        <div class="flex-1 overflow-y-auto h-full scroll-smooth">
+            
+            <!-- PANEL: LIVE INBOX (3-Column Layout) -->
+            <div id="panel-inbox" class="panel-section h-full flex">
                 
-                <!-- Welcome Banner -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-purple/5 to-transparent"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Halo Kopi Senja 👋</h2>
-                        <p class="text-slate-600">AI Assistant Anda sedang aktif membalas pesan. Hari ini AI berhasil mengamankan <span class="font-bold text-brand-purple">12 Penjualan</span>.</p>
+                <!-- Col 1: Filters -->
+                <div class="w-56 bg-white border-r border-slate-200 flex flex-col h-full py-4 px-2 shadow-sm z-10 hidden lg:flex">
+                    <div class="px-3 mb-2 font-bold text-slate-800 flex items-center justify-between">
+                        Inbox
                     </div>
-                    <div class="relative z-10">
-                        <button class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-slate-800 transition shadow-lg flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm">add</span> Buat Broadcast Baru
-                        </button>
-                    </div>
+                    <a href="#" class="flex items-center gap-2 px-3 py-2 bg-purple-50 text-brand-purple rounded-lg font-semibold text-sm mb-1">
+                        <span class="material-symbols-outlined text-[18px]">all_inbox</span> Semua chat <span class="ml-auto bg-brand-pink text-white text-[10px] px-1.5 py-0.5 rounded-full">13</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg text-sm mb-1">
+                        <span class="material-symbols-outlined text-[18px]">smart_toy</span> AI balas otomatis <span class="ml-auto bg-slate-100 text-slate-600 text-[10px] px-1.5 py-0.5 rounded-full">8</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg text-sm mb-6">
+                        <span class="material-symbols-outlined text-[18px]">person</span> Balas Manual <span class="ml-auto bg-slate-100 text-slate-600 text-[10px] px-1.5 py-0.5 rounded-full">5</span>
+                    </a>
+                    
+                    <div class="px-3 mb-2 font-bold text-slate-800 text-xs text-slate-400 uppercase mt-4">CRM</div>
+                    <a href="#" class="flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg text-sm mb-1">
+                        <span class="material-symbols-outlined text-[18px]">view_kanban</span> Board 1
+                    </a>
                 </div>
 
-                <!-- Metrics -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-purple-50 text-brand-purple flex items-center justify-center">
-                                <span class="material-symbols-outlined">forum</span>
-                            </div>
-                            <span class="bg-green-50 text-green-600 text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 14%</span>
-                        </div>
-                        <div class="text-slate-500 text-sm font-medium mb-1">Total Chat (Hari ini)</div>
-                        <div class="text-3xl font-bold text-slate-900">428</div>
+                <!-- Col 2: Chat List -->
+                <div class="w-full md:w-80 bg-white border-r border-slate-200 flex flex-col h-full z-10">
+                    <div class="p-3 border-b border-slate-100 flex items-center justify-between">
+                        <div class="font-bold flex items-center gap-2 text-slate-800">Semua chat <span class="material-symbols-outlined text-[16px] text-slate-400">arrow_drop_down</span></div>
+                        <span class="flex items-center gap-1 text-[10px] text-orange-500 bg-orange-50 px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></span> Syncing...</span>
                     </div>
-
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-pink-50 text-brand-pink flex items-center justify-center">
-                                <span class="material-symbols-outlined">smart_toy</span>
-                            </div>
-                            <span class="bg-green-50 text-green-600 text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 5%</span>
-                        </div>
-                        <div class="text-slate-500 text-sm font-medium mb-1">Dibalas AI (Automation)</div>
-                        <div class="text-3xl font-bold text-slate-900">415 <span class="text-sm text-slate-400 font-normal">/ 97%</span></div>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-green-50 text-green-500 flex items-center justify-center">
-                                <span class="material-symbols-outlined">payments</span>
-                            </div>
-                            <span class="bg-green-50 text-green-600 text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_up</span> 21%</span>
-                        </div>
-                        <div class="text-slate-500 text-sm font-medium mb-1">Estimasi Sales Closed</div>
-                        <div class="text-3xl font-bold text-slate-900">Rp 1.2M</div>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center">
-                                <span class="material-symbols-outlined">timer</span>
-                            </div>
-                            <span class="bg-red-50 text-red-600 text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">trending_down</span> -2s</span>
-                        </div>
-                        <div class="text-slate-500 text-sm font-medium mb-1">Avg Response Time</div>
-                        <div class="text-3xl font-bold text-slate-900">1.2 <span class="text-sm text-slate-400 font-normal">detik</span></div>
-                    </div>
-                </div>
-
-                <!-- Bottom Section: Chart & Live Inbox -->
-                <div class="grid lg:grid-cols-3 gap-6 h-[400px]">
-                    <!-- Chart -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 flex flex-col">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-900">Interaksi Harian</h3>
-                            <select class="text-sm bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 outline-none focus:border-brand-purple">
-                                <option>7 Hari Terakhir</option>
-                                <option>30 Hari Terakhir</option>
-                            </select>
-                        </div>
-                        <div class="flex-1 w-full relative">
-                            <canvas id="myChart"></canvas>
+                    <div class="p-3 border-b border-slate-100">
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-2 text-slate-400 text-[18px]">search</span>
+                            <input type="text" placeholder="Cari chat, nama, atau nomor..." class="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-full outline-none focus:border-brand-purple text-xs">
                         </div>
                     </div>
-
-                    <!-- Mini Inbox -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-0 flex flex-col overflow-hidden">
-                        <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50/50">
-                            <h3 class="font-bold text-slate-900 flex items-center gap-2">Live Inbox <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span></h3>
-                            <a href="#" class="text-sm font-medium text-brand-purple hover:underline">Lihat Semua</a>
+                    <div class="flex-1 overflow-y-auto">
+                        <!-- Chat Item 1 (AI butuh bantuan) -->
+                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer bg-green-50/50 border-l-4 border-l-green-500">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">Z</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-start mb-0.5">
+                                        <div class="font-bold text-sm text-slate-900 truncate">Zuhal</div>
+                                        <div class="text-[10px] text-slate-400">11:21</div>
+                                    </div>
+                                    <div class="flex gap-1 mb-1.5">
+                                        <span class="tag-red text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">smart_toy</span> AI butuh bantuan</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 truncate">halo</p>
+                                    <div class="flex gap-1 mt-1.5">
+                                        <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">person</span> Gilangprodtest</span>
+                                        <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.5 rounded-md">Customer <span class="font-bold">Medium</span></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex-1 overflow-y-auto">
-                            <!-- Chat item -->
-                            <div class="p-4 border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex justify-between items-start mb-1">
-                                    <div class="font-semibold text-sm">Andi Kusuma</div>
-                                    <div class="text-xs text-slate-400">10:42</div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <span class="material-symbols-outlined text-[14px] text-brand-purple mt-0.5">smart_toy</span>
-                                    <p class="text-sm text-slate-600 truncate">Baik kak Andi, pesanannya akan segera kami proses menggunakan Gojek ya.</p>
-                                </div>
-                            </div>
-                            <!-- Chat item -->
-                            <div class="p-4 border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition bg-brand-purple/5">
-                                <div class="flex justify-between items-start mb-1">
-                                    <div class="font-semibold text-sm">Siti (New)</div>
-                                    <div class="text-xs text-brand-purple font-medium">Baru saja</div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <span class="material-symbols-outlined text-[14px] text-slate-400 mt-0.5">person</span>
-                                    <p class="text-sm text-slate-800 font-medium truncate">Min, menu kopi susunya ada apa aja?</p>
+                        
+                        <!-- Chat Item 2 (AI dimatikan) -->
+                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">W</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-start mb-0.5">
+                                        <div class="font-bold text-sm text-slate-900 truncate">Wes</div>
+                                        <div class="text-[10px] text-slate-400">Kemarin 12:23</div>
+                                    </div>
+                                    <div class="flex gap-1 mb-1.5">
+                                        <span class="bg-slate-100 text-slate-500 text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">block</span> AI dimatikan</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 truncate font-semibold">Halo</p>
                                 </div>
                             </div>
-                            <!-- Chat item -->
-                            <div class="p-4 border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex justify-between items-start mb-1">
-                                    <div class="font-semibold text-sm">Budi Santoso</div>
-                                    <div class="text-xs text-slate-400">Kemarin</div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <span class="material-symbols-outlined text-[14px] text-brand-purple mt-0.5">smart_toy</span>
-                                    <p class="text-sm text-slate-600 truncate">Sama-sama kak Budi. Ditunggu orderan selanjutnya!</p>
+                        </div>
+
+                        <!-- Chat Item 3 (AI balas otomatis) -->
+                        <div class="p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm flex-shrink-0">6</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex justify-between items-start mb-0.5">
+                                        <div class="font-bold text-sm text-slate-900 truncate">6285123316286</div>
+                                        <div class="text-[10px] text-slate-400">03/10 09:57</div>
+                                    </div>
+                                    <div class="flex gap-1 mb-1.5">
+                                        <span class="tag-green text-[9px] px-1.5 py-0.5 rounded-md flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">smart_toy</span> AI balas otomatis</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 truncate">tes</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Col 3: Chat View -->
+                <div class="flex-1 bg-[#FAFAFA] flex flex-col h-full relative">
+                    <div class="h-16 px-6 border-b border-slate-200 flex items-center justify-between bg-white z-10 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-sm">Z</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-sm">Zuhal</h3>
+                                <p class="text-[11px] text-slate-500">628561697983</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-2 top-1.5 text-slate-400 text-[16px]">search</span>
+                                <input type="text" placeholder="Search" class="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-brand-purple text-xs w-32">
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 cursor-pointer">push_pin</span>
+                            <span class="material-symbols-outlined text-slate-400 cursor-pointer">more_vert</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 p-6 overflow-y-auto space-y-4">
+                        <div class="text-center my-4"><span class="bg-white border border-slate-200 text-slate-500 text-[10px] px-3 py-1 rounded-full font-medium">Hari ini</span></div>
+                        
+                        <div class="flex justify-end">
+                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm">hai</div>
+                        </div>
+                        <div class="flex justify-end">
+                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm mt-1">hai</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-center my-4">
+                            <div class="h-px bg-slate-200 flex-1"></div>
+                            <span class="bg-white border border-slate-200 text-slate-500 text-[10px] px-3 py-1 rounded-full font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">smart_toy</span> AI meminta bantuan menjawab <span class="material-symbols-outlined text-[14px]">expand_more</span></span>
+                            <div class="h-px bg-slate-200 flex-1"></div>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <div class="chat-user px-4 py-2.5 max-w-[70%] text-sm shadow-sm">halo</div>
+                        </div>
+                        
+                        <div class="flex justify-start">
+                            <div class="bg-green-50 text-green-800 border border-green-200 px-4 py-2.5 rounded-xl max-w-[70%] text-sm shadow-sm relative">
+                                <div class="absolute -left-2 -top-2 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white"><span class="material-symbols-outlined text-white text-[10px]">person</span></div>
+                                hi
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-start">
+                            <div class="flex gap-2 items-end max-w-[80%]">
+                                <div class="chat-ai px-4 py-3 text-sm shadow-md">Selamat datang di HaloFlow AI 👋 Apakah ada yang bisa kami bantu hari ini?</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-white border-t border-slate-200">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded flex items-center gap-1 cursor-pointer hover:bg-slate-200"><span class="material-symbols-outlined text-[12px]">bolt</span> Quick Reply</span>
+                            <span class="text-[10px] text-slate-400">Ketik '/' untuk menggunakan template cepat</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl flex items-center p-1 focus-within:border-brand-purple focus-within:bg-white transition-colors">
+                                <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">add</span></button>
+                                <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">attach_file</span></button>
+                                <button class="p-2 text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined text-[20px]">mood</span></button>
+                                <input type="text" placeholder="Balas manual di sini..." class="flex-1 bg-transparent border-none outline-none text-sm px-2">
+                            </div>
+                            <button class="bg-gradient-to-r from-brand-purple to-brand-pink text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-all"><span class="material-symbols-outlined">send</span></button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- PANEL: TRAINING & SIMULATOR (2-Column) -->
+            <div id="panel-training" class="panel-section hidden h-full max-w-7xl mx-auto p-6 flex flex-col lg:flex-row gap-6">
+                <!-- Training Left Side -->
+                <div class="flex-1 bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-brand-purple text-2xl">school</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Training Agen AI</h2>
+                            <p class="text-slate-500 text-xs">Ajarkan AI kapan harus mengambil tindakan tertentu (Auto-label, Invoice, CRM).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 overflow-y-auto space-y-6 bg-[#FAFAFA] flex-1">
+                        
+                        <!-- System Prompt Config -->
+                        <div class="bg-white p-5 border border-slate-200 rounded-xl shadow-sm">
+                            <form id="personality-form" class="space-y-4">
+                                <h3 class="font-bold text-slate-800 flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-brand-purple">psychology</span> Agent Personality</h3>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Bot</label>
+                                    <input type="text" id="bot-name" value="CS Mawar" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-brand-purple text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">System Prompt (Instruksi Utama)</label>
+                                    <textarea id="bot-prompt" rows="4" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-brand-purple font-mono text-xs text-slate-600">Kamu adalah asisten AI HaloFlow. Jawab dengan ramah.</textarea>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" id="btn-save-personality" class="bg-brand-purple text-white px-4 py-2 rounded-lg text-sm font-bold shadow hover:bg-purple-700 transition">Simpan Prompt</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2"><span class="material-symbols-outlined text-green-500">bolt</span> Actions (Automation)</h3>
+                            <button class="px-3 py-1.5 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-50 shadow-sm">Edit Actions</button>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <div class="p-4 bg-slate-50 flex items-center justify-between border-b border-slate-200">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-brand-purple">label</span>
+                                    <span class="font-bold text-sm text-slate-800">Aktifkan Label Otomatis</span>
+                                </div>
+                                <!-- Toggle -->
+                                <div class="w-10 h-6 bg-green-500 rounded-full relative cursor-pointer shadow-inner">
+                                    <div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <div class="flex items-center gap-4 border-b border-slate-100 pb-2">
+                                    <div class="w-1/3 text-[10px] uppercase font-bold text-slate-400">Label</div>
+                                    <div class="flex-1 text-[10px] uppercase font-bold text-slate-400">Kapan harus diaktifkan?</div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-1/3 bg-red-50 text-red-600 text-xs px-2 py-1.5 rounded border border-red-100 font-medium truncate">InitiateCheckout</div>
+                                    <div class="flex-1 bg-slate-50 border border-slate-200 text-slate-600 text-xs px-2 py-1.5 rounded">Tertarik membeli</div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-1/3 bg-pink-50 text-brand-pink text-xs px-2 py-1.5 rounded border border-pink-100 font-medium truncate">Purchase <span class="text-green-500">✔</span></div>
+                                    <div class="flex-1 bg-slate-50 border border-slate-200 text-slate-600 text-xs px-2 py-1.5 rounded">Kirim bukti transfer</div>
+                                </div>
+                                <button class="w-full mt-2 py-2 bg-white border border-dashed border-slate-300 text-brand-purple text-xs font-bold rounded-lg hover:bg-purple-50 flex items-center justify-center gap-1 transition">
+                                    <span class="material-symbols-outlined text-[16px]">add</span> Tambah Label
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Other mock actions -->
+                        <div class="p-4 bg-white border border-slate-200 rounded-xl flex items-center justify-between shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-green-600">receipt_long</span>
+                                <span class="font-bold text-sm text-slate-800">Kirim Invoice Otomatis</span>
+                            </div>
+                            <div class="w-10 h-6 bg-slate-200 rounded-full relative cursor-pointer shadow-inner"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulator Right Side -->
+                <div class="w-full lg:w-80 bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-brand-purple/5 to-white z-0"></div>
+                    <div class="p-4 border-b border-slate-100 flex items-center gap-3 bg-white/80 backdrop-blur z-10">
+                        <span class="material-symbols-outlined text-slate-500">smartphone</span>
+                        <h2 class="text-sm font-bold text-slate-900">Simulator AI</h2>
+                    </div>
+                    
+                    <div class="flex-1 p-4 flex flex-col z-10">
+                        <div class="bg-white rounded-[2rem] border-[8px] border-slate-800 flex-1 shadow-xl flex flex-col overflow-hidden relative">
+                            <!-- Phone Header -->
+                            <div class="bg-slate-50 p-3 border-b border-slate-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-brand-purple to-brand-pink text-white flex items-center justify-center text-xs font-bold shadow-sm">B</div>
+                                <div>
+                                    <div class="text-xs font-bold">Bot Simulator</div>
+                                    <div class="text-[9px] text-green-500 font-bold">Online</div>
+                                </div>
+                                <span class="material-symbols-outlined ml-auto text-slate-400 text-[16px] cursor-pointer hover:text-brand-purple transition">refresh</span>
+                            </div>
+                            <!-- Phone Chat -->
+                            <div class="flex-1 bg-[#E5DDD5] p-3 overflow-y-auto flex flex-col relative space-y-2" id="simulator-chat-box">
+                                <div class="bg-white/90 px-4 py-3 rounded-xl text-center shadow-sm backdrop-blur-sm mx-4 mt-10">
+                                    <span class="material-symbols-outlined text-brand-purple mb-1 text-3xl">smart_toy</span>
+                                    <p class="text-xs font-bold text-slate-800">Test AI Anda di sini</p>
+                                    <p class="text-[10px] text-slate-500 mt-1">Pesan ini tidak dikirim ke WhatsApp, hanya simulasi untuk menguji System Prompt.</p>
+                                </div>
+                            </div>
+                            <!-- Phone Input -->
+                            <div class="bg-white p-2 flex gap-2 border-t border-slate-200">
+                                <input type="text" placeholder="Ketik pesan..." class="flex-1 bg-slate-100 rounded-full px-4 text-xs outline-none focus:bg-white focus:border focus:border-brand-purple">
+                                <button class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow hover:bg-purple-700 transition"><span class="material-symbols-outlined text-[14px]">send</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL: HUMAN AGENTS -->
+            <div id="panel-agents" class="panel-section hidden max-w-5xl mx-auto p-6 space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-white flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2"><span class="material-symbols-outlined text-brand-purple">group</span> Pengaturan Tim (Human Agents)</h2>
+                            <p class="text-slate-500 text-sm mt-1">Undang tim Anda dan delegasikan chat dari AI ke CS secara otomatis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-purple-50/30">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-green-500 text-3xl">switch_access_shortcut</span>
+                            <div>
+                                <h3 class="font-bold text-slate-800">Auto-assign human agents</h3>
+                                <p class="text-xs text-slate-500">Otomatis assign percakapan masuk ke anggota tim secara bergiliran (*Round Robin*)</p>
+                            </div>
+                        </div>
+                        <!-- Toggle Active -->
+                        <div class="w-12 h-6 bg-green-500 rounded-full relative cursor-pointer shadow-inner"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-800 text-sm">Member Organisasi</h3>
+                            <button class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-slate-700 transition"><span class="material-symbols-outlined text-[16px]">add</span> Tambah Member</button>
+                        </div>
+                        
+                        <div class="border border-slate-200 rounded-xl overflow-hidden mb-8 shadow-sm">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-[10px] uppercase text-slate-500 font-bold tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-3">Profile</th>
+                                        <th class="px-6 py-3">Access Level</th>
+                                        <th class="px-6 py-3">Divisi</th>
+                                        <th class="px-6 py-3 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="px-6 py-4 flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold text-xs shadow-sm">H</div>
+                                            <span class="font-bold text-slate-800 text-xs">halotesting123@gmail.com</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs font-medium">Owner</td>
+                                        <td class="px-6 py-4"><span class="bg-slate-200 text-slate-600 px-2 py-1 rounded-md text-[10px] font-bold">Default Team</span></td>
+                                        <td class="px-6 py-4 text-right"><button class="text-slate-400 hover:text-brand-purple"><span class="material-symbols-outlined text-[16px]">edit</span></button></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="px-6 py-4 flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-full bg-brand-pink text-white flex items-center justify-center font-bold text-xs shadow-sm">W</div>
+                                            <span class="font-bold text-slate-800 text-xs">cs-wesly@yahoo.com</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <select class="bg-white border border-slate-200 rounded px-2 py-1 outline-none text-xs font-medium cursor-pointer">
+                                                <option>Owner</option>
+                                                <option selected>Staff</option>
+                                            </select>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <select class="bg-white border border-slate-200 rounded px-2 py-1 outline-none text-xs font-medium cursor-pointer">
+                                                <option selected>Sales</option>
+                                                <option>CS</option>
+                                            </select>
+                                        </td>
+                                        <td class="px-6 py-4 text-right"><button class="text-red-400 hover:text-red-600"><span class="material-symbols-outlined text-[16px]">delete</span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-800 text-sm">Divisi</h3>
+                            <button class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-slate-50 shadow-sm transition"><span class="material-symbols-outlined text-[16px]">add</span> Tambah Divisi</button>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm w-1/2">
+                            <table class="w-full text-left text-sm text-slate-600">
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="px-6 py-3 font-bold text-slate-800 text-xs">Sales</td>
+                                        <td class="px-6 py-3 text-right"><button class="text-slate-400 hover:text-brand-purple"><span class="material-symbols-outlined text-[16px]">edit</span></button></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="px-6 py-3 font-bold text-slate-800 text-xs">CS</td>
+                                        <td class="px-6 py-3 text-right"><button class="text-red-400 hover:text-red-600"><span class="material-symbols-outlined text-[16px]">delete</span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL: KNOWLEDGE BASE -->
+            <div id="panel-personality" class="panel-section hidden max-w-4xl mx-auto space-y-6 p-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold text-slate-900 mb-2">Knowledge Base (Sumber Pengetahuan)</h2>
+                    <p class="text-slate-500 text-sm mb-6">Hubungkan Google Drive Anda agar AI bisa membaca katalog produk dan FAQ toko Anda secara cerdas.</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Google Drive -->
+                        <div class="border border-slate-200 rounded-xl p-5 flex items-center justify-between hover:border-blue-400 transition cursor-pointer bg-slate-50">
+                            <div class="flex items-center gap-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" class="w-8 h-8">
+                                <div>
+                                    <h4 class="font-bold text-slate-800">Google Drive</h4>
+                                    <p class="text-xs text-slate-500">Sync files dynamically</p>
+                                </div>
+                            </div>
+                            <button id="btn-connect-gdrive" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 shadow-md">
+                                Connect
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="gdrive-status" class="hidden mt-6 p-4 bg-green-50 rounded-xl border border-green-100 flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-500">info</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-green-800">Sinkronisasi Aktif</h4>
+                            <p class="text-xs text-green-700 mt-1">HaloFlow sekarang secara otomatis membaca file di folder Google Drive Anda. Setiap file PDF, Word, atau Excel akan dibaca AI.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL: INTEGRATIONS -->
+            <div id="panel-integrations" class="panel-section hidden max-w-4xl mx-auto space-y-6 p-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-6 h-6"> WhatsApp Connection (WAHA)</h2>
+                    <p class="text-slate-500 text-sm mb-6">Hubungkan nomor WhatsApp Anda dengan HaloFlow untuk memulai automasi.</p>
+
+                    <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-inner">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg mb-2">Langkah-langkah:</h3>
+                            <ol class="list-decimal list-inside text-slate-600 text-sm space-y-2 mb-4">
+                                <li>Klik tombol Generate QR Code.</li>
+                                <li>Buka aplikasi WhatsApp di HP Anda.</li>
+                                <li>Pilih menu <strong>Linked Devices</strong> (Perangkat Tertaut).</li>
+                                <li>Scan QR Code yang muncul di layar ini.</li>
+                            </ol>
+                            <button id="btn-connect-waha" class="bg-[#25D366] hover:bg-[#1DA851] text-white px-6 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-md">
+                                <span class="material-symbols-outlined">qr_code_scanner</span> Generate QR Code
+                            </button>
+                        </div>
+                        
+                        <div id="waha-qr-container" class="hidden w-48 h-48 bg-white border-2 border-dashed border-slate-300 rounded-2xl flex items-center justify-center p-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="QR Code" class="w-full h-full opacity-80">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
-    <script>
-        // Setup Chart
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(124, 58, 237, 0.5)');   
-        gradient.addColorStop(1, 'rgba(124, 58, 237, 0.0)');
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-                datasets: [{
-                    label: 'Pesan Masuk',
-                    data: [150, 230, 180, 320, 280, 450, 428],
-                    borderColor: '#7C3AED',
-                    backgroundColor: gradient,
-                    borderWidth: 3,
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: '#7C3AED',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { borderDash: [4, 4], color: '#E2E8F0' }, border: { display: false } },
-                    x: { grid: { display: false }, border: { display: false } }
-                },
-                interaction: { intersect: false, mode: 'index' }
-            }
-        });
-    </script>
-    <script type="module">
-        import { subscribeToAuthChanges, logout } from '/src/firebase/auth';
-
-        document.addEventListener('DOMContentLoaded', () => {
-            subscribeToAuthChanges((user) => {
-                if (!user) {
-                    window.location.href = '/login.html';
-                } else {
-                    const userNameEl = document.getElementById('user-initials');
-                    if(userNameEl && user.email) {
-                        userNameEl.textContent = user.email.substring(0, 2).toUpperCase();
-                    }
-                }
-            });
-
-            const logoutBtn = document.getElementById('logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    if (confirm('Keluar dari sistem?')) {
-                        await logout();
-                        window.location.href = '/login.html';
-                    }
-                });
-            }
-        });
-    </script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>

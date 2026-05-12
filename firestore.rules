@@ -45,6 +45,31 @@ service cloud.firestore {
       );
     }
 
+    // Rules for 'products' collection
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAuthenticated() && isAdmin();
+    }
+
+    // Rules for 'user_products' collection
+    match /user_products/{docId} {
+      allow read: if isAuthenticated() && resource.data.user_id == request.auth.uid;
+      allow write: if isAuthenticated() && isAdmin();
+    }
+
+    // Rules for HaloFlow collections
+    match /haloflow_settings/{docId} {
+      allow read, write: if isAuthenticated() && docId == request.auth.uid;
+    }
+    
+    match /haloflow_knowledge/{docId} {
+      allow read, write: if isAuthenticated() && resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid;
+    }
+
+    match /haloflow_inbox/{docId} {
+      allow read, write: if isAuthenticated() && resource.data.user_id == request.auth.uid || request.resource.data.user_id == request.auth.uid;
+    }
+
     // Default rule: deny all other access
     match /{document=**} {
       allow read, write: if false; 

@@ -80,7 +80,23 @@ const checkPromoTool = tool({
         ]
       }
     },
-    position: [750, 500]
+    position: [750, 400]
+  }
+});
+
+// Google Drive Document Retrieval Tool (Knowledge Base)
+const searchKnowledgeBaseTool = tool({
+  type: '@n8n/n8n-nodes-langchain.toolGoogleDrive',
+  version: 1.0,
+  config: {
+    name: 'SearchKnowledgeBase',
+    description: 'Call this tool to search through the user Google Drive documents for business information, pricing, and FAQs.',
+    parameters: {
+      operation: 'search',
+      query: '={{ $fromAi("search_query", "The specific information you are looking for") }}',
+      folderId: '={{ $json.user_settings.gdrive_folder_id }}'
+    },
+    position: [750, 600]
   }
 });
 
@@ -92,14 +108,14 @@ const aiAgent = node({
     name: 'HaloFlow Business Agent',
     parameters: { 
       promptType: 'define', 
-      text: 'You are HaloFlow AI, an expert sales and customer support assistant for our business. Always be polite, use emojis naturally, and help the customer with their requests. Use your tools to check real-time data when needed. If the user asks about promo, use the CheckPromoDB tool.',
+      text: '={{ $json.user_settings.systemPrompt }} \n\nYou have access to Google Drive documents for knowledge base. If asked about business info, use the SearchKnowledgeBase tool.',
       options: {
         systemMessage: "Always respond in the user's language (primarily Indonesian)."
       }
     },
     subnodes: { 
       model: openAiModel, 
-      tools: [checkPromoTool] 
+      tools: [checkPromoTool, searchKnowledgeBaseTool] 
     },
     position: [600, 300]
   },
@@ -127,7 +143,7 @@ const sendReply = node({
         parameters: [
           { name: 'chatId', value: '={{ $(\"Format Message\").item.json.user_phone }}@c.us' },
           { name: 'text', value: '={{ $json.output }}' },
-          { name: 'session', value: 'default' }
+          { name: 'session', value: '={{ $json.user_settings.waha_session_id }}' } // Dynamic Session Routing
         ]
       }
     },
