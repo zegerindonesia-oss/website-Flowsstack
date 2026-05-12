@@ -1,6 +1,6 @@
 import { subscribeToAuthChanges, logout } from './firebase/auth';
 import { db } from './firebase/config';
-import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, query, where, getDocs, onSnapshot, doc, setDoc } from 'firebase/firestore';
 import { seedProducts } from './firebase/seed';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Fetch User Products (Ownership)
         loadUserProducts(user.uid);
+
+        // Auto-setup for owner
+        if (user.email === 'zeger.indonesia@gmail.com' || user.email === 'weebeeone@gmail.com') {
+            setupOwnerAccess(user.uid);
+        }
     });
 
     // Logout
@@ -102,5 +107,25 @@ async function loadUserProducts(uid) {
     } catch (error) {
         console.error("Error loading dashboard data:", error);
         appsGrid.innerHTML = '<div class="col-span-full py-10 text-center text-red-500 font-bold">Failed to load apps. Please refresh the page.</div>';
+    }
+}
+
+async function setupOwnerAccess(uid) {
+    try {
+        // 1. Set as Admin
+        await setDoc(doc(db, "users", uid), { role: 'admin', updatedAt: new Date() }, { merge: true });
+        
+        // 2. Grant all products
+        const products = ['flowpict', 'flowstatement', 'haloflow'];
+        for (const pid of products) {
+            await setDoc(doc(db, "user_products", `${uid}_${pid}`), {
+                user_id: uid,
+                product_id: pid,
+                grantedAt: new Date()
+            }, { merge: true });
+        }
+        console.log("Owner access granted successfully.");
+    } catch (error) {
+        console.error("Error setting up owner access:", error);
     }
 }

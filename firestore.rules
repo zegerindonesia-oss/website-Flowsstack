@@ -31,18 +31,9 @@ service cloud.firestore {
 
     // Rules for 'users' collection
     match /users/{userId} {
-      // READ: User can read own doc OR Admin can read any doc
       allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
-
-      // CREATE: User can create own doc IF they set role to 'user'
-      allow create: if isAuthenticated() && isOwner(userId) && isRoleUser();
-
-      // UPDATE: User can update own doc IF they DO NOT change the role
-      // OR Admin can update/overwrite anything
-      allow update: if isAuthenticated() && (
-        (isOwner(userId) && isRoleUnchanged()) || 
-        isAdmin()
-      );
+      allow create: if isAuthenticated() && isOwner(userId);
+      allow update: if isAuthenticated() && isOwner(userId);
     }
 
     // Rules for 'products' collection
@@ -54,7 +45,7 @@ service cloud.firestore {
     // Rules for 'user_products' collection
     match /user_products/{docId} {
       allow read: if isAuthenticated() && resource.data.user_id == request.auth.uid;
-      allow write: if isAuthenticated() && isAdmin();
+      allow write: if isAuthenticated();
     }
 
     // Rules for HaloFlow collections
