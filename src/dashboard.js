@@ -86,7 +86,7 @@ async function loadUserProducts(uid) {
                         <p class="text-sm text-gray-500 mb-6 flex-1">${product.description}</p>
                         
                         ${isOwned ? `
-                            <a href="${product.link}" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl text-center shadow-lg transition-all flex items-center justify-center gap-2">
+                            <a href="${product.link}" ${product.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl text-center shadow-lg transition-all flex items-center justify-center gap-2">
                                 Open App
                                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                             </a>
@@ -116,7 +116,7 @@ async function setupOwnerAccess(uid) {
         await setDoc(doc(db, "users", uid), { role: 'admin', updatedAt: new Date() }, { merge: true });
         
         // 2. Grant all products
-        const products = ['flowpict', 'flowstatement', 'haloflow'];
+        const products = ['flowpict', 'flowstatement', 'haloflow', 'flowpict-fb', 'flowcontent-studio'];
         for (const pid of products) {
             await setDoc(doc(db, "user_products", `${uid}_${pid}`), {
                 user_id: uid,
