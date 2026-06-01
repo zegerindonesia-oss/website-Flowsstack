@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlowContent Studio - AI Content Generation untuk Bisnis | FlowStack</title>
-    <meta name="description" content="FlowContent Studio adalah AI Assistant yang bekerja untuk bisnis Anda 24 jam. Membalas chat, menjawab pertanyaan, dan meningkatkan closing otomatis." />
+    <title>FlowStatement - Smart Financial Analysis untuk Bisnis | FlowStack</title>
+    <meta name="description" content="FlowStatement adalah AI Assistant yang bekerja untuk bisnis Anda 24 jam. Membalas chat, menjawab pertanyaan, dan meningkatkan closing otomatis." />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,9 +28,9 @@
                     },
                     colors: {
                         brand: {
-                            purple: '#F97316',
-                            violet: '#FB923C',
-                            pink: '#EF4444',
+                            purple: '#2563EB',
+                            violet: '#3B82F6',
+                            pink: '#14B8A6',
                             dark: '#0F172A',
                             light: '#F8FAFC'
                         }
@@ -89,14 +89,14 @@
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #F97316, #EF4444);
+            background: linear-gradient(135deg, #2563EB, #14B8A6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .bg-gradient-brand {
-            background: linear-gradient(135deg, #F97316, #EF4444);
+            background: linear-gradient(135deg, #2563EB, #14B8A6);
         }
 
         .bg-mesh {
@@ -122,20 +122,20 @@
         }
 
         .bg-mesh::before {
-            background: #F97316;
+            background: #2563EB;
             top: -200px;
             left: -200px;
         }
 
         .bg-mesh::after {
-            background: #EF4444;
+            background: #14B8A6;
             bottom: -200px;
             right: -200px;
             animation-delay: -5s;
         }
 
         .chat-bubble-ai {
-            background: linear-gradient(135deg, #F97316, #FB923C);
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
             color: white;
             border-radius: 20px 20px 20px 4px;
             box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.3);
@@ -168,7 +168,7 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background: linear-gradient(90deg, #F97316, #EF4444);
+            background: linear-gradient(90deg, #2563EB, #14B8A6);
             transition: width 0.3s ease;
         }
         .nav-link:hover::after {
@@ -186,11 +186,11 @@
         }
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
-            color: #EF4444;
+            color: #14B8A6;
         }
     </style>
 </head>
-<body class="antialiased font-sans selection:bg-orange-500 selection:text-white">
+<body class="antialiased font-sans selection:bg-blue-600 selection:text-white">
     <div class="bg-mesh"></div>
 
     <!-- Navbar -->
@@ -199,35 +199,35 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Back & Logo -->
                 <div class="flex-shrink-0 flex items-center gap-4">
-                    <a href="../../index.html" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 text-slate-500 hover:text-orange-500 transition-all" title="Kembali ke FlowStack">
+                    <a href="../../index.html" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 text-slate-500 hover:text-blue-600 transition-all" title="Kembali ke FlowStack">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </a>
                     <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center shadow-lg shadow-orange-500/30">
-                            <span class="material-symbols-outlined text-white">edit_document</span>
+                        <div class="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center shadow-lg shadow-blue-600/30">
+                            <span class="material-symbols-outlined text-white">account_balance</span>
                         </div>
-                        <span class="font-heading font-bold text-2xl tracking-tight">Halo<span class="text-orange-500">Flow</span></span>
+                        <span class="font-heading font-bold text-2xl tracking-tight">Halo<span class="text-blue-600">Flow</span></span>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-slate-600 hover:text-orange-500 font-medium nav-link transition-colors">Features</a>
-                    <a href="#solutions" class="text-slate-600 hover:text-orange-500 font-medium nav-link transition-colors">Solutions</a>
-                    <a href="#pricing" class="text-slate-600 hover:text-orange-500 font-medium nav-link transition-colors">Pricing</a>
-                    <a href="#demo" class="text-slate-600 hover:text-orange-500 font-medium nav-link transition-colors">Demo</a>
-                    <a href="#faq" class="text-slate-600 hover:text-orange-500 font-medium nav-link transition-colors">FAQ</a>
+                    <a href="#features" class="text-slate-600 hover:text-blue-600 font-medium nav-link transition-colors">Features</a>
+                    <a href="#solutions" class="text-slate-600 hover:text-blue-600 font-medium nav-link transition-colors">Solutions</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-blue-600 font-medium nav-link transition-colors">Pricing</a>
+                    <a href="#demo" class="text-slate-600 hover:text-blue-600 font-medium nav-link transition-colors">Demo</a>
+                    <a href="#faq" class="text-slate-600 hover:text-blue-600 font-medium nav-link transition-colors">FAQ</a>
                 </div>
 
                 <!-- CTA -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="/login.html" class="text-slate-600 hover:text-orange-500 font-medium transition-colors">Login</a>
+                    <a href="/login.html" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Login</a>
                     <a href="/products/haloflow/dashboard.html" class="bg-brand-dark text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">Coba Gratis</a>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button class="text-slate-600 hover:text-orange-500 p-2" id="mobile-menu-btn">
+                    <button class="text-slate-600 hover:text-blue-600 p-2" id="mobile-menu-btn">
                         <span class="material-symbols-outlined text-3xl">menu</span>
                     </button>
                 </div>
@@ -238,7 +238,7 @@
     <!-- Mobile Menu -->
     <div class="fixed inset-0 z-40 bg-white/95 backdrop-blur-md hidden flex-col pt-24 px-6 pb-8" id="mobile-menu">
         <div class="flex flex-col space-y-6 text-center text-lg">
-            <a href="../../index.html" class="font-semibold text-slate-500 flex items-center justify-center gap-2 hover:text-orange-500 transition-colors">
+            <a href="../../index.html" class="font-semibold text-slate-500 flex items-center justify-center gap-2 hover:text-blue-600 transition-colors">
                 <span class="material-symbols-outlined text-[20px]">arrow_back</span> Kembali ke FlowStack
             </a>
             <div class="h-px w-full bg-slate-200 my-2"></div>
@@ -249,7 +249,7 @@
             <a href="#faq" class="font-semibold text-slate-800">FAQ</a>
             <div class="h-px w-full bg-slate-200 my-4"></div>
             <a href="/login.html" class="font-semibold text-slate-800">Login</a>
-            <a href="/products/haloflow/dashboard.html" class="bg-gradient-brand text-white py-3 rounded-2xl font-bold shadow-lg shadow-orange-500/30">Coba Gratis Sekarang</a>
+            <a href="/products/haloflow/dashboard.html" class="bg-gradient-brand text-white py-3 rounded-2xl font-bold shadow-lg shadow-blue-600/30">Coba Gratis Sekarang</a>
         </div>
     </div>
 
@@ -259,26 +259,26 @@
             <div class="lg:grid lg:grid-cols-12 gap-12 items-center">
                 <!-- Text Content -->
                 <div class="lg:col-span-6 text-center lg:text-left z-10" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 font-semibold text-sm mb-6 animate-slide-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-600 font-semibold text-sm mb-6 animate-slide-up">
                         <span class="material-symbols-outlined text-sm">auto_awesome</span>
                         AI Assistant untuk Bisnis Indonesia
                     </div>
                     
                     <h1 class="font-heading text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
-                        Buntu Ide Bikin Konten?<br/>
-                        <span class="text-gradient">FlowContent Studio Bikin Copywriting & Artikel Detik Ini Juga.</span>
+                        Rekap Manual Bikin Pusing?<br/>
+                        <span class="text-gradient">FlowStatement Analisis Keuangan Otomatis.</span>
                     </h1>
                     
                     <p class="text-lg lg:text-xl text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        FlowContent Studio membantu bisnis membalas chat customer otomatis, follow up prospek, dan meningkatkan penjualan dengan AI Content Generation yang bekerja nonstop untuk bisnis Anda.
+                        FlowStatement membantu bisnis membalas chat customer otomatis, follow up prospek, dan meningkatkan penjualan dengan Smart Financial Analysis yang bekerja nonstop untuk bisnis Anda.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-                        <a href="/products/haloflow/dashboard.html" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-brand text-white font-bold text-lg shadow-xl shadow-orange-500/30 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        <a href="/products/haloflow/dashboard.html" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-brand text-white font-bold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                             Coba Gratis <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </a>
-                        <a href="#demo" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-slate-800 font-bold text-lg border border-slate-200 shadow-sm hover:border-orange-500/50 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-orange-500">play_circle</span> Lihat Demo
+                        <a href="#demo" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-slate-800 font-bold text-lg border border-slate-200 shadow-sm hover:border-blue-600/50 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-blue-600">play_circle</span> Lihat Demo
                         </a>
                     </div>
                     
@@ -303,12 +303,12 @@
                         <div class="absolute top-0 inset-x-0 h-6 bg-white w-40 mx-auto rounded-b-2xl z-20"></div>
                         
                         <!-- App Header -->
-                        <div class="bg-orange-500 px-6 pt-10 pb-4 flex items-center gap-4 text-white relative z-10 shadow-md">
+                        <div class="bg-blue-600 px-6 pt-10 pb-4 flex items-center gap-4 text-white relative z-10 shadow-md">
                             <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                <span class="material-symbols-outlined">edit_document</span>
+                                <span class="material-symbols-outlined">account_balance</span>
                             </div>
                             <div>
-                                <div class="font-semibold leading-tight">FlowContent Studio AI</div>
+                                <div class="font-semibold leading-tight">FlowStatement AI</div>
                                 <div class="text-xs text-white/80 flex items-center gap-1">
                                     <span class="w-2 h-2 rounded-full bg-green-400"></span> Online 24/7
                                 </div>
@@ -326,7 +326,7 @@
                             <!-- User Msg -->
                             <div class="flex flex-col items-end animate-slide-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
                                 <div class="chat-bubble-user p-3 shadow-sm">
-                                    Buatkan 3 ide konten Instagram untuk produk Kopi Susu
+                                    Tolong analisa laporan penjualan bulan ini
                                 </div>
                                 <span class="text-[10px] text-slate-400 mt-1 mr-1">09:41</span>
                             </div>
@@ -334,9 +334,9 @@
                             <!-- AI Msg -->
                             <div class="flex flex-col items-start animate-slide-up" style="animation-delay: 1.5s; animation-fill-mode: both;">
                                 <div class="chat-bubble-ai p-3">
-                                    Siap! Berikut idenya: <br>1. Behind the scenes roasting.<br>2. ASMR bikin Kopi Susu.<br>3. Kuis tebak rasa.<br><br>Mau saya buatkan captionnya sekalian? ✍️
+                                    Tentu! Penjualan bulan ini naik 24% mencapai Rp 45M. Laba bersih Rp 33M. <br><br>Ada efisiensi biaya operasional sebesar 12%.
                                 </div>
-                                <span class="text-[10px] text-slate-400 mt-1 ml-1">09:41 <span class="text-orange-500 font-bold">⚡ AI Reply</span></span>
+                                <span class="text-[10px] text-slate-400 mt-1 ml-1">09:41 <span class="text-blue-600 font-bold">⚡ AI Reply</span></span>
                             </div>
 
                             <!-- Floating Elements -->
@@ -395,7 +395,7 @@
 
                 <!-- Card 3 -->
                 <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center mb-6">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center mb-6">
                         <span class="material-symbols-outlined text-3xl">mark_chat_unread</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Chat Menumpuk</h3>
@@ -416,26 +416,26 @@
 
     <!-- Solution Section -->
     <section class="py-24 relative overflow-hidden" id="solutions">
-        <div class="absolute right-0 top-1/2 w-1/2 h-1/2 bg-red-500/5 blur-[120px] rounded-full"></div>
-        <div class="absolute left-0 bottom-0 w-1/3 h-1/3 bg-orange-500/5 blur-[100px] rounded-full"></div>
+        <div class="absolute right-0 top-1/2 w-1/2 h-1/2 bg-teal-500/5 blur-[120px] rounded-full"></div>
+        <div class="absolute left-0 bottom-0 w-1/3 h-1/3 bg-blue-600/5 blur-[100px] rounded-full"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
-                <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-4">FlowContent Studio Jadi <span class="text-gradient">AI Admin</span> Bisnis Anda</h2>
+                <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-4">FlowStatement Jadi <span class="text-gradient">AI Admin</span> Bisnis Anda</h2>
                 <p class="text-xl text-slate-600">AI yang membantu melayani customer, menjawab pertanyaan produk, hingga follow up otomatis.</p>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
                 <!-- Feature Items -->
                 <div class="glass-card p-6 rounded-2xl text-center group" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-slate-50 text-orange-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">edit_document</span>
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-slate-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">account_balance</span>
                     </div>
                     <div class="font-semibold text-slate-800 text-sm">AI Reply Otomatis</div>
                 </div>
                 
                 <div class="glass-card p-6 rounded-2xl text-center group" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="w-12 h-12 mx-auto rounded-xl bg-slate-50 text-red-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-slate-50 text-teal-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined">schedule</span>
                     </div>
                     <div class="font-semibold text-slate-800 text-sm">Aktif 24 Jam</div>
@@ -473,7 +473,7 @@
                     <div class="w-12 h-12 mx-auto rounded-xl bg-slate-50 text-teal-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined">campaign</span>
                     </div>
-                    <div class="font-semibold text-slate-800 text-sm">Template Library Automation</div>
+                    <div class="font-semibold text-slate-800 text-sm">Arus Kas Automation</div>
                 </div>
 
                 <div class="glass-card p-6 rounded-2xl text-center group" data-aos="zoom-in" data-aos-delay="400">
@@ -506,7 +506,7 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-                <h2 class="font-heading text-4xl lg:text-5xl font-bold mb-4">Semua Dalam <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Satu Dashboard</span></h2>
+                <h2 class="font-heading text-4xl lg:text-5xl font-bold mb-4">Semua Dalam <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">Satu Dashboard</span></h2>
                 <p class="text-xl text-slate-400">Pantau chat, latih AI, dan lihat laporan penjualan dari satu tempat yang elegan.</p>
             </div>
 
@@ -518,7 +518,7 @@
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                     <div class="ml-4 bg-slate-700/50 rounded-md text-xs text-slate-400 px-3 py-1 flex-1 max-w-md text-center flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-[14px]">lock</span> app.flowcontent.id
+                        <span class="material-symbols-outlined text-[14px]">lock</span> app.flowstatement.id
                     </div>
                 </div>
                 
@@ -528,22 +528,22 @@
                     <div class="w-64 border-r border-slate-700 p-4 hidden md:block">
                         <div class="flex items-center gap-2 mb-8 px-2">
                             <div class="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white text-[16px]">edit_document</span>
+                                <span class="material-symbols-outlined text-white text-[16px]">account_balance</span>
                             </div>
-                            <span class="font-bold text-lg">FlowContent Studio</span>
+                            <span class="font-bold text-lg">FlowStatement</span>
                         </div>
                         <div class="space-y-2">
-                            <div class="bg-orange-500/20 text-orange-500 px-4 py-2 rounded-lg flex items-center gap-3 font-medium">
+                            <div class="bg-blue-600/20 text-blue-600 px-4 py-2 rounded-lg flex items-center gap-3 font-medium">
                                 <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
                             </div>
                             <div class="text-slate-400 hover:text-white px-4 py-2 rounded-lg flex items-center gap-3 transition-colors cursor-pointer">
-                                <span class="material-symbols-outlined text-[20px]">chat</span> AI Writer
+                                <span class="material-symbols-outlined text-[20px]">chat</span> Laporan Laba Rugi
                             </div>
                             <div class="text-slate-400 hover:text-white px-4 py-2 rounded-lg flex items-center gap-3 transition-colors cursor-pointer">
-                                <span class="material-symbols-outlined text-[20px]">campaign</span> Template Library
+                                <span class="material-symbols-outlined text-[20px]">campaign</span> Arus Kas
                             </div>
                             <div class="text-slate-400 hover:text-white px-4 py-2 rounded-lg flex items-center gap-3 transition-colors cursor-pointer">
-                                <span class="material-symbols-outlined text-[20px]">model_training</span> Brand Voice
+                                <span class="material-symbols-outlined text-[20px]">model_training</span> Integrasi Bank
                             </div>
                         </div>
                     </div>
@@ -560,19 +560,19 @@
                         <!-- Stats Grid -->
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                             <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                                <div class="text-slate-400 text-sm mb-1">Konten Dibuat</div>
+                                <div class="text-slate-400 text-sm mb-1">Transaksi Diproses</div>
                                 <div class="text-2xl font-bold text-white">4,289</div>
                             </div>
                             <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
                                 <div class="text-slate-400 text-sm mb-1">Waktu Hemat</div>
-                                <div class="text-2xl font-bold text-red-500">142 Jam</div>
+                                <div class="text-2xl font-bold text-teal-500">142 Jam</div>
                             </div>
                             <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
                                 <div class="text-slate-400 text-sm mb-1">Lead Baru</div>
                                 <div class="text-2xl font-bold text-white">356</div>
                             </div>
                             <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                                <div class="text-slate-400 text-sm mb-1">Skor SEO</div>
+                                <div class="text-slate-400 text-sm mb-1">Akurasi Data</div>
                                 <div class="text-2xl font-bold text-green-400">94%</div>
                             </div>
                         </div>
@@ -583,13 +583,13 @@
                                 <h4 class="font-medium text-slate-300 mb-4">Grafik Interaksi</h4>
                                 <!-- Mock Chart -->
                                 <div class="flex items-end gap-2 h-40 pt-4 border-b border-slate-700 pb-2">
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[40%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[60%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[30%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[80%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[50%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[90%]"></div>
-                                    <div class="w-1/12 bg-orange-500/40 rounded-t hover:bg-orange-500 transition-colors h-[100%] bg-orange-500 shadow-[0_0_15px_#F97316]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[40%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[60%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[30%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[80%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[50%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[90%]"></div>
+                                    <div class="w-1/12 bg-blue-600/40 rounded-t hover:bg-blue-600 transition-colors h-[100%] bg-blue-600 shadow-[0_0_15px_#2563EB]"></div>
                                 </div>
                                 <div class="flex justify-between text-xs text-slate-500 mt-2">
                                     <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
@@ -603,21 +603,21 @@
                                         <div class="w-8 h-8 rounded-full bg-slate-700 flex-shrink-0"></div>
                                         <div>
                                             <div class="text-sm font-medium">Budi S.</div>
-                                            <div class="text-xs text-red-500 truncate">AI: "Pesanan 091 sedang..."</div>
+                                            <div class="text-xs text-teal-500 truncate">AI: "Pesanan 091 sedang..."</div>
                                         </div>
                                     </div>
                                     <div class="flex gap-3 items-start border-b border-slate-700 pb-3">
                                         <div class="w-8 h-8 rounded-full bg-slate-700 flex-shrink-0"></div>
                                         <div>
                                             <div class="text-sm font-medium">Siti Aminah</div>
-                                            <div class="text-xs text-red-500 truncate">AI: "Promo 12.12 berlaku..."</div>
+                                            <div class="text-xs text-teal-500 truncate">AI: "Promo 12.12 berlaku..."</div>
                                         </div>
                                     </div>
                                     <div class="flex gap-3 items-start">
                                         <div class="w-8 h-8 rounded-full bg-slate-700 flex-shrink-0"></div>
                                         <div>
                                             <div class="text-sm font-medium">Andi K.</div>
-                                            <div class="text-xs text-red-500 truncate">AI: "Bisa bayar COD ya..."</div>
+                                            <div class="text-xs text-teal-500 truncate">AI: "Bisa bayar COD ya..."</div>
                                         </div>
                                     </div>
                                 </div>
@@ -634,21 +634,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
-                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Lihat Cara FlowContent Studio Membantu Customer</h2>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Lihat Cara FlowStatement Membantu Customer</h2>
                     <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Coba interaksi langsung dengan simulasi AI kami. FlowContent Studio tidak hanya membalas template, tapi mengerti konteks, menawarkan produk, dan merespon layaknya human sales terbaik Anda.
+                        Coba interaksi langsung dengan simulasi AI kami. FlowStatement tidak hanya membalas template, tapi mengerti konteks, menawarkan produk, dan merespon layaknya human sales terbaik Anda.
                     </p>
                     
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-orange-500 mt-1">check_circle</span>
+                            <span class="material-symbols-outlined text-blue-600 mt-1">check_circle</span>
                             <div>
                                 <strong class="text-slate-900">Natural Language Processing</strong>
                                 <p class="text-sm text-slate-600">Mengerti bahasa gaul, singkatan, dan typo customer.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-orange-500 mt-1">check_circle</span>
+                            <span class="material-symbols-outlined text-blue-600 mt-1">check_circle</span>
                             <div>
                                 <strong class="text-slate-900">Context Aware</strong>
                                 <p class="text-sm text-slate-600">Ingat chat sebelumnya untuk respon yang relevan.</p>
@@ -663,15 +663,15 @@
                 
                 <!-- Interactive Demo Mockup -->
                 <div class="bg-slate-50 rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-xl relative" data-aos="fade-left">
-                    <div class="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 z-20">Live Demo!</div>
+                    <div class="absolute -top-4 -right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 z-20">Live Demo!</div>
                     
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-[450px] flex flex-col">
                         <!-- Chat Header -->
-                        <div class="bg-orange-500 px-4 py-3 flex items-center justify-between text-white">
+                        <div class="bg-blue-600 px-4 py-3 flex items-center justify-between text-white">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center relative">
                                     <span class="material-symbols-outlined">storefront</span>
-                                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-orange-500 rounded-full"></span>
+                                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-600 rounded-full"></span>
                                 </div>
                                 <div>
                                     <div class="font-semibold">Kopi Senja (AI Assistant)</div>
@@ -697,7 +697,7 @@
                                     <div class="chat-bubble-ai p-3">
                                         Halo kak! 👋 Tentu masih ya. Kopi Susu Aren kita selalu ready dan fresh. <br><br>Oh ya, khusus hari ini kita ada promo beli 2 Kopi Susu Aren gratis 1 Croissant lho! Mau saya pesankan promonya sekalian? 🥐✨
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 ml-1 text-orange-500 font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">bolt</span> AI Smart Reply</span>
+                                    <span class="text-[10px] text-slate-400 mt-1 ml-1 text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">bolt</span> AI Smart Reply</span>
                                 </div>
                                 
                                 <div class="flex flex-col items-end">
@@ -721,8 +721,8 @@
                         <!-- Chat Input -->
                         <div class="bg-slate-50 p-3 border-t border-slate-200 flex items-center gap-2">
                             <button class="text-slate-400 p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">add</span></button>
-                            <input type="text" placeholder="Ketik pesan demo..." class="flex-1 bg-white border border-slate-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" readonly>
-                            <button class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-violet transition-colors shadow-md"><span class="material-symbols-outlined text-sm ml-1">send</span></button>
+                            <input type="text" placeholder="Ketik pesan demo..." class="flex-1 bg-white border border-slate-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600" readonly>
+                            <button class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-violet transition-colors shadow-md"><span class="material-symbols-outlined text-sm ml-1">send</span></button>
                         </div>
                     </div>
                 </div>
@@ -740,28 +740,28 @@
 
             <div class="relative">
                 <!-- Timeline Line -->
-                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-orange-500/20 via-red-500/50 to-orange-500/20 -translate-y-1/2 z-0"></div>
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-600/20 via-teal-500/50 to-blue-600/20 -translate-y-1/2 z-0"></div>
 
                 <div class="grid md:grid-cols-3 gap-8 relative z-10">
                     <!-- Step 1 -->
                     <div class="glass-card p-8 rounded-3xl text-center relative" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-16 h-16 mx-auto bg-white border-4 border-orange-500 text-orange-500 rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg">1</div>
+                        <div class="w-16 h-16 mx-auto bg-white border-4 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg">1</div>
                         <h3 class="text-xl font-bold mb-3">Scan QR WhatsApp</h3>
-                        <p class="text-slate-600">Hubungkan nomor WhatsApp Bisnis Anda ke sistem FlowContent Studio cukup dengan scan QR code seperti WA Web.</p>
+                        <p class="text-slate-600">Hubungkan nomor WhatsApp Bisnis Anda ke sistem FlowStatement cukup dengan scan QR code seperti WA Web.</p>
                     </div>
 
                     <!-- Step 2 -->
                     <div class="glass-card p-8 rounded-3xl text-center relative" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-16 h-16 mx-auto bg-gradient-brand text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg shadow-red-500/30">2</div>
+                        <div class="w-16 h-16 mx-auto bg-gradient-brand text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg shadow-teal-500/30">2</div>
                         <h3 class="text-xl font-bold mb-3">Upload Data Bisnis</h3>
                         <p class="text-slate-600">Berikan AI informasi bisnis Anda: katalog produk, harga, promo, dan FAQ lewat form atau upload dokumen.</p>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="glass-card p-8 rounded-3xl text-center relative" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 mx-auto bg-white border-4 border-red-500 text-red-500 rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg">3</div>
+                        <div class="w-16 h-16 mx-auto bg-white border-4 border-teal-500 text-teal-500 rounded-full flex items-center justify-center text-2xl font-bold mb-6 relative z-10 shadow-lg">3</div>
                         <h3 class="text-xl font-bold mb-3">AI Langsung Bekerja</h3>
-                        <p class="text-slate-600">Selesai! AI FlowContent Studio siap menjawab pertanyaan customer, melayani komplain, hingga closing otomatis 24/7.</p>
+                        <p class="text-slate-600">Selesai! AI FlowStatement siap menjawab pertanyaan customer, melayani komplain, hingga closing otomatis 24/7.</p>
                     </div>
                 </div>
             </div>
@@ -773,7 +773,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Cocok Untuk Berbagai Bisnis</h2>
-                <p class="text-xl text-slate-600">Apapun industri Anda, FlowContent Studio bisa dilatih untuk menjadi expert sales Anda.</p>
+                <p class="text-xl text-slate-600">Apapun industri Anda, FlowStatement bisa dilatih untuk menjadi expert sales Anda.</p>
             </div>
 
             <!-- Auto Scrolling Banner -->
@@ -852,11 +852,11 @@
         </div>
     </section>
 
-    <!-- Why FlowContent Studio Comparison -->
+    <!-- Why FlowStatement Comparison -->
     <section class="py-24 bg-slate-50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Kenapa Memilih FlowContent Studio?</h2>
+                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Kenapa Memilih FlowStatement?</h2>
             </div>
 
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200" data-aos="fade-up">
@@ -886,29 +886,29 @@
                         </ul>
                     </div>
 
-                    <!-- FlowContent Studio -->
-                    <div class="p-8 md:p-12 bg-gradient-to-br from-orange-500/5 to-red-500/5 relative overflow-hidden">
+                    <!-- FlowStatement -->
+                    <div class="p-8 md:p-12 bg-gradient-to-br from-blue-600/5 to-teal-500/5 relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-10">
-                            <span class="material-symbols-outlined text-9xl text-orange-500">verified</span>
+                            <span class="material-symbols-outlined text-9xl text-blue-600">verified</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-orange-500">check_circle</span> Dengan FlowContent Studio AI
+                            <span class="material-symbols-outlined text-blue-600">check_circle</span> Dengan FlowStatement AI
                         </h3>
                         <ul class="space-y-6 relative z-10">
                             <li class="flex gap-4 text-slate-800 font-medium">
-                                <span class="material-symbols-outlined text-orange-500 shrink-0">check</span>
+                                <span class="material-symbols-outlined text-blue-600 shrink-0">check</span>
                                 <div>Aktif 24/7 nonstop. Closing terjadi meski Anda sedang tidur.</div>
                             </li>
                             <li class="flex gap-4 text-slate-800 font-medium">
-                                <span class="material-symbols-outlined text-orange-500 shrink-0">check</span>
+                                <span class="material-symbols-outlined text-blue-600 shrink-0">check</span>
                                 <div>Interaksi senatural manusia. AI mengerti konteks & bahasa gaul.</div>
                             </li>
                             <li class="flex gap-4 text-slate-800 font-medium">
-                                <span class="material-symbols-outlined text-orange-500 shrink-0">check</span>
+                                <span class="material-symbols-outlined text-blue-600 shrink-0">check</span>
                                 <div>Biaya flat terjangkau. Scale up bisnis tanpa pusing tambah karyawan.</div>
                             </li>
                             <li class="flex gap-4 text-slate-800 font-medium">
-                                <span class="material-symbols-outlined text-orange-500 shrink-0">check</span>
+                                <span class="material-symbols-outlined text-blue-600 shrink-0">check</span>
                                 <div>AI otomatis mendeteksi hot lead dan mem-follow up mereka.</div>
                             </li>
                         </ul>
@@ -948,7 +948,7 @@
                 <div class="rounded-3xl p-8 bg-gradient-brand text-white shadow-2xl relative transform md:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="absolute top-0 inset-x-0 transform -translate-y-1/2 flex justify-center">
                         <span class="bg-slate-900 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full flex items-center gap-1 shadow-lg">
-                            <span class="text-red-500">🔥</span> Paling Populer
+                            <span class="text-teal-500">🔥</span> Paling Populer
                         </span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Growth</h3>
@@ -958,13 +958,13 @@
                         <span class="text-white/80">/3 bulan</span>
                     </div>
                     <ul class="space-y-4 mb-8 text-white/90 text-sm">
-                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-red-500 text-[18px]">check_circle</span> Multi Automation</li>
-                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-red-500 text-[18px]">check_circle</span> AI Smart Follow Up</li>
-                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-red-500 text-[18px]">check_circle</span> Advanced Analytics</li>
-                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-red-500 text-[18px]">check_circle</span> Fitur Template Library WA</li>
-                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-red-500 text-[18px]">check_circle</span> 5.000 Kuota Chat AI</li>
+                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-teal-500 text-[18px]">check_circle</span> Multi Automation</li>
+                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-teal-500 text-[18px]">check_circle</span> AI Smart Follow Up</li>
+                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-teal-500 text-[18px]">check_circle</span> Advanced Analytics</li>
+                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-teal-500 text-[18px]">check_circle</span> Fitur Arus Kas WA</li>
+                        <li class="flex gap-3 items-center"><span class="material-symbols-outlined text-teal-500 text-[18px]">check_circle</span> 5.000 Kuota Chat AI</li>
                     </ul>
-                    <a href="../../register.html" class="block w-full py-3 px-4 bg-white hover:bg-slate-50 text-orange-500 text-center font-bold rounded-xl shadow-lg transition-colors">Coba Growth Sekarang</a>
+                    <a href="../../register.html" class="block w-full py-3 px-4 bg-white hover:bg-slate-50 text-blue-600 text-center font-bold rounded-xl shadow-lg transition-colors">Coba Growth Sekarang</a>
                 </div>
 
                 <!-- Business -->
@@ -1043,7 +1043,7 @@
                         <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                     </div>
-                    <p class="text-slate-700 italic mb-6">"Tadinya mau hire 2 admin CS baru, tapi nyoba FlowContent Studio dulu. Ternyata 1 AI FlowContent Studio bisa handle kerjaan 3 admin sekaligus. Lebih hemat biaya operasional."</p>
+                    <p class="text-slate-700 italic mb-6">"Tadinya mau hire 2 admin CS baru, tapi nyoba FlowStatement dulu. Ternyata 1 AI FlowStatement bisa handle kerjaan 3 admin sekaligus. Lebih hemat biaya operasional."</p>
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center text-slate-500 font-bold">K</div>
                         <div>
@@ -1060,7 +1060,7 @@
     <section class="py-24 bg-white" id="faq">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Pertanyaan Seputar FlowContent Studio</h2>
+                <h2 class="font-heading text-4xl font-bold text-slate-900 mb-4">Pertanyaan Seputar FlowStatement</h2>
             </div>
 
             <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
@@ -1071,7 +1071,7 @@
                         <span class="material-symbols-outlined faq-icon text-slate-400">add</span>
                     </div>
                     <div class="faq-answer px-5 bg-white">
-                        <p class="text-slate-600 pb-2">Tidak perlu sama sekali. FlowContent Studio dirancang untuk pemilik bisnis. Anda cukup scan QR code WhatsApp, ketik/copas informasi produk Anda ke dalam sistem kami, dan AI siap bekerja.</p>
+                        <p class="text-slate-600 pb-2">Tidak perlu sama sekali. FlowStatement dirancang untuk pemilik bisnis. Anda cukup scan QR code WhatsApp, ketik/copas informasi produk Anda ke dalam sistem kami, dan AI siap bekerja.</p>
                     </div>
                 </div>
 
@@ -1082,7 +1082,7 @@
                         <span class="material-symbols-outlined faq-icon text-slate-400">add</span>
                     </div>
                     <div class="faq-answer px-5 bg-white">
-                        <p class="text-slate-600 pb-2">Ya, FlowContent Studio menggunakan metode koneksi standar yang aman. Kami memiliki sistem anti-spam dan jeda pengiriman natural agar akun WhatsApp Anda tetap aman dari pemblokiran.</p>
+                        <p class="text-slate-600 pb-2">Ya, FlowStatement menggunakan metode koneksi standar yang aman. Kami memiliki sistem anti-spam dan jeda pengiriman natural agar akun WhatsApp Anda tetap aman dari pemblokiran.</p>
                     </div>
                 </div>
 
@@ -1124,16 +1124,16 @@
 
     <!-- Final CTA -->
     <section class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 opacity-90 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-teal-500 opacity-90 z-0"></div>
         <!-- Decorative bg -->
         <div class="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+CjxwYXRoIGQ9Ik01NC42MjcgMTEuMjRjLjExMi0uMDc0LjIyNC0uMTQ3LjMzNy0uMjIuMjQ1LS4xNTguNDktLjMyLjczNS0uNDgyLjExNS0uMDc3LjIyOS0uMTU1LjM0My0uMjMzLjIzMy0uMTYyLjQ2NS0uMzI2LjY5Ny0uNDkxLjEwNS0uMDc1LjIxLS4xNTEuMzE1-.2I3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+')] z-0"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="zoom-in">
             <h2 class="font-heading text-4xl lg:text-6xl font-bold text-white mb-6">Biarkan AI Membantu Bisnis Anda Tumbuh</h2>
-            <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Mulai gunakan FlowContent Studio dan rasakan bagaimana rasanya memiliki AI Assistant yang bekerja mencetak sales 24 jam nonstop untuk bisnis Anda.</p>
+            <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Mulai gunakan FlowStatement dan rasakan bagaimana rasanya memiliki AI Assistant yang bekerja mencetak sales 24 jam nonstop untuk bisnis Anda.</p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="../../register.html" class="px-8 py-4 rounded-full bg-white text-orange-500 font-bold text-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto text-center">
+                <a href="../../register.html" class="px-8 py-4 rounded-full bg-white text-blue-600 font-bold text-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto text-center">
                     Coba Gratis Sekarang
                 </a>
                 <a href="#demo" class="px-8 py-4 rounded-full bg-transparent border-2 border-white/30 text-white font-bold text-lg hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto text-center">
@@ -1150,11 +1150,11 @@
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-2 mb-4">
                         <div class="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center">
-                            <span class="material-symbols-outlined text-white text-sm">edit_document</span>
+                            <span class="material-symbols-outlined text-white text-sm">account_balance</span>
                         </div>
-                        <span class="font-heading font-bold text-xl text-white">Halo<span class="text-orange-500">Flow</span></span>
+                        <span class="font-heading font-bold text-xl text-white">Halo<span class="text-blue-600">Flow</span></span>
                     </div>
-                    <p class="text-sm max-w-sm mb-4">AI Content Generation premium untuk membalas chat otomatis, follow up, dan meningkatkan closing bisnis Anda 24 jam nonstop.</p>
+                    <p class="text-sm max-w-sm mb-4">Smart Financial Analysis premium untuk membalas chat otomatis, follow up, dan meningkatkan closing bisnis Anda 24 jam nonstop.</p>
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs">
                         Part of <strong class="text-white">FlowStack Ecosystem</strong>
                     </div>
@@ -1163,34 +1163,34 @@
                 <div>
                     <h4 class="text-white font-bold mb-4">Product</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#features" class="hover:text-red-500 transition-colors">Features</a></li>
-                        <li><a href="#pricing" class="hover:text-red-500 transition-colors">Pricing</a></li>
-                        <li><a href="#solutions" class="hover:text-red-500 transition-colors">Solutions</a></li>
-                        <li><a href="../../login.html" class="hover:text-red-500 transition-colors">Login</a></li>
+                        <li><a href="#features" class="hover:text-teal-500 transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-teal-500 transition-colors">Pricing</a></li>
+                        <li><a href="#solutions" class="hover:text-teal-500 transition-colors">Solutions</a></li>
+                        <li><a href="../../login.html" class="hover:text-teal-500 transition-colors">Login</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h4 class="text-white font-bold mb-4">Company</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://www.flowsstack.com" class="hover:text-red-500 transition-colors">Flowsstack.com</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-red-500 transition-colors">Terms of Service</a></li>
+                        <li><a href="https://www.flowsstack.com" class="hover:text-teal-500 transition-colors">Flowsstack.com</a></li>
+                        <li><a href="#" class="hover:text-teal-500 transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-teal-500 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-teal-500 transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="text-sm">
-                    &copy; 2026 FlowContent Studio by FlowStack. All rights reserved.
+                    &copy; 2026 FlowStatement by FlowStack. All rights reserved.
                 </div>
                 <div class="text-sm text-center">
                     Built with AI for modern businesses.
                 </div>
                 <div class="flex gap-4">
                     <!-- Social icons placeholders -->
-                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors">
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
                         <span class="material-symbols-outlined text-[16px]">public</span>
                     </a>
                 </div>
