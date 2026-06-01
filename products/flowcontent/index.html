@@ -295,67 +295,62 @@
                     </div>
                 </div>
 
-                <!-- Hero Visual -->
+                                <!-- Hero Visual -->
                 <div class="lg:col-span-6 mt-16 lg:mt-0 relative" data-aos="fade-left" data-aos-duration="1200">
-                    <div class="relative w-full max-w-md mx-auto aspect-[9/16] bg-slate-50 rounded-[40px] shadow-2xl border-[8px] border-white overflow-hidden animate-float">
-                        <!-- Phone Notch -->
-                        <div class="absolute top-0 inset-x-0 h-6 bg-white w-40 mx-auto rounded-b-2xl z-20"></div>
-                        
-                        <!-- App Header -->
-                        <div class="bg-orange-500 px-6 pt-10 pb-4 flex items-center gap-4 text-white relative z-10 shadow-md">
-                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                <span class="material-symbols-outlined">edit_document</span>
-                            </div>
-                            <div>
-                                <div class="font-semibold leading-tight">FlowContent Studio AI</div>
-                                <div class="text-xs text-white/80 flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-green-400"></span> Online 24/7
-                                </div>
+                    <div class="relative w-full aspect-[4/3] bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden animate-float flex flex-col text-white">
+                        <!-- Browser Header -->
+                        <div class="bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-slate-700">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <div class="ml-4 bg-slate-900 rounded-md text-xs text-slate-400 px-3 py-1 flex-1 max-w-xs flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[14px]">lock</span> app.flowcontent.id
                             </div>
                         </div>
-
-                        <!-- Chat Area -->
-                        <div class="p-6 space-y-4 bg-[#E5DDD5]/10 h-full relative" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;">
-                            
-                            <!-- Date Badge -->
-                            <div class="text-center">
-                                <span class="text-xs font-medium bg-slate-200/50 text-slate-500 px-3 py-1 rounded-full">Hari ini</span>
-                            </div>
-
-                            <!-- User Msg -->
-                            <div class="flex flex-col items-end animate-slide-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
-                                <div class="chat-bubble-user p-3 shadow-sm">
-                                    Buatkan 3 ide konten Instagram untuk produk Kopi Susu
-                                </div>
-                                <span class="text-[10px] text-slate-400 mt-1 mr-1">09:41</span>
-                            </div>
-
-                            <!-- AI Msg -->
-                            <div class="flex flex-col items-start animate-slide-up" style="animation-delay: 1.5s; animation-fill-mode: both;">
-                                <div class="chat-bubble-ai p-3">
-                                    Siap! Berikut idenya: <br>1. Behind the scenes roasting.<br>2. ASMR bikin Kopi Susu.<br>3. Kuis tebak rasa.<br><br>Mau saya buatkan captionnya sekalian? ✍️
-                                </div>
-                                <span class="text-[10px] text-slate-400 mt-1 ml-1">09:41 <span class="text-orange-500 font-bold">⚡ AI Reply</span></span>
-                            </div>
-
-                            <!-- Floating Elements -->
-                            <div class="absolute -right-12 top-1/3 bg-white p-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float-delayed z-30">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                                    <span class="material-symbols-outlined">payments</span>
+                        
+                        <!-- Editor UI -->
+                        <div class="flex-1 p-6 flex flex-col gap-4">
+                            <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center shadow-lg">
+                                    <span class="material-symbols-outlined text-white">edit_document</span>
                                 </div>
                                 <div>
-                                    <div class="text-xs text-slate-500">Closing Baru</div>
-                                    <div class="font-bold text-slate-800">+Rp 799.000</div>
+                                    <h3 class="font-bold text-lg leading-tight">FlowContent Editor</h3>
+                                    <p class="text-xs text-slate-400">Project: Campaign Kopi Susu</p>
                                 </div>
                             </div>
                             
-                            <div class="absolute -left-8 bottom-1/4 bg-white p-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float z-30" style="animation-delay: 1s;">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                    <span class="material-symbols-outlined">speed</span>
+                            <div class="flex-1 flex flex-col gap-4">
+                                <!-- Prompt Box -->
+                                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                                    <div class="text-xs text-orange-400 font-bold mb-1 flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]">psychology</span> Prompt Anda
+                                    </div>
+                                    <p class="text-sm text-slate-300">Tolong buatkan copywriting Instagram untuk promo buy 1 get 1 kopi susu aren, target audiens mahasiswa, nada santai dan gaul.</p>
                                 </div>
-                                <div>
-                                    <div class="text-xs text-slate-500">Respon Speed</div>
-                                    <div class="font-bold text-slate-800">&lt; 2 Detik</div>
+                                
+                                <!-- AI Generating -->
+                                <div class="bg-slate-800/50 p-4 rounded-xl border border-orange-500/30 flex-1 relative overflow-hidden group">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <div class="flex gap-1">
+                                            <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
+                                            <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse" style="animation-delay: 0.2s"></div>
+                                            <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse" style="animation-delay: 0.4s"></div>
+                                        </div>
+                                        <span class="text-xs text-orange-400 font-bold">AI sedang menulis...</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="h-2 bg-slate-700 rounded w-3/4"></div>
+                                        <div class="h-2 bg-slate-700 rounded w-full"></div>
+                                        <div class="h-2 bg-slate-700 rounded w-5/6"></div>
+                                        <div class="h-2 bg-slate-700 rounded w-1/2 mt-4"></div>
+                                    </div>
+                                    
+                                    <!-- Floating Tooltip -->
+                                    <div class="absolute bottom-4 right-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg animate-bounce flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[12px]">done_all</span> Konten siap!
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -628,100 +623,77 @@
         </div>
     </section>
 
-    <!-- AI Demo Section -->
+        <!-- AI Demo Section -->
     <section class="py-24 bg-white" id="demo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
-                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Lihat Cara FlowContent Studio Membantu Customer</h2>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Ubah Ide Jadi Konten Dalam Hitungan Detik</h2>
                     <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Coba interaksi langsung dengan simulasi AI kami. FlowContent Studio tidak hanya membalas template, tapi mengerti konteks, menawarkan produk, dan merespon layaknya human sales terbaik Anda.
+                        Tidak perlu lagi menatap layar kosong selama berjam-jam. FlowContent Studio mengubah instruksi sederhana Anda menjadi draf konten yang siap dipublikasikan.
                     </p>
                     
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-orange-500 mt-1">check_circle</span>
                             <div>
-                                <strong class="text-slate-900">Natural Language Processing</strong>
-                                <p class="text-sm text-slate-600">Mengerti bahasa gaul, singkatan, dan typo customer.</p>
+                                <strong class="text-slate-900">Brand Voice yang Konsisten</strong>
+                                <p class="text-sm text-slate-600">AI belajar dari gaya penulisan *brand* Anda sehingga tidak kaku.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-orange-500 mt-1">check_circle</span>
                             <div>
-                                <strong class="text-slate-900">Context Aware</strong>
-                                <p class="text-sm text-slate-600">Ingat chat sebelumnya untuk respon yang relevan.</p>
+                                <strong class="text-slate-900">Multi-Format Ready</strong>
+                                <p class="text-sm text-slate-600">Bisa untuk Instagram, TikTok script, Artikel SEO, hingga Email Newsletter.</p>
                             </div>
                         </li>
                     </ul>
-                    
-                    <a href="/products/haloflow/dashboard.html" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full font-medium hover:bg-slate-800 transition-colors">
-                        Buat AI Anda Sendiri <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </a>
                 </div>
                 
                 <!-- Interactive Demo Mockup -->
                 <div class="bg-slate-50 rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-xl relative" data-aos="fade-left">
                     <div class="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 z-20">Live Demo!</div>
                     
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-[450px] flex flex-col">
-                        <!-- Chat Header -->
-                        <div class="bg-orange-500 px-4 py-3 flex items-center justify-between text-white">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center relative">
-                                    <span class="material-symbols-outlined">storefront</span>
-                                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-orange-500 rounded-full"></span>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Kopi Senja (AI Assistant)</div>
-                                    <div class="text-xs text-white/80">Selalu online membalas cepat</div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined opacity-80">more_vert</span>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-500 px-4 py-3 flex items-center gap-3 text-white">
+                            <span class="material-symbols-outlined">magic_button</span>
+                            <div class="font-semibold">AI Content Generator</div>
                         </div>
                         
-                        <!-- Chat Body -->
-                        <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] bg-cover bg-center bg-opacity-10 relative">
-                            <div class="absolute inset-0 bg-white/90"></div>
+                        <div class="p-6 space-y-4">
+                            <!-- Prompt Input -->
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <p class="text-sm text-slate-600 italic">"Buatkan 3 ide konten TikTok untuk mempromosikan produk sepatu lari lokal yang tahan banting."</p>
+                            </div>
                             
-                            <div class="relative z-10 flex flex-col space-y-4" id="demo-chat-container">
-                                <div class="flex flex-col items-end">
-                                    <div class="chat-bubble-user p-3 shadow-sm border border-slate-100">
-                                        Halo kak, Kopi Susu Aren nya apakah masih available untuk dipesan sekarang?
-                                    </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 mr-1">10:00</span>
+                            <!-- Generation Button -->
+                            <div class="flex justify-center">
+                                <button class="bg-slate-900 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+                                    <span class="material-symbols-outlined text-[16px]">temp_preferences_custom</span> Generate Konten
+                                </button>
+                            </div>
+                            
+                            <!-- Result Output -->
+                            <div class="bg-orange-50 p-4 rounded-xl border border-orange-200">
+                                <div class="flex items-center gap-2 text-orange-600 font-bold text-sm mb-3 border-b border-orange-200 pb-2">
+                                    <span class="material-symbols-outlined text-[16px]">check_circle</span> Ini Hasilnya:
                                 </div>
-
-                                <div class="flex flex-col items-start">
-                                    <div class="chat-bubble-ai p-3">
-                                        Halo kak! 👋 Tentu masih ya. Kopi Susu Aren kita selalu ready dan fresh. <br><br>Oh ya, khusus hari ini kita ada promo beli 2 Kopi Susu Aren gratis 1 Croissant lho! Mau saya pesankan promonya sekalian? 🥐✨
+                                <div class="space-y-3 text-sm text-slate-700">
+                                    <div>
+                                        <strong>Ide 1: Drop Test Extreme</strong><br>
+                                        <span class="text-slate-500">Video hook: Jatuhkan sepatu dari lantai 2. Buktikan sol tidak rusak. Audio: Musik beat cepat.</span>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 ml-1 text-orange-500 font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">bolt</span> AI Smart Reply</span>
-                                </div>
-                                
-                                <div class="flex flex-col items-end">
-                                    <div class="chat-bubble-user p-3 shadow-sm border border-slate-100">
-                                        Wah boleh banget! Kirim ke alamat biasa ya pakai Gojek. Berapa totalnya?
+                                    <div>
+                                        <strong>Ide 2: A Day in The Life (Pelari)</strong><br>
+                                        <span class="text-slate-500">POV: Lari pagi 10KM. Fokus pada kenyamanan sepatu dan nafas pelari. CTA: Beli sekarang.</span>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 mr-1">10:02</span>
-                                </div>
-                                
-                                <!-- Typing Indicator (Animated) -->
-                                <div class="flex flex-col items-start" id="typing-indicator">
-                                    <div class="bg-white text-slate-500 border border-slate-200 rounded-full px-4 py-2 flex items-center gap-1 shadow-sm w-16 h-8">
-                                        <div class="typing-dot"></div>
-                                        <div class="typing-dot"></div>
-                                        <div class="typing-dot"></div>
+                                    <div>
+                                        <strong>Ide 3: Bandingin sama Sepatu Mahal</strong><br>
+                                        <span class="text-slate-500">Belah sepatu jadi 2 (jika berani), tunjukkan material dalam yang setara brand internasional.</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Chat Input -->
-                        <div class="bg-slate-50 p-3 border-t border-slate-200 flex items-center gap-2">
-                            <button class="text-slate-400 p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">add</span></button>
-                            <input type="text" placeholder="Ketik pesan demo..." class="flex-1 bg-white border border-slate-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" readonly>
-                            <button class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-violet transition-colors shadow-md"><span class="material-symbols-outlined text-sm ml-1">send</span></button>
                         </div>
                     </div>
                 </div>

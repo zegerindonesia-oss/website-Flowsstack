@@ -297,65 +297,62 @@
 
                 <!-- Hero Visual -->
                 <div class="lg:col-span-6 mt-16 lg:mt-0 relative" data-aos="fade-left" data-aos-duration="1200">
-                    <div class="relative w-full max-w-md mx-auto aspect-[9/16] bg-slate-50 rounded-[40px] shadow-2xl border-[8px] border-white overflow-hidden animate-float">
-                        <!-- Phone Notch -->
-                        <div class="absolute top-0 inset-x-0 h-6 bg-white w-40 mx-auto rounded-b-2xl z-20"></div>
-                        
-                        <!-- App Header -->
-                        <div class="bg-blue-600 px-6 pt-10 pb-4 flex items-center gap-4 text-white relative z-10 shadow-md">
-                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                <span class="material-symbols-outlined">account_balance</span>
-                            </div>
-                            <div>
-                                <div class="font-semibold leading-tight">FlowStatement AI</div>
-                                <div class="text-xs text-white/80 flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-green-400"></span> Online 24/7
-                                </div>
+                    <div class="relative w-full aspect-[4/3] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-float flex flex-col">
+                        <!-- Browser Header -->
+                        <div class="bg-gray-100 px-4 py-3 flex items-center gap-2 border-b border-gray-200">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            <div class="ml-4 bg-white rounded-md text-xs text-gray-400 px-3 py-1 flex-1 max-w-xs flex items-center gap-2 shadow-sm">
+                                <span class="material-symbols-outlined text-[14px]">lock</span> app.flowstatement.id
                             </div>
                         </div>
-
-                        <!-- Chat Area -->
-                        <div class="p-6 space-y-4 bg-[#E5DDD5]/10 h-full relative" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;">
-                            
-                            <!-- Date Badge -->
-                            <div class="text-center">
-                                <span class="text-xs font-medium bg-slate-200/50 text-slate-500 px-3 py-1 rounded-full">Hari ini</span>
-                            </div>
-
-                            <!-- User Msg -->
-                            <div class="flex flex-col items-end animate-slide-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
-                                <div class="chat-bubble-user p-3 shadow-sm">
-                                    Tolong analisa laporan penjualan bulan ini
-                                </div>
-                                <span class="text-[10px] text-slate-400 mt-1 mr-1">09:41</span>
-                            </div>
-
-                            <!-- AI Msg -->
-                            <div class="flex flex-col items-start animate-slide-up" style="animation-delay: 1.5s; animation-fill-mode: both;">
-                                <div class="chat-bubble-ai p-3">
-                                    Tentu! Penjualan bulan ini naik 24% mencapai Rp 45M. Laba bersih Rp 33M. <br><br>Ada efisiensi biaya operasional sebesar 12%.
-                                </div>
-                                <span class="text-[10px] text-slate-400 mt-1 ml-1">09:41 <span class="text-blue-600 font-bold">⚡ AI Reply</span></span>
-                            </div>
-
-                            <!-- Floating Elements -->
-                            <div class="absolute -right-12 top-1/3 bg-white p-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float-delayed z-30">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                                    <span class="material-symbols-outlined">payments</span>
-                                </div>
+                        
+                        <!-- Dashboard UI -->
+                        <div class="flex-1 p-6 bg-slate-50 flex flex-col gap-6">
+                            <div class="flex justify-between items-center">
                                 <div>
-                                    <div class="text-xs text-slate-500">Closing Baru</div>
-                                    <div class="font-bold text-slate-800">+Rp 799.000</div>
+                                    <h3 class="font-bold text-slate-800 text-lg">Laporan Laba Rugi</h3>
+                                    <p class="text-xs text-slate-500">Periode: Oktober 2023</p>
+                                </div>
+                                <div class="bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-sm">
+                                    <span class="material-symbols-outlined text-[14px]">upload_file</span> Upload Mutasi
                                 </div>
                             </div>
                             
-                            <div class="absolute -left-8 bottom-1/4 bg-white p-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-float z-30" style="animation-delay: 1s;">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                    <span class="material-symbols-outlined">speed</span>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 relative overflow-hidden">
+                                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-green-50 rounded-full"></div>
+                                    <div class="text-xs text-slate-500 mb-1 relative z-10">Total Pemasukan</div>
+                                    <div class="text-xl font-bold text-green-600 relative z-10">Rp 124.500.000</div>
                                 </div>
-                                <div>
-                                    <div class="text-xs text-slate-500">Respon Speed</div>
-                                    <div class="font-bold text-slate-800">&lt; 2 Detik</div>
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 relative overflow-hidden">
+                                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-red-50 rounded-full"></div>
+                                    <div class="text-xs text-slate-500 mb-1 relative z-10">Total Pengeluaran</div>
+                                    <div class="text-xl font-bold text-red-500 relative z-10">Rp 42.300.000</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex-1 flex flex-col relative overflow-hidden">
+                                <div class="text-xs font-bold text-slate-700 mb-3 relative z-10">Tren Laba Bersih</div>
+                                <div class="flex-1 flex items-end gap-2 relative z-10">
+                                    <div class="w-1/6 bg-blue-100 rounded-t h-[40%] transition-all duration-500"></div>
+                                    <div class="w-1/6 bg-blue-100 rounded-t h-[50%] transition-all duration-500"></div>
+                                    <div class="w-1/6 bg-blue-100 rounded-t h-[30%] transition-all duration-500"></div>
+                                    <div class="w-1/6 bg-blue-100 rounded-t h-[70%] transition-all duration-500"></div>
+                                    <div class="w-1/6 bg-blue-100 rounded-t h-[60%] transition-all duration-500"></div>
+                                    <div class="w-1/6 bg-blue-600 rounded-t h-[90%] shadow-[0_0_10px_#2563EB] animate-slide-up transition-all duration-500"></div>
+                                </div>
+                                
+                                <!-- Floating insight bubble -->
+                                <div class="absolute top-1/3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg border border-teal-100 flex items-center gap-3 animate-float-delayed z-30">
+                                    <div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
+                                        <span class="material-symbols-outlined text-[16px]">tips_and_updates</span>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-slate-500">Insight AI</div>
+                                        <div class="font-bold text-sm text-slate-800">Laba naik 24% dari bulan lalu!</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -628,100 +625,77 @@
         </div>
     </section>
 
-    <!-- AI Demo Section -->
+        <!-- AI Demo Section -->
     <section class="py-24 bg-white" id="demo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
-                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Lihat Cara FlowStatement Membantu Customer</h2>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Simulasi Upload Laporan Bank</h2>
                     <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Coba interaksi langsung dengan simulasi AI kami. FlowStatement tidak hanya membalas template, tapi mengerti konteks, menawarkan produk, dan merespon layaknya human sales terbaik Anda.
+                        Lihat bagaimana FlowStatement mengekstrak data dari mutasi rekening Anda secara instan dan mengubahnya menjadi laporan keuangan yang rapi dan mudah dibaca.
                     </p>
                     
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-blue-600 mt-1">check_circle</span>
                             <div>
-                                <strong class="text-slate-900">Natural Language Processing</strong>
-                                <p class="text-sm text-slate-600">Mengerti bahasa gaul, singkatan, dan typo customer.</p>
+                                <strong class="text-slate-900">Teknologi OCR Cerdas</strong>
+                                <p class="text-sm text-slate-600">Otomatis membaca format mutasi BCA, Mandiri, BNI, BRI, dll.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="material-symbols-outlined text-blue-600 mt-1">check_circle</span>
                             <div>
-                                <strong class="text-slate-900">Context Aware</strong>
-                                <p class="text-sm text-slate-600">Ingat chat sebelumnya untuk respon yang relevan.</p>
+                                <strong class="text-slate-900">Auto Kategorisasi</strong>
+                                <p class="text-sm text-slate-600">AI mengelompokkan pengeluaran dan pemasukan otomatis.</p>
                             </div>
                         </li>
                     </ul>
-                    
-                    <a href="/products/haloflow/dashboard.html" class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full font-medium hover:bg-slate-800 transition-colors">
-                        Buat AI Anda Sendiri <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </a>
                 </div>
                 
                 <!-- Interactive Demo Mockup -->
                 <div class="bg-slate-50 rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-xl relative" data-aos="fade-left">
                     <div class="absolute -top-4 -right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12 z-20">Live Demo!</div>
                     
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-[450px] flex flex-col">
-                        <!-- Chat Header -->
-                        <div class="bg-blue-600 px-4 py-3 flex items-center justify-between text-white">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center relative">
-                                    <span class="material-symbols-outlined">storefront</span>
-                                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-600 rounded-full"></span>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Kopi Senja (AI Assistant)</div>
-                                    <div class="text-xs text-white/80">Selalu online membalas cepat</div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined opacity-80">more_vert</span>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+                        <div class="bg-blue-600 px-4 py-3 flex items-center gap-3 text-white">
+                            <span class="material-symbols-outlined">upload_file</span>
+                            <div class="font-semibold">Upload Rekening Koran</div>
                         </div>
                         
-                        <!-- Chat Body -->
-                        <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] bg-cover bg-center bg-opacity-10 relative">
-                            <div class="absolute inset-0 bg-white/90"></div>
+                        <div class="p-6 space-y-4">
+                            <div class="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-50 transition-colors">
+                                <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">cloud_upload</span>
+                                <p class="text-sm font-bold text-slate-700">Tarik & Letakkan File Mutasi (PDF/CSV)</p>
+                                <p class="text-xs text-slate-500">Mendukung file dari semua bank nasional</p>
+                            </div>
                             
-                            <div class="relative z-10 flex flex-col space-y-4" id="demo-chat-container">
-                                <div class="flex flex-col items-end">
-                                    <div class="chat-bubble-user p-3 shadow-sm border border-slate-100">
-                                        Halo kak, Kopi Susu Aren nya apakah masih available untuk dipesan sekarang?
+                            <div class="bg-slate-100 p-4 rounded-xl flex items-center justify-between border border-slate-200">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-red-100 text-red-500 rounded-lg flex items-center justify-center">
+                                        <span class="material-symbols-outlined">picture_as_pdf</span>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 mr-1">10:00</span>
-                                </div>
-
-                                <div class="flex flex-col items-start">
-                                    <div class="chat-bubble-ai p-3">
-                                        Halo kak! 👋 Tentu masih ya. Kopi Susu Aren kita selalu ready dan fresh. <br><br>Oh ya, khusus hari ini kita ada promo beli 2 Kopi Susu Aren gratis 1 Croissant lho! Mau saya pesankan promonya sekalian? 🥐✨
+                                    <div>
+                                        <div class="text-sm font-bold text-slate-800">Mutasi_BCA_Okt_2023.pdf</div>
+                                        <div class="text-xs text-slate-500">1.2 MB • Processing...</div>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 ml-1 text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">bolt</span> AI Smart Reply</span>
                                 </div>
-                                
-                                <div class="flex flex-col items-end">
-                                    <div class="chat-bubble-user p-3 shadow-sm border border-slate-100">
-                                        Wah boleh banget! Kirim ke alamat biasa ya pakai Gojek. Berapa totalnya?
+                                <span class="material-symbols-outlined text-blue-600 animate-spin">sync</span>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded-xl border border-green-200 opacity-80 transition-opacity">
+                                <div class="flex items-center gap-2 text-green-700 font-bold text-sm mb-2">
+                                    <span class="material-symbols-outlined text-[16px]">check_circle</span> Ekstraksi Selesai (342 Transaksi)
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-white p-2 rounded border border-green-100">
+                                        <span class="text-slate-500">Pemasukan:</span> <strong class="text-green-600">Rp 124.500.000</strong>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 mt-1 mr-1">10:02</span>
-                                </div>
-                                
-                                <!-- Typing Indicator (Animated) -->
-                                <div class="flex flex-col items-start" id="typing-indicator">
-                                    <div class="bg-white text-slate-500 border border-slate-200 rounded-full px-4 py-2 flex items-center gap-1 shadow-sm w-16 h-8">
-                                        <div class="typing-dot"></div>
-                                        <div class="typing-dot"></div>
-                                        <div class="typing-dot"></div>
+                                    <div class="bg-white p-2 rounded border border-green-100">
+                                        <span class="text-slate-500">Pengeluaran:</span> <strong class="text-red-500">Rp 42.300.000</strong>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Chat Input -->
-                        <div class="bg-slate-50 p-3 border-t border-slate-200 flex items-center gap-2">
-                            <button class="text-slate-400 p-2 hover:bg-slate-200 rounded-full transition-colors"><span class="material-symbols-outlined">add</span></button>
-                            <input type="text" placeholder="Ketik pesan demo..." class="flex-1 bg-white border border-slate-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600" readonly>
-                            <button class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-violet transition-colors shadow-md"><span class="material-symbols-outlined text-sm ml-1">send</span></button>
                         </div>
                     </div>
                 </div>
