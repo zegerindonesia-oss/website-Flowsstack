@@ -18,7 +18,7 @@ const products = [
         slug: 'flowstatement',
         description: 'Smart financial statement analysis and automation.',
         icon: 'payments',
-        link: '/apps/flowstatement',
+        link: 'https://script.google.com/macros/s/AKfycbyLhgARMn5-UspEFNftpwywT0wWTV_GXBWy_R26ScM7xtUhWlqHg2bGkN-rBi9fsGaP/exec',
         price: 490000,
         status: 'active'
     },
