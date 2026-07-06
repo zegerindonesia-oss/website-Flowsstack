@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FlowApp Workspace Editor - FlowStack</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0a0f;
+        }
+
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .editor-textarea {
+            background-color: #12101a;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            resize: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            outline: none;
+        }
+
+        .editor-textarea:focus {
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
+        }
+
+        .glass-nav {
+            background: rgba(15, 13, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-panel {
+            background: rgba(15, 13, 25, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: #22d3ee;
+            border-color: #0891b2;
+        }
+    </style>
+</head>
+
+<body class="text-gray-100 overflow-hidden h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="glass-nav h-16 flex items-center justify-between px-6 shrink-0 z-50">
+        <div class="flex items-center gap-4">
+            <a href="/dashboard/flowapp/index.html" class="p-2 hover:bg-white/5 rounded-xl transition-all text-gray-400 hover:text-white flex items-center">
+                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+            </a>
+            <div>
+                <h1 id="project-title" class="font-heading font-extrabold text-white text-base flex items-center gap-2">
+                    Loading project...
+                    <span id="tier-badge" class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-extrabold uppercase">LITE</span>
+                </h1>
+                <p id="project-subtitle" class="text-xs text-gray-500">Draft version</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button onclick="handleSave()" class="px-4 py-2 border border-white/10 hover:bg-white/5 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">save</span> Simpan
+            </button>
+            <button onclick="handlePublishModal()" class="bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition-all flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">publish</span> Publikasi
+            </button>
+        </div>
+    </nav>
+
+    <!-- Workspace Main Layout -->
+    <div class="flex-1 flex overflow-hidden">
+        <!-- Sidebar / Settings Panel -->
+        <aside class="w-80 sidebar-panel flex flex-col shrink-0 overflow-y-auto p-5 space-y-6">
+            <!-- AI Generator Console -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-heading font-bold text-sm tracking-wide text-white uppercase">AI Generation Console</h3>
+                    <span class="text-[10px] text-gray-500 font-mono">Gemini 1.5 Pro</span>
+                </div>
+                <div class="p-3.5 bg-white/5 border border-white/5 rounded-2xl space-y-3">
+                    <p class="text-xs text-gray-400">Deskripsikan perubahan atau aplikasi yang ingin di-generate oleh AI:</p>
+                    <textarea id="ai-prompt-input" rows="4" placeholder="Contoh: Tambahkan tombol filter pencarian di bagian atas..." class="w-full bg-[#12101a] border border-white/5 rounded-xl text-xs py-2 px-3 text-slate-200 focus:border-cyan-500 focus:ring-cyan-500 placeholder-gray-600 resize-none"></textarea>
+                    
+                    <button id="generate-btn" onclick="triggerAIGeneration()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">bolt</span> Generate App Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- Google Apps Script URL Config -->
+            <div class="space-y-2">
+                <h3 class="font-heading font-bold text-sm tracking-wide text-white uppercase">Spreadsheet Backend Link</h3>
+                <div class="p-3.5 bg-white/5 border border-white/5 rounded-2xl space-y-3">
+                    <label class="block text-[10px] text-gray-400">PASTE GOOGLE APPS SCRIPT WEB APP URL</label>
+                    <input type="url" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-[#12101a] border border-white/5 rounded-xl text-xs py-2 px-3 text-slate-200 focus:border-cyan-500 focus:ring-cyan-500 placeholder-gray-600">
+                    <p class="text-[10px] text-gray-500">URL ini akan di-inject langsung ke dalam script frontend ketika Anda mempublikasikan aplikasi.</p>
+                </div>
+            </div>
+
+            <!-- Export options -->
+            <div class="space-y-2">
+                <h3 class="font-heading font-bold text-sm tracking-wide text-white uppercase">Export Source Code</h3>
+                <button onclick="handleExportZIP()" class="w-full py-2.5 border border-white/10 hover:bg-white/5 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px]">download</span> Export ZIP
+                </button>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="pt-4 border-t border-white/5">
+                <button onclick="handleDeleteProject()" class="w-full py-2.5 border border-red-500/20 hover:bg-red-500/5 text-red-400 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px]">delete</span> Hapus Project
+                </button>
+            </div>
+        </aside>
+
+        <!-- Code Editor & Live Preview Panel -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Left editor box -->
+            <div class="w-1/2 flex flex-col border-r border-white/5 h-full">
+                <!-- File Selector Tabs -->
+                <div class="h-11 bg-white/5 border-b border-white/5 flex items-center px-4 shrink-0 overflow-x-auto gap-2">
+                    <button onclick="selectFileTab('gs')" id="tab-gs" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-gray-400 hover:text-white flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">description</span> Code.gs
+                    </button>
+                    <button onclick="selectFileTab('html')" id="tab-html" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-gray-400 hover:text-white flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">html</span> index.html
+                    </button>
+                    <button onclick="selectFileTab('readme')" id="tab-readme" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-gray-400 hover:text-white flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">info</span> README.md
+                    </button>
+                </div>
+
+                <!-- Editor Textarea -->
+                <div class="flex-1 overflow-hidden relative">
+                    <textarea id="code-editor" class="editor-textarea w-full h-full p-6 font-mono outline-none" spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <!-- Right live preview box -->
+            <div class="w-1/2 flex flex-col h-full bg-[#07060a]">
+                <!-- Preview Control Header -->
+                <div class="h-11 bg-white/5 border-b border-white/5 flex items-center justify-between px-4 shrink-0">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px] text-emerald-400">play_circle</span> Sandboxed Live Preview
+                    </span>
+                    
+                    <button onclick="refreshPreview()" class="px-3 py-1 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 text-xs font-bold rounded-lg transition-all flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">refresh</span> Run Preview
+                    </button>
+                </div>
+
+                <!-- Iframe Viewer -->
+                <div class="flex-1 bg-white relative">
+                    <!-- Blank or loading state -->
+                    <div id="preview-blank" class="absolute inset-0 bg-[#0f0d19] flex flex-col items-center justify-center text-center p-6 z-10">
+                        <span class="material-symbols-outlined text-[48px] text-gray-600 mb-3 font-light">preview</span>
+                        <h4 class="font-heading font-bold text-sm text-gray-300">Belum Ada Preview Terbuka</h4>
+                        <p class="text-xs text-gray-500 max-w-xs mt-1">Klik tombol 'Run Preview' di atas untuk mengompilasi index.html dan merendernya secara lokal.</p>
+                    </div>
+                    <iframe id="preview-frame" class="w-full h-full border-none hidden" sandbox="allow-scripts allow-forms"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Publish Settings Modal -->
+    <div id="publish-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+        <div class="w-full max-w-md bg-white border border-gray-100 rounded-3xl p-6 shadow-2xl text-slate-800 animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-gray-100">
+                <h3 class="font-heading text-lg font-bold text-slate-950">Publish Application</h3>
+                <button onclick="closePublishModal()" class="text-gray-400 hover:text-gray-700"><span class="material-symbols-outlined">close</span></button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Pilih Slug URL Kustom</label>
+                    <div class="flex rounded-xl overflow-hidden border border-gray-200 focus-within:border-cyan-500 focus-within:ring-cyan-500">
+                        <span class="bg-gray-50 text-gray-500 px-3 py-2 text-xs flex items-center border-r border-gray-100">flowsstack.com/p/</span>
+                        <input type="text" id="publish-slug-input" required class="w-full border-none py-2 px-3 text-xs focus:ring-0">
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-1.5">Slug hanya boleh berisi huruf kecil, angka, dan strip (e.g. laundry-ku).</p>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-6 border-t border-gray-100">
+                    <button type="button" onclick="closePublishModal()" class="px-4 py-2 rounded-xl border border-gray-200 font-bold text-xs text-gray-500 hover:bg-gray-50 transition-all">Batal</button>
+                    <button onclick="handlePublishSubmit()" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs transition-all shadow-md">Publish Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK & Script -->
+    <script type="module" src="/src/flowapp-editor.js"></script>
+    <script>
+        function closePublishModal() {
+            document.getElementById('publish-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>

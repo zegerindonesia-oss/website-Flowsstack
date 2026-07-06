@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard - FlowStack</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-btn.active {
+            border-bottom-width: 2px;
+            border-color: #0891b2;
+            color: #0891b2;
+        }
+    </style>
+</head>
+
+<body class="bg-[#fcfbfc] text-[#131118] overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-6">
+        <a href="/" class="flex items-center gap-3">
+            <div class="size-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-600">
+                <span class="material-symbols-outlined text-[24px]">layers</span>
+            </div>
+            <span class="font-heading text-xl font-bold tracking-tight text-slate-900">FlowStack <span class="text-cyan-600 font-bold text-xs bg-cyan-500/10 px-2 py-0.5 rounded ml-1">Admin Panel</span></span>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end mr-2">
+                <span id="user-name" class="text-sm font-bold text-slate-800">Admin</span>
+                <span id="user-email" class="text-xs text-gray-500">admin@flowsstack.com</span>
+            </div>
+            <a href="/dashboard.html" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all text-xs font-bold flex items-center gap-1.5 text-gray-700">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <!-- Content Panel -->
+    <main class="max-w-6xl mx-auto pt-24 px-6 pb-20">
+        <header class="mb-10">
+            <h1 class="font-heading text-3xl font-extrabold text-gray-900 mb-2">Sistem Administrasi</h1>
+            <p class="text-gray-500">Kelola pengguna, log pembayaran, status langganan, dan project yang aktif.</p>
+        </header>
+
+        <!-- Access Block Notification -->
+        <div id="unauthorized-block" class="hidden glass-card p-10 text-center rounded-3xl max-w-xl mx-auto border-red-100">
+            <span class="material-symbols-outlined text-red-500 text-[48px] mb-4">gpp_maybe</span>
+            <h3 class="font-heading font-bold text-lg text-slate-950 mb-1">Akses Ditolak</h3>
+            <p class="text-gray-500 text-xs mb-6">Akun Anda tidak terdaftar sebagai admin FlowStack. Hubungi tim teknis untuk otorisasi.</p>
+            <a href="/dashboard.html" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-2xl text-xs transition-all shadow-md">Kembali ke Dashboard</a>
+        </div>
+
+        <div id="admin-tabs-container">
+            <!-- Navigation Tabs -->
+            <div class="flex border-b border-gray-100 mb-8 overflow-x-auto">
+                <button onclick="switchTab('users')" id="tab-users" class="tab-btn px-6 py-3 font-bold text-sm text-gray-500 hover:text-gray-900 border-b-2 border-transparent transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">group</span> Pengguna
+                </button>
+                <button onclick="switchTab('subs')" id="tab-subs" class="tab-btn px-6 py-3 font-bold text-sm text-gray-500 hover:text-gray-900 border-b-2 border-transparent transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">subscriptions</span> Langganan
+                </button>
+                <button onclick="switchTab('payments')" id="tab-payments" class="tab-btn px-6 py-3 font-bold text-sm text-gray-500 hover:text-gray-900 border-b-2 border-transparent transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">payments</span> Pembayaran
+                </button>
+                <button onclick="switchTab('projects')" id="tab-projects" class="tab-btn px-6 py-3 font-bold text-sm text-gray-500 hover:text-gray-900 border-b-2 border-transparent transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">terminal</span> Projects FlowApp
+                </button>
+            </div>
+
+            <!-- Tab Content: Users -->
+            <section id="content-users" class="tab-content hidden">
+                <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-100 text-gray-500 uppercase font-extrabold">
+                                <th class="p-4">Nama</th>
+                                <th class="p-4">Email</th>
+                                <th class="p-4">Role</th>
+                                <th class="p-4">Terdaftar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body" class="text-gray-600 divide-y divide-gray-50">
+                            <!-- Injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tab Content: Subscriptions -->
+            <section id="content-subs" class="tab-content hidden">
+                <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-100 text-gray-500 uppercase font-extrabold">
+                                <th class="p-4">User ID</th>
+                                <th class="p-4">Plan</th>
+                                <th class="p-4">Billing Cycle</th>
+                                <th class="p-4">Ends At</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subs-table-body" class="text-gray-600 divide-y divide-gray-50">
+                            <!-- Injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tab Content: Payments -->
+            <section id="content-payments" class="tab-content hidden">
+                <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-100 text-gray-500 uppercase font-extrabold">
+                                <th class="p-4">Payment ID</th>
+                                <th class="p-4">User ID</th>
+                                <th class="p-4">Plan ID</th>
+                                <th class="p-4">Amount</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Paid At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payments-table-body" class="text-gray-600 divide-y divide-gray-50">
+                            <!-- Injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tab Content: Projects -->
+            <section id="content-projects" class="tab-content hidden">
+                <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-100 text-gray-500 uppercase font-extrabold">
+                                <th class="p-4">Project ID</th>
+                                <th class="p-4">User ID</th>
+                                <th class="p-4">Name</th>
+                                <th class="p-4">Slug</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Visual Theme</th>
+                                <th class="p-4">Published</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-table-body" class="text-gray-600 divide-y divide-gray-50">
+                            <!-- Injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Firebase SDK & Script -->
+    <script type="module" src="/src/flowapp-admin.js"></script>
+    <script>
+        let currentTab = 'users';
+        function switchTab(tabId) {
+            currentTab = tabId;
+            const tabs = ['tab-users', 'tab-subs', 'tab-payments', 'tab-projects'];
+            tabs.forEach(id => document.getElementById(id).classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            const contents = ['content-users', 'content-subs', 'content-payments', 'content-projects'];
+            contents.forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>

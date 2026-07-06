@@ -1,0 +1,343 @@
+{
+  "name": "FlowContent Master Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-videos",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-generate-videos",
+      "name": "Webhook (Generate)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "flowcontent-generate"
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "driveId": {
+          "__rl": true,
+          "value": "myDrive",
+          "mode": "list"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "fileContent": "={{ $json.body.productImage_0 || $json.body.aiModelImage_0 }}",
+        "name": "={{ $json.body.projectId + '_' + $json.body.generatedAt + '.png' }}"
+      },
+      "id": "gdrive-upload",
+      "name": "Upload to Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GDRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Task",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Task ID": "={{ $json.body.projectId + '_' + Math.random().toString(36).substring(7) }}",
+            "Status": "Pending",
+            "Project ID": "={{ $json.body.projectId }}",
+            "Language": "={{ $json.body.language }}",
+            "Content Type": "={{ $json.body.contentTypes }}",
+            "Video Duration": "={{ $json.body.videoDuration }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "gsheets-append",
+      "name": "Queue in Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        700,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "{\n  \"success\": true,\n  \"message\": \"Task received and queued successfully!\"\n}",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        950,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "schedule-processor",
+      "name": "Process Queue (Every 15m)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Task",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "id": "gsheets-read-pending",
+      "name": "Get Pending Tasks",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        450,
+        600
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.atlascloud.ai/api/v1/model/generateImage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"google/nano-banana-pro/edit\",\n  \"aspect_ratio\": \"9:16\",\n  \"images\": [],\n  \"prompt\": \"Selfie photo holding product\",\n  \"resolution\": \"2k\"\n}",
+        "options": {}
+      },
+      "id": "nano-banana-api",
+      "name": "Nano Banana API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        700,
+        600
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "YOUR_NANO_BANANA_CREDENTIAL_ID",
+          "name": "Nano Banana API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.koboillm.com/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"google/veo3.1/image-to-video\",\n  \"aspect_ratio\": \"9:16\",\n  \"duration\": 8,\n  \"generate_audio\": true,\n  \"image\": \"\",\n  \"prompt\": \"Video prompt\",\n  \"resolution\": \"1080p\",\n  \"seed\": 1\n}",
+        "options": {}
+      },
+      "id": "veo-api",
+      "name": "Google Veo 3 API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        950,
+        600
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "YOUR_VEO_CREDENTIAL_ID",
+          "name": "Veo API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "get_calendar",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-calendar",
+      "name": "Webhook (Calendar)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        900
+      ],
+      "webhookId": "flowcontent-calendar"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Task",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "id": "gsheets-read-calendar",
+      "name": "Read Calendar Data",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        450,
+        900
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook (Generate)": {
+      "main": [
+        [
+          {
+            "node": "Upload to Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Queue in Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue in Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Queue (Every 15m)": {
+      "main": [
+        [
+          {
+            "node": "Get Pending Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pending Tasks": {
+      "main": [
+        [
+          {
+            "node": "Nano Banana API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nano Banana API": {
+      "main": [
+        [
+          {
+            "node": "Google Veo 3 API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook (Calendar)": {
+      "main": [
+        [
+          {
+            "node": "Read Calendar Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "df16eb9a-9e2c-47bc-bbbd-589f81ab9c50"
+}

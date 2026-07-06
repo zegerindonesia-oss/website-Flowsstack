@@ -1,0 +1,297 @@
+{
+  "name": "HaloFlow PRO MAX - Agentic Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "haloflow-wa-incoming",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Webhook WAHA",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "body",
+              "value": "={{$json.payload.body}}"
+            },
+            {
+              "name": "from",
+              "value": "={{$json.payload.from}}"
+            },
+            {
+              "name": "pushname",
+              "value": "={{$json.payload.pushName || $json.payload.from}}"
+            },
+            {
+              "name": "userId",
+              "value": "2fTfQeeFboUdo0SRqYe5PSvb3692"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2",
+      "name": "Extract Info",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getMany",
+        "collection": "haloflow_chats",
+        "filters": {
+          "fields": [
+            {
+              "field": "customerNumber",
+              "operator": "==",
+              "value": "={{$node[\"Extract Info\"].json[\"from\"]}}"
+            }
+          ]
+        }
+      },
+      "id": "3",
+      "name": "Sync Dashboard",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        500,
+        450
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$node[\"Extract Info\"].json[\"body\"]}}",
+        "options": {
+          "systemMessage": "Kamu adalah Agen Sales HaloFlow Pro. Tugasmu membantu customer dengan ramah.\n\nGunakan Tool 'check_price' untuk melihat harga produk dari Google Sheets.\nGunakan Tool 'create_invoice' jika customer ingin membeli."
+        }
+      },
+      "id": "4",
+      "name": "AI Agent (Brain)",
+      "type": "n8n-nodes-base.aiAgent",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "5",
+      "name": "OpenAI Chat Model",
+      "type": "n8n-nodes-base.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        700,
+        350
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_ID",
+          "name": "OpenAI Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "check_price",
+        "description": "Gunakan ini untuk mengecek harga atau stok produk dari katalog Google Sheets.",
+        "workflowId": "={{$workflow.id}}",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"product_name\": {\n      \"type\": \"string\",\n      \"description\": \"Nama produk yang ingin dicari harganya\"\n    }\n  }\n}"
+      },
+      "id": "6",
+      "name": "Tool: Catalog Sheets",
+      "type": "n8n-nodes-base.toolWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        50
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "spreadsheetId": "1TJFerJavi1c_5H_9lP4i0SD03mjqyUNR0cT8alYen6w",
+        "sheetName": "Sheet1",
+        "filters": {
+          "fields": [
+            {
+              "name": "Nama Produk",
+              "value": "={{$node[\"Tool: Catalog Sheets\"].json[\"product_name\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7",
+      "name": "Read Spreadsheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.1,
+      "position": [
+        1200,
+        50
+      ],
+      "credentials": {
+        "googleSheetsApi": {
+          "id": "YOUR_SHEETS_ID",
+          "name": "Flowstack Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n-p07q97exr70r.ceri.sumopod.my.id/webhook/haloflow-wa-incoming",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatId",
+              "value": "={{$node[\"Extract Info\"].json[\"from\"]}}"
+            },
+            {
+              "name": "text",
+              "value": "={{$json.output}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8",
+      "name": "Send to WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        250
+      ]
+    },
+    {
+      "parameters": {
+        "collection": "haloflow_messages",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "columns": {
+            "chat_id": "={{$node[\"Sync Dashboard\"].json[0]?.id || 'new_chat'}}",
+            "role": "assistant",
+            "content": "={{$node[\"AI Agent (Brain)\"].json[\"output\"]}}",
+            "createdAt": "={{new Date()}}"
+          }
+        }
+      },
+      "id": "9",
+      "name": "Save AI Response",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        400
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook WAHA": {
+      "main": [
+        [
+          {
+            "node": "Extract Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Info": {
+      "main": [
+        [
+          {
+            "node": "Sync Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sync Dashboard": {
+      "main": [
+        [
+          {
+            "node": "AI Agent (Brain)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent (Brain)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tool: Catalog Sheets": {
+      "main": [
+        [
+          {
+            "node": "Read Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent (Brain)": {
+      "main": [
+        [
+          {
+            "node": "Send to WhatsApp",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

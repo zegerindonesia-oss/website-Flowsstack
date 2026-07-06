@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FlowApp Dashboard - FlowStack</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-link.active {
+            background: rgba(6, 182, 212, 0.1);
+            color: #0891b2;
+        }
+    </style>
+</head>
+
+<body class="bg-[#fcfbfc] text-[#131118] overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-6">
+        <a href="/" class="flex items-center gap-3">
+            <div class="size-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-600">
+                <span class="material-symbols-outlined text-[24px]">layers</span>
+            </div>
+            <span class="font-heading text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">FlowStack</span>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end mr-2">
+                <span id="user-name" class="text-sm font-bold">User Name</span>
+                <span id="user-email" class="text-xs text-gray-500">user@example.com</span>
+            </div>
+            <a href="/dashboard.html" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all text-xs font-bold flex items-center gap-1.5 text-gray-700">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span> Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-gray-100 bg-white hidden md:block">
+            <div class="p-4 space-y-2">
+                <a href="/dashboard/flowapp/index.html" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all">
+                    <span class="material-symbols-outlined">analytics</span> Projects
+                </a>
+                <a href="#templates" onclick="scrollSection('templates-section')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all">
+                    <span class="material-symbols-outlined">temp_preferences_custom</span> AI Templates
+                </a>
+                <a href="/billing.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all">
+                    <span class="material-symbols-outlined">credit_card</span> Billing
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10">
+            <!-- Protection Notice -->
+            <div id="unsubscribed-notice" class="hidden glass-card p-8 rounded-2xl text-center max-w-2xl mx-auto mt-12 border-red-200/50 bg-red-50/10">
+                <span class="material-symbols-outlined text-red-500 text-[48px] mb-4">lock</span>
+                <h2 class="font-heading text-2xl font-bold text-gray-900 mb-2">Akses Terkunci</h2>
+                <p class="text-gray-500 mb-6">Anda memerlukan langganan paket FlowApp yang aktif untuk mengakses halaman konsol ini.</p>
+                <a href="/products/flowapp/" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-6 py-3 rounded-xl transition-all inline-block shadow-lg shadow-cyan-500/20">Lihat Paket Berlangganan</a>
+            </div>
+
+            <!-- Dashboard App Workspace -->
+            <div id="workspace-content">
+                <header class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="font-heading text-3xl font-extrabold text-gray-900 mb-2 flex items-center gap-2">
+                            FlowApp Workspace
+                            <span id="tier-badge" class="text-xs px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 font-extrabold uppercase">LITE</span>
+                        </h1>
+                        <p class="text-gray-500">Bangun dan kelola seluruh aplikasi micro-tools Anda di satu tempat.</p>
+                    </div>
+
+                    <button onclick="openCreateModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-5 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined">add</span> Buat Project Baru
+                    </button>
+                </header>
+
+                <!-- Project Limit Tracker -->
+                <div class="mb-10 p-4 rounded-xl border border-gray-100 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-1.5 text-xs font-bold text-gray-500">
+                            <span>LIMIT PROJECT TERPAKAI</span>
+                            <span id="limit-text">0 / 20 Project</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div id="limit-bar" class="h-full bg-cyan-500 transition-all" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <a href="/products/flowapp/#pricing" class="px-4 py-2 border border-cyan-600 text-cyan-600 hover:bg-cyan-50 font-bold text-xs rounded-xl transition-all shrink-0">Upgrade Plan</a>
+                </div>
+
+                <!-- Projects grid list -->
+                <section class="mb-16">
+                    <h2 class="font-heading text-xl font-bold mb-6">Daftar Project Anda</h2>
+                    <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Projects injected here -->
+                        <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+                        <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+                        <div class="animate-pulse glass-card h-48 rounded-2xl bg-gray-200"></div>
+                    </div>
+                </section>
+
+                <!-- Templates Section -->
+                <section id="templates-section" class="border-t border-gray-100 pt-16">
+                    <h2 class="font-heading text-2xl font-bold mb-2">AI Templates Blueprint</h2>
+                    <p class="text-gray-500 mb-8">Pilih salah satu template siap pakai untuk mempercepat pembuatan aplikasi Anda.</p>
+                    <div id="templates-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Templates injected here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Project Modal -->
+    <div id="create-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-950/40 backdrop-blur-sm">
+        <div class="w-full max-w-xl bg-white border border-gray-100 rounded-3xl p-6 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-gray-100">
+                <h3 class="font-heading text-lg font-bold">Buat Project Baru</h3>
+                <button onclick="closeCreateModal()" class="text-gray-400 hover:text-gray-700"><span class="material-symbols-outlined">close</span></button>
+            </div>
+
+            <form id="create-project-form" class="space-y-4" onsubmit="handleCreateProject(event)">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nama Project</label>
+                    <input type="text" id="new-proj-name" required placeholder="Contoh: Kasir Laundry Berkah" class="w-full rounded-xl border-gray-200 focus:border-cyan-500 focus:ring-cyan-500 text-sm py-2.5">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Kategori Aplikasi</label>
+                        <select id="new-proj-category" class="w-full rounded-xl border-gray-200 focus:border-cyan-500 focus:ring-cyan-500 text-sm py-2.5">
+                            <option value="CRM">CRM & Leads</option>
+                            <option value="Inventory">Inventory</option>
+                            <option value="HR">HR & Attendance</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Utility">Utility / Lainnya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tema Desain</label>
+                        <select id="new-proj-theme" class="w-full rounded-xl border-gray-200 focus:border-cyan-500 focus:ring-cyan-500 text-sm py-2.5">
+                            <option value="modern">Modern Light</option>
+                            <option value="dark">Sleek Dark</option>
+                            <option value="brutalist">Cyber Brutalist</option>
+                            <option value="glass">Soft Glassmorphism</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Deskripsi Singkat</label>
+                    <textarea id="new-proj-desc" rows="2" placeholder="Deskripsikan secara ringkas kegunaan project ini..." class="w-full rounded-xl border-gray-200 focus:border-cyan-500 focus:ring-cyan-500 text-sm py-2.5"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeCreateModal()" class="px-5 py-2.5 rounded-xl border border-gray-200 font-bold text-sm text-gray-500 hover:bg-gray-50 transition-all">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-sm transition-all shadow-md">Buat Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK & Script -->
+    <script type="module" src="/src/flowapp-dashboard.js"></script>
+    <script>
+        function scrollSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+        function openCreateModal() {
+            document.getElementById('create-modal').classList.remove('hidden');
+        }
+        function closeCreateModal() {
+            document.getElementById('create-modal').classList.add('hidden');
+            document.getElementById('create-project-form').reset();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,441 @@
+{
+  "name": "HaloFlow ULTIMATE - Inbox + AI Auto Reply",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "haloflow-wa-incoming",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Webhook WAHA",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "body",
+              "value": "={{$json.payload.body}}"
+            },
+            {
+              "name": "from",
+              "value": "={{$json.payload.from}}"
+            },
+            {
+              "name": "pushname",
+              "value": "={{$json.payload.pushName || $json.payload.from}}"
+            },
+            {
+              "name": "userId",
+              "value": "2fTfQeeFboUdo0SRqYe5PSvb3692"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2",
+      "name": "Extract Info",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "collection": "haloflow_settings",
+        "documentId": "={{$node[\"Extract Info\"].json[\"userId\"]}}"
+      },
+      "id": "3",
+      "name": "Ambil Personality",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        600,
+        150
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getMany",
+        "collection": "haloflow_chats",
+        "filters": {
+          "fields": [
+            {
+              "field": "customerNumber",
+              "operator": "==",
+              "value": "={{$node[\"Extract Info\"].json[\"from\"]}}"
+            }
+          ]
+        }
+      },
+      "id": "4",
+      "name": "Search Chat",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        600,
+        450
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$node[\"Search Chat\"].json.length}}",
+              "operation": "larger"
+            }
+          ]
+        }
+      },
+      "id": "5",
+      "name": "Chat Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        800,
+        450
+      ]
+    },
+    {
+      "parameters": {
+        "collection": "haloflow_chats",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "columns": {
+            "user_id": "={{$node[\"Extract Info\"].json[\"userId\"]}}",
+            "customerNumber": "={{$node[\"Extract Info\"].json[\"from\"]}}",
+            "customerName": "={{$node[\"Extract Info\"].json[\"pushname\"]}}",
+            "lastMessage": "={{$node[\"Extract Info\"].json[\"body\"]}}",
+            "status": "AUTO",
+            "updatedAt": "={{new Date()}}"
+          }
+        }
+      },
+      "id": "6",
+      "name": "Create Chat",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        500
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "haloflow_chats",
+        "documentId": "={{$node[\"Search Chat\"].json[0].id}}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "columns": {
+            "lastMessage": "={{$node[\"Extract Info\"].json[\"body\"]}}",
+            "updatedAt": "={{new Date()}}"
+          }
+        }
+      },
+      "id": "7",
+      "name": "Update Chat",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        350
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "collection": "haloflow_messages",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "columns": {
+            "chat_id": "={{$node[\"Chat Exists?\"].json[\"active\"] ? $node[\"Search Chat\"].json[0].id : $node[\"Create Chat\"].json.id}}",
+            "role": "user",
+            "content": "={{$node[\"Extract Info\"].json[\"body\"]}}",
+            "type": "text",
+            "createdAt": "={{new Date()}}"
+          }
+        }
+      },
+      "id": "8",
+      "name": "Save User Message",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        450
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$node[\"Extract Info\"].json[\"body\"]}}",
+        "options": {
+          "systemMessage": "={{$node[\"Ambil Personality\"].json[\"systemPrompt\"] || 'Jawab dengan ramah.'}}"
+        }
+      },
+      "id": "9",
+      "name": "AI Agent",
+      "type": "n8n-nodes-base.aiAgent",
+      "typeVersion": 1.1,
+      "position": [
+        1500,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/waha/send",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-mock-uid",
+              "value": "={{$node[\"Extract Info\"].json[\"userId\"]}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatId",
+              "value": "={{$node[\"Extract Info\"].json[\"from\"]}}"
+            },
+            {
+              "name": "text",
+              "value": "={{$json.output}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "10",
+      "name": "Balas via WAHA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1750,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "collection": "haloflow_messages",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "columns": {
+            "chat_id": "={{$node[\"Save User Message\"].json[\"chat_id\"]}}",
+            "role": "assistant",
+            "content": "={{$node[\"AI Agent\"].json[\"output\"]}}",
+            "type": "text",
+            "createdAt": "={{new Date()}}"
+          }
+        }
+      },
+      "id": "11",
+      "name": "Save AI Message",
+      "type": "n8n-nodes-base.googleFirestore",
+      "typeVersion": 1,
+      "position": [
+        1750,
+        450
+      ],
+      "credentials": {
+        "googleFirestoreApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Flowstack Firestore"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "12",
+      "name": "OpenAI Chat Model",
+      "type": "n8n-nodes-base.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        350
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_ID",
+          "name": "OpenAI Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook WAHA": {
+      "main": [
+        [
+          {
+            "node": "Extract Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Info": {
+      "main": [
+        [
+          {
+            "node": "Ambil Personality",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Search Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ambil Personality": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Chat": {
+      "main": [
+        [
+          {
+            "node": "Chat Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Chat",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Chat": {
+      "main": [
+        [
+          {
+            "node": "Save User Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Chat": {
+      "main": [
+        [
+          {
+            "node": "Save User Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save User Message": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Balas via WAHA",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save AI Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

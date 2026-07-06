@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FlowApp - AI App Generator | FlowStack</title>
+    <meta name="description" content="Build customized Google Apps Script, Sheets, and HTML web applications in under 1 minute using AI." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0a0f;
+        }
+
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .premium-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(20, 18, 30, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .accent-gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .neon-glow-btn {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .neon-glow-btn:hover {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+        }
+    </style>
+</head>
+
+<body class="text-gray-100 overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-8 bg-[#0b0a0f]/80 backdrop-blur-md border-b border-white/5">
+        <a href="/" class="flex items-center gap-3">
+            <div class="size-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                <span class="material-symbols-outlined text-[24px]">layers</span>
+            </div>
+            <span class="font-heading text-xl font-bold tracking-tight text-white">FlowStack <span class="text-cyan-400 font-medium text-sm px-1.5 py-0.5 rounded bg-cyan-500/10 ml-1">FlowApp</span></span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+            <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+            <a href="/#products" class="text-gray-300 hover:text-white transition-colors">Products</a>
+            <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+            <a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <a href="/login.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors px-4 py-2">Login</a>
+            <a href="/register.html" class="neon-glow-btn bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2.5 rounded-full text-sm">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-36 pb-24 px-6 md:px-12 flex flex-col items-center text-center overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none -z-10"></div>
+        <div class="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-emerald-500/5 blur-[90px] pointer-events-none -z-10"></div>
+
+        <span class="px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20 mb-6">AI App Generation System</span>
+        
+        <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl leading-[1.05] text-white mb-6">
+            Buat Aplikasi Hanya Dalam <span class="accent-gradient-text">1 Menit</span>
+        </h1>
+        
+        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
+            Ketik kebutuhan Anda, dan kecerdasan buatan FlowApp akan melahirkan frontend HTML, database Google Sheets, dan backend Google Apps Script secara instan.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <a href="/login.html" class="neon-glow-btn bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-4 rounded-full text-base flex items-center gap-2">
+                Mulai Buat Aplikasi
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </a>
+            <a href="#demo" class="px-8 py-4 rounded-full border border-white/10 hover:bg-white/5 transition-all text-gray-300 hover:text-white font-bold text-base">
+                Lihat Demo Flow
+            </a>
+        </div>
+    </section>
+
+    <!-- Demo Flow Section -->
+    <section id="demo" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-16 text-white">Bagaimana FlowApp Bekerja</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl relative">
+                <div class="size-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 font-heading font-bold text-xl">1</div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">Tulis Prompt Kebutuhan</h3>
+                <p class="text-gray-400 text-sm">Jelaskan aplikasi yang ingin Anda bangun, contoh: "Aplikasi kasir laundry dengan status pembayaran dan WhatsApp alert".</p>
+            </div>
+            
+            <div class="glass-card p-8 rounded-3xl relative">
+                <div class="size-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 font-heading font-bold text-xl">2</div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">AI Membuat Kode</h3>
+                <p class="text-gray-400 text-sm">Engine AI FlowApp akan menyusun HTML frontend, kode JavaScript backend, serta format kolom database Google Sheets secara instan.</p>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl relative">
+                <div class="size-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 font-heading font-bold text-xl">3</div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">Hubungkan & Publikasikan</h3>
+                <p class="text-gray-400 text-sm">Deploy kode ke akun Google Apps Script Anda, tempel URL Web App ke FlowApp, dan aplikasi Anda langsung online di URL flowsstack.com/p/[slug].</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-[#07060a] border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-white mb-4">Pilih Paket Berlangganan</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Hemat lebih banyak dengan memilih paket durasi panjang.</p>
+                
+                <!-- Duration Switcher -->
+                <div class="mt-8 inline-flex p-1 bg-white/5 rounded-full border border-white/10">
+                    <button onclick="setBilling('monthly')" id="btn-monthly" class="px-5 py-2 rounded-full text-sm font-bold transition-all bg-cyan-500 text-slate-950">
+                        Monthly
+                    </button>
+                    <button onclick="setBilling('3_months')" id="btn-3m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
+                        3 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-5%</span>
+                    </button>
+                    <button onclick="setBilling('6_months')" id="btn-6m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
+                        6 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-10%</span>
+                    </button>
+                    <button onclick="setBilling('12_months')" id="btn-12m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
+                        12 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-20%</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Lite Card -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border border-white/5">
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Lite</h3>
+                        <p class="text-gray-400 text-sm mb-6">Cocok untuk pemula yang ingin generate tools sederhana.</p>
+                        <div class="mb-8">
+                            <span id="price-lite" class="font-heading text-4xl font-extrabold text-white">Rp 199.000</span>
+                            <span id="period-lite" class="text-gray-400 text-sm">/bulan</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> AI app generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Code.gs generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> index.html generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Google Apps Script backend</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Google Sheets database</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> 20 projects limit</li>
+                            <li class="flex items-center gap-3 text-gray-500"><span class="material-symbols-outlined text-gray-600 text-[18px]">cancel</span> No Export ZIP</li>
+                            <li class="flex items-center gap-3 text-gray-500"><span class="material-symbols-outlined text-gray-600 text-[18px]">cancel</span> FlowStack branding banner</li>
+                        </ul>
+                    </div>
+                    <button onclick="handleSubscribe('flowapp-lite')" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-2xl transition-all">Langganan Lite</button>
+                </div>
+
+                <!-- Pro Card -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border-2 border-cyan-500 relative">
+                    <span class="absolute top-0 right-8 -translate-y-1/2 bg-cyan-500 text-slate-950 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">Paling Populer</span>
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Pro</h3>
+                        <p class="text-gray-400 text-sm mb-6">Pilihan terbaik untuk profesional dan pelaku bisnis.</p>
+                        <div class="mb-8">
+                            <span id="price-pro" class="font-heading text-4xl font-extrabold text-white">Rp 399.000</span>
+                            <span id="period-pro" class="text-gray-400 text-sm">/bulan</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Everything in Lite</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Advanced CRUD & Auth Templates</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Role-based access control</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Audit Logs & Admin view</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Export source code (ZIP)</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> 100 projects limit</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Hapus branding FlowStack</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Priority generation speed</li>
+                        </ul>
+                    </div>
+                    <button onclick="handleSubscribe('flowapp-pro')" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-cyan-500/25">Langganan Pro</button>
+                </div>
+
+                <!-- Cloud Card -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border border-white/5">
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Cloud</h3>
+                        <p class="text-gray-400 text-sm mb-6">Bagi perusahaan yang memerlukan dashboard kolaboratif.</p>
+                        <div class="mb-8">
+                            <span id="price-cloud" class="font-heading text-4xl font-extrabold text-white">Rp 599.000</span>
+                            <span id="period-cloud" class="text-gray-400 text-sm">/bulan</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Everything in Pro</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Unlimited projects limit</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Hosted workspace & Custom Domain</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Team workspaces / Kolaborasi</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Template Marketplace Access</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> White-label options</li>
+                        </ul>
+                    </div>
+                    <button onclick="handleSubscribe('flowapp-cloud')" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-2xl transition-all">Langganan Cloud</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6 max-w-4xl mx-auto">
+        <h2 class="font-heading text-3xl font-bold text-center mb-12 text-white">FAQ (Frequently Asked Questions)</h2>
+        <div class="space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-lg mb-2 text-white">Apakah saya memerlukan akun Google?</h3>
+                <p class="text-gray-400 text-sm">Ya. FlowApp memanfaatkan Google Sheets sebagai database Anda. Kode Google Apps Script yang di-generate harus di-deploy di dalam editor Google Apps Script Anda sendiri untuk akses penuh.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-lg mb-2 text-white">Apakah database aman?</h3>
+                <p class="text-gray-400 text-sm">Sangat aman. Database aplikasi Anda disimpan di Google Sheet milik akun Google Anda sendiri. FlowApp tidak memyimpan salinan record database Anda, melainkan hanya merender interface yang berinteraksi langsung via GAS Web App URL Anda.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-lg mb-2 text-white">Bagaimana cara memotong branding banner?</h3>
+                <p class="text-gray-400 text-sm">Paket Pro dan Cloud memberikan fitur khusus untuk menghapus branding banner "Built with FlowApp" di bagian bawah layar secara otomatis saat proses publikasi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+        <p>&copy; 2026 FlowStack Ecosystem. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentCycle = 'monthly';
+        const pricing = {
+            lite: 199000,
+            pro: 399000,
+            cloud: 599000
+        };
+
+        function setBilling(cycle) {
+            currentCycle = cycle;
+            
+            // Adjust buttons active style
+            const btns = ['btn-monthly', 'btn-3m', 'btn-6m', 'btn-12m'];
+            btns.forEach(id => {
+                const btn = document.getElementById(id);
+                btn.className = "px-5 py-2 rounded-full text-sm font-bold transition-all text-gray-400 hover:text-white";
+            });
+            
+            let activeBtnId = 'btn-monthly';
+            if(cycle === '3_months') activeBtnId = 'btn-3m';
+            if(cycle === '6_months') activeBtnId = 'btn-6m';
+            if(cycle === '12_months') activeBtnId = 'btn-12m';
+            document.getElementById(activeBtnId).className = "px-5 py-2 rounded-full text-sm font-bold transition-all bg-cyan-500 text-slate-950";
+
+            // Render new price fields based on duration discount
+            let multiplier = 1;
+            let discount = 0;
+            let periodText = '/month';
+            
+            if(cycle === '3_months') { multiplier = 3; discount = 0.05; periodText = ' / 3 months'; }
+            if(cycle === '6_months') { multiplier = 6; discount = 0.10; periodText = ' / 6 months'; }
+            if(cycle === '12_months') { multiplier = 12; discount = 0.20; periodText = ' / 12 months'; }
+
+            const calculateAndFormat = (baseVal) => {
+                const price = Math.round((baseVal * multiplier) * (1 - discount));
+                return "Rp " + price.toLocaleString('id-ID');
+            };
+
+            document.getElementById('price-lite').textContent = calculateAndFormat(pricing.lite);
+            document.getElementById('price-pro').textContent = calculateAndFormat(pricing.pro);
+            document.getElementById('price-cloud').textContent = calculateAndFormat(pricing.cloud);
+            
+            document.getElementById('period-lite').textContent = periodText;
+            document.getElementById('period-pro').textContent = periodText;
+            document.getElementById('period-cloud').textContent = periodText;
+        }
+
+        async function handleSubscribe(planId) {
+            // Check auth (in actual app we read token from Firebase)
+            const token = localStorage.getItem('fs_token');
+            if(!token) {
+                // If not logged in, redirect to login
+                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/billing/create-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        planId: planId,
+                        billingCycle: currentCycle
+                    })
+                });
+
+                const data = await response.json();
+                if(data.checkoutUrl) {
+                    window.location.href = data.checkoutUrl;
+                } else {
+                    alert('Error creating checkout: ' + (data.error || 'Unknown error'));
+                }
+            } catch(e) {
+                console.error(e);
+                alert('Connection to server failed.');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -44,12 +44,22 @@ const products = [
     },
     {
         id: 'flowcontent-studio',
-        name: 'FlowContent Studio',
+        name: 'FlowContent',
         slug: 'flowcontent-studio',
-        description: 'AI Content Generation Studio.',
+        description: 'AI Video Content Factory - Automate creation & publishing of social media videos.',
         icon: 'movie',
-        link: 'https://ai.studio/apps/b7db0509-947c-4718-9bd0-d544b5dcd5c7?fullscreenApplet=true',
+        link: '/apps/flowcontent/',
         price: 390000,
+        status: 'active'
+    },
+    {
+        id: 'flowapp',
+        name: 'FlowApp Workspace',
+        slug: 'flowapp',
+        description: 'Generate Google Apps Script + Sheets + HTML apps dengan AI secara instan.',
+        icon: 'terminal',
+        link: '/dashboard/flowapp/index.html',
+        price: 199000,
         status: 'active'
     }
 ];

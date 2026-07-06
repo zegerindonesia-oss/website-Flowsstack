@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowLMS — AI-Powered Learning, Training & Membership Platform</title>
+  <meta name="description" content="FlowLMS adalah platform Learning Management System berbasis AI untuk membangun akademi online, onboarding karyawan, SOP training, dan membership site dalam satu platform." />
+  <meta name="keywords" content="LMS, Learning Management System, AI, training, kursus online, membership, FlowStack, Indonesia" />
+  <meta property="og:title" content="FlowLMS — AI-Powered Learning Platform" />
+  <meta property="og:description" content="Bangun portal belajar profesional dalam 15 menit dengan AI." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0EA5E9",
+            "primary-dark": "#0284C7",
+            "accent": "#06B6D4",
+            "accent-light": "#67E8F9",
+            "surface": "#F0FDFA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "heading": ["Outfit", "sans-serif"],
+          },
+          borderRadius: { "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "3rem", "full": "9999px" },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(14, 165, 233, 0.07)',
+            'glass-hover': '0 12px 40px 0 rgba(14, 165, 233, 0.18)',
+            'glow': '0 0 30px rgba(14, 165, 233, 0.4)',
+            'glow-lg': '0 0 60px rgba(6, 182, 212, 0.3)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Font Classes */
+    .font-heading { font-family: 'Outfit', sans-serif; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* Glassmorphism */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 12px 40px rgba(14, 165, 233, 0.12);
+      transform: translateY(-4px);
+    }
+
+    /* Aurora Blobs */
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      animation: drift 12s infinite alternate ease-in-out;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(15px, -10px) scale(1.05); }
+      100% { transform: translate(-10px, 20px) scale(0.95); }
+    }
+    .blob-teal-1 {
+      background: #0EA5E9;
+      opacity: 0.18;
+      top: -12%;
+      left: -8%;
+      width: 55vw;
+      height: 55vw;
+      max-width: 700px;
+      max-height: 700px;
+    }
+    .blob-cyan-2 {
+      background: #06B6D4;
+      opacity: 0.15;
+      top: 5%;
+      right: -12%;
+      width: 45vw;
+      height: 45vw;
+      max-width: 550px;
+      max-height: 550px;
+      animation-delay: -4s;
+    }
+    .blob-sky-3 {
+      background: #67E8F9;
+      opacity: 0.2;
+      bottom: -15%;
+      left: 25%;
+      width: 40vw;
+      height: 40vw;
+      max-width: 500px;
+      max-height: 500px;
+      animation-delay: -7s;
+    }
+
+    /* Gradient text */
+    .text-gradient-teal {
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+
+    /* Selection */
+    ::selection {
+      background: #0EA5E9;
+      color: white;
+    }
+
+    /* Pulse ring animation */
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    .pulse-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid #0EA5E9;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* Step connector line */
+    .step-connector {
+      position: absolute;
+      top: 32px;
+      left: calc(50% + 32px);
+      width: calc(100% - 64px);
+      height: 2px;
+      background: linear-gradient(90deg, #0EA5E9, #06B6D4);
+      opacity: 0.3;
+    }
+
+    /* Pricing popular badge */
+    .pricing-popular {
+      position: relative;
+      border: 2px solid #0EA5E9;
+      box-shadow: 0 0 40px rgba(14, 165, 233, 0.15);
+    }
+    .pricing-popular::before {
+      content: 'Paling Populer';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* FAQ Accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+    }
+    .faq-chevron {
+      transition: transform 0.3s ease;
+    }
+    .faq-chevron.rotated {
+      transform: rotate(180deg);
+    }
+
+    /* Dashboard mockup skeleton */
+    .mockup-skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-animation-delay {
+      animation: float 6s ease-in-out infinite;
+      animation-delay: -3s;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 font-display overflow-x-hidden">
+
+  <!-- ==================== 1. NAVIGATION ==================== -->
+  <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <nav class="glass-nav rounded-full px-6 md:px-8 py-3.5 flex items-center justify-between w-full max-w-5xl shadow-glass">
+      <!-- Back Link -->
+      <a href="/" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors group">
+        <span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+        <span class="font-semibold text-sm hidden sm:inline">Kembali ke FlowStack</span>
+      </a>
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-[18px]">school</span>
+        </div>
+        <span class="font-heading text-xl font-bold text-gradient-teal">FlowLMS</span>
+      </a>
+      <!-- CTA -->
+      <a href="#pricing" class="bg-gradient-to-r from-primary to-accent text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg hover:shadow-glow transition-all transform hover:-translate-y-0.5 flex items-center gap-1.5 group">
+        <span>Mulai Gratis</span>
+        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+      </a>
+    </nav>
+  </div>
+
+
+  <!-- ==================== 2. HERO SECTION ==================== -->
+  <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+    <!-- Aurora Blobs -->
+    <div class="aurora-blob blob-teal-1"></div>
+    <div class="aurora-blob blob-cyan-2"></div>
+    <div class="aurora-blob blob-sky-3"></div>
+    <!-- Dot Pattern -->
+    <div class="absolute top-32 left-6 opacity-10" style="background-image:radial-gradient(#0EA5E9 1px,transparent 1px);background-size:20px 20px;width:180px;height:180px;"></div>
+    <div class="absolute bottom-20 right-8 opacity-10" style="background-image:radial-gradient(#06B6D4 1px,transparent 1px);background-size:20px 20px;width:140px;height:140px;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left: Copy -->
+        <div class="flex flex-col gap-6 text-center lg:text-left" data-aos="fade-right" data-aos-duration="800">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-primary/20 w-fit mx-auto lg:mx-0 shadow-sm backdrop-blur-sm">
+            <span class="text-base">🎓</span>
+            <span class="text-xs font-bold text-primary tracking-wide uppercase">AI-Powered Learning Platform</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-gray-900">
+            Bangun Portal Belajar Profesional dalam
+            <span class="text-gradient-teal"> 15 Menit</span>
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            FlowLMS adalah platform Learning, Training, dan Membership berbasis AI. Buat akademi online, onboarding karyawan, SOP training, dan membership site — semua dalam satu platform.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+            <a href="#pricing" class="flex items-center justify-center gap-2 h-12 px-8 bg-gradient-to-r from-primary to-accent hover:brightness-110 text-white text-base font-bold rounded-full shadow-lg hover:shadow-glow transition-all transform hover:-translate-y-0.5">
+              <span>Mulai Gratis</span>
+              <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+            </a>
+            <a href="#dashboard-preview" class="flex items-center justify-center gap-2 h-12 px-8 bg-white hover:bg-gray-50 text-gray-800 text-base font-bold rounded-full shadow-md hover:shadow-lg transition-all border border-gray-200">
+              <span class="material-symbols-outlined text-[20px] text-primary">play_circle</span>
+              <span>Lihat Demo</span>
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="flex items-center justify-center lg:justify-start gap-5 text-gray-500 text-sm font-medium">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-emerald-500">check_circle</span>
+              Tanpa kartu kredit
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-emerald-500">check_circle</span>
+              Setup dalam 15 menit
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Dashboard Mockup -->
+        <div class="relative" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+          <div class="relative w-full max-w-lg mx-auto">
+            <!-- Glow behind -->
+            <div class="absolute inset-4 bg-gradient-to-tr from-primary/25 to-accent/25 rounded-3xl blur-2xl"></div>
+            <!-- Main card -->
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+              <!-- Top bar -->
+              <div class="bg-gray-50 px-4 py-3 flex items-center gap-2 border-b border-gray-100">
+                <div class="flex gap-1.5">
+                  <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                <div class="flex-1 flex justify-center">
+                  <div class="bg-white rounded-lg px-4 py-1 text-xs text-gray-400 border border-gray-200 font-mono">app.flowlms.id/dashboard</div>
+                </div>
+              </div>
+              <!-- Dashboard Content -->
+              <div class="p-5 space-y-4">
+                <!-- Stats Row -->
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-gradient-to-br from-primary/10 to-accent/5 rounded-xl p-3 text-center">
+                    <div class="text-xs text-gray-500 mb-1">Total Siswa</div>
+                    <div class="text-xl font-bold text-primary">2,481</div>
+                    <div class="text-[10px] text-emerald-500 font-semibold">↑ 12%</div>
+                  </div>
+                  <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-3 text-center">
+                    <div class="text-xs text-gray-500 mb-1">Completion</div>
+                    <div class="text-xl font-bold text-emerald-600">87%</div>
+                    <div class="text-[10px] text-emerald-500 font-semibold">↑ 5%</div>
+                  </div>
+                  <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-3 text-center">
+                    <div class="text-xs text-gray-500 mb-1">Revenue</div>
+                    <div class="text-xl font-bold text-amber-600">45jt</div>
+                    <div class="text-[10px] text-emerald-500 font-semibold">↑ 24%</div>
+                  </div>
+                </div>
+                <!-- Course List -->
+                <div class="space-y-3">
+                  <div class="text-sm font-bold text-gray-700">Kursus Aktif</div>
+                  <!-- Course 1 -->
+                  <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white flex-shrink-0">
+                      <span class="material-symbols-outlined text-[18px]">code</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="text-sm font-semibold text-gray-800 truncate">Fullstack Web Development</div>
+                      <div class="flex items-center gap-2 mt-1">
+                        <div class="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                          <div class="bg-gradient-to-r from-primary to-accent h-full rounded-full" style="width:78%"></div>
+                        </div>
+                        <span class="text-[10px] text-gray-500 font-semibold">78%</span>
+                      </div>
+                    </div>
+                    <div class="text-[10px] text-gray-400 flex-shrink-0">342 siswa</div>
+                  </div>
+                  <!-- Course 2 -->
+                  <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white flex-shrink-0">
+                      <span class="material-symbols-outlined text-[18px]">palette</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="text-sm font-semibold text-gray-800 truncate">UI/UX Design Masterclass</div>
+                      <div class="flex items-center gap-2 mt-1">
+                        <div class="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                          <div class="bg-gradient-to-r from-violet-500 to-purple-600 h-full rounded-full" style="width:55%"></div>
+                        </div>
+                        <span class="text-[10px] text-gray-500 font-semibold">55%</span>
+                      </div>
+                    </div>
+                    <div class="text-[10px] text-gray-400 flex-shrink-0">218 siswa</div>
+                  </div>
+                  <!-- Course 3 -->
+                  <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white flex-shrink-0">
+                      <span class="material-symbols-outlined text-[18px]">trending_up</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="text-sm font-semibold text-gray-800 truncate">Digital Marketing Intensive</div>
+                      <div class="flex items-center gap-2 mt-1">
+                        <div class="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                          <div class="bg-gradient-to-r from-amber-500 to-orange-600 h-full rounded-full" style="width:92%"></div>
+                        </div>
+                        <span class="text-[10px] text-gray-500 font-semibold">92%</span>
+                      </div>
+                    </div>
+                    <div class="text-[10px] text-gray-400 flex-shrink-0">189 siswa</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating badges -->
+            <div class="absolute -top-4 -right-4 md:-right-8 bg-white/90 backdrop-blur-xl p-3 rounded-2xl shadow-xl border border-white/60 float-animation z-20">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                  <span class="material-symbols-outlined text-[20px]">verified</span>
+                </div>
+                <div>
+                  <p class="text-[10px] text-gray-400 font-semibold">Sertifikat</p>
+                  <p class="text-sm font-bold text-gray-800">Auto-Generated</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 md:-left-8 bg-white/90 backdrop-blur-xl p-3 rounded-2xl shadow-xl border border-white/60 float-animation-delay z-20">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                </div>
+                <div>
+                  <p class="text-[10px] text-gray-400 font-semibold">AI-Powered</p>
+                  <p class="text-sm font-bold text-gray-800">Course Builder</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 3. SOCIAL PROOF BAR ==================== -->
+  <section class="relative py-6 bg-gradient-to-r from-primary to-accent" data-aos="fade-up">
+    <div class="max-w-5xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x divide-white/30 text-center text-white">
+        <div class="py-2">
+          <div class="text-3xl md:text-4xl font-heading font-extrabold">500+</div>
+          <div class="text-sm font-medium text-white/80">Workspace Aktif</div>
+        </div>
+        <div class="py-2">
+          <div class="text-3xl md:text-4xl font-heading font-extrabold">15.000+</div>
+          <div class="text-sm font-medium text-white/80">Siswa Terdaftar</div>
+        </div>
+        <div class="py-2">
+          <div class="text-3xl md:text-4xl font-heading font-extrabold">98%</div>
+          <div class="text-sm font-medium text-white/80">Tingkat Kepuasan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 4. FEATURES GRID ==================== -->
+  <section class="py-20 md:py-28 relative overflow-hidden" id="features">
+    <!-- Subtle background -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-surface/50 to-white"></div>
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image:linear-gradient(#0EA5E9 1px,transparent 1px),linear-gradient(90deg,#0EA5E9 1px,transparent 1px);background-size:48px 48px;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Fitur Unggulan</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Semua yang Anda Butuhkan untuk Membangun Akademi</h2>
+        <p class="text-gray-500 text-lg">Fitur lengkap yang dirancang untuk pengalaman belajar modern dan profesional.</p>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Feature 1 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-primary text-[24px]">auto_awesome</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">AI Course Builder</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Buat outline kursus lengkap dengan AI dalam hitungan detik.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/15 to-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-violet-600 text-[24px]">hub</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Multi-Tenant Workspace</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Setiap workspace independen dengan branding sendiri.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/15 to-orange-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-amber-600 text-[24px]">workspace_premium</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Sertifikat Otomatis</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Generate sertifikat PDF otomatis saat kursus selesai.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="150">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/15 to-teal-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-emerald-600 text-[24px]">monitoring</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Analytics Dashboard</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Pantau revenue, engagement, dan completion rate real-time.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/15 to-rose-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-red-500 text-[24px]">play_circle</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Video Multi-Platform</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Support YouTube, Vimeo, Loom, dan Bunny Stream.</p>
+        </div>
+        <!-- Feature 6 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500/15 to-blue-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-sky-600 text-[24px]">verified</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">White Label Ready</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Custom domain dan branding tanpa watermark.</p>
+        </div>
+        <!-- Feature 7 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/15 to-blue-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-indigo-600 text-[24px]">schedule_send</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Drip Content</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Jadwalkan perilisan konten bertahap untuk siswa.</p>
+        </div>
+        <!-- Feature 8 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="150">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/15 to-rose-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-pink-600 text-[24px]">forum</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Komunitas</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Diskusi, Q&A, dan interaksi siswa-instruktur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 5. HOW IT WORKS ==================== -->
+  <section class="py-20 md:py-28 bg-gray-50 relative" id="how-it-works">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Cara Kerja</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">3 Langkah Mudah untuk Mulai</h2>
+        <p class="text-gray-500 text-lg">Dari nol sampai portal belajar profesional, hanya dalam hitungan menit.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <!-- Connector Lines (Desktop) -->
+        <div class="hidden md:block absolute top-16 left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] h-0.5 bg-gradient-to-r from-primary/40 via-accent/40 to-primary/40"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center relative" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-glow relative z-10">
+            <span class="material-symbols-outlined text-white text-[28px]">add_circle</span>
+          </div>
+          <div class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Langkah 1</div>
+          <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Buat Workspace & Kursus</h3>
+          <p class="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">Setup workspace dan susun materi pembelajaran dalam hitungan menit dengan bantuan AI.</p>
+        </div>
+        <!-- Step 2 -->
+        <div class="text-center relative" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-glow relative z-10">
+            <span class="material-symbols-outlined text-white text-[28px]">group_add</span>
+          </div>
+          <div class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Langkah 2</div>
+          <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Undang Siswa</h3>
+          <p class="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">Bagikan link unik atau embed langsung di website Anda untuk menjangkau siswa.</p>
+        </div>
+        <!-- Step 3 -->
+        <div class="text-center relative" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-glow relative z-10">
+            <span class="material-symbols-outlined text-white text-[28px]">trending_up</span>
+          </div>
+          <div class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Langkah 3</div>
+          <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Pantau & Kembangkan</h3>
+          <p class="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">Lihat analytics real-time, optimasi konten, dan scale bisnis edukasi Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 6. USE CASES ==================== -->
+  <section class="py-20 md:py-28 relative overflow-hidden" id="use-cases">
+    <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+    <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-[100px] -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Use Cases</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Cocok untuk Berbagai Kebutuhan</h2>
+        <p class="text-gray-500 text-lg">FlowLMS dirancang fleksibel untuk mendukung berbagai skenario edukasi dan training.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Card 1 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">business</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Corporate Training</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Onboarding karyawan baru & pelatihan internal yang terstruktur dan terukur.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">school</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Online Academy</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Jual kursus online dengan payment gateway terintegrasi langsung.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">menu_book</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">SOP Academy</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Dokumentasi SOP dalam format training interaktif yang mudah dipahami.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">support_agent</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Client Education</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Edukasi customer tentang produk/layanan Anda secara profesional.</p>
+        </div>
+        <!-- Card 5 -->
+        <div class="glass-card rounded-2xl p-6 group" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">card_membership</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-gray-900 mb-2">Membership Site</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Konten eksklusif untuk member premium dengan akses terkontrol.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 7. DASHBOARD PREVIEW ==================== -->
+  <section class="py-20 md:py-28 bg-gray-50 relative overflow-hidden" id="dashboard-preview">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Dashboard Preview</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Antarmuka yang Intuitif & Modern</h2>
+        <p class="text-gray-500 text-lg">Dashboard lengkap untuk mengelola kursus, siswa, dan revenue Anda.</p>
+      </div>
+
+      <!-- Large Dashboard Mockup -->
+      <div class="relative max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-3xl blur-3xl -z-10 scale-105"></div>
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
+          <!-- Browser chrome -->
+          <div class="bg-gray-100 px-4 py-3 flex items-center gap-3 border-b border-gray-200">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            </div>
+            <div class="flex-1 flex justify-center">
+              <div class="bg-white rounded-lg px-6 py-1.5 text-xs text-gray-400 border border-gray-200 font-mono max-w-md w-full text-center">app.flowlms.id/workspace/dashboard</div>
+            </div>
+          </div>
+
+          <!-- App layout -->
+          <div class="flex min-h-[480px] lg:min-h-[540px]">
+            <!-- Sidebar -->
+            <div class="hidden md:flex flex-col w-56 bg-gray-900 text-white p-4 space-y-1 flex-shrink-0">
+              <div class="flex items-center gap-2.5 mb-6 px-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-[16px]">school</span>
+                </div>
+                <span class="font-heading font-bold text-sm">FlowLMS</span>
+              </div>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/10 text-white text-sm font-semibold">
+                <span class="material-symbols-outlined text-[18px]">dashboard</span>Dashboard
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">auto_stories</span>Kursus
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">group</span>Siswa
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">bar_chart</span>Analytics
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">payments</span>Revenue
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">workspace_premium</span>Sertifikat
+              </a>
+              <div class="flex-1"></div>
+              <a class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-white/5 text-gray-400 text-sm">
+                <span class="material-symbols-outlined text-[18px]">settings</span>Pengaturan
+              </a>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 p-5 lg:p-6 bg-gray-50 overflow-hidden">
+              <!-- Top -->
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <h3 class="font-heading font-bold text-lg text-gray-900">Selamat Datang, Ahmad! 👋</h3>
+                  <p class="text-xs text-gray-400">Rabu, 15 Juni 2026</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button class="w-9 h-9 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">notifications</span>
+                  </button>
+                  <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold">AF</div>
+                </div>
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+                <div class="bg-white rounded-xl p-3.5 border border-gray-100">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-primary text-[18px]">group</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">TOTAL SISWA</span>
+                  </div>
+                  <div class="text-xl font-bold text-gray-900">2,481</div>
+                  <div class="text-[10px] text-emerald-500 font-semibold mt-0.5">↑ 12.5% bulan ini</div>
+                </div>
+                <div class="bg-white rounded-xl p-3.5 border border-gray-100">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-emerald-500 text-[18px]">school</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">KURSUS AKTIF</span>
+                  </div>
+                  <div class="text-xl font-bold text-gray-900">18</div>
+                  <div class="text-[10px] text-emerald-500 font-semibold mt-0.5">3 baru minggu ini</div>
+                </div>
+                <div class="bg-white rounded-xl p-3.5 border border-gray-100">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-amber-500 text-[18px]">payments</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">REVENUE</span>
+                  </div>
+                  <div class="text-xl font-bold text-gray-900">Rp 45jt</div>
+                  <div class="text-[10px] text-emerald-500 font-semibold mt-0.5">↑ 24% bulan ini</div>
+                </div>
+                <div class="bg-white rounded-xl p-3.5 border border-gray-100">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">COMPLETION</span>
+                  </div>
+                  <div class="text-xl font-bold text-gray-900">87%</div>
+                  <div class="text-[10px] text-emerald-500 font-semibold mt-0.5">↑ 5% bulan ini</div>
+                </div>
+              </div>
+
+              <!-- Course Cards Row -->
+              <div class="text-sm font-bold text-gray-700 mb-3">Kursus Populer</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+                  <div class="h-20 bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white/50 text-[40px]">code</span>
+                  </div>
+                  <div class="p-3">
+                    <div class="text-xs font-bold text-gray-800 mb-1">Fullstack Web Dev</div>
+                    <div class="flex items-center justify-between text-[10px] text-gray-400">
+                      <span>342 siswa</span><span class="text-primary font-bold">Rp 499rb</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+                  <div class="h-20 bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white/50 text-[40px]">palette</span>
+                  </div>
+                  <div class="p-3">
+                    <div class="text-xs font-bold text-gray-800 mb-1">UI/UX Masterclass</div>
+                    <div class="flex items-center justify-between text-[10px] text-gray-400">
+                      <span>218 siswa</span><span class="text-primary font-bold">Rp 399rb</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition-shadow hidden sm:block">
+                  <div class="h-20 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white/50 text-[40px]">trending_up</span>
+                  </div>
+                  <div class="p-3">
+                    <div class="text-xs font-bold text-gray-800 mb-1">Digital Marketing</div>
+                    <div class="flex items-center justify-between text-[10px] text-gray-400">
+                      <span>189 siswa</span><span class="text-primary font-bold">Rp 349rb</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 8. PRICING ==================== -->
+  <section class="py-20 md:py-28 relative overflow-hidden" id="pricing">
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-surface/30 to-white"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Pricing</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pilih Paket yang Sesuai</h2>
+        <p class="text-gray-500 text-lg">Mulai gratis, upgrade kapan saja. Tanpa biaya tersembunyi.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Free -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary/30 hover:shadow-glass-hover transition-all duration-300" data-aos="fade-up" data-aos-delay="0">
+          <div class="mb-5">
+            <h3 class="font-heading text-lg font-bold text-gray-900">Free</h3>
+            <p class="text-sm text-gray-400 mt-1">Untuk mencoba platform</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-heading font-extrabold text-gray-900">Rp 0</span>
+            <span class="text-sm text-gray-400">/bulan</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>1 Kursus</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>50 Siswa</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Basic Analytics</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-gray-300 text-[18px]">cancel</span><span class="text-gray-400">Custom Domain</span></li>
+          </ul>
+          <a href="#" class="block w-full text-center py-3 rounded-xl border-2 border-gray-200 font-bold text-gray-700 hover:border-primary hover:text-primary transition-all text-sm">Mulai Gratis</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary/30 hover:shadow-glass-hover transition-all duration-300" data-aos="fade-up" data-aos-delay="50">
+          <div class="mb-5">
+            <h3 class="font-heading text-lg font-bold text-gray-900">Pro</h3>
+            <p class="text-sm text-gray-400 mt-1">Untuk kreator serius</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-heading font-extrabold text-gray-900">299rb</span>
+            <span class="text-sm text-gray-400">/bulan</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Unlimited Kursus</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Unlimited Siswa</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Custom Domain</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Sertifikat Otomatis</li>
+          </ul>
+          <a href="#" class="block w-full text-center py-3 rounded-xl border-2 border-primary/30 bg-primary/5 font-bold text-primary hover:bg-primary hover:text-white transition-all text-sm">Pilih Pro</a>
+        </div>
+
+        <!-- Agency (Popular) -->
+        <div class="pricing-popular bg-white rounded-2xl p-6 hover:shadow-glass-hover transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+          <div class="mb-5">
+            <h3 class="font-heading text-lg font-bold text-primary">Agency</h3>
+            <p class="text-sm text-gray-400 mt-1">Untuk bisnis edukasi</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-heading font-extrabold text-gray-900">799rb</span>
+            <span class="text-sm text-gray-400">/bulan</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Multiple Workspace</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>White Label</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Priority Support</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Semua fitur Pro</li>
+          </ul>
+          <a href="#" class="block w-full text-center py-3 rounded-xl bg-gradient-to-r from-primary to-accent font-bold text-white shadow-lg hover:shadow-glow transition-all text-sm">Pilih Agency</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:border-primary/30 hover:shadow-glass-hover transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
+          <div class="mb-5">
+            <h3 class="font-heading text-lg font-bold text-gray-900">Enterprise</h3>
+            <p class="text-sm text-gray-400 mt-1">Untuk korporasi</p>
+          </div>
+          <div class="mb-6">
+            <span class="text-4xl font-heading font-extrabold text-gray-900">Custom</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>SSO Integration</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>API Access</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>Dedicated Support</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>SLA Guarantee</li>
+          </ul>
+          <a href="#" class="block w-full text-center py-3 rounded-xl border-2 border-gray-200 font-bold text-gray-700 hover:border-primary hover:text-primary transition-all text-sm">Hubungi Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 9. TESTIMONIALS ==================== -->
+  <section class="py-20 md:py-28 bg-gray-50 relative overflow-hidden" id="testimonials">
+    <div class="absolute top-0 left-1/3 w-64 h-64 bg-primary/8 rounded-full blur-[100px] -z-10"></div>
+    <div class="absolute bottom-0 right-1/3 w-56 h-56 bg-accent/8 rounded-full blur-[100px] -z-10"></div>
+
+    <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Testimonial</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Dipercaya Ratusan Organisasi</h2>
+        <p class="text-gray-500 text-lg">Dengar langsung dari mereka yang sudah merasakan manfaat FlowLMS.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="0">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">"FlowLMS mengubah cara kami melakukan onboarding. Dari 2 minggu menjadi 2 hari. Efisiensi meningkat drastis."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-bold">AF</div>
+            <div>
+              <div class="text-sm font-bold text-gray-800">Ahmad Fauzi</div>
+              <div class="text-xs text-gray-400">Head of HR, TechCorp Indonesia</div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">"Akhirnya ada platform LMS Indonesia yang benar-benar premium dan mudah digunakan. Siswa saya sangat puas."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-sm font-bold">SR</div>
+            <div>
+              <div class="text-sm font-bold text-gray-800">Siti Rahma</div>
+              <div class="text-xs text-gray-400">Founder, AkademiDigital.id</div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center gap-1 mb-4">
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-amber-400 text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">"ROI training kami meningkat 300% sejak menggunakan FlowLMS. Analytics-nya sangat membantu mengoptimasi konten."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold">DP</div>
+            <div>
+              <div class="text-sm font-bold text-gray-800">Dian Pratama</div>
+              <div class="text-xs text-gray-400">Training Manager, Bank Nusantara</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 10. FAQ ==================== -->
+  <section class="py-20 md:py-28 relative" id="faq">
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">FAQ</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pertanyaan yang Sering Diajukan</h2>
+      </div>
+
+      <div class="space-y-3" data-aos="fade-up" data-aos-delay="100">
+        <!-- FAQ 1 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Apa itu FlowLMS?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">FlowLMS adalah platform learning management system berbasis AI yang memungkinkan Anda membangun portal belajar profesional, akademi online, dan membership site dalam hitungan menit. Dilengkapi dengan AI course builder, sertifikat otomatis, dan analytics lengkap.</p>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Apakah bisa custom domain?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">Ya, fitur custom domain tersedia mulai dari paket Pro. Anda bisa menggunakan domain sendiri seperti academy.namabisnis.com untuk tampilan yang lebih profesional.</p>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Video provider apa yang didukung?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">FlowLMS mendukung berbagai video provider: YouTube, Vimeo, Loom, Bunny Stream, dan Cloudflare Stream. Anda bisa menggunakan video yang sudah ada atau upload langsung.</p>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Apakah ada sertifikat?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">Ya, FlowLMS menyediakan fitur sertifikat PDF otomatis yang di-generate saat siswa menyelesaikan kursus. Sertifikat bisa dikustomisasi dengan branding Anda sendiri.</p>
+          </div>
+        </div>
+        <!-- FAQ 5 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Bisa white label?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">Ya, fitur white label tersedia mulai dari paket Agency. Anda bisa menghilangkan branding FlowLMS sepenuhnya dan menampilkan brand Anda sendiri.</p>
+          </div>
+        </div>
+        <!-- FAQ 6 -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden faq-item">
+          <button class="w-full flex items-center justify-between p-5 text-left faq-toggle" onclick="toggleFaq(this)">
+            <span class="font-semibold text-gray-800 text-sm pr-4">Bagaimana cara migrasi dari LMS lain?</span>
+            <span class="material-symbols-outlined text-gray-400 faq-chevron flex-shrink-0">expand_more</span>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="text-sm text-gray-500 leading-relaxed pb-5">Kami menyediakan tools import dan tim support yang siap membantu proses migrasi dari platform LMS lain. Data kursus, siswa, dan progress belajar bisa dipindahkan dengan aman.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 11. FINAL CTA ==================== -->
+  <section class="py-20 md:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-accent/20 rounded-full blur-[120px]"></div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-5" style="background-image:linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px);background-size:60px 60px;"></div>
+
+    <div class="max-w-3xl mx-auto px-6 md:px-12 relative z-10 text-center" data-aos="zoom-in" data-aos-duration="600">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 mb-6 backdrop-blur-sm">
+        <span class="text-base">🚀</span>
+        <span class="text-xs font-bold text-white/80 tracking-wide uppercase">Mulai Sekarang</span>
+      </div>
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+        Siap Membangun Portal
+        <span class="text-gradient-teal"> Belajar Anda?</span>
+      </h2>
+      <p class="text-base sm:text-lg text-gray-400 leading-relaxed max-w-xl mx-auto mb-8">
+        Bergabung dengan 500+ workspace yang sudah menggunakan FlowLMS. Gratis untuk memulai, tanpa kartu kredit.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#pricing" class="flex items-center justify-center gap-2 h-14 px-10 bg-gradient-to-r from-primary to-accent hover:brightness-110 text-white text-base font-bold rounded-full shadow-glow transition-all transform hover:-translate-y-1 group">
+          <span>Mulai Gratis Sekarang</span>
+          <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+        <a href="#features" class="flex items-center justify-center gap-2 h-14 px-10 bg-white/10 hover:bg-white/20 text-white text-base font-bold rounded-full border border-white/20 transition-all backdrop-blur-sm">
+          Pelajari Fitur
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 12. FOOTER ==================== -->
+  <footer class="py-10 border-t border-gray-100 bg-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-[16px]">school</span>
+          </div>
+          <span class="font-heading text-lg font-bold text-gradient-teal">FlowLMS</span>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-wrap items-center gap-6 text-sm text-gray-500">
+          <a href="#features" class="hover:text-primary transition-colors">Fitur</a>
+          <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
+          <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
+          <a href="#testimonials" class="hover:text-primary transition-colors">Testimonial</a>
+        </div>
+
+        <!-- Ecosystem badge -->
+        <p class="text-sm text-gray-400">
+          Part of <a href="/" class="font-bold text-primary hover:underline">FlowStack</a> Ecosystem
+        </p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-400">© 2026 FlowLMS by FlowStack. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 600,
+      easing: 'ease-out-cubic',
+      offset: 50,
+    });
+  </script>
+
+  <!-- FAQ Toggle -->
+  <script>
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = answer.classList.contains('open');
+
+      // Close all others
+      document.querySelectorAll('.faq-answer.open').forEach(el => {
+        el.classList.remove('open');
+        el.previousElementSibling.querySelector('.faq-chevron').classList.remove('rotated');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        answer.classList.add('open');
+        chevron.classList.add('rotated');
+      }
+    }
+  </script>
+
+  <!-- Smooth scroll for anchor links -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

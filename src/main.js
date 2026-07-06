@@ -102,14 +102,14 @@ const products = [
     isSoon: true
   },
   {
-    name: 'FlowTrain',
+    name: 'FlowLMS',
     category: 'Education',
     descKey: null,
-    desc: 'LMS Platform for corporate training and education.',
+    desc: 'AI-powered Learning, Training & Membership platform.',
     icon: 'GraduationCap',
-    link: '/products/flowtrain',
-    styleClass: 'bg-orange-100 text-orange-600',
-    isSoon: true
+    link: '/products/flowlms',
+    styleClass: 'bg-teal-100 text-teal-600',
+    isSoon: false
   },
   {
     name: 'FlowMenu',

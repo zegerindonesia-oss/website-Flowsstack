@@ -23,8 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Seed products if needed
         await seedProducts();
 
+        const token = await user.getIdToken();
+        localStorage.setItem('fs_token', token);
+
         // Fetch User Products (Ownership)
-        loadUserProducts(user.uid);
+        loadUserProducts(user.uid, token);
 
         // Auto-setup for owner
         if (user.email === 'zeger.indonesia@gmail.com' || user.email === 'weebeeone@gmail.com') {
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-async function loadUserProducts(uid) {
+async function loadUserProducts(uid, token) {
     const appsGrid = document.getElementById('apps-grid');
     const activeAppsCount = document.getElementById('active-apps-count');
     const totalSpend = document.getElementById('total-spend');
@@ -52,6 +55,20 @@ async function loadUserProducts(uid) {
     if (!appsGrid) return;
 
     try {
+        // Check FlowApp active subscription from SQL backend
+        let flowappSubscribed = false;
+        if (token) {
+            try {
+                const subRes = await fetch('/api/billing/subscription', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                const subData = await subRes.json();
+                flowappSubscribed = subData.active === true;
+            } catch (e) {
+                console.error('Failed to fetch subscription status from API:', e);
+            }
+        }
+
         // Get all products first
         const productsSnap = await getDocs(collection(db, "products"));
         const allProducts = [];
@@ -63,6 +80,10 @@ async function loadUserProducts(uid) {
         onSnapshot(ownedQuery, (ownedSnap) => {
             const ownedProductIds = [];
             ownedSnap.forEach(doc => ownedProductIds.push(doc.data().product_id));
+
+            if (flowappSubscribed && !ownedProductIds.includes('flowapp')) {
+                ownedProductIds.push('flowapp');
+            }
 
             if (activeAppsCount) activeAppsCount.textContent = ownedProductIds.length;
 

@@ -1,0 +1,1875 @@
+{
+  "name": "Automasi UGC Tiktok",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const items = $(\"Get Ready Task\").all();\nreturn items.map(item => {\n  const data = item.json;\n\n  return {\n    json: {\n      images: [\n        data[\"Product Photo\"],\n        data[\"Character\"],\n        data[\"Background\"]\n      ]\n    }\n  };\n});"
+      },
+      "id": "e3150573-c8f5-47b0-a806-1f9504cc64ec",
+      "name": "Get Image Array",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1904,
+        208
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.atlascloud.ai/api/v1/model/generateImage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"google/nano-banana-pro/edit\",\n  \"aspect_ratio\": \"9:16\",\n  \"enable_base64_output\": false,\n  \"enable_sync_mode\": true,\n  \"images\": {{ $json.images.toJsonString() }},\n  \"output_format\": \"png\",\n  \"prompt\": \"{{ $json.prompt.replace(/\\r?\\n|\\r/g, ' ').replace(/\"/g, '').replace(/[“”]/g, '') }} }}\",\n  \"resolution\": \"2k\"\n}",
+        "options": {}
+      },
+      "id": "9dcbc8b4-049e-4326-beaf-8ea7610cc33e",
+      "name": "NanoBanana Pro Edit",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        3024,
+        208
+      ],
+      "retryOnFail": true,
+      "typeVersion": 4.3,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "Xv0HdO1FY1WYdSBl",
+          "name": "UGC Automation KIE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "id": "df2a3f0c-7281-4761-910c-30d5fa8c62f1",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        2128,
+        208
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.images }}",
+        "options": {}
+      },
+      "id": "c64b60d9-34df-484d-9fcb-9816f0a7af23",
+      "name": "Download Images",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2352,
+        208
+      ],
+      "typeVersion": 4.3
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://tmpfiles.org/api/v1/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "836baeeb-7b4e-428f-8a83-5e567db4c508",
+      "name": "Get Temp Url",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2576,
+        208
+      ],
+      "retryOnFail": false,
+      "typeVersion": 4.3,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Product: {{ $json['Product Name'] }}\nScene: {{ $json[\"Video Scene\"] }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are an expert in hyper-realistic user-generated content (UGC) photography prompts for image generation models.\n\nYou will be provided with:\n- Product photo (MUST remain unchanged)\n- Character reference photo (MUST match exactly)\n- Background reference photo (MUST match exactly)\n- Scene description\n\nYour task is to generate a CONCISE prompt (maximum 100 words) that directs the model to create a clean, simple selfie image.\n\nCRITICAL RULES:\n1) OUTPUT MUST BE IN ENGLISH ONLY\n2) Keep prompt SHORT and SIMPLE - avoid excessive detail\n3) NEVER describe hands in detail - just say \"holding product naturally\"\n4) Focus on: character match, product accuracy, background match, selfie angle\n5) Avoid describing: multiple hand positions, complex gestures, finger details\n\nPROMPT STRUCTURE (follow this order):\n- Selfie-style photo of [character description matching reference]\n- Holding [product name from reference] in one hand naturally\n- In [background setting from reference]\n- Natural smile, eye contact with camera\n- Soft natural lighting, shallow depth of field\n- Authentic UGC feel, not studio photo\n\nFORMAT OUTPUT:\n- Output ONLY the prompt in English\n- Maximum 100 words\n- No explanations, no bullet points, no extra text\n- Just the prompt, nothing else\n\nCRITICAL: Keep it simple. Complex prompts cause distorted hands and multiple limbs."
+        }
+      },
+      "id": "22924e3b-49cc-4e04-999e-d8f4fdfa69c0",
+      "name": "Image Prompt Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1568,
+        208
+      ],
+      "typeVersion": 3.1
+    },
+    {
+      "parameters": {
+        "jsCode": "const uploadItems = $input.all();\nconst originalData = $(\"Get Ready Task\").first().json;\nconst aiAgent = $(\"Image Prompt Agent\").first().json;\n\n// Ambil semua URL dan fix formatnya\nconst urls = uploadItems\n  .filter(item => item.json?.data?.url)\n  .map(item => {\n    let url = item.json.data.url;\n    url = url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');\n    url = url.replace('http://', 'https://');\n    return url;\n  });\n\n// Validasi: pastikan ada 3 URL\nif (urls.length !== 3) {\n  throw new Error(`Expected 3 images, got ${urls.length}`);\n}\n\n// Ambil prompt dari AI Agent\nlet prompt = aiAgent.output || aiAgent.text || aiAgent.content || '';\n\n// Fallback jika prompt kosong\nif (!prompt || prompt.trim() === '') {\n  prompt = `Selfie photo of Indonesian woman holding ${originalData[\"Product Name\"]} naturally in bright room by window. Natural smile, looking at camera. Soft morning light. Casual style. Authentic UGC feel.`;\n}\n\n// Limit prompt ke 80 kata\nconst words = prompt.trim().split(/\\s+/);\nif (words.length > 80) {\n  prompt = words.slice(0, 80).join(' ');\n}\n\n// Return request body\nreturn [{\n  json: {\n    images: urls,\n    prompt: prompt,\n    metadata: {\n      taskId: originalData[\"Task ID\"],\n      productId: originalData[\"Product ID\"],\n      rowNumber: originalData[\"row_number\"],\n      productName: originalData[\"Product Name\"]\n    }\n  }\n}];"
+      },
+      "id": "422db372-0787-44fb-9860-c21a7d2ad9b7",
+      "name": "Get Clean Data",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2800,
+        208
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "f15fd9ac-d057-4ddd-ac04-4783642a8c23",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.code }}",
+              "rightValue": "=200"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "b7a11745-6d53-4860-b9af-65f189547b2b",
+      "name": "If Image Success",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        3248,
+        208
+      ],
+      "typeVersion": 2.3
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 268342285,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit#gid=268342285",
+          "cachedResultName": "Task"
+        },
+        "columns": {
+          "value": {
+            "Status": "Edited",
+            "Task ID": "={{ $('Get Clean Data').item.json.metadata.taskId }}",
+            "Image Prompt": "={{ $('Get Clean Data').item.json.prompt }}",
+            "Image Result": "={{ $('If Image Success').item.json.data.outputs.first() }}",
+            "Analyze Image": "={{ $json[0].content[0].text }}"
+          },
+          "schema": [
+            {
+              "id": "Task ID",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Task ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product ID",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Photo",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Photo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Character",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Character",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Background",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Background",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Market",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Target Market",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Scene",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Scene",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Image Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Result",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Image Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Analyze Image",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Analyze Image",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Task ID"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e50c8268-4f12-4528-b51a-049e9c28f893",
+      "name": "Update Edit Task [SUCCESS]",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        3696,
+        112
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kCuycDnR2jSurPd1",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 268342285,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit#gid=268342285",
+          "cachedResultName": "Task"
+        },
+        "columns": {
+          "value": {
+            "Status": "Error",
+            "Task ID": "={{ $('Get Clean Data').item.json.metadata.taskId }}"
+          },
+          "schema": [
+            {
+              "id": "Task ID",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Task ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product ID",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Photo",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Photo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Character",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Character",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Background",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Background",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Scene",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Scene",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Task ID"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a85fb49b-602b-440d-a53a-13be89d13109",
+      "name": "Update Edit Task [ERROR]",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        3472,
+        304
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kCuycDnR2jSurPd1",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Product Name: {{ $json[\"Product Name\"] }}\nVideo Scene: {{ $json[\"Video Scene\"] }}\nTarget Market: {{ $json[\"Target Market\"] }}\nProduct Description: {{ $json[\"Product Description\"] }}\nImage Reference: {{ $json[\"Analyze Image\"] }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=## System Message\n\nYou are an expert UGC (User-Generated Content) video prompt creator for AI video generation models (e.g., Veo 3.1).\n\nYour task is to generate **ONE** realistic, selfie-style video prompt based on:\n- Product information  \n- Video scene description  \n- Target market  \n- Product description  \n- Reference image analysis (style consistency only)\n\nThe output must describe a video that feels authentic, casual, and user-generated, as if recorded naturally by an everyday content creator. The video should focus on **product usage and experience**, not personal traits.\n\n---\n\n## CRITICAL RULES\n- **Output must be in ENGLISH ONLY**\n- Spoken dialogue must follow the Dialog Language Rules below\n- The subject must always be a **clearly defined adult (20+ years old)**\n- Avoid sensitive, sexualized, or unnecessary physical descriptions\n- Keep descriptions professional, neutral, and product-focused\n\n---\n\n## Dialog Language Rule\n- **Default:** Spoken dialogue must be in Indonesian (Bahasa Indonesia)  \n- **Exception:** If the Target Market explicitly specifies another language or nationality, use that language  \n- Always write the **exact spoken dialogue in quotation marks** inside the English prompt\n\n---\n\n## Core Video Requirements\n\n### Subject & Framing\n- Subject is an adult creator aligned with the Target Market\n- Video is recorded selfie-style at arm’s length\n- Subject looks directly into the lens while speaking\n- Vertical 9:16 format (TikTok / Instagram Reels style)\n- One hand interacts with the product; the recording device is never visible\n\n### Visual Style\n- Natural lighting and a realistic everyday setting (e.g., bedroom, vanity, office, car)\n- Slight camera shake, subtle grain, and minor imperfections for authenticity\n- Product must be clearly visible and used naturally\n- **Do NOT show** the phone, camera, reflections, mirrors, or filming equipment\n- **No** on-screen text, subtitles, watermarks, logos, or graphic overlays\n- Match overall vibe, wardrobe simplicity, and tone with the reference image without mentioning it\n\n### Tone & Dialogue\n- 1–2 short, casual spoken sentences\n- Conversational, personal, and experience-based\n- Avoid exaggerated claims, medical claims, or advertising-style language\n- Focus on texture, feel, ease of use, or everyday practicality\n\n### Technical Specs\n- Duration: 8 seconds\n- Shot type: handheld selfie-style\n- Lighting: natural and realistic\n- Reference image is for visual consistency only and must not be referenced\n\n---\n\n## Google AI Safety & Compliance Guidelines\nTo ensure approval:\n- Use neutral descriptors such as “adult creator,” “young adult,” or “everyday content creator”\n- Avoid age ranges that include minors\n- Avoid unnecessary physical or personal detail\n- Focus on actions, setting, and product interaction\n- Keep all descriptions appropriate, professional, and non-sensitive\n\n---\n\n## Output Format\n- Output **ONE** cohesive video prompt as a single block of text\n- Dialogue must appear in quotation marks in the correct language\n- Do not include explanations, lists, links, or multiple versions\n- Do not mention policies, filters, or reference images"
+        }
+      },
+      "id": "e9d79d15-99be-41db-8c40-ad7c119664be",
+      "name": "Video Prompt Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1552,
+        624
+      ],
+      "typeVersion": 3.1
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 268342285,
+          "mode": "list",
+          "cachedResultName": "Task",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit#gid=268342285"
+        },
+        "options": {}
+      },
+      "id": "b99be56f-b2e4-48df-9a99-e5c7532c4946",
+      "name": "Get Ready Task",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1328,
+        208
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "63IjT8JFI7oi1ZGq",
+          "name": "UGC Automation"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "9a9f5092-f534-49de-8c0a-eaf902ea4af6",
+      "name": "Schedule Trigger Make Videos",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        1104,
+        624
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "154d1366-aa3f-4bc9-b4fe-cb261b26c835",
+      "name": "Schedule Trigger Edit Images",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        1104,
+        208
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 268342285,
+          "mode": "list",
+          "cachedResultName": "Task",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit#gid=268342285"
+        },
+        "options": {}
+      },
+      "id": "f034fa6c-de56-4dd0-bf94-4d43dcccde14",
+      "name": "Get Edited Task",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1328,
+        624
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kCuycDnR2jSurPd1",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "=Describe the image in one concise paragraph: explain what the main human subject is doing and their facial expression, describe the environment (indoor or outdoor, key background elements, lighting), and describe exactly what the person is holding (object type, color, shape, any visible brand or readable text quoted exactly as seen), plus a brief note on composition (selfie vs not, close-up vs wide, sharp vs blurry).",
+        "imageUrls": "={{ $json.data.outputs[0] }}",
+        "options": {}
+      },
+      "id": "546e19fc-729f-4d2f-8d9b-baf84efc8db7",
+      "name": "Analyze image",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        3472,
+        112
+      ],
+      "retryOnFail": true,
+      "typeVersion": 2.1,
+      "credentials": {
+        "openAiApi": {
+          "id": "hV9RPN32HxXoY5UH",
+          "name": "OpenAI account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.koboillm.com/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"google/veo3.1/image-to-video\",\n  \"aspect_ratio\": \"9:16\",\n  \"duration\": 8,\n  \"generate_audio\": true,\n  \"image\": \"{{ $('Get Edited Task').item.json['Image Result'] }}\",\n  \"prompt\": \"{{ $json.output.replace(/\\r?\\n|\\r/g, ' ').replace(/\"/g, '').replace(/[“”]/g, '') }} }}\",\n  \"resolution\": \"1080p\",\n  \"seed\": 1\n}",
+        "options": {}
+      },
+      "id": "2056390d-561e-4365-8063-89c059d9d682",
+      "name": "Veo 3.1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1904,
+        624
+      ],
+      "retryOnFail": true,
+      "typeVersion": 4.3,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "Xv0HdO1FY1WYdSBl",
+          "name": "UGC Automation KIE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "id": "ad9b69fe-cd6e-4721-8270-41f496dfed2e",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        2128,
+        624
+      ],
+      "webhookId": "10fa2f0c-c8d5-4283-8202-2e74c9d472b9",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "url": "=https://api.atlascloud.ai/api/v1/model/prediction/{{ $json.data.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "id": "d3107bd9-1954-4446-94f7-85cf2833bded",
+      "name": "Get a Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2352,
+        624
+      ],
+      "retryOnFail": true,
+      "typeVersion": 4.3
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "4a2c247a-e120-4fac-b4dd-c0b0ea84d7bd",
+                    "operator": {
+                      "name": "filter.operator.equals",
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "completed"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "completed"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "2bdd72c6-208a-4896-a34c-5b915962ea80",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "failed"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "failed"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "740abc84-c084-45b8-aa20-f09458245f86",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "processing"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "processing"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "12dd56c3-b2cc-48f3-826a-4ff1d332018a",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        2576,
+        608
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 268342285,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit#gid=268342285",
+          "cachedResultName": "Task"
+        },
+        "columns": {
+          "value": {
+            "Status": "Error",
+            "Task ID": "={{ $('Get Edited Task').item.json[\"Task ID\"] }}",
+            "Video Prompt": "={{ $('Video Prompt Agent').item.json.output }}",
+            "Error Message": "={{ $json.data.error }}"
+          },
+          "schema": [
+            {
+              "id": "Task ID",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Task ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product ID",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Photo",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Photo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Character",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Character",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Background",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Background",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Market",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Target Market",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Scene",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Scene",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Analyze Image",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Analyze Image",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Prompt",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Video Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Error Message",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Error Message",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Task ID"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "385fe964-4d98-47a6-be0d-429aa0a7cb42",
+      "name": "Update Video Task [ERROR]",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        2800,
+        720
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kCuycDnR2jSurPd1",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1NlXDm-IJ3HBPS2iKKOHpU5u7I2XgVQyLr6KEbf4_g6U/edit?gid=268342285#gid=268342285",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 268342285,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit#gid=268342285",
+          "cachedResultName": "Task"
+        },
+        "columns": {
+          "value": {
+            "Status": "Finished",
+            "Task ID": "={{ $('Get Edited Task').item.json[\"Task ID\"] }}",
+            "Video Prompt": "={{ $('Video Prompt Agent').item.json.output }}",
+            "Video Result": "={{ $('Get a Video').item.json.data.outputs.first() }}"
+          },
+          "schema": [
+            {
+              "id": "Task ID",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Task ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product ID",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Photo",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Photo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Character",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Character",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Background",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Background",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Market",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Target Market",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Scene",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Scene",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Image Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Analyze Image",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Analyze Image",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Prompt",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Video Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Result",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Video Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Error Message",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Error Message",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Task ID"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "ec48f314-e535-40e0-959a-254eece271d0",
+      "name": "Update Video Task [SUCCESS]",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        2800,
+        528
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kCuycDnR2jSurPd1",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Combine 3 Images into 1 (Product, Character, Background)",
+        "height": 416,
+        "width": 2912,
+        "color": 6
+      },
+      "id": "ebddbae2-5707-4241-b080-15944507469c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1024,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Make Video from Images",
+        "height": 416,
+        "width": 2016,
+        "color": 3
+      },
+      "id": "377456a3-4ae1-4571-aa67-fa6767c3db73",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1024,
+        496
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gemini/gemini-2.5-flash-lite",
+          "mode": "list",
+          "cachedResultName": "gemini/gemini-2.5-flash-lite"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "69e6f80e-6dbf-453c-9d59-a9284da97f67",
+      "name": "GPT-5-Mini",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1520,
+        416
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "openAiApi": {
+          "id": "hV9RPN32HxXoY5UH",
+          "name": "OpenAI account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "id": "9aaf6df6-9401-42d4-a292-2eeaadb1c35d",
+      "name": "GPT-OSS-120b",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "position": [
+        1664,
+        432
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "groqApi": {
+          "id": "A38PfZ3DsFcHWmR2",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🔥 Follow My Channels\n\nDon't miss out on **AI and Automation** content! Follow me on:\n\n🎥 **YouTube:** [@aichandre](https://www.youtube.com/@aichandre)  \n📸 **Instagram:** [@aichandre](https://www.instagram.com/aichandre)  \n🎵 **TikTok:** [@aichandre](https://www.tiktok.com/@aichandre)\n\n***\n\n## 📺 Full Tutorial\n\n[![Watch the video on YouTube](https://img.youtube.com/vi/wOdtH54A8iE/0.jpg)](https://youtu.be/wOdtH54A8iE)\n\n***",
+        "height": 672,
+        "width": 512,
+        "color": 7
+      },
+      "id": "d018edfc-59ea-415d-9bd9-f99282d71103",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 🛠️ Quick Setup Guide\n\n**Created by:** [Kristian Ekachandra](https://yapp.ink/aichandre)\n\n### ✅ Step 1: Add Google Sheets Credentials\nSet up OAuth2 credentials from [Google Cloud Console](https://console.cloud.google.com/) in n8n.\n\n### ✅ Step 2: Duplicate Template & Update Links\n1. [Duplicate this Google Sheets template](https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/copy)\n2. Update ALL Google Sheets node URLs to your cloned spreadsheet\n\n### ✅ Step 3: Connect AI Model API Keys\nAdd at least ONE API key:\n- [OpenAI](https://platform.openai.com) → GPT-5-Mini node\n- [Groq](https://groq.com) → GPT-OSS-120b node (fallback)\n- [Gemini](https://aistudio.google.com/app/apikey) (alternative)\n\n### ✅ Step 4: Add Atlas Cloud API Key\nInsert [Atlas Cloud](https://goto.atlascloud.ai/Kristian?ref=TM2L4K) API key in:\n- NanoBanana Pro Edit node\n- Veo 3.1 node\n\n### 💡 Step 5: Test It!\n1. Add a task in your Google Sheets (Status: \"Ready\")\n2. Run \"Schedule Trigger Edit Images\" manually\n3. Wait for Status → \"Edited\"\n4. Run \"Schedule Trigger Make Videos\" manually\n5. Check results in Image Result & Video Result columns\n\n***\n\n## 🚀 What This Does\n\n**Combines 3 images** (product + character + background) into realistic UGC selfie photos, then **generates 8-second videos** using AI.\n\n**Perfect for:** TikTok ads, Instagram Reels, product demos, social media content.\n\n***",
+        "height": 912,
+        "width": 512,
+        "color": 7
+      },
+      "id": "dae9377c-1dce-466c-a664-c35cb30bd384",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        512,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "=https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit?gid=268342285#gid=268342285"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 268342285,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wVz-tvvAuYi9sHtHj40i4yeOFZMbdwmuaQR5N5wRg08/edit#gid=268342285",
+          "cachedResultName": "Task"
+        },
+        "columns": {
+          "value": {
+            "Status": "Edited",
+            "Task ID": "={{ $('Get Clean Data').item.json.metadata.taskId }}",
+            "Image Prompt": "={{ $('Get Clean Data').item.json.prompt }}",
+            "Image Result": "={{ $('If Image Success').item.json.data.outputs.first() }}",
+            "Analyze Image": "={{ $json[0].content[0].text }}"
+          },
+          "schema": [
+            {
+              "id": "Task ID",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Task ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product ID",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product ID",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Photo",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Photo",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Character",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Character",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Background",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Background",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Market",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Target Market",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Scene",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Scene",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Image Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Result",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Image Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Analyze Image",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Analyze Image",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Prompt",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Prompt",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video Result",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Video Result",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "number",
+              "display": true,
+              "removed": true,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Task ID"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "7a292efb-b651-41eb-b8ff-0db83d6308e7",
+      "name": "Update Edit Task [SUCCESS]2",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        4128,
+        128
+      ],
+      "typeVersion": 4.7
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get a Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Update Video Task [SUCCESS]",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Video Task [ERROR]",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Veo 3.1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Download Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT-5-Mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Prompt Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Video Prompt Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a Video": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT-OSS-120b": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Prompt Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          },
+          {
+            "node": "Video Prompt Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Temp Url": {
+      "main": [
+        [
+          {
+            "node": "Get Clean Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Image Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Update Edit Task [SUCCESS]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Clean Data": {
+      "main": [
+        [
+          {
+            "node": "NanoBanana Pro Edit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ready Task": {
+      "main": [
+        [
+          {
+            "node": "Image Prompt Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Images": {
+      "main": [
+        [
+          {
+            "node": "Get Temp Url",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Edited Task": {
+      "main": [
+        [
+          {
+            "node": "Video Prompt Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image Array": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Image Success": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Edit Task [ERROR]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Prompt Agent": {
+      "main": [
+        [
+          {
+            "node": "Get Image Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Prompt Agent": {
+      "main": [
+        [
+          {
+            "node": "Veo 3.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NanoBanana Pro Edit": {
+      "main": [
+        [
+          {
+            "node": "If Image Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger Edit Images": {
+      "main": [
+        [
+          {
+            "node": "Get Ready Task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger Make Videos": {
+      "main": [
+        [
+          {
+            "node": "Get Edited Task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b615b862-5e22-4ca1-b444-091eaead3c0c",
+  "meta": {
+    "instanceId": "f0547952575edb07a8485571d6d769198e0655d479042523301dcf82fef20706"
+  },
+  "nodeGroups": [],
+  "id": "Y7RHDKdjLx4tArLm",
+  "tags": []
+}
