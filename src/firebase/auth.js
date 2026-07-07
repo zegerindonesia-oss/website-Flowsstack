@@ -48,11 +48,16 @@ export const loginWithEmail = async (email, password) => {
         const result = await signInWithEmailAndPassword(auth, email, password);
         const user = result.user;
 
-        // Update last login
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(userRef, {
-            lastLogin: serverTimestamp()
-        }, { merge: true });
+        // Update last login (wrapped in try-catch so it won't block login if Firestore fails)
+        try {
+            const userRef = doc(db, "users", user.uid);
+            await setDoc(userRef, {
+                lastLogin: serverTimestamp(),
+                role: 'user'
+            }, { merge: true });
+        } catch (dbErr) {
+            console.warn("⚠️ Firestore lastLogin update skipped or denied:", dbErr.message);
+        }
 
         return user;
     } catch (error) {
@@ -66,28 +71,33 @@ export const loginWithGoogle = async () => {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
 
-        // Check if user document exists
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
+        try {
+            // Check if user document exists
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
 
-        if (!userSnap.exists()) {
-            // Create new user document
-            await setDoc(userRef, {
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL,
-                role: 'user', // Default role
-                createdAt: serverTimestamp(),
-                lastLogin: serverTimestamp()
-            });
-            console.log("New user document created in Firestore.");
-        } else {
-            // Update last login
-            await setDoc(userRef, {
-                lastLogin: serverTimestamp()
-            }, { merge: true });
-            console.log("Existing user logged in, lastLogin updated.");
+            if (!userSnap.exists()) {
+                // Create new user document
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    role: 'user', // Default role
+                    createdAt: serverTimestamp(),
+                    lastLogin: serverTimestamp()
+                });
+                console.log("New user document created in Firestore.");
+            } else {
+                // Update last login
+                await setDoc(userRef, {
+                    lastLogin: serverTimestamp(),
+                    role: 'user'
+                }, { merge: true });
+                console.log("Existing user logged in, lastLogin updated.");
+            }
+        } catch (dbErr) {
+            console.warn("⚠️ Firestore user document sync skipped or denied:", dbErr.message);
         }
 
         return user;

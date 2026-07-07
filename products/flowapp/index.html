@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html class="light" lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -7,242 +7,545 @@
     <title>FlowApp - AI App Generator | FlowStack</title>
     <meta name="description" content="Build customized Google Apps Script, Sheets, and HTML web applications in under 1 minute using AI." />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0a0f;
+            background-color: #ffffff;
         }
 
         .font-heading {
             font-family: 'Outfit', sans-serif;
         }
 
-        .premium-border {
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        /* Clean Aurora BG */
+        .aurora-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+
+        .blob-purple {
+            background-color: #8b5cf6;
+            width: 500px;
+            height: 500px;
+            top: -10%;
+            left: -10%;
+        }
+
+        .blob-pink {
+            background-color: #ec4899;
+            width: 450px;
+            height: 450px;
+            top: 20%;
+            right: -10%;
         }
 
         .glass-card {
-            background: rgba(20, 18, 30, 0.6);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(134, 85, 246, 0.1);
+            box-shadow: 0 20px 40px rgba(134, 85, 246, 0.05);
         }
 
-        .accent-gradient-text {
-            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 50%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .slide {
+            display: none;
         }
 
-        .neon-glow-btn {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .neon-glow-btn:hover {
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+        .slide.active {
+            display: block;
         }
     </style>
 </head>
 
-<body class="text-gray-100 overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+<body class="text-[#131118] overflow-x-hidden">
+    <!-- Aurora background -->
+    <div class="aurora-bg">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-pink"></div>
+    </div>
+
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-8 bg-[#0b0a0f]/80 backdrop-blur-md border-b border-white/5">
+    <nav class="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-8 bg-white/70 backdrop-blur-md border-b border-gray-100">
         <a href="/" class="flex items-center gap-3">
-            <div class="size-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+            <div class="size-9 rounded-lg bg-purple-600/10 flex items-center justify-center text-purple-600">
                 <span class="material-symbols-outlined text-[24px]">layers</span>
             </div>
-            <span class="font-heading text-xl font-bold tracking-tight text-white">FlowStack <span class="text-cyan-400 font-medium text-sm px-1.5 py-0.5 rounded bg-cyan-500/10 ml-1">FlowApp</span></span>
+            <span class="font-heading text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">FlowStack <span class="text-purple-600 font-medium text-sm px-1.5 py-0.5 rounded bg-purple-600/10 ml-1">FlowApp</span></span>
         </a>
 
         <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
-            <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
-            <a href="/#products" class="text-gray-300 hover:text-white transition-colors">Products</a>
-            <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
-            <a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+            <a href="/" class="text-gray-600 hover:text-purple-600 transition-colors">Home</a>
+            <a href="/#products" class="text-gray-600 hover:text-purple-600 transition-colors">Products</a>
+            <a href="#pricing-section" class="text-gray-600 hover:text-purple-600 transition-colors">Pricing</a>
+            <a href="#demo-playground" class="text-gray-600 hover:text-purple-600 transition-colors">Demo</a>
         </div>
 
         <div class="flex items-center gap-4">
-            <a href="/login.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors px-4 py-2">Login</a>
-            <a href="/register.html" class="neon-glow-btn bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2.5 rounded-full text-sm">Register</a>
+            <a href="/login.html" class="text-sm font-semibold text-gray-600 hover:text-purple-600 transition-colors px-4 py-2">Login</a>
+            <a href="/register.html" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-full text-sm shadow-md hover:shadow-purple-500/20 transition-all">Register</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-36 pb-24 px-6 md:px-12 flex flex-col items-center text-center overflow-hidden">
-        <!-- Background elements -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none -z-10"></div>
-        <div class="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-emerald-500/5 blur-[90px] pointer-events-none -z-10"></div>
-
-        <span class="px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20 mb-6">AI App Generation System</span>
+    <!-- Hero / Redesigned Slider -->
+    <section class="relative pt-36 pb-20 px-6 max-w-6xl mx-auto flex flex-col items-center">
+        <span class="px-3.5 py-1.5 rounded-full bg-purple-600/10 text-purple-600 font-bold text-xs uppercase tracking-widest border border-purple-500/15 mb-6">AI App Builder System</span>
         
-        <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl leading-[1.05] text-white mb-6">
-            Buat Aplikasi Hanya Dalam <span class="accent-gradient-text">1 Menit</span>
+        <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl text-center leading-[1.05] text-gray-900 mb-6">
+            Buat Aplikasi Hanya Dalam <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">1 Menit</span>
         </h1>
         
-        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
+        <p class="text-gray-500 text-center text-lg max-w-2xl leading-relaxed mb-12">
             Ketik kebutuhan Anda, dan kecerdasan buatan FlowApp akan melahirkan frontend HTML, database Google Sheets, dan backend Google Apps Script secara instan.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center gap-4">
-            <a href="/login.html" class="neon-glow-btn bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-4 rounded-full text-base flex items-center gap-2">
+        <!-- Product slideshow cards (Lite, Pro, Cloud) -->
+        <div class="w-full max-w-3xl relative mb-12">
+            <!-- Slide 1: Lite -->
+            <div id="slide-lite" class="slide active glass-card p-8 rounded-3xl border border-purple-200/50 bg-white/80 animate-in fade-in duration-300">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="flex-1 space-y-4">
+                        <span class="px-2.5 py-1 bg-cyan-100 text-cyan-700 font-extrabold text-[10px] rounded uppercase">Tier: Lite</span>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900">FlowApp Lite</h3>
+                        <p class="text-gray-500 text-sm">Sangat cocok untuk membangun micro-apps, aplikasi form input, atau CRUD database internal cepat dengan batas hingga 20 project.</p>
+                        <div class="text-2xl font-extrabold text-purple-600">Rp 199.000 <span class="text-xs text-gray-400 font-normal">/bulan</span></div>
+                    </div>
+                    <!-- Visual Mockup representation -->
+                    <div class="w-full md:w-72 aspect-[4/3] bg-slate-900 rounded-2xl p-4 font-mono text-[10px] text-gray-400 border border-white/10 flex flex-col justify-between shrink-0 shadow-lg">
+                        <div class="flex items-center gap-1.5 border-b border-white/5 pb-2 text-slate-500">
+                            <span class="size-2.5 rounded-full bg-red-500"></span><span class="size-2.5 rounded-full bg-yellow-500"></span><span class="size-2.5 rounded-full bg-green-500"></span>
+                            <span class="ml-2 font-bold text-[9px]">Code.gs - Generated</span>
+                        </div>
+                        <div class="flex-1 py-3 text-slate-300 overflow-hidden line-clamp-6 leading-relaxed">
+                            function doGet(e) {<br>
+                            &nbsp;&nbsp;return HtmlService.createHtmlOutputFromFile('Index')<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;.setTitle('FlowApp Database');<br>
+                            }<br>
+                            function getSheetData() { ... }
+                        </div>
+                        <div class="bg-cyan-500/10 text-cyan-400 text-center py-1 rounded font-bold text-[9px] uppercase tracking-wide">Lite Active Engine</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Pro -->
+            <div id="slide-pro" class="slide glass-card p-8 rounded-3xl border border-purple-200/50 bg-white/80 animate-in fade-in duration-300">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="flex-1 space-y-4">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-700 font-extrabold text-[10px] rounded uppercase">Tier: Pro</span>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900">FlowApp Pro</h3>
+                        <p class="text-gray-500 text-sm">Opsi premium untuk bisnis profesional. Lengkap dengan sistem auth internal, pembatasan hak akses berbasis role, ekspor ZIP, dan bebas dari logo FlowStack.</p>
+                        <div class="text-2xl font-extrabold text-purple-600">Rp 399.000 <span class="text-xs text-gray-400 font-normal">/bulan</span></div>
+                    </div>
+                    <div class="w-full md:w-72 aspect-[4/3] bg-slate-900 rounded-2xl p-4 font-mono text-[10px] text-gray-400 border border-white/10 flex flex-col justify-between shrink-0 shadow-lg">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2 text-slate-500">
+                            <div class="flex items-center gap-1.5">
+                                <span class="size-2.5 rounded-full bg-red-500"></span><span class="size-2.5 rounded-full bg-yellow-500"></span><span class="size-2.5 rounded-full bg-green-500"></span>
+                                <span class="ml-2 font-bold text-[9px]">Role-Auth System</span>
+                            </div>
+                            <span class="text-[8px] bg-purple-500/20 text-purple-400 px-1 py-0.5 rounded uppercase font-bold">Admin Panel</span>
+                        </div>
+                        <div class="flex-1 py-3 text-slate-300 overflow-hidden leading-relaxed space-y-1.5">
+                            <div class="flex items-center justify-between border-b border-white/5 pb-1"><span class="text-[9px]">zeger.indonesia@gmail.com</span><span class="text-purple-400">Admin</span></div>
+                            <div class="flex items-center justify-between border-b border-white/5 pb-1"><span class="text-[9px]">customer.user@gmail.com</span><span class="text-slate-500">Viewer</span></div>
+                            <div class="flex items-center justify-between border-b border-white/5 pb-1"><span class="text-[9px]">staff.member@gmail.com</span><span class="text-emerald-400">Staff</span></div>
+                        </div>
+                        <div class="bg-purple-500/10 text-purple-400 text-center py-1 rounded font-bold text-[9px] uppercase tracking-wide">Pro Active Engine</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Cloud -->
+            <div id="slide-cloud" class="slide glass-card p-8 rounded-3xl border border-purple-200/50 bg-white/80 animate-in fade-in duration-300">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="flex-1 space-y-4">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 font-extrabold text-[10px] rounded uppercase">Tier: Cloud</span>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900">FlowApp Cloud</h3>
+                        <p class="text-gray-500 text-sm">Paket kolaborasi tanpa batas. Dapatkan workspace tim bersama, kustomisasi domain penuh, akses ke template marketplace premium, serta optimasi AI tanpa batas.</p>
+                        <div class="text-2xl font-extrabold text-purple-600">Rp 599.000 <span class="text-xs text-gray-400 font-normal">/bulan</span></div>
+                    </div>
+                    <div class="w-full md:w-72 aspect-[4/3] bg-slate-900 rounded-2xl p-4 font-mono text-[10px] text-gray-400 border border-white/10 flex flex-col justify-between shrink-0 shadow-lg">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2 text-slate-500">
+                            <div class="flex items-center gap-1.5">
+                                <span class="size-2.5 rounded-full bg-red-500"></span><span class="size-2.5 rounded-full bg-yellow-500"></span><span class="size-2.5 rounded-full bg-green-500"></span>
+                                <span class="ml-2 font-bold text-[9px]">Custom Domains</span>
+                            </div>
+                            <span class="text-[8px] bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded uppercase font-bold">Cloud Connected</span>
+                        </div>
+                        <div class="flex-1 py-3 text-slate-300 flex flex-col justify-center items-center gap-2">
+                            <span class="material-symbols-outlined text-[32px] text-emerald-400">language</span>
+                            <span class="text-[10px] font-bold">app.laundry-kilau.com</span>
+                            <span class="text-[8px] text-slate-500">CNAME target: cname.flowsstack.com</span>
+                        </div>
+                        <div class="bg-emerald-500/10 text-emerald-400 text-center py-1 rounded font-bold text-[9px] uppercase tracking-wide">Cloud Active Engine</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide Navigation Buttons -->
+            <button onclick="moveSlide(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
+                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+            </button>
+            <button onclick="moveSlide(1)" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
+                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+            </button>
+
+            <!-- Dots -->
+            <div class="flex items-center justify-center gap-2 mt-6">
+                <button onclick="goToSlide(0)" id="dot-lite" class="size-2 rounded-full bg-purple-600 transition-all"></button>
+                <button onclick="goToSlide(1)" id="dot-pro" class="size-2 rounded-full bg-gray-300 transition-all"></button>
+                <button onclick="goToSlide(2)" id="dot-cloud" class="size-2 rounded-full bg-gray-300 transition-all"></button>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <a href="/login.html" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-8 py-4 rounded-full text-base transition-all shadow-lg hover:shadow-purple-500/25 flex items-center gap-2">
                 Mulai Buat Aplikasi
                 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
             </a>
-            <a href="#demo" class="px-8 py-4 rounded-full border border-white/10 hover:bg-white/5 transition-all text-gray-300 hover:text-white font-bold text-base">
-                Lihat Demo Flow
+            <a href="#demo-playground" class="px-8 py-4 rounded-full border border-gray-200 hover:bg-gray-50 text-gray-700 font-bold text-base transition-all">
+                Coba Demo Instan
             </a>
         </div>
     </section>
 
-    <!-- Demo Flow Section -->
-    <section id="demo" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-16 text-white">Bagaimana FlowApp Bekerja</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-card p-8 rounded-3xl relative">
-                <div class="size-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 font-heading font-bold text-xl">1</div>
-                <h3 class="font-heading text-xl font-bold mb-3 text-white">Tulis Prompt Kebutuhan</h3>
-                <p class="text-gray-400 text-sm">Jelaskan aplikasi yang ingin Anda bangun, contoh: "Aplikasi kasir laundry dengan status pembayaran dan WhatsApp alert".</p>
-            </div>
-            
-            <div class="glass-card p-8 rounded-3xl relative">
-                <div class="size-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 font-heading font-bold text-xl">2</div>
-                <h3 class="font-heading text-xl font-bold mb-3 text-white">AI Membuat Kode</h3>
-                <p class="text-gray-400 text-sm">Engine AI FlowApp akan menyusun HTML frontend, kode JavaScript backend, serta format kolom database Google Sheets secara instan.</p>
+    <!-- Wave divider -->
+    <div class="w-full overflow-hidden leading-none rotate-180 bg-[#fbfbfd]">
+        <svg class="relative block w-[calc(100%+1.3px)] h-[40px] text-white fill-current" viewbox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.83C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+        </svg>
+    </div>
+
+    <!-- Live Interactive Demo Playground -->
+    <section id="demo-playground" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="font-heading text-3xl font-extrabold text-gray-900 mb-2">Uji Coba AI Generator</h2>
+            <p class="text-gray-500">Tulis kebutuhan aplikasi Anda di bawah ini dan lihat bagaimana FlowApp menyusun interface HTML sederhana Anda secara langsung.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <!-- Playground input pane -->
+            <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="p-5 bg-purple-50/50 border border-purple-100 rounded-3xl space-y-4">
+                    <label class="block text-xs font-bold text-purple-900 tracking-wider uppercase">Tulis Prompt Ide Aplikasi</label>
+                    <textarea id="demo-prompt-input" rows="5" class="w-full rounded-2xl border-gray-200 text-xs py-3 focus:border-purple-600 focus:ring-purple-600 resize-none text-slate-800" placeholder="Contoh: Aplikasi kasir warung kopi dengan pencatatan nama menu dan total harga..."></textarea>
+                    
+                    <button onclick="runDemoGeneration()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3.5 rounded-2xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-purple-500/20">
+                        <span class="material-symbols-outlined text-[18px]">bolt</span> Generate Demo Live
+                    </button>
+                </div>
+
+                <!-- Suggested Quick Prompts -->
+                <div class="space-y-2">
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">CONTOH CEPAT:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="fillDemoPrompt('todo')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">📝 To-do Task List</button>
+                        <button onclick="fillDemoPrompt('laundry')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">🧺 Laundry Status Tracker</button>
+                        <button onclick="fillDemoPrompt('cashier')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">☕ Simple POS Cashier</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl relative">
-                <div class="size-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 font-heading font-bold text-xl">3</div>
-                <h3 class="font-heading text-xl font-bold mb-3 text-white">Hubungkan & Publikasikan</h3>
-                <p class="text-gray-400 text-sm">Deploy kode ke akun Google Apps Script Anda, tempel URL Web App ke FlowApp, dan aplikasi Anda langsung online di URL flowsstack.com/p/[slug].</p>
+            <!-- Preview pane simulating rendering sandbox -->
+            <div class="lg:col-span-7 border border-gray-150 rounded-3xl overflow-hidden flex flex-col min-h-[400px] shadow-sm bg-white">
+                <!-- Sandbox Control bar -->
+                <div class="h-12 bg-gray-50 border-b border-gray-100 flex items-center justify-between px-4">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide flex items-center gap-1.5">
+                        <span class="size-2 bg-emerald-500 rounded-full animate-ping"></span> Live Sandboxed Iframe
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-mono">Index.html preview</span>
+                </div>
+
+                <!-- Simulation frame target -->
+                <div class="flex-1 relative">
+                    <!-- Blank display -->
+                    <div id="demo-blank-state" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
+                        <span class="material-symbols-outlined text-[48px] text-gray-300 font-light mb-3">terminal</span>
+                        <h4 class="font-bold text-sm text-gray-700">Menunggu Prompt Anda</h4>
+                        <p class="text-xs text-gray-400 max-w-xs mt-1">Ketik ide di panel kiri dan klik 'Generate' untuk merender halaman HTML Anda di sini.</p>
+                    </div>
+                    <!-- Loading skeleton -->
+                    <div id="demo-loading-state" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white/90 z-10 hidden">
+                        <span class="material-symbols-outlined text-[48px] text-purple-600 animate-spin mb-3">sync</span>
+                        <h4 class="font-bold text-sm text-gray-900">AI Sedang Bekerja...</h4>
+                        <p class="text-xs text-gray-500">Menyusun layout UI modern sesuai prompt Anda...</p>
+                    </div>
+                    <iframe id="demo-preview-frame" class="w-full h-full border-none hidden" sandbox="allow-scripts"></iframe>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 bg-[#07060a] border-t border-white/5">
+    <section id="pricing-section" class="py-24 bg-gray-50 border-t border-gray-100">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-white mb-4">Pilih Paket Berlangganan</h2>
-                <p class="text-gray-400 max-w-xl mx-auto">Hemat lebih banyak dengan memilih paket durasi panjang.</p>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Pilih Paket Berlangganan</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">Tersedia pilihan langganan dengan diskon besar untuk komitmen jangka panjang.</p>
                 
                 <!-- Duration Switcher -->
-                <div class="mt-8 inline-flex p-1 bg-white/5 rounded-full border border-white/10">
-                    <button onclick="setBilling('monthly')" id="btn-monthly" class="px-5 py-2 rounded-full text-sm font-bold transition-all bg-cyan-500 text-slate-950">
+                <div class="mt-8 inline-flex p-1 bg-gray-200/50 rounded-full border border-gray-200">
+                    <button onclick="setBilling('monthly')" id="btn-monthly" class="px-5 py-2 rounded-full text-sm font-bold transition-all bg-purple-600 text-white">
                         Monthly
                     </button>
-                    <button onclick="setBilling('3_months')" id="btn-3m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
-                        3 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-5%</span>
+                    <button onclick="setBilling('3_months')" id="btn-3m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                        3 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-5%</span>
                     </button>
-                    <button onclick="setBilling('6_months')" id="btn-6m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
-                        6 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-10%</span>
+                    <button onclick="setBilling('6_months')" id="btn-6m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                        6 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-10%</span>
                     </button>
-                    <button onclick="setBilling('12_months')" id="btn-12m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition-all">
-                        12 Months <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded ml-1">-20%</span>
+                    <button onclick="setBilling('12_months')" id="btn-12m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                        12 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-20%</span>
                     </button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Lite Card -->
-                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border border-white/5">
+                <div class="bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between hover:shadow-xl transition-all">
                     <div>
-                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Lite</h3>
-                        <p class="text-gray-400 text-sm mb-6">Cocok untuk pemula yang ingin generate tools sederhana.</p>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">FlowApp Lite</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-medium">Cocok untuk pemula yang ingin generate tools sederhana.</p>
                         <div class="mb-8">
-                            <span id="price-lite" class="font-heading text-4xl font-extrabold text-white">Rp 199.000</span>
+                            <span id="price-lite" class="font-heading text-4xl font-extrabold text-gray-900">Rp 199.000</span>
                             <span id="period-lite" class="text-gray-400 text-sm">/bulan</span>
                         </div>
-                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> AI app generator</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Code.gs generator</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> index.html generator</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Google Apps Script backend</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Google Sheets database</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> 20 projects limit</li>
-                            <li class="flex items-center gap-3 text-gray-500"><span class="material-symbols-outlined text-gray-600 text-[18px]">cancel</span> No Export ZIP</li>
-                            <li class="flex items-center gap-3 text-gray-500"><span class="material-symbols-outlined text-gray-600 text-[18px]">cancel</span> FlowStack branding banner</li>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> AI app generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Code.gs generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> index.html generator</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Google Apps Script backend</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Google Sheets database</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> 20 projects limit</li>
+                            <li class="flex items-center gap-3 text-gray-400"><span class="material-symbols-outlined text-gray-400 text-[18px]">cancel</span> No Export ZIP</li>
+                            <li class="flex items-center gap-3 text-gray-400"><span class="material-symbols-outlined text-gray-400 text-[18px]">cancel</span> FlowStack branding banner</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-lite')" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-2xl transition-all">Langganan Lite</button>
+                    <button onclick="handleSubscribe('flowapp-lite')" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Lite</button>
                 </div>
 
                 <!-- Pro Card -->
-                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border-2 border-cyan-500 relative">
-                    <span class="absolute top-0 right-8 -translate-y-1/2 bg-cyan-500 text-slate-950 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">Paling Populer</span>
+                <div class="bg-white border-2 border-purple-600 p-8 rounded-3xl flex flex-col justify-between relative hover:shadow-xl transition-all">
+                    <span class="absolute top-0 right-8 -translate-y-1/2 bg-purple-600 text-white font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">Paling Populer</span>
                     <div>
-                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Pro</h3>
-                        <p class="text-gray-400 text-sm mb-6">Pilihan terbaik untuk profesional dan pelaku bisnis.</p>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">FlowApp Pro</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-medium">Pilihan terbaik untuk profesional dan pelaku bisnis.</p>
                         <div class="mb-8">
-                            <span id="price-pro" class="font-heading text-4xl font-extrabold text-white">Rp 399.000</span>
+                            <span id="price-pro" class="font-heading text-4xl font-extrabold text-gray-900">Rp 399.000</span>
                             <span id="period-pro" class="text-gray-400 text-sm">/bulan</span>
                         </div>
-                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Everything in Lite</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Advanced CRUD & Auth Templates</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Role-based access control</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Audit Logs & Admin view</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Export source code (ZIP)</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> 100 projects limit</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Hapus branding FlowStack</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Priority generation speed</li>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Everything in Lite</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Advanced CRUD & Auth Templates</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Role-based access control</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Audit Logs & Admin view</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Export source code (ZIP)</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> 100 projects limit</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Hapus branding FlowStack</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Priority generation speed</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-pro')" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-cyan-500/25">Langganan Pro</button>
+                    <button onclick="handleSubscribe('flowapp-pro')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-purple-500/25">Langganan Pro</button>
                 </div>
 
                 <!-- Cloud Card -->
-                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border border-white/5">
+                <div class="bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between hover:shadow-xl transition-all">
                     <div>
-                        <h3 class="font-heading text-2xl font-bold text-white mb-2">FlowApp Cloud</h3>
-                        <p class="text-gray-400 text-sm mb-6">Bagi perusahaan yang memerlukan dashboard kolaboratif.</p>
+                        <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">FlowApp Cloud</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-medium">Bagi perusahaan yang memerlukan dashboard kolaboratif.</p>
                         <div class="mb-8">
-                            <span id="price-cloud" class="font-heading text-4xl font-extrabold text-white">Rp 599.000</span>
+                            <span id="price-cloud" class="font-heading text-4xl font-extrabold text-gray-900">Rp 599.000</span>
                             <span id="period-cloud" class="text-gray-400 text-sm">/bulan</span>
                         </div>
-                        <ul class="space-y-4 mb-8 text-sm text-gray-300">
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Everything in Pro</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Unlimited projects limit</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Hosted workspace & Custom Domain</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Team workspaces / Kolaborasi</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> Template Marketplace Access</li>
-                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-cyan-400 text-[18px]">check_circle</span> White-label options</li>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Everything in Pro</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Unlimited projects limit</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Hosted workspace & Custom Domain</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Team workspaces / Kolaborasi</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Template Marketplace Access</li>
+                            <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> White-label options</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-cloud')" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-2xl transition-all">Langganan Cloud</button>
+                    <button onclick="handleSubscribe('flowapp-cloud')" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Cloud</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6 max-w-4xl mx-auto">
-        <h2 class="font-heading text-3xl font-bold text-center mb-12 text-white">FAQ (Frequently Asked Questions)</h2>
-        <div class="space-y-6">
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="font-bold text-lg mb-2 text-white">Apakah saya memerlukan akun Google?</h3>
-                <p class="text-gray-400 text-sm">Ya. FlowApp memanfaatkan Google Sheets sebagai database Anda. Kode Google Apps Script yang di-generate harus di-deploy di dalam editor Google Apps Script Anda sendiri untuk akses penuh.</p>
-            </div>
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="font-bold text-lg mb-2 text-white">Apakah database aman?</h3>
-                <p class="text-gray-400 text-sm">Sangat aman. Database aplikasi Anda disimpan di Google Sheet milik akun Google Anda sendiri. FlowApp tidak memyimpan salinan record database Anda, melainkan hanya merender interface yang berinteraksi langsung via GAS Web App URL Anda.</p>
-            </div>
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="font-bold text-lg mb-2 text-white">Bagaimana cara memotong branding banner?</h3>
-                <p class="text-gray-400 text-sm">Paket Pro dan Cloud memberikan fitur khusus untuk menghapus branding banner "Built with FlowApp" di bagian bawah layar secara otomatis saat proses publikasi.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+    <footer class="py-12 border-t border-gray-100 text-center text-gray-400 text-sm">
         <p>&copy; 2026 FlowStack Ecosystem. All rights reserved.</p>
     </footer>
 
+    <!-- Slider & Demo Generator JS logic -->
     <script>
+        // Hero product slideshow slider logic
+        let activeSlideIndex = 0;
+        const slides = ['slide-lite', 'slide-pro', 'slide-cloud'];
+        const dots = ['dot-lite', 'dot-pro', 'dot-cloud'];
+
+        function showSlide(index) {
+            slides.forEach((id) => document.getElementById(id).classList.add('slide'));
+            dots.forEach((id) => {
+                const dot = document.getElementById(id);
+                dot.className = "size-2 rounded-full bg-gray-300 transition-all";
+            });
+
+            activeSlideIndex = (index + slides.length) % slides.length;
+            document.getElementById(slides[activeSlideIndex]).classList.remove('slide');
+            document.getElementById(dots[activeSlideIndex]).className = "size-2.5 rounded-full bg-purple-600 transition-all";
+        }
+
+        window.moveSlide = function(dir) {
+            showSlide(activeSlideIndex + dir);
+        }
+
+        window.goToSlide = function(idx) {
+            showSlide(idx);
+        }
+
+        // Live Demo Generator
+        const demoTemplates = {
+            todo: `<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-6 font-sans">
+  <div class="max-w-md mx-auto bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">📝 Task Tracker</h2>
+    <div class="flex gap-2 mb-4">
+      <input type="text" id="task-name" placeholder="Tulis tugas..." class="flex-1 rounded-xl border-gray-200 text-xs py-2 px-3 focus:ring-purple-600">
+      <button onclick="addTask()" class="bg-purple-600 text-white font-bold px-4 py-2 rounded-xl text-xs">Tambah</button>
+    </div>
+    <ul id="task-list" class="space-y-2 text-xs">
+      <li class="p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between"><span>Tinjau laporan bulanan</span><span class="text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded">Aktif</span></li>
+      <li class="p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between"><span>Meeting presentasi jam 2</span><span class="text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded">Aktif</span></li>
+    </ul>
+  </div>
+  <script>
+    function addTask() {
+      const inp = document.getElementById('task-name');
+      if(!inp.value) return;
+      const li = document.createElement('li');
+      li.className = "p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between";
+      li.innerHTML = \`<span>\${inp.value}</span><span class="text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded">Aktif</span>\`;
+      document.getElementById('task-list').appendChild(li);
+      inp.value = '';
+    }
+  <\/script>
+</body>
+</html>`,
+            laundry: `<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 p-6 font-sans">
+  <div class="max-w-md mx-auto bg-white rounded-2xl p-6 shadow-sm border border-gray-150">
+    <div class="flex items-center justify-between mb-4">
+       <h2 class="text-lg font-bold text-slate-800">🧺 Laundry Kilau</h2>
+       <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-extrabold">Live Database</span>
+    </div>
+    <div class="grid grid-cols-2 gap-3 mb-6">
+       <div class="bg-slate-50 p-3 rounded-xl"><div class="text-[10px] text-slate-400 uppercase font-bold">Total Antrean</div><div class="text-xl font-bold text-slate-700">4 Pelanggan</div></div>
+       <div class="bg-slate-50 p-3 rounded-xl"><div class="text-[10px] text-slate-400 uppercase font-bold">Siap Ambil</div><div class="text-xl font-bold text-emerald-600">2 Cucian</div></div>
+    </div>
+    <table class="w-full text-left text-xs border-collapse divide-y divide-gray-150">
+      <thead><tr class="text-slate-400 font-bold"><th class="pb-2">Nama</th><th class="pb-2">Berat</th><th class="pb-2 text-right">Status</th></tr></thead>
+      <tbody class="divide-y divide-gray-100 text-slate-600">
+         <tr><td class="py-2.5">Budi Hartono</td><td class="py-2.5">3.5 Kg</td><td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-[9px] font-bold">Proses Cuci</span></td></tr>
+         <tr><td class="py-2.5">Santi Wijaya</td><td class="py-2.5">2.0 Kg</td><td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-[9px] font-bold">Selesai</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>`,
+            cashier: `<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-4 font-sans text-xs">
+  <div class="max-w-md mx-auto bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+    <h2 class="text-base font-bold text-gray-800 mb-3">☕ Simple POS Cashier</h2>
+    <div class="space-y-2 mb-4" id="menu-items">
+       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Espresso (Rp15.000)</span><button onclick="addOrder('Espresso', 15000)" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
+       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Caffe Latte (Rp22.000)</span><button onclick="addOrder('Caffe Latte', 22000)" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
+    </div>
+    <div class="border-t border-gray-100 pt-3">
+       <div class="font-bold mb-2">Struk Belanja:</div>
+       <div id="receipt" class="space-y-1.5 text-slate-500 mb-4"></div>
+       <div class="flex justify-between font-bold text-sm text-gray-900 border-t border-gray-100 pt-2"><span>Total Tagihan</span><span id="demo-total">Rp0</span></div>
+    </div>
+  </div>
+  <script>
+     let total = 0;
+     function addOrder(name, price) {
+        total += price;
+        document.getElementById('demo-total').textContent = 'Rp' + total.toLocaleString('id-ID');
+        const div = document.createElement('div');
+        div.className = "flex justify-between";
+        div.innerHTML = \`<span>\${name}</span><span>Rp\${price.toLocaleString('id-ID')}</span>\`;
+        document.getElementById('receipt').appendChild(div);
+     }
+  <\/script>
+</body>
+</html>`
+        };
+
+        window.fillDemoPrompt = function(type) {
+            let promptText = '';
+            if (type === 'todo') promptText = 'Aplikasi to-do list tugas harian dengan status aktif/selesai.';
+            if (type === 'laundry') promptText = 'Aplikasi kasir pencatat status cucian laundry kg dengan berat kg dan status antrean.';
+            if (type === 'cashier') promptText = 'Aplikasi struk kasir warung kopi sederhana dengan menu espresso dan latte dan jumlah tagihan.';
+            document.getElementById('demo-prompt-input').value = promptText;
+        }
+
+        window.runDemoGeneration = function() {
+            const prompt = document.getElementById('demo-prompt-input').value;
+            if(!prompt) {
+                alert('Silakan tulis ide atau klik tombol contoh cepat terlebih dahulu.');
+                return;
+            }
+
+            const blank = document.getElementById('demo-blank-state');
+            const loading = document.getElementById('demo-loading-state');
+            const frame = document.getElementById('demo-preview-frame');
+
+            blank.classList.add('hidden');
+            loading.classList.remove('hidden');
+            frame.classList.add('hidden');
+
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                frame.classList.remove('hidden');
+
+                // Determine template based on matching prompt words
+                let selectedCode = demoTemplates.todo; // fallback
+                const lower = prompt.toLowerCase();
+                if(lower.includes('laundry') || lower.includes('cucian') || lower.includes('cuci')) {
+                    selectedCode = demoTemplates.laundry;
+                } else if(lower.includes('kasir') || lower.includes('cashier') || lower.includes('kopi') || lower.includes('struk') || lower.includes('warung')) {
+                    selectedCode = demoTemplates.cashier;
+                }
+
+                frame.srcdoc = selectedCode;
+            }, 1500); // 1.5s simulated build speed
+        }
+
         let currentCycle = 'monthly';
         const pricing = {
             lite: 199000,
@@ -250,23 +553,21 @@
             cloud: 599000
         };
 
-        function setBilling(cycle) {
+        window.setBilling = function(cycle) {
             currentCycle = cycle;
             
-            // Adjust buttons active style
             const btns = ['btn-monthly', 'btn-3m', 'btn-6m', 'btn-12m'];
             btns.forEach(id => {
                 const btn = document.getElementById(id);
-                btn.className = "px-5 py-2 rounded-full text-sm font-bold transition-all text-gray-400 hover:text-white";
+                btn.className = "px-5 py-2 rounded-full text-sm font-bold transition-all text-gray-500 hover:text-gray-900";
             });
             
             let activeBtnId = 'btn-monthly';
             if(cycle === '3_months') activeBtnId = 'btn-3m';
             if(cycle === '6_months') activeBtnId = 'btn-6m';
             if(cycle === '12_months') activeBtnId = 'btn-12m';
-            document.getElementById(activeBtnId).className = "px-5 py-2 rounded-full text-sm font-bold transition-all bg-cyan-500 text-slate-950";
+            document.getElementById(activeBtnId).className = "px-5 py-2 rounded-full text-sm font-bold transition-all bg-purple-600 text-white";
 
-            // Render new price fields based on duration discount
             let multiplier = 1;
             let discount = 0;
             let periodText = '/month';
@@ -289,11 +590,9 @@
             document.getElementById('period-cloud').textContent = periodText;
         }
 
-        async function handleSubscribe(planId) {
-            // Check auth (in actual app we read token from Firebase)
+        window.handleSubscribe = async function(planId) {
             const token = localStorage.getItem('fs_token');
             if(!token) {
-                // If not logged in, redirect to login
                 window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
                 return;
             }
@@ -315,10 +614,9 @@
                 if(data.checkoutUrl) {
                     window.location.href = data.checkoutUrl;
                 } else {
-                    alert('Error creating checkout: ' + (data.error || 'Unknown error'));
+                    alert('Error: ' + (data.error || 'Unknown error'));
                 }
             } catch(e) {
-                console.error(e);
                 alert('Connection to server failed.');
             }
         }
