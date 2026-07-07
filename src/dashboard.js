@@ -3,6 +3,70 @@ import { db } from './firebase/config';
 import { collection, query, where, getDocs, onSnapshot, doc, setDoc } from 'firebase/firestore';
 import { seedProducts } from './firebase/seed';
 
+// Local Fallback Products List to ensure dashboard always renders
+const localProducts = [
+    {
+        id: 'flowpict',
+        name: 'FlowPict Premium',
+        slug: 'flowpict',
+        description: 'AI-powered professional product photography.',
+        icon: 'image',
+        link: 'https://gemini.google.com/share/ac8efd3572bc',
+        price: 290000,
+        status: 'active'
+    },
+    {
+        id: 'flowstatement',
+        name: 'FlowStatement',
+        slug: 'flowstatement',
+        description: 'Smart financial statement analysis and automation.',
+        icon: 'payments',
+        link: 'https://script.google.com/macros/s/AKfycbyLhgARMn5-UspEFNftpwywT0wWTV_GXBWy_R26ScM7xtUhWlqHg2bGkN-rBi9fsGaP/exec',
+        price: 490000,
+        status: 'active'
+    },
+    {
+        id: 'haloflow',
+        name: 'HaloFlow',
+        slug: 'haloflow',
+        description: 'Automasi Customer Service & Sales 24/7 menggunakan AI.',
+        icon: 'smart_toy',
+        link: '/products/haloflow/dashboard.html',
+        price: 390000,
+        status: 'active'
+    },
+    {
+        id: 'flowpict-fb',
+        name: 'Flowpict F&B',
+        slug: 'flowpict-fb',
+        description: 'AI photography for Food & Beverage.',
+        icon: 'restaurant',
+        link: 'https://gemini.google.com/share/8fa30b7740c8',
+        price: 290000,
+        status: 'active'
+    },
+    {
+        id: 'flowcontent-studio',
+        name: 'FlowContent',
+        slug: 'flowcontent-studio',
+        description: 'AI Video Content Factory - Automate creation & publishing of social media videos.',
+        icon: 'movie',
+        link: '/apps/flowcontent/',
+        price: 390000,
+        status: 'active'
+    },
+    {
+        id: 'flowapp',
+        name: 'FlowApp Workspace',
+        slug: 'flowapp',
+        description: 'Generate Google Apps Script + Sheets + HTML apps dengan AI secara instan.',
+        icon: 'terminal',
+        link: '/dashboard/flowapp/index.html',
+        price: 199000,
+        status: 'active'
+    }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
     // Auth Check
     subscribeToAuthChanges(async (user) => {
@@ -20,18 +84,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userEmailEl) userEmailEl.textContent = user.email;
         if (welcomeNameEl) welcomeNameEl.textContent = (user.displayName || 'User').split(' ')[0];
 
-        // Seed products if needed
-        await seedProducts();
+        // Seed products if needed (wrapped in try-catch so it won't crash)
+        try {
+            await seedProducts();
+        } catch (e) {
+            console.warn("⚠️ Failed to seed Firestore products:", e.message);
+        }
 
         const token = await user.getIdToken();
         localStorage.setItem('fs_token', token);
 
         // Fetch User Products (Ownership)
-        loadUserProducts(user.uid, token);
+        loadUserProducts(user.uid, token, user.email);
 
-        // Auto-setup for owner
+        // Auto-setup for owner (wrapped in try-catch)
         if (user.email === 'zeger.indonesia@gmail.com' || user.email === 'weebeeone@gmail.com') {
-            setupOwnerAccess(user.uid);
+            try {
+                setupOwnerAccess(user.uid);
+            } catch (e) {
+                console.warn("⚠️ Owner auto-setup in Firestore failed:", e.message);
+            }
         }
     });
 
@@ -47,12 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-async function loadUserProducts(uid, token) {
+async function loadUserProducts(uid, token, email) {
     const appsGrid = document.getElementById('apps-grid');
     const activeAppsCount = document.getElementById('active-apps-count');
-    const totalSpend = document.getElementById('total-spend');
 
     if (!appsGrid) return;
+
+    // Check if logged in user is admin by email
+    const isAdmin = email === 'zeger.indonesia@gmail.com' || email === 'weebeeone@gmail.com';
 
     try {
         // Check FlowApp active subscription from SQL backend
@@ -69,33 +143,40 @@ async function loadUserProducts(uid, token) {
             }
         }
 
-        // Get all products first
-        const productsSnap = await getDocs(collection(db, "products"));
-        const allProducts = [];
-        productsSnap.forEach(doc => allProducts.push({ id: doc.id, ...doc.data() }));
+        // Get all products first (with local products as fallback)
+        let allProducts = [...localProducts];
+        try {
+            const productsSnap = await getDocs(collection(db, "products"));
+            const dbProducts = [];
+            productsSnap.forEach(doc => dbProducts.push({ id: doc.id, ...doc.data() }));
+            if (dbProducts.length > 0) {
+                allProducts = dbProducts;
+            }
+        } catch (dbErr) {
+            console.warn("⚠️ Firestore failed to retrieve products collection, using local fallback:", dbErr.message);
+        }
 
-        // Get user owned products
-        const ownedQuery = query(collection(db, "user_products"), where("user_id", "==", uid));
-
-        onSnapshot(ownedQuery, (ownedSnap) => {
-            const ownedProductIds = [];
-            ownedSnap.forEach(doc => ownedProductIds.push(doc.data().product_id));
-
-            if (flowappSubscribed && !ownedProductIds.includes('flowapp')) {
-                ownedProductIds.push('flowapp');
+        // Helper function to render Grid UI
+        const renderGrid = (ownedProductIds) => {
+            // Admin automatically owns all products
+            if (isAdmin) {
+                allProducts.forEach(p => {
+                    if (!ownedProductIds.includes(p.id)) {
+                        ownedProductIds.push(p.id);
+                    }
+                });
             }
 
             if (activeAppsCount) activeAppsCount.textContent = ownedProductIds.length;
 
-            // Render Apps Grid
             appsGrid.innerHTML = allProducts.map(product => {
-                const isOwned = ownedProductIds.includes(product.id);
+                const isOwned = isAdmin || ownedProductIds.includes(product.id);
 
                 return `
                     <div class="glass-card p-6 rounded-2xl flex flex-col h-full transform transition-all hover:-translate-y-1 hover:shadow-xl ${!isOwned ? 'opacity-90' : ''}">
                         <div class="flex items-center gap-4 mb-6">
                             <div class="size-14 rounded-xl ${isOwned ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-400'} flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[32px]">${product.icon}</span>
+                                <span class="material-symbols-outlined text-[32px]">${product.icon || 'terminal'}</span>
                             </div>
                             <div>
                                 <h3 class="font-bold text-lg">${product.name}</h3>
@@ -120,23 +201,42 @@ async function loadUserProducts(uid, token) {
                     </div>
                 `;
             }).join('');
-        });
+        };
 
-        // Mock Spend (should come from purchases table)
-        // totalSpend.textContent = 'Rp 0';
+        // Get user owned products from Firestore (with try-catch for permission checks)
+        try {
+            const ownedQuery = query(collection(db, "user_products"), where("user_id", "==", uid));
+            onSnapshot(ownedQuery, (ownedSnap) => {
+                const ownedProductIds = [];
+                ownedSnap.forEach(doc => ownedProductIds.push(doc.data().product_id));
+
+                if (flowappSubscribed && !ownedProductIds.includes('flowapp')) {
+                    ownedProductIds.push('flowapp');
+                }
+
+                renderGrid(ownedProductIds);
+            }, (snapshotErr) => {
+                console.warn("⚠️ onSnapshot error, falling back to static render:", snapshotErr.message);
+                const fallbackIds = flowappSubscribed ? ['flowapp'] : [];
+                renderGrid(fallbackIds);
+            });
+        } catch (queryErr) {
+            console.warn("⚠️ Firestore query error, falling back to static render:", queryErr.message);
+            const fallbackIds = flowappSubscribed ? ['flowapp'] : [];
+            renderGrid(fallbackIds);
+        }
 
     } catch (error) {
         console.error("Error loading dashboard data:", error);
+        // Fallback render to prevent total blank page block
         appsGrid.innerHTML = '<div class="col-span-full py-10 text-center text-red-500 font-bold">Failed to load apps. Please refresh the page.</div>';
     }
 }
 
 async function setupOwnerAccess(uid) {
     try {
-        // 1. Set as Admin
         await setDoc(doc(db, "users", uid), { role: 'admin', updatedAt: new Date() }, { merge: true });
         
-        // 2. Grant all products
         const products = ['flowpict', 'flowstatement', 'haloflow', 'flowpict-fb', 'flowcontent-studio'];
         for (const pid of products) {
             await setDoc(doc(db, "user_products", `${uid}_${pid}`), {
