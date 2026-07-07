@@ -71,7 +71,8 @@ const verifyAuth = async (req, res, next) => {
                 role: mockEmail.includes('admin') ? 'admin' : 'user',
                 createdAt: new Date(),
                 updatedAt: new Date()
-            }).onDuplicateKeyUpdate({
+            }).onConflictDoUpdate({
+                target: users.id,
                 set: { updatedAt: new Date() }
             });
         } catch (e) {
@@ -98,7 +99,8 @@ const verifyAuth = async (req, res, next) => {
                 role: (decodedToken.email === 'zeger.indonesia@gmail.com' || decodedToken.email === 'weebeeone@gmail.com') ? 'admin' : 'user',
                 createdAt: new Date(),
                 updatedAt: new Date()
-            }).onDuplicateKeyUpdate({
+            }).onConflictDoUpdate({
+                target: users.id,
                 set: {
                     name: decodedToken.name || 'User',
                     photoUrl: decodedToken.picture || null,

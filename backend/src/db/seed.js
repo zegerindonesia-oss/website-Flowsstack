@@ -8,7 +8,7 @@ async function seedDatabase() {
     }
 
     try {
-        console.log('🌱 Seeding database...');
+        console.log('🌱 Seeding PostgreSQL database...');
 
         // 1. Seed FlowApp Product
         await db.insert(products).values({
@@ -17,7 +17,8 @@ async function seedDatabase() {
             name: 'FlowApp',
             description: 'Generate Google Apps Script + Sheets + HTML apps with AI.',
             status: 'active'
-        }).onDuplicateKeyUpdate({
+        }).onConflictDoUpdate({
+            target: products.id,
             set: { name: 'FlowApp', description: 'Generate Google Apps Script + Sheets + HTML apps with AI.' }
         });
 
@@ -59,7 +60,8 @@ async function seedDatabase() {
         ];
 
         for (const plan of plansToSeed) {
-            await db.insert(plans).values(plan).onDuplicateKeyUpdate({
+            await db.insert(plans).values(plan).onConflictDoUpdate({
+                target: plans.id,
                 set: {
                     name: plan.name,
                     priceMonthly: plan.priceMonthly,
@@ -104,7 +106,8 @@ async function seedDatabase() {
         ];
 
         for (const template of templatesToSeed) {
-            await db.insert(flowappTemplates).values(template).onDuplicateKeyUpdate({
+            await db.insert(flowappTemplates).values(template).onConflictDoUpdate({
+                target: flowappTemplates.id,
                 set: {
                     name: template.name,
                     category: template.category,

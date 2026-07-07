@@ -1,19 +1,21 @@
-const { drizzle } = require('drizzle-orm/mysql2');
-const mysql = require('mysql2/promise');
+const { drizzle } = require('drizzle-orm/node-postgres');
+const { Pool } = require('pg');
 const schema = require('./schema');
 
-// The DATABASE_URL must be formatted as: mysql://user:password@host:port/database
 const connectionString = process.env.DATABASE_URL;
 
 let db;
 
 if (connectionString) {
     try {
-        const poolConnection = mysql.createPool(connectionString);
-        db = drizzle(poolConnection, { schema });
-        console.log('✅ Drizzle Database initialized successfully.');
+        const pool = new Pool({
+            connectionString: connectionString,
+            ssl: connectionString.includes('sslmode=') || connectionString.includes('supabase') || connectionString.includes('sumobase') ? { rejectUnauthorized: false } : false
+        });
+        db = drizzle(pool, { schema });
+        console.log('✅ Drizzle Database (PostgreSQL) initialized successfully.');
     } catch (err) {
-        console.error('❌ Failed to initialize Drizzle DB:', err.message);
+        console.error('❌ Failed to initialize Drizzle DB (PostgreSQL):', err.message);
     }
 } else {
     console.warn('⚠️ DATABASE_URL environment variable is missing. Database operations will fail.');
