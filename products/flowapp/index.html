@@ -195,18 +195,18 @@
             </div>
 
             <!-- Slide Navigation Buttons -->
-            <button onclick="moveSlide(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
+            <button id="prev-slide-btn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
                 <span class="material-symbols-outlined text-[20px]">chevron_left</span>
             </button>
-            <button onclick="moveSlide(1)" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
-                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+            <button id="next-slide-btn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 size-12 rounded-full bg-white border border-gray-100 hover:border-purple-600 shadow-md flex items-center justify-center text-gray-500 hover:text-purple-600 transition-all z-10">
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
             </button>
 
             <!-- Dots -->
             <div class="flex items-center justify-center gap-2 mt-6">
-                <button onclick="goToSlide(0)" id="dot-lite" class="size-2 rounded-full bg-purple-600 transition-all"></button>
-                <button onclick="goToSlide(1)" id="dot-pro" class="size-2 rounded-full bg-gray-300 transition-all"></button>
-                <button onclick="goToSlide(2)" id="dot-cloud" class="size-2 rounded-full bg-gray-300 transition-all"></button>
+                <button id="dot-lite" class="size-2.5 rounded-full bg-purple-600 transition-all"></button>
+                <button id="dot-pro" class="size-2 rounded-full bg-gray-300 transition-all"></button>
+                <button id="dot-cloud" class="size-2 rounded-full bg-gray-300 transition-all"></button>
             </div>
         </div>
 
@@ -242,7 +242,7 @@
                     <label class="block text-xs font-bold text-purple-900 tracking-wider uppercase">Tulis Prompt Ide Aplikasi</label>
                     <textarea id="demo-prompt-input" rows="5" class="w-full rounded-2xl border-gray-200 text-xs py-3 focus:border-purple-600 focus:ring-purple-600 resize-none text-slate-800" placeholder="Contoh: Aplikasi kasir warung kopi dengan pencatatan nama menu dan total harga..."></textarea>
                     
-                    <button onclick="runDemoGeneration()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3.5 rounded-2xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-purple-500/20">
+                    <button id="generate-demo-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3.5 rounded-2xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-purple-500/20">
                         <span class="material-symbols-outlined text-[18px]">bolt</span> Generate Demo Live
                     </button>
                 </div>
@@ -251,9 +251,9 @@
                 <div class="space-y-2">
                     <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">CONTOH CEPAT:</span>
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="fillDemoPrompt('todo')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">📝 To-do Task List</button>
-                        <button onclick="fillDemoPrompt('laundry')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">🧺 Laundry Status Tracker</button>
-                        <button onclick="fillDemoPrompt('cashier')" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">☕ Simple POS Cashier</button>
+                        <button id="prompt-todo-btn" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">📝 To-do Task List</button>
+                        <button id="prompt-laundry-btn" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">🧺 Laundry Status Tracker</button>
+                        <button id="prompt-cashier-btn" class="px-3 py-1.5 bg-gray-50 hover:bg-purple-50 hover:text-purple-600 text-gray-600 text-xs rounded-lg border border-gray-200/60 font-semibold transition-all">☕ Simple POS Cashier</button>
                     </div>
                 </div>
             </div>
@@ -297,16 +297,16 @@
                 
                 <!-- Duration Switcher -->
                 <div class="mt-8 inline-flex p-1 bg-gray-200/50 rounded-full border border-gray-200">
-                    <button onclick="setBilling('monthly')" id="btn-monthly" class="px-5 py-2 rounded-full text-sm font-bold transition-all bg-purple-600 text-white">
+                    <button id="btn-monthly" class="px-5 py-2 rounded-full text-sm font-bold transition-all bg-purple-600 text-white">
                         Monthly
                     </button>
-                    <button onclick="setBilling('3_months')" id="btn-3m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                    <button id="btn-3m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
                         3 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-5%</span>
                     </button>
-                    <button onclick="setBilling('6_months')" id="btn-6m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                    <button id="btn-6m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
                         6 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-10%</span>
                     </button>
-                    <button onclick="setBilling('12_months')" id="btn-12m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
+                    <button id="btn-12m" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-gray-900 transition-all">
                         12 Months <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded ml-1">-20%</span>
                     </button>
                 </div>
@@ -333,7 +333,7 @@
                             <li class="flex items-center gap-3 text-gray-400"><span class="material-symbols-outlined text-gray-400 text-[18px]">cancel</span> FlowStack branding banner</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-lite')" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Lite</button>
+                    <button id="subscribe-lite-btn" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Lite</button>
                 </div>
 
                 <!-- Pro Card -->
@@ -341,7 +341,7 @@
                     <span class="absolute top-0 right-8 -translate-y-1/2 bg-purple-600 text-white font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full">Paling Populer</span>
                     <div>
                         <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">FlowApp Pro</h3>
-                        <p class="text-gray-500 text-sm mb-6 font-medium">Pilihan terbaik untuk profesional dan pelaku bisnis.</p>
+                        <p class="text-gray-500 text-sm mb-6 font-medium">Pilihan terbaik untuk profesional and pelaku bisnis.</p>
                         <div class="mb-8">
                             <span id="price-pro" class="font-heading text-4xl font-extrabold text-gray-900">Rp 399.000</span>
                             <span id="period-pro" class="text-gray-400 text-sm">/bulan</span>
@@ -357,7 +357,7 @@
                             <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> Priority generation speed</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-pro')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-purple-500/25">Langganan Pro</button>
+                    <button id="subscribe-pro-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-purple-500/25">Langganan Pro</button>
                 </div>
 
                 <!-- Cloud Card -->
@@ -378,7 +378,7 @@
                             <li class="flex items-center gap-3"><span class="material-symbols-outlined text-purple-600 text-[18px]">check_circle</span> White-label options</li>
                         </ul>
                     </div>
-                    <button onclick="handleSubscribe('flowapp-cloud')" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Cloud</button>
+                    <button id="subscribe-cloud-btn" class="w-full border border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-3.5 rounded-2xl transition-all">Langganan Cloud</button>
                 </div>
             </div>
         </div>
@@ -408,11 +408,11 @@
             document.getElementById(dots[activeSlideIndex]).className = "size-2.5 rounded-full bg-purple-600 transition-all";
         }
 
-        window.moveSlide = function(dir) {
+        function moveSlide(dir) {
             showSlide(activeSlideIndex + dir);
         }
 
-        window.goToSlide = function(idx) {
+        function goToSlide(idx) {
             showSlide(idx);
         }
 
@@ -428,7 +428,7 @@
     <h2 class="text-xl font-bold text-gray-800 mb-4">📝 Task Tracker</h2>
     <div class="flex gap-2 mb-4">
       <input type="text" id="task-name" placeholder="Tulis tugas..." class="flex-1 rounded-xl border-gray-200 text-xs py-2 px-3 focus:ring-purple-600">
-      <button onclick="addTask()" class="bg-purple-600 text-white font-bold px-4 py-2 rounded-xl text-xs">Tambah</button>
+      <button id="add-task-btn" class="bg-purple-600 text-white font-bold px-4 py-2 rounded-xl text-xs">Tambah</button>
     </div>
     <ul id="task-list" class="space-y-2 text-xs">
       <li class="p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between"><span>Tinjau laporan bulanan</span><span class="text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded">Aktif</span></li>
@@ -436,15 +436,15 @@
     </ul>
   </div>
   <script>
-    function addTask() {
+    document.getElementById('add-task-btn').addEventListener('click', function() {
       const inp = document.getElementById('task-name');
       if(!inp.value) return;
       const li = document.createElement('li');
       li.className = "p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between";
-      li.innerHTML = "<span>" + inp.value + "</span><span class='text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded'>Aktif</span>";
+      li.innerHTML = "<span>" + inp.value + "</span><span class='text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5' rounded>Aktif</span>";
       document.getElementById('task-list').appendChild(li);
       inp.value = '';
-    }
+    });
   <\/script>
 </body>
 </html>`,
@@ -482,8 +482,8 @@
   <div class="max-w-md mx-auto bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
     <h2 class="text-base font-bold text-gray-800 mb-3">☕ Simple POS Cashier</h2>
     <div class="space-y-2 mb-4" id="menu-items">
-       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Espresso (Rp15.000)</span><button onclick="addOrder('Espresso', 15000)" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
-       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Caffe Latte (Rp22.000)</span><button onclick="addOrder('Caffe Latte', 22000)" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
+       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Espresso (Rp15.000)</span><button id="btn-add-espresso" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
+       <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl"><span>Caffe Latte (Rp22.000)</span><button id="btn-add-latte" class="bg-purple-600 text-white font-bold px-3 py-1 rounded-lg">Pilih</button></div>
     </div>
     <div class="border-t border-gray-100 pt-3">
        <div class="font-bold mb-2">Struk Belanja:</div>
@@ -501,12 +501,14 @@
         div.innerHTML = "<span>" + name + "</span><span>Rp" + price.toLocaleString('id-ID') + "</span>";
         document.getElementById('receipt').appendChild(div);
      }
+     document.getElementById('btn-add-espresso').addEventListener('click', function() { addOrder('Espresso', 15000); });
+     document.getElementById('btn-add-latte').addEventListener('click', function() { addOrder('Caffe Latte', 22000); });
   <\/script>
 </body>
 </html>`
         };
 
-        window.fillDemoPrompt = function(type) {
+        function fillDemoPrompt(type) {
             let promptText = '';
             if (type === 'todo') promptText = 'Aplikasi to-do list tugas harian dengan status aktif/selesai.';
             if (type === 'laundry') promptText = 'Aplikasi kasir pencatat status cucian laundry kg dengan berat kg dan status antrean.';
@@ -514,7 +516,7 @@
             document.getElementById('demo-prompt-input').value = promptText;
         }
 
-        window.runDemoGeneration = function() {
+        function runDemoGeneration() {
             const prompt = document.getElementById('demo-prompt-input').value;
             if(!prompt) {
                 alert('Silakan tulis ide atau klik tombol contoh cepat terlebih dahulu.');
@@ -553,7 +555,7 @@
             cloud: 599000
         };
 
-        window.setBilling = function(cycle) {
+        function setBilling(cycle) {
             currentCycle = cycle;
             
             const btns = ['btn-monthly', 'btn-3m', 'btn-6m', 'btn-12m'];
@@ -590,7 +592,7 @@
             document.getElementById('period-cloud').textContent = periodText;
         }
 
-        window.handleSubscribe = async function(planId) {
+        async function handleSubscribe(planId) {
             const token = localStorage.getItem('fs_token');
             if(!token) {
                 window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
@@ -620,6 +622,51 @@
                 alert('Connection to server failed.');
             }
         }
+
+        // Programmatic Event Binding (To support Vite packaging and deferred module loading)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Slider Listeners
+            const prevBtn = document.getElementById('prev-slide-btn');
+            const nextBtn = document.getElementById('next-slide-btn');
+            if(prevBtn) prevBtn.addEventListener('click', () => moveSlide(-1));
+            if(nextBtn) nextBtn.addEventListener('click', () => moveSlide(1));
+
+            const dotLite = document.getElementById('dot-lite');
+            const dotPro = document.getElementById('dot-pro');
+            const dotCloud = document.getElementById('dot-cloud');
+            if(dotLite) dotLite.addEventListener('click', () => goToSlide(0));
+            if(dotPro) dotPro.addEventListener('click', () => goToSlide(1));
+            if(dotCloud) dotCloud.addEventListener('click', () => goToSlide(2));
+
+            // Demo Playground Listeners
+            const genBtn = document.getElementById('generate-demo-btn');
+            if(genBtn) genBtn.addEventListener('click', runDemoGeneration);
+
+            const promptTodo = document.getElementById('prompt-todo-btn');
+            const promptLaundry = document.getElementById('prompt-laundry-btn');
+            const promptCashier = document.getElementById('prompt-cashier-btn');
+            if(promptTodo) promptTodo.addEventListener('click', () => fillDemoPrompt('todo'));
+            if(promptLaundry) promptLaundry.addEventListener('click', () => fillDemoPrompt('laundry'));
+            if(promptCashier) promptCashier.addEventListener('click', () => fillDemoPrompt('cashier'));
+
+            // Duration billing cycles
+            const btnMonthly = document.getElementById('btn-monthly');
+            const btn3m = document.getElementById('btn-3m');
+            const btn6m = document.getElementById('btn-6m');
+            const btn12m = document.getElementById('btn-12m');
+            if(btnMonthly) btnMonthly.addEventListener('click', () => setBilling('monthly'));
+            if(btn3m) btn3m.addEventListener('click', () => setBilling('3_months'));
+            if(btn6m) btn6m.addEventListener('click', () => setBilling('6_months'));
+            if(btn12m) btn12m.addEventListener('click', () => setBilling('12_months'));
+
+            // Subscribe action links
+            const subLite = document.getElementById('subscribe-lite-btn');
+            const subPro = document.getElementById('subscribe-pro-btn');
+            const subCloud = document.getElementById('subscribe-cloud-btn');
+            if(subLite) subLite.addEventListener('click', () => handleSubscribe('flowapp-lite'));
+            if(subPro) subPro.addEventListener('click', () => handleSubscribe('flowapp-pro'));
+            if(subCloud) subCloud.addEventListener('click', () => handleSubscribe('flowapp-cloud'));
+        });
     </script>
 </body>
 
