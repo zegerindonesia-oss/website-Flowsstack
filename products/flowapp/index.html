@@ -441,7 +441,7 @@
       if(!inp.value) return;
       const li = document.createElement('li');
       li.className = "p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between";
-      li.innerHTML = \`<span>\${inp.value}</span><span class="text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded">Aktif</span>\`;
+      li.innerHTML = "<span>" + inp.value + "</span><span class='text-purple-600 font-bold uppercase text-[9px] bg-purple-50 px-2 py-0.5 rounded'>Aktif</span>";
       document.getElementById('task-list').appendChild(li);
       inp.value = '';
     }
@@ -498,7 +498,7 @@
         document.getElementById('demo-total').textContent = 'Rp' + total.toLocaleString('id-ID');
         const div = document.createElement('div');
         div.className = "flex justify-between";
-        div.innerHTML = \`<span>\${name}</span><span>Rp\${price.toLocaleString('id-ID')}</span>\`;
+        div.innerHTML = "<span>" + name + "</span><span>Rp" + price.toLocaleString('id-ID') + "</span>";
         document.getElementById('receipt').appendChild(div);
      }
   <\/script>
