@@ -15,16 +15,26 @@ const billingCtrl = require('./src/controllers/billing');
 const flowappCtrl = require('./src/controllers/flowapp');
 const adminCtrl = require('./src/controllers/admin');
 
-// Note: To use Firebase Admin, you must download a serviceAccountKey.json from Firebase Console -> Project Settings -> Service Accounts
-// and place it in the backend folder.
+// Firebase Admin SDK Initialization
 try {
-  const serviceAccount = require('./serviceAccountKey.json');
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
-  console.log('Firebase Admin SDK initialized.');
+  if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+      })
+    });
+    console.log('Firebase Admin SDK initialized using environment variables.');
+  } else {
+    const serviceAccount = require('./serviceAccountKey.json');
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount)
+    });
+    console.log('Firebase Admin SDK initialized using serviceAccountKey.json.');
+  }
 } catch (error) {
-  console.warn('⚠️ Firebase Admin SDK not initialized. Please add serviceAccountKey.json if you want DB sync.');
+  console.warn('⚠️ Firebase Admin SDK not initialized. Please add serviceAccountKey.json or set FIREBASE_* env variables.', error.message);
 }
 
 // Automatically seed database on server boot
@@ -252,6 +262,11 @@ app.post('/api/waha/stop', verifyAuth, async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 FlowStack Backend Proxy listening on port ${PORT}`);
-});
+// In serverless environments, we don't start the server using listen
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 FlowStack Backend Proxy listening on port ${PORT}`);
+  });
+}
+
+module.exports = app;
