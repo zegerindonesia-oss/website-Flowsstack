@@ -121,9 +121,23 @@ async function handleMayarWebhook(req, res) {
     }
 }
 
-// 3. Get Subscription Endpoint
 async function getSubscription(req, res) {
     const userId = req.user.uid;
+    const email = req.user.email;
+
+    // Admin bypass
+    if (email === 'zeger.indonesia@gmail.com' || email === 'weebeeone@gmail.com') {
+        return res.json({
+            active: true,
+            id: `sub_admin_${userId}`,
+            planId: 'flowapp-cloud',
+            status: 'active',
+            billingCycle: 'unlimited',
+            startsAt: new Date(2026, 0, 1),
+            endsAt: new Date(2036, 0, 1)
+        });
+    }
+
     try {
         const sub = await getUserSubscription(userId, 'flowapp');
         if (!sub) {

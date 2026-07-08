@@ -34,8 +34,11 @@ async function createProject(req, res) {
     if (!name) return res.status(400).json({ error: 'Project name is required' });
 
     try {
-        // Enforce project limits
-        const allowed = await canCreateProject(userId);
+        // Enforce project limits (bypass for admin)
+        const email = req.user.email;
+        const isAdmin = email === 'zeger.indonesia@gmail.com' || email === 'weebeeone@gmail.com';
+        
+        const allowed = isAdmin || await canCreateProject(userId);
         if (!allowed) {
             return res.status(403).json({
                 error: 'Project limit reached',
@@ -48,7 +51,7 @@ async function createProject(req, res) {
 
         // Get user subscription tier
         const sub = await getUserSubscription(userId, 'flowapp');
-        const planType = sub ? sub.planId.replace('flowapp-', '') : 'lite';
+        const planType = isAdmin ? 'cloud' : (sub ? sub.planId.replace('flowapp-', '') : 'lite');
 
         const newProject = {
             id: projectId,

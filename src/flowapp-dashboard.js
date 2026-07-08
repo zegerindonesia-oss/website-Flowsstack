@@ -17,8 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userNameEl) userNameEl.textContent = user.displayName || 'User';
         if (userEmailEl) userEmailEl.textContent = user.email;
 
-        // Verify Subscription
-        const subActive = await checkFlowAppSubscription(token);
+        // Verify Subscription (Bypass for admin email)
+        const isAdmin = user.email === 'zeger.indonesia@gmail.com' || user.email === 'weebeeone@gmail.com';
+        let subActive = false;
+
+        if (isAdmin) {
+            subActive = true;
+            const badge = document.getElementById('tier-badge');
+            if (badge) {
+                badge.textContent = "CLOUD";
+                badge.className = "text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-extrabold uppercase";
+            }
+        } else {
+            subActive = await checkFlowAppSubscription(token);
+        }
+
         if (!subActive) {
             document.getElementById('unsubscribed-notice').classList.remove('hidden');
             document.getElementById('workspace-content').classList.add('hidden');
