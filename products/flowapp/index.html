@@ -72,7 +72,7 @@
 
 <body class="text-[#131118] overflow-x-hidden">
     <!-- Aurora background -->
-    <div class="aurora-bg">
+    <div class="aurora-bg pointer-events-none">
         <div class="blob blob-purple"></div>
         <div class="blob blob-pink"></div>
     </div>
@@ -624,7 +624,7 @@
         }
 
         // Programmatic Event Binding (To support Vite packaging and deferred module loading)
-        document.addEventListener('DOMContentLoaded', () => {
+        function initApp() {
             // Slider Listeners
             const prevBtn = document.getElementById('prev-slide-btn');
             const nextBtn = document.getElementById('next-slide-btn');
@@ -666,7 +666,13 @@
             if(subLite) subLite.addEventListener('click', () => handleSubscribe('flowapp-lite'));
             if(subPro) subPro.addEventListener('click', () => handleSubscribe('flowapp-pro'));
             if(subCloud) subCloud.addEventListener('click', () => handleSubscribe('flowapp-cloud'));
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
     </script>
 </body>
 
